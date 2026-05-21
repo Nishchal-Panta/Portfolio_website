@@ -347,7 +347,15 @@ class ContactForm {
                 statusEl.className = "contact-status";
             }, 5000);
         } catch (err) {
-            statusEl.textContent = `Error: ${err.message}`;
+            console.error('Contact form error:', err);
+            let errorMsg = err.message;
+            
+            // Provide helpful CORS error message
+            if (errorMsg.includes('Failed to fetch') || errorMsg.includes('CORS')) {
+                errorMsg = 'Connection error - please check API configuration';
+            }
+            
+            statusEl.textContent = `Error: ${errorMsg}`;
             statusEl.className = "contact-status error";
         }
     }
