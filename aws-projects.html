@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AWS Cloud Projects - Nishchal Panta's Cloud Infrastructure and AWS Solutions">
+    <meta name="keywords" content="AWS, Cloud Architecture, EC2, S3, Lambda, CloudFormation, Infrastructure">
+    <meta name="author" content="Nishchal Panta">
+    <meta name="theme-color" content="#FF9900">
+    
+    <title>AWS Cloud Projects - Nishchal Panta</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ============================================
+           AWS PROJECTS PAGE - CLOUD AESTHETICS
+           ============================================ */
+        
+        .aws-page {
+            background: linear-gradient(135deg, #0f172a 0%, #1a2a4a 50%, #0f172a 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .aws-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 153, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 153, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .aws-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Cloud Background Animation */
+        .cloud-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 100px;
+            opacity: 0.5;
+            animation: float linear infinite;
+        }
+        
+        .cloud-1 {
+            width: 300px;
+            height: 80px;
+            top: 10%;
+            left: -300px;
+            animation-duration: 30s;
+            animation-delay: 0s;
+        }
+        
+        .cloud-2 {
+            width: 250px;
+            height: 70px;
+            top: 40%;
+            left: -250px;
+            animation-duration: 40s;
+            animation-delay: -5s;
+        }
+        
+        .cloud-3 {
+            width: 280px;
+            height: 75px;
+            top: 70%;
+            left: -280px;
+            animation-duration: 35s;
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(calc(100vw + 100%));
+            }
+        }
+        
+        /* Header */
+        .aws-header {
+            text-align: center;
+            padding: var(--spacing-4xl) var(--spacing-lg) var(--spacing-2xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .aws-header h1 {
+            color: #FF9900;
+            text-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-lg);
+        }
+        
+        .aws-header i {
+            font-size: 2.5rem;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                text-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 8px 25px rgba(255, 153, 0, 0.6);
+            }
+        }
+        
+        .aws-header p {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: #FF9900;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            margin: var(--spacing-lg) 0 0 var(--spacing-lg);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px);
+            color: #ff8800;
+        }
+        
+        /* AWS Projects Grid */
+        .aws-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-2xl);
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .aws-project-card {
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.08) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border: 2px solid rgba(255, 153, 0, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            backdrop-filter: blur(10px);
+        }
+        
+        .aws-project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 153, 0, 0.1), transparent);
+            transition: left var(--transition-base);
+            pointer-events: none;
+        }
+        
+        .aws-project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255, 153, 0, 0.5);
+            box-shadow: 0 25px 50px rgba(255, 153, 0, 0.15);
+        }
+        
+        .aws-project-card:hover::before {
+            left: 100%;
+        }
+        
+        .aws-project-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .aws-project-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FF9900, #ff8800);
+            border-radius: var(--radius-lg);
+            color: white;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 10px 25px rgba(255, 153, 0, 0.3);
+        }
+        
+        .aws-project-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin: 0;
+        }
+        
+        .aws-project-description {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .aws-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .aws-service-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background-color: rgba(255, 153, 0, 0.15);
+            color: #FF9900;
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            border-radius: var(--radius-md);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .aws-project-footer {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .aws-project-link {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: linear-gradient(135deg, #FF9900, #ff8800);
+            color: white;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-base);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .aws-project-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 153, 0, 0.4);
+            background: linear-gradient(135deg, #ff8800, #FF9900);
+        }
+        
+        /* Statistics Section */
+        .aws-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-xl);
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto var(--spacing-3xl);
+            text-align: center;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.1), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(255, 153, 0, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #FF9900;
+            display: block;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .stat-label {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* CTA Section */
+        .aws-cta {
+            text-align: center;
+            padding: var(--spacing-3xl) var(--spacing-lg);
+            margin: var(--spacing-3xl) 0;
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.08), rgba(59, 130, 246, 0.05));
+            border-top: 2px solid rgba(255, 153, 0, 0.2);
+            border-bottom: 2px solid rgba(255, 153, 0, 0.2);
+        }
+        
+        .aws-cta h2 {
+            color: #FF9900;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .aws-cta p {
+            margin-bottom: var(--spacing-xl);
+            font-size: 1.05rem;
+        }
+        
+        .aws-cta-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .aws-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: linear-gradient(135deg, #FF9900, #ff8800);
+            color: white;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .aws-cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 153, 0, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .aws-header h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            
+            .aws-projects-grid {
+                grid-template-columns: 1fr;
+                padding: var(--spacing-lg);
+                gap: var(--spacing-xl);
+            }
+            
+            .aws-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cloud Background -->
+    <div class="cloud-bg">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+    </div>
+    
+    <!-- AWS Page -->
+    <div class="aws-page">
+        <div class="aws-content">
+            <!-- Back Button -->
+            <a href="index.html#projects" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            
+            <!-- Header -->
+            <div class="aws-header">
+                <h1>
+                    <i class="fab fa-aws"></i>
+                    AWS Cloud Projects
+                </h1>
+                <p>Exploring cloud architecture, infrastructure scalability, and AWS best practices through real-world implementations</p>
+            </div>
+            
+            <!-- Statistics -->
+            <div class="aws-stats">
+                <div class="stat-box">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Cloud Projects</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">AWS Services</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Infrastructure as Code</span>
+                </div>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="aws-projects-grid">
+                <!-- Project 1 -->
+                <div class="aws-project-card">
+                    <div class="aws-project-header">
+                        <div class="aws-project-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="aws-project-name">EC2 Auto-Scaling Infrastructure</h3>
+                    </div>
+                    <p class="aws-project-description">
+                        Highly available web application infrastructure with EC2 auto-scaling groups, load balancers, and multi-AZ deployment for fault tolerance.
+                    </p>
+                    <div class="aws-services">
+                        <span class="aws-service-badge">EC2</span>
+                        <span class="aws-service-badge">ELB</span>
+                        <span class="aws-service-badge">ASG</span>
+                        <span class="aws-service-badge">CloudWatch</span>
+                    </div>
+                    <div class="aws-project-footer">
+                        <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="aws-project-link">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="aws-project-card">
+                    <div class="aws-project-header">
+                        <div class="aws-project-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h3 class="aws-project-name">S3 Data Pipeline</h3>
+                    </div>
+                    <p class="aws-project-description">
+                        Automated data pipeline for uploading, processing, and analyzing large datasets in S3 with lifecycle policies and versioning.
+                    </p>
+                    <div class="aws-services">
+                        <span class="aws-service-badge">S3</span>
+                        <span class="aws-service-badge">Lambda</span>
+                        <span class="aws-service-badge">EventBridge</span>
+                        <span class="aws-service-badge">IAM</span>
+                    </div>
+                    <div class="aws-project-footer">
+                        <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="aws-project-link">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="aws-project-card">
+                    <div class="aws-project-header">
+                        <div class="aws-project-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="aws-project-name">Serverless REST API</h3>
+                    </div>
+                    <p class="aws-project-description">
+                        Scalable REST API built with Lambda functions and API Gateway. DynamoDB for storage with fine-grained access control via IAM.
+                    </p>
+                    <div class="aws-services">
+                        <span class="aws-service-badge">Lambda</span>
+                        <span class="aws-service-badge">API Gateway</span>
+                        <span class="aws-service-badge">DynamoDB</span>
+                        <span class="aws-service-badge">CloudFormation</span>
+                    </div>
+                    <div class="aws-project-footer">
+                        <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="aws-project-link">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="aws-project-card">
+                    <div class="aws-project-header">
+                        <div class="aws-project-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="aws-project-name">VPC & Network Security</h3>
+                    </div>
+                    <p class="aws-project-description">
+                        Custom VPC with public/private subnets, NAT gateways, security groups, and NACLs for secure multi-tier application architecture.
+                    </p>
+                    <div class="aws-services">
+                        <span class="aws-service-badge">VPC</span>
+                        <span class="aws-service-badge">Security Groups</span>
+                        <span class="aws-service-badge">NACLs</span>
+                        <span class="aws-service-badge">NAT Gateway</span>
+                    </div>
+                    <div class="aws-project-footer">
+                        <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="aws-project-link">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="aws-project-card">
+                    <div class="aws-project-header">
+                        <div class="aws-project-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3 class="aws-project-name">CloudFormation IaC Templates</h3>
+                    </div>
+                    <p class="aws-project-description">
+                        Infrastructure as Code templates for repeatable deployments. Comprehensive CloudFormation stacks for multi-environment configurations.
+                    </p>
+                    <div class="aws-services">
+                        <span class="aws-service-badge">CloudFormation</span>
+                        <span class="aws-service-badge">YAML</span>
+                        <span class="aws-service-badge">StackSets</span>
+                        <span class="aws-service-badge">Parameters</span>
+                    </div>
+                    <div class="aws-project-footer">
+                        <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="aws-project-link">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="aws-project-card">
+                    <div class="aws-project-header">
+                        <div class="aws-project-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="aws-project-name">IAM & Access Management</h3>
+                    </div>
+                    <p class="aws-project-description">
+                        Least-privilege IAM policies, role-based access control, and identity federation for secure multi-account AWS architecture.
+                    </p>
+                    <div class="aws-services">
+                        <span class="aws-service-badge">IAM</span>
+                        <span class="aws-service-badge">Roles</span>
+                        <span class="aws-service-badge">Policies</span>
+                        <span class="aws-service-badge">MFA</span>
+                    </div>
+                    <div class="aws-project-footer">
+                        <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="aws-project-link">
+                            <i class="fab fa-github"></i> View Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="aws-cta">
+                <h2>Ready to Explore More?</h2>
+                <p>Check out my GitHub repository for detailed implementations, code samples, and documentation.</p>
+                <div class="aws-cta-buttons">
+                    <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="aws-cta-button">
+                        <i class="fab fa-github"></i> View GitHub Profile
+                    </a>
+                    <a href="index.html#contact" class="aws-cta-button">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Theme persistence on AWS projects page
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        });
+    </script>
+</body>
+</html>

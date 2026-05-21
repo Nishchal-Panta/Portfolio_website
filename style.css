@@ -990,6 +990,37 @@ section:nth-child(even) {
     color: white;
 }
 
+/* AWS Projects Card Styling */
+.aws-projects-card {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.05), rgba(35, 47, 62, 0.05));
+    border: 2px solid rgba(255, 153, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.aws-projects-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 153, 0, 0.1), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.aws-icon {
+    background: linear-gradient(135deg, #FF9900, #FF9900);
+    box-shadow: 0 8px 16px rgba(255, 153, 0, 0.3);
+}
+
+.aws-projects-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(255, 153, 0, 0.5);
+    box-shadow: 0 20px 40px rgba(255, 153, 0, 0.2);
+}
+
 .projects-cta {
     text-align: center;
     padding: var(--spacing-2xl);
@@ -1378,18 +1409,28 @@ section:nth-child(even) {
 
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-2xl);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
     margin-bottom: var(--spacing-3xl);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: start;
+}
+
+@media (max-width: 991px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
 }
 
 .contact-info {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: var(--spacing-lg);
+}
+
+@media (max-width: 767px) {
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
 }
 
 .contact-item {
@@ -1464,6 +1505,40 @@ section:nth-child(even) {
     outline: none;
     border-color: var(--color-accent);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.contact-status {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: 500;
+    min-height: 20px;
+    animation: slideInDown 0.3s ease-out;
+}
+
+.contact-status.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
+
+.contact-status.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+}
+
+.contact-status.sending {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
 }
 
 .social-links-section {

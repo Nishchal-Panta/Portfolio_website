@@ -14,7 +14,6 @@ const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
 const cursor = document.getElementById('cursor');
 const typingText = document.querySelector('.typing-text');
-const contactForm = document.getElementById('contactForm');
 
 // ============================================
 // Theme Management
@@ -306,117 +305,51 @@ class NavbarManager {
 
 class ContactForm {
     constructor() {
+        this.API_URL = "https://ue0l82ocg4.execute-api.us-east-1.amazonaws.com/contact";
         this.init();
     }
 
     init() {
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => this.handleSubmit(e));
+        const form = document.getElementById("contact-form");
+        if (form) {
+            form.addEventListener("submit", (e) => this.handleSubmit(e));
         }
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
 
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message')
-        };
+        const form = document.getElementById("contact-form");
+        const statusEl = document.getElementById("contact-status");
+        statusEl.textContent = "Sending...";
+        statusEl.className = "contact-status sending";
 
-        // Validate
-        if (!this.validate(data)) {
-            return;
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        try {
+            const res = await fetch(this.API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || !data.ok) throw new Error(data.error || "Failed to send");
+
+            statusEl.textContent = "Sent successfully!";
+            statusEl.className = "contact-status success";
+            form.reset();
+            
+            setTimeout(() => {
+                statusEl.textContent = "";
+                statusEl.className = "contact-status";
+            }, 5000);
+        } catch (err) {
+            statusEl.textContent = `Error: ${err.message}`;
+            statusEl.className = "contact-status error";
         }
-
-        // Show success message
-        this.showSuccessMessage();
-
-        // Reset form
-        contactForm.reset();
-
-        // If using Formspree, the form will submit automatically
-        // For this static site, we'll just show a success message
-        if (contactForm.action === 'https://formspree.io/f/YOUR_FORM_ID') {
-            console.log('Contact Form Configuration Required:');
-            console.log('1. Visit https://formspree.io');
-            console.log('2. Create a new form and get your form ID');
-            console.log('3. Replace YOUR_FORM_ID in the form action');
-        }
-    }
-
-    validate(data) {
-        if (!data.name || data.name.trim() === '') {
-            this.showErrorMessage('Please enter your name');
-            return false;
-        }
-
-        if (!data.email || !this.isValidEmail(data.email)) {
-            this.showErrorMessage('Please enter a valid email');
-            return false;
-        }
-
-        if (!data.subject || data.subject.trim() === '') {
-            this.showErrorMessage('Please enter a subject');
-            return false;
-        }
-
-        if (!data.message || data.message.trim() === '') {
-            this.showErrorMessage('Please enter a message');
-            return false;
-        }
-
-        return true;
-    }
-
-    isValidEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    }
-
-    showSuccessMessage() {
-        const message = document.createElement('div');
-        message.className = 'form-message success';
-        message.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
-        message.style.cssText = `
-            background-color: #10b981;
-            color: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            animation: slideInDown 0.3s ease-out;
-        `;
-
-        contactForm.parentNode.insertBefore(message, contactForm);
-
-        setTimeout(() => {
-            message.style.animation = 'slideOutUp 0.3s ease-out';
-            setTimeout(() => message.remove(), 300);
-        }, 3000);
-    }
-
-    showErrorMessage(text) {
-        const message = document.createElement('div');
-        message.className = 'form-message error';
-        message.textContent = '✕ ' + text;
-        message.style.cssText = `
-            background-color: #ef4444;
-            color: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            animation: slideInDown 0.3s ease-out;
-        `;
-
-        contactForm.parentNode.insertBefore(message, contactForm);
-
-        setTimeout(() => {
-            message.style.animation = 'slideOutUp 0.3s ease-out';
-            setTimeout(() => message.remove(), 300);
-        }, 3000);
     }
 }
 
