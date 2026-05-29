@@ -35,7 +35,7 @@
 
 5. **Deploy automatically**
    - GitHub Actions runs workflow automatically
-   - Site goes live at `https://YOUR-USERNAME.github.io/portfolio/`
+   - Site goes live at `https://nishchalpanta.com.np/`
 
 ---
 
@@ -152,13 +152,13 @@ Writing objects: 100% (XX/XX), ...
 
 **Your site is now live at:**
 ```
-https://YOUR-USERNAME.github.io/portfolio/
+https://nishchalpanta.com.np/
 ```
 
 ### Step 7: View Your Portfolio
 
 1. Open browser
-2. Navigate to: `https://YOUR-USERNAME.github.io/portfolio/`
+2. Navigate to: `https://nishchalpanta.com.np/`
 3. Test all functionality:
    - [ ] Hero section loads
    - [ ] Theme toggle works
@@ -224,7 +224,7 @@ git log --oneline | head -10
 
 1. Go to Settings → Pages
 2. Under "Custom domain"
-3. Enter your domain (e.g., `nishchal-panta.com`)
+3. Enter your domain: `nishchalpanta.com.np`
 4. Click "Save"
 
 ### DNS Configuration
@@ -232,7 +232,7 @@ git log --oneline | head -10
 **For domain registrar (GoDaddy, Namecheap, etc.):**
 
 1. Go to DNS settings
-2. Add **A records** pointing to GitHub's IP:
+2. If you are using GitHub Pages, add **A records** pointing to GitHub's IP:
    ```
    185.199.108.153
    185.199.109.153
@@ -240,10 +240,10 @@ git log --oneline | head -10
    185.199.111.153
    ```
 
-3. Or add **CNAME record**:
+3. Or add **CNAME record** for a subdomain such as `www`:
    ```
-   CNAME: portfolio
-   Points to: YOUR-USERNAME.github.io
+   CNAME: www
+   Points to: nishchalpanta.com.np
    ```
 
 4. Wait 24 hours for DNS propagation
@@ -493,7 +493,7 @@ Use online minifiers:
 
 #### Check Performance
 
-1. Go to site: `https://YOUR-USERNAME.github.io/portfolio/`
+1. Go to site: `https://nishchalpanta.com.np/`
 2. Open DevTools (F12)
 3. Go to "Performance" tab
 4. Click record and scroll

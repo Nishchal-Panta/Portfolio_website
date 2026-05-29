@@ -4,18 +4,18 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34C26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?style=flat-square)
+![AWS](https://img.shields.io/badge/AWS-S3%20%2B%20CloudFront-orange?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-> A modern, premium, recruiter-focused static portfolio website showcasing technical expertise, projects, certifications, and professional growth. Built with vanilla HTML, CSS, and JavaScript. Deployed via GitHub Pages with automated CI/CD.
+> A modern, premium, recruiter-focused static portfolio website showcasing technical expertise, projects, certifications, and professional growth. Built with vanilla HTML, CSS, and JavaScript. Deployed via AWS S3 + CloudFront with automated CI/CD.
 
 ## 🌐 Live Portfolio
 
-**[View Live Portfolio](https://github.com/Nishchal-Panta)**
-*(Replace with actual GitHub Pages URL after deployment)*
+**[View Live Portfolio](https://nishchalpanta.com.np/)**
+*(Replace with your live custom domain if it changes)*
 
 ```
-https://YOUR-USERNAME.github.io/portfolio/
+https://nishchalpanta.com.np/
 ```
 
 ---
@@ -48,15 +48,15 @@ https://YOUR-USERNAME.github.io/portfolio/
 - ✅ **Modern UI** - Premium, recruiter-grade appearance
 - ✅ **Fast Performance** - Vanilla JS, minimal CSS, optimized loading
 - ✅ **SEO Optimized** - Meta tags, semantic HTML, accessibility features
-- ✅ **Automatic Deployment** - GitHub Actions CI/CD on every push
-- ✅ **No Backend Required** - Static website, GitHub Pages compatible
+- ✅ **Automatic Deployment** - GitHub Actions CI/CD on every push to S3 + CloudFront
+- ✅ **No Backend Required** - Static website, AWS-hosted and CDN-ready
 
 ### Website Sections
 
 1. **Hero Section** - Dynamic roles, CTAs, social links, scroll indicator
 2. **About Section** - Professional story, career mission, feature cards
 3. **Skills Section** - Categorized technical skills with interactive tags
-4. **Projects Section** - 6 featured projects with descriptions and GitHub links
+4. **Projects Section** - Featured portfolio projects plus a dedicated AWS cloud projects gallery
 5. **Certifications Section** - AWS certifications and achievements
 6. **Education Section** - BCS program details and coursework
 7. **Journey Timeline** - Career growth visualization with milestones
@@ -91,11 +91,11 @@ git add .
 git commit -m "Initial portfolio deployment"
 git push origin main
 
-# 4. Enable GitHub Pages
-# Settings → Pages → Source: GitHub Actions
+# 4. Deploy to AWS
+# GitHub Actions syncs the site to S3 and invalidates CloudFront
 
 # 5. Your portfolio is live!
-# https://YOUR-USERNAME.github.io/portfolio/
+# https://nishchalpanta.com.np/
 ```
 
 **See [Deployment Guide](./docs/deployment-guide.md) for detailed instructions.**
@@ -108,7 +108,7 @@ git push origin main
 
 1. Go to [GitHub.com](https://github.com/new)
 2. Create new repository named `portfolio`
-3. Choose **Public** visibility (required for GitHub Pages)
+3. Choose **Public** visibility (required for public access)
 4. Click "Create repository"
 
 ### Step 2: Set Up Locally
@@ -182,31 +182,31 @@ python -m http.server 8000
 
 ## 🌍 Deployment
 
-### GitHub Pages Setup
+### AWS Deployment Setup
 
 #### Automatic (Recommended)
 
 1. Push code to `main` branch
 2. GitHub Actions workflow runs automatically
-3. Site deploys to GitHub Pages
+3. Site deploys to S3 and CloudFront
 4. ✅ Portfolio is live in 2-3 minutes
 
 #### View Deployment Status
 
 ```
-Repository → Actions tab → Deploy to GitHub Pages workflow
+Repository → Actions tab → Deploy to AWS workflow
 ```
 
 ### Verify Deployment
 
-1. Go to `Settings` → `Pages`
-2. Check "GitHub Pages" is enabled
+1. Check the GitHub Actions run completed successfully
+2. Confirm CloudFront invalidation completed
 3. Visit URL:
    ```
-   https://YOUR-USERNAME.github.io/portfolio/
+    https://nishchalpanta.com.np/
    ```
 
-### Custom Domain (Optional)
+### Custom Domain
 
 See [Deployment Guide](./docs/deployment-guide.md#custom-domain-setup) for setup instructions.
 
@@ -218,6 +218,7 @@ See [Deployment Guide](./docs/deployment-guide.md#custom-domain-setup) for setup
 portfolio/
 │
 ├── index.html                    # Main website (all sections)
+├── aws-projects.html             # AWS project showcase page
 ├── style.css                     # Complete styling & animations
 ├── script.js                     # Interactive features
 ├── README.md                     # This file
@@ -322,7 +323,7 @@ Edit `style.css`:
 
 1. **[Deployment Guide](./docs/deployment-guide.md)** ⭐ **START HERE**
    - Step-by-step setup
-   - GitHub Pages configuration
+    - AWS S3 and CloudFront configuration
    - CI/CD workflow
    - Troubleshooting
 
@@ -365,7 +366,8 @@ Edit `style.css`:
 
 ### Hosting & Deployment
 
-- **GitHub Pages** - Static site hosting
+- **AWS S3** - Static site origin hosting
+- **CloudFront** - CDN and custom domain delivery
 - **GitHub Actions** - CI/CD automation
 - **GitHub Workflows** - Build validation
 
@@ -407,7 +409,7 @@ Edit `style.css`:
 ### Check Your Performance
 
 ```
-Visit: https://YOUR-USERNAME.github.io/portfolio/
+Visit: https://nishchalpanta.com.np/
 Press: F12 → Lighthouse tab
 Click: Analyze page load
 ```
@@ -489,7 +491,7 @@ For others updating your portfolio:
 
 ### Site Not Deploying
 
-**Problem**: GitHub Pages shows 404 error
+**Problem**: CloudFront or custom domain shows 404 error
 
 **Solutions**:
 1. Verify repository is **public**
@@ -565,7 +567,7 @@ For others updating your portfolio:
 
 ### External Resources
 
-- [GitHub Pages Help](https://docs.github.com/pages)
+- [AWS CloudFront Documentation](https://docs.aws.amazon.com/cloudfront/)
 - [GitHub Actions Docs](https://docs.github.com/actions)
 - [HTML5 Validation](https://validator.w3.org/)
 - [CSS Validation](https://jigsaw.w3.org/css-validator/)
@@ -696,7 +698,7 @@ See [LICENSE](./LICENSE) file for details.
 
 | Resource | Link |
 |----------|------|
-| **Live Portfolio** | `https://github.com/Nishchal-Panta` |
+| **Live Portfolio** | `https://nishchalpanta.com.np/` |
 | **GitHub Profile** | https://github.com/Nishchal-Panta |
 | **LinkedIn** | https://linkedin.com/in/nishchal-panta-3890b1292 |
 | **Deployment Guide** | [./docs/deployment-guide.md](./docs/deployment-guide.md) |
@@ -708,7 +710,7 @@ See [LICENSE](./LICENSE) file for details.
 
 **Built with ❤️ using vanilla HTML, CSS, and JavaScript**
 
-*Last Updated: May 2024*
+*Last Updated: May 2026*
 
 [⬆ Back to Top](#nishchal-panta---premium-portfolio-website)
 
