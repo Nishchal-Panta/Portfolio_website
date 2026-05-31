@@ -708,8 +708,6 @@ See [LICENSE](./LICENSE) file for details.
 
 <div align="center">
 
-**Built with ❤️ using vanilla HTML, CSS, and JavaScript**
-
 *Last Updated: May 2026*
 
 [⬆ Back to Top](#nishchal-panta---premium-portfolio-website)
