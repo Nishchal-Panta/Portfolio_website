@@ -303,7 +303,7 @@ class NavbarManager {
 // Contact Form Handler
 // ============================================
 
-const CONTACT_API_URL = "https://ue0l82ocg4.execute-api.us-east-1.amazonaws.com/";
+const CONTACT_API_URL = "https://ue0l82ocg4.execute-api.us-east-1.amazonaws.com/contact";
 
 class ContactForm {
     constructor() {
