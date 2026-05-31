@@ -466,11 +466,11 @@ npx http-server
 **Problem**: Contact form not working
 
 **Solutions**:
-1. Replace `YOUR_FORM_ID` in HTML with actual Formspree ID
-2. Visit [formspree.io](https://formspree.io) to setup
-3. Get form ID and update action URL
-4. Test form submission
-5. Check Formspree dashboard for submissions
+1. Set the SES-backed API Gateway URL in `script.js`
+2. Confirm the Lambda function uses Amazon SES credentials and that `FROM_EMAIL` and `TO_EMAIL` are set in the function environment
+3. Test the API endpoint directly in the browser or with `curl` to confirm it returns JSON
+4. Check the browser console for CORS or network errors
+5. Verify the SES identity is verified and the Lambda role has permission to send email
 
 ---
 
@@ -506,7 +506,7 @@ Use online minifiers:
 - [ ] Repository is public (required for Pages)
 - [ ] No sensitive data in files
 - [ ] HTTPS enabled (automatic)
-- [ ] Forms configured (Formspree)
+- [ ] Forms configured (SES-backed contact API in script.js)
 - [ ] Social links are correct
 - [ ] No hardcoded API keys
 - [ ] Third-party scripts from trusted sources

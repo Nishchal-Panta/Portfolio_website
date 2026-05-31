@@ -303,9 +303,11 @@ class NavbarManager {
 // Contact Form Handler
 // ============================================
 
+const CONTACT_API_URL = "https://ue0l82ocg4.execute-api.us-east-1.amazonaws.com/";
+
 class ContactForm {
     constructor() {
-        this.API_URL = "https://ue0l82ocg4.execute-api.us-east-1.amazonaws.com/contact";
+        this.API_URL = CONTACT_API_URL;
         this.init();
     }
 
@@ -349,10 +351,9 @@ class ContactForm {
         } catch (err) {
             console.error('Contact form error:', err);
             let errorMsg = err.message;
-            
-            // Provide helpful CORS error message
+
             if (errorMsg.includes('Failed to fetch') || errorMsg.includes('CORS')) {
-                errorMsg = 'Connection error - please check API configuration';
+                errorMsg = 'Connection error - please check the Amazon SES API Gateway configuration in script.js';
             }
             
             statusEl.textContent = `Error: ${errorMsg}`;

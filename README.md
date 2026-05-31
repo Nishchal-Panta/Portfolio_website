@@ -375,7 +375,7 @@ Edit `style.css`:
 
 - **Font Awesome** - Icons
 - **Google Fonts** - Typography (Poppins, JetBrains Mono)
-- **Formspree** - Contact form (optional setup)
+- **Amazon SES contact API** - Configured in `script.js`
 
 ### No External Dependencies!
 
