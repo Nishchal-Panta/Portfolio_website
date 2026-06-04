@@ -594,3 +594,39 @@ document.addEventListener('click', (e) => {
         });
     }
 });
+
+// ============================================
+// Album Drawer Toggle
+// ============================================
+
+class AlbumDrawer {
+    constructor() {
+        this.drawers = document.querySelectorAll('.drawer-toggle');
+        this.init();
+    }
+
+    init() {
+        this.drawers.forEach(drawer => {
+            drawer.addEventListener('click', (e) => this.toggle(e));
+        });
+    }
+
+    toggle(e) {
+        const button = e.currentTarget;
+        const drawerId = button.getAttribute('data-drawer');
+        const drawerContent = document.getElementById(`${drawerId}-drawer`);
+        
+        if (!drawerContent) return;
+
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        button.setAttribute('aria-expanded', !isExpanded);
+        drawerContent.classList.toggle('active');
+    }
+}
+
+// Initialize Album Drawer
+document.addEventListener('DOMContentLoaded', () => {
+    new AlbumDrawer();
+});
+

@@ -34,7 +34,8 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#album" class="nav-link">Album</a>
+                <a href="#certifications" class="nav-link">Certificates</a>
                 <a href="#journey" class="nav-link">Journey</a>
                 <a href="#cv" class="nav-link">Resume</a>
                 <a href="#contact" class="nav-link">Contact</a>
@@ -169,7 +170,7 @@
 
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-hexagon-nodes"></i>
+                            <i class="fas fa-robot"></i>
                         </div>
                         <h3>Artificial Intelligence</h3>
                         <p>Deep learning, neural networks, and AI-driven solutions</p>
@@ -591,78 +592,284 @@
             </div>
         </div>
     </section>
-
-    <!-- Certifications Section -->
-    <section class="certifications" id="certifications">
+    <!-- Album Section -->
+    <section class="album" id="album">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Certifications & Achievements</h2>
-                <p class="section-subtitle">Professional Recognition & Awards</p>
+                <h2 class="section-title">Photo & Video Gallery</h2>
+                <p class="section-subtitle">Moments & Memories</p>
             </div>
             
-            <div class="certifications-grid">
-                <div class="cert-card highlight">
-                    <div class="cert-icon">
-                        <i class="fab fa-aws"></i>
-                    </div>
-                    <h3>AWS Academy Graduate — Cloud Architecting</h3>
-                    <p class="cert-issuer">AWS Academy & CloudMandap</p>
-                    <p class="cert-date">2026</p>
-                    <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i> Active
+            <!-- Photos Drawer -->
+            <div class="album-drawer">
+                <button class="drawer-toggle" data-drawer="photos" aria-expanded="true">
+                    <span class="drawer-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                    <span class="drawer-title">
+                        <i class="fas fa-image"></i> Photos
+                    </span>
+                    <span class="drawer-count">6</span>
+                </button>
+                
+                <div class="drawer-content active" id="photos-drawer">
+                    <div class="album-grid">
+                        <!-- Photo 1 -->
+                        <div class="album-item">
+                            <div class="album-media">
+                                <img src="assets/album/photos/photo-1.jpg" alt="Portfolio moment" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/photos/photo-1.jpg" target="_blank" class="album-view" title="View full size">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Photo 2 -->
+                        <div class="album-item">
+                            <div class="album-media">
+                                <img src="assets/album/photos/photo-2.jpg" alt="Event moment" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/photos/photo-2.jpg" target="_blank" class="album-view" title="View full size">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Photo 3 -->
+                        <div class="album-item">
+                            <div class="album-media">
+                                <img src="assets/album/photos/photo-3.jpg" alt="Project showcase" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/photos/photo-3.jpg" target="_blank" class="album-view" title="View full size">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Photo 4 -->
+                        <div class="album-item">
+                            <div class="album-media">
+                                <img src="assets/album/photos/photo-4.jpg" alt="Team moment" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/photos/photo-4.jpg" target="_blank" class="album-view" title="View full size">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Photo 5 -->
+                        <div class="album-item">
+                            <div class="album-media">
+                                <img src="assets/album/photos/photo-5.jpg" alt="Conference snapshot" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/photos/photo-5.jpg" target="_blank" class="album-view" title="View full size">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Photo 6 -->
+                        <div class="album-item">
+                            <div class="album-media">
+                                <img src="assets/album/photos/photo-6.jpg" alt="Creative moment" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/photos/photo-6.jpg" target="_blank" class="album-view" title="View full size">
+                                        <i class="fas fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Videos Drawer -->
+            <div class="album-drawer">
+                <button class="drawer-toggle" data-drawer="videos" aria-expanded="false">
+                    <span class="drawer-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                    <span class="drawer-title">
+                        <i class="fas fa-video"></i> Videos
+                    </span>
+                    <span class="drawer-count">2</span>
+                </button>
                 
-                <div class="cert-card highlight">
-                    <div class="cert-icon">
-                        <i class="fab fa-aws"></i>
+                <div class="drawer-content" id="videos-drawer">
+                    <div class="album-grid">
+                        <!-- Video 1 -->
+                        <div class="album-item">
+                            <div class="album-media video-media">
+                                <img src="assets/album/videos/video-1-thumb.jpg" alt="Video thumbnail" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/videos/video-1.mp4" target="_blank" class="album-view" title="Watch video">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                </div>
+                                <span class="video-badge">VIDEO</span>
+                            </div>
+                        </div>
+
+                        <!-- Video 2 -->
+                        <div class="album-item">
+                            <div class="album-media video-media">
+                                <img src="assets/album/videos/video-2-thumb.jpg" alt="Video thumbnail" class="album-image">
+                                <div class="album-overlay">
+                                    <a href="assets/album/videos/video-2.mp4" target="_blank" class="album-view" title="Watch video">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                </div>
+                                <span class="video-badge">VIDEO</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3>AWS Certified Cloud Practitioner</h3>
-                    <p class="cert-issuer">Amazon Web Services</p>
-                    <p class="cert-date">2026</p>
-                    <div class="cert-badge">
-                        <i class="fas fa-check-circle"></i> Verified
-                    </div>
-                </div>
-                
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3>Certificate of Achievement</h3>
-                    <p class="cert-issuer">Aqore X Relayhack, Techspire College</p>
-                    <p class="cert-date">2025</p>
-                </div>
-                
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Future Forward Leadership & Communication</h3>
-                    <p class="cert-issuer">Professional Development</p>
-                    <p class="cert-date">2024</p>
-                </div>
-                
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3>Certificate of Participation — TEDx</h3>
-                    <p class="cert-issuer">TEDx IIMS 2024</p>
-                    <p class="cert-date">2024</p>
-                </div>
-                
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>AWS Cloud Fellow</h3>
-                    <p class="cert-issuer">CloudMandap DAAI Fellowship</p>
-                    <p class="cert-date">Feb 2026 - May 2026</p>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Certifications Section -->
+    <section class="certifications" id="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certificates & Achievements</h2>
+                <p class="section-subtitle">Professional Credentials & Recognition</p>
+            </div>
+            
+            <div class="certifications-grid">
+                <!-- AWS Academy Graduate -->
+                <div class="cert-card highlight">
+                    <div class="cert-image-wrapper">
+                        <img src="assets/certificates/aws-academy-certificate.jpg" alt="AWS Academy Certificate" class="cert-image">
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/aws-academy-certificate.jpg" target="_blank" class="cert-view-btn" title="View Certificate">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <h3>AWS Academy Graduate</h3>
+                            <span class="cert-badge-status"><i class="fas fa-check-circle"></i> Active</span>
+                        </div>
+                        <p class="cert-issuer"><i class="fas fa-building"></i> AWS Academy & CloudMandap</p>
+                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
+                        <p class="cert-description">Cloud Architecture specialization from AWS Academy</p>
+                    </div>
+                </div>
+                
+                <!-- AWS Cloud Practitioner -->
+                <div class="cert-card highlight">
+                    <div class="cert-image-wrapper">
+                        <img src="assets/certificates/aws-certified-cloud-practitioner.jpg" alt="AWS Certified Cloud Practitioner" class="cert-image">
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/aws-certified-cloud-practitioner.jpg" target="_blank" class="cert-view-btn" title="View Certificate">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <h3>AWS Certified Cloud Practitioner</h3>
+                            <span class="cert-badge-status"><i class="fas fa-check-circle"></i> Verified</span>
+                        </div>
+                        <p class="cert-issuer"><i class="fas fa-building"></i> Amazon Web Services</p>
+                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
+                        <p class="cert-description">Official AWS Cloud Practitioner certification</p>
+                    </div>
+                </div>
+                
+                <!-- Hackathon Achievement -->
+                <div class="cert-card">
+                    <div class="cert-image-wrapper">
+                        <img src="assets/certificates/hackathon-certificate.jpg" alt="Relay Hack Achievement" class="cert-image">
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/hackathon-certificate.jpg" target="_blank" class="cert-view-btn" title="View Certificate">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <h3>Certificate of Achievement</h3>
+                            <span class="cert-badge-event">Hackathon</span>
+                        </div>
+                        <p class="cert-issuer"><i class="fas fa-trophy"></i> Aqore X Relay Hack</p>
+                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</p>
+                        <p class="cert-description">Techspire College Hackathon participation</p>
+                    </div>
+                </div>
+                
+                <!-- Leadership Certificate -->
+                <div class="cert-card">
+                    <div class="cert-image-wrapper">
+                        <img src="assets/certificates/leadership-certificate.jpg" alt="Leadership & Communication Certificate" class="cert-image">
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/leadership-certificate.jpg" target="_blank" class="cert-view-btn" title="View Certificate">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <h3>Future Forward Leadership</h3>
+                            <span class="cert-badge-event">Development</span>
+                        </div>
+                        <p class="cert-issuer"><i class="fas fa-graduation-cap"></i> Professional Development</p>
+                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2024</p>
+                        <p class="cert-description">Leadership & Communication excellence</p>
+                    </div>
+                </div>
+                
+                <!-- TEDx Certificate -->
+                <div class="cert-card">
+                    <div class="cert-image-wrapper">
+                        <img src="assets/certificates/tedx-certificate.jpg" alt="TEDx IIMS Certificate" class="cert-image">
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/tedx-certificate.jpg" target="_blank" class="cert-view-btn" title="View Certificate">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <h3>TEDx Participation</h3>
+                            <span class="cert-badge-event">Speaker Event</span>
+                        </div>
+                        <p class="cert-issuer"><i class="fas fa-microphone"></i> TEDx IIMS 2024</p>
+                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2024</p>
+                        <p class="cert-description">Participated as speaker at TEDx event</p>
+                    </div>
+                </div>
+                
+                <!-- AWS Cloud Fellow -->
+                <div class="cert-card highlight">
+                    <div class="cert-image-wrapper">
+                        <img src="assets/certificates/aws-cloud-fellow.jpg" alt="AWS Cloud Fellow" class="cert-image">
+                        <div class="cert-overlay">
+                            <a href="assets/certificates/aws-cloud-fellow.jpg" target="_blank" class="cert-view-btn" title="View Certificate">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <h3>AWS Cloud Fellow</h3>
+                            <span class="cert-badge-status"><i class="fas fa-star"></i> Fellowship</span>
+                        </div>
+                        <p class="cert-issuer"><i class="fas fa-briefcase"></i> CloudMandap DAAI</p>
+                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> Feb - May 2026</p>
+                        <p class="cert-description">Selected fellow for cloud architecture program</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>"
 
     <!-- Education Section -->
     <section class="education" id="education">
