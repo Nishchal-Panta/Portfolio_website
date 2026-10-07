@@ -1,1331 +1,1182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Nishchal Panta - BCS Student, AWS Cloud Learner, Full-Stack Developer. Showcasing ML projects, e-commerce platforms, and cloud architecture expertise.">
-    <meta name="keywords" content="Portfolio, Developer, AWS, Machine Learning, Full-Stack, Nepal, Backend, Cloud">
+        content="Nishchal Panta - BCS Undergraduate, AWS Cloud Fellow & Full-Stack Developer based in Kathmandu. Specialized in Cloud Architecture, Machine Learning Threat Detection, and Production Web Engineering.">
+    <meta name="keywords" content="Nishchal Panta, AWS Cloud, Machine Learning, PyTorch, Laravel, Nepal, Full-Stack Developer, Cybersecurity">
     <meta name="author" content="Nishchal Panta">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#090d16">
 
-    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 
-    <title>Nishchal Panta - Software Engineer & Cloud Developer</title>
+    <title>Nishchal Panta | Software Engineer & AWS Cloud Fellow</title>
     <link rel="canonical" href="https://nishchalpanta.com.np/">
 
-    <!-- Preconnect for performance -->
+    <!-- Preconnect Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
-        rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar" id="navbar">
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+    <!-- Top Navigation Bar -->
+    <header class="navbar" id="navbar">
         <div class="container nav-container">
-            <div class="nav-menu" id="navMenu">
-                <a href="#hero" class="nav-link">Home</a>
+            <a href="#hero" class="nav-brand" aria-label="Nishchal Panta Home">
+                <span class="nav-brand-code">NP</span>
+                <span>Nishchal Panta</span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
-                <a href="#certifications" class="nav-link">Certificates</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
                 <a href="#journey" class="nav-link">Journey</a>
                 <a href="#cv" class="nav-link">Resume</a>
                 <a href="#contact" class="nav-link">Contact</a>
-            </div>
+            </nav>
 
             <div class="nav-controls">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-                    <i class="fas fa-moon"></i>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle visual theme" title="Toggle theme">
+                    <i class="fas fa-sun" id="themeIcon"></i>
                 </button>
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-background">
-            <div class="animated-gradient"></div>
-        </div>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-status-row">
+                        <div class="status-pill">
+                            <span class="status-indicator"></span>
+                            <span>Open to Software Engineering & Cloud Internships</span>
+                        </div>
+                    </div>
 
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Nishchal Panta</h1>
-
-                <div class="typing-container">
-                    <span class="typing-text">Software Engineering Student</span>
-                    <span class="cursor" id="cursor">|</span>
-                </div>
-
-                <p class="hero-subtitle">
-                    BCS Undergraduate | AWS Cloud Learner | Backend & Full-Stack Developer
-                </p>
-
-                <p class="hero-description">
-                    Building end-to-end solutions from neural network threat detection to production e-commerce
-                    platforms.
-                    Passionate about cloud architecture, fintech, AI and Machine Learning.
-                </p>
-
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-code"></i> View Projects
-                    </a>
-                    <a href="#cv" class="btn btn-secondary">
-                        <i class="fas fa-file-pdf"></i> View CV
-                    </a>
-                    <a href="#contact" class="btn btn-outline">
-                        <i class="fas fa-envelope"></i> Get In Touch
-                    </a>
-                </div>
-
-                <div class="hero-social">
-                    <a href="https://github.com/Nishchal-Panta" target="_blank" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/nishchal-panta-3890b1292" target="_blank" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://facebook.com/nishchal.panta.9" target="_blank" aria-label="Facebook">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="https://instagram.com/nishchalpanta" target="_blank" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="hero-image">
-                <div class="profile-container">
-                    <img src="assets/images/1768701296757.jpg" alt="Nishchal Panta - BCS Student & Developer"
-                        class="profile-image">
-                </div>
-            </div>
-        </div>
-
-        <div class="scroll-indicator">
-            <span>Scroll to explore</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">My Story & Career Path</p>
-            </div>
-
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I'm a motivated BCS undergraduate with a passion for building robust, scalable systems.
-                        Currently studying at IIMS College & Taylor's University in Kathmandu, I combine theoretical
-                        knowledge with hands-on experience in machine learning, cloud architecture, and full-stack
-                        development.
+                    <h1 class="hero-title">Nishchal Panta</h1>
+                    
+                    <p class="hero-role">
+                        BCS Undergraduate &bull; AWS Cloud Fellow &bull; Backend Engineer
                     </p>
 
-                    <p>
-                        My journey started with curiosity about cybersecurity, leading me to develop deep learning
-                        intrusion detection systems. This evolved into a broader interest in cloud infrastructure and
-                        production-grade web applications, culminating in a full-stack e-commerce platform with 12
-                        database migrations and comprehensive security implementations.
+                    <p class="hero-summary">
+                        Building reliable software from deep-learning intrusion detection systems to production-grade web platforms. Passionate about cloud architecture, database systems, and secure application development. Based in Kathmandu, Nepal.
                     </p>
 
-                    <p>
-                        As an AWS Cloud Fellow at CloudMandap, I'm deepening my expertise in cloud architecture,
-                        scalability patterns, and AWS best practices. I'm particularly interested in the intersection of
-                        cloud architecture, fintech, AI and Machine Learning.
-                    </p>
-
-                    <p>
-                        <strong>Nepal-based, globally connected.</strong> I believe great solutions don't recognize
-                        borders. Let's build something meaningful together.
-                    </p>
-
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">4+</span>
-                            <span class="stat-label">Major Projects</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">16</span>
-                            <span class="stat-label">Certifications</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">12+</span>
-                            <span class="stat-label">Tech Skills</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="about-features">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>Machine Learning</h3>
-                        <p>Deep neural networks, feature engineering, model evaluation with PyTorch</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3>Artificial Intelligence</h3>
-                        <p>Deep learning, neural networks, and AI-driven solutions</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <h3>Cloud Architecture</h3>
-                        <p>AWS services, scalability patterns, IAM, VPC, and solution design</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-code-branch"></i>
-                        </div>
-                        <h3>Full-Stack Dev</h3>
-                        <p>Laravel, PHP, MySQL, modern frontend with Tailwind CSS & Alpine.js</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Security Focus</h3>
-                        <p>XSS protection, bcrypt hashing, secure architecture patterns</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Technical Skills</h2>
-                <p class="section-subtitle">Technologies & Tools I Use</p>
-            </div>
-
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-laptop-code"></i> Programming Languages
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">PHP</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-cube"></i> Frameworks & Libraries
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Laravel 11</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">Transformers</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">Tailwind CSS</span>
-                        <span class="skill-tag">Alpine.js</span>
-                        <span class="skill-tag">Chart.js</span>
-                        <span class="skill-tag">Node.js</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-cloud"></i> Cloud & DevOps
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">CI/CD</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-database"></i> Databases & Tools
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">XAMPP</span>
-                        <span class="skill-tag">VS Code</span>
-                        <span class="skill-tag">Postman</span>
-                        <span class="skill-tag">IntelliJ IDEA</span>
-                        <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">Kaggle</span>
-                        <span class="skill-tag">Jupyter Notebook</span>
-                        <span class="skill-tag">Hugging Face</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-chart-line"></i> Machine Learning
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Neural Networks</span>
-                        <span class="skill-tag">Supervised Learning</span>
-                        <span class="skill-tag">Unsupervised Learning</span>
-                        <span class="skill-tag">Reinforcement Learning</span>
-                        <span class="skill-tag">ROC/AUC</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-chart-line"></i> Artificial Intelligence
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Large Language Models(LLMs)</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-users"></i> Soft Skills
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Problem Solving</span>
-                        <span class="skill-tag">Communication</span>
-                        <span class="skill-tag">Team Collaboration</span>
-                        <span class="skill-tag">Leadership</span>
-                        <span class="skill-tag">Presentation</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">End-to-End Solutions & Technical Implementations</p>
-            </div>
-
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3 class="project-title">Neural Network Cybersecurity Threat Detection</h3>
-                    </div>
-
-                    <p class="project-description">
-                        Deep-learning IDS system using PyTorch to classify network traffic from IDS 2018 datasets.
-                        4-layer MLP with ReLU activation, Dropout, and early stopping.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>4-layer Neural Network</span>
-                        <span>512→256→128→2 Architecture</span>
-                        <span>ROC/AUC Evaluation</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">PyTorch</span>
-                        <span class="tech-badge">Scikit-learn</span>
-                        <span class="tech-badge">Pandas</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="https://github.com/Nishchal-Panta/Cybersecurity_threat_detection" target="_blank"
-                            rel="noopener noreferrer" class="project-link">
-                            <i class="fab fa-github"></i> View Repository
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-code"></i> View Projects
                         </a>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <h3 class="project-title">Laravel E-Commerce Platform</h3>
-                    </div>
-
-                    <p class="project-description">
-                        Production e-commerce application with buyer storefront, admin analytics, inventory management,
-                        RBAC, and comprehensive security implementations.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>12 DB Migrations</span>
-                        <span>Admin Dashboard</span>
-                        <span>Inventory System</span>
-                        <span>CSRF/XSS Protection</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">Laravel 11</span>
-                        <span class="tech-badge">PHP 8.2</span>
-                        <span class="tech-badge">MySQL</span>
-                        <span class="tech-badge">Tailwind CSS</span>
-                        <span class="tech-badge">Alpine.js</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="https://github.com/Nishchal-Panta/E-commerce_website" target="_blank"
-                            rel="noopener noreferrer" class="project-link">
-                            <i class="fab fa-github"></i> View Repository
+                        <a href="assets/files/Nishchal_Panta_CV.pdf" target="_blank" class="btn btn-secondary">
+                            <i class="fas fa-file-pdf"></i> View Resume
                         </a>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3 class="project-title">Share Market Analysis</h3>
-                    </div>
-
-                    <p class="project-description">
-                        Exploratory Data Analysis on NEPSE market data. Statistical analysis, visualization, and
-                        insights generation using Pandas and Matplotlib.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>EDA Techniques</span>
-                        <span>Data Visualization</span>
-                        <span>Statistical Analysis</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Pandas</span>
-                        <span class="tech-badge">Matplotlib</span>
-                        <span class="tech-badge">Data Science</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="https://github.com/Nishchal-Panta/Share-market_analysis.git" target="_blank"
-                            rel="noopener noreferrer" class="project-link">
-                            <i class="fab fa-github"></i> View Repository
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <h3 class="project-title">VeggieScan - AI Disease Detection</h3>
-                    </div>
-
-                    <p class="project-description">
-                        AI-powered vegetable disease detection system. Machine learning integration for agricultural
-                        technology and disease prevention.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>ML Integration</span>
-                        <span>Image Analysis</span>
-                        <span>AgriTech Focus</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">ML</span>
-                        <span class="tech-badge">Image Processing</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="https://github.com/Kaushik22864/VeggieScan.git" target="_blank"
-                            rel="noopener noreferrer" class="project-link">
-                            <i class="fab fa-github"></i> View Repository
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3 class="project-title">Panta Store - Inventory App</h3>
-                    </div>
-
-                    <p class="project-description">
-                        Android inventory management application built with Java. Real-time stock tracking and
-                        management system.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>Android Development</span>
-                        <span>Inventory Tracking</span>
-                        <span>Real-time Updates</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">Java</span>
-                        <span class="tech-badge">Android</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="https://github.com/Nishchal-Panta/PantaStoreApp.git" target="_blank"
-                            rel="noopener noreferrer" class="project-link">
-                            <i class="fab fa-github"></i> View Repository
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 6 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3 class="project-title">Relay Hack Hackathon</h3>
-                    </div>
-
-                    <p class="project-description">
-                        Full-stack application built under time pressure during hackathon. Laravel & Blade templating
-                        with rapid prototyping techniques.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>Time-Constrained</span>
-                        <span>Full-Stack</span>
-                        <span>Rapid Prototyping</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">Laravel</span>
-                        <span class="tech-badge">Blade</span>
-                        <span class="tech-badge">PHP</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="https://github.com/Albratoburner/Hackathon-relay-hack.git" target="_blank"
-                            rel="noopener noreferrer" class="project-link">
-                            <i class="fab fa-github"></i> View Repository
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 7 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3 class="project-title">Customer Behavior Analysis</h3>
-                    </div>
-
-                    <p class="project-description">
-                        Uncovering insights from transactional data to inform business strategies.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>Insightful Analytics</span>
-                        <span>Data-driven Decisions</span>
-                        <span>Business Insights</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Association Rule Mining</span>
-                        <span class="tech-badge">Apriori</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="https://github.com/Nishchal-Panta/Customer_behavior_analysis.git" target="_blank"
-                            rel="noopener noreferrer" class="project-link">
-                            <i class="fab fa-github"></i> View Repository
-                        </a>
-                    </div>
-                </div>
-
-                <!-- AWS Projects CTA Card -->
-                <div class="project-card aws-projects-card">
-                    <div class="project-header">
-                        <div class="project-icon aws-icon">
-                            <i class="fab fa-aws"></i>
-                        </div>
-                        <h3 class="project-title">AWS Cloud Projects</h3>
-                    </div>
-
-                    <p class="project-description">
-                        Collection of cloud infrastructure projects and AWS solutions. Explore cloud architecture
-                        patterns, CI/CD pipelines, and serverless implementations.
-                    </p>
-
-                    <div class="project-highlights">
-                        <span>Cloud Architecture</span>
-                        <span>Infrastructure as Code</span>
-                        <span>CI/CD Integration</span>
-                    </div>
-
-                    <div class="project-tech">
-                        <span class="tech-badge">AWS</span>
-                        <span class="tech-badge">EC2</span>
-                        <span class="tech-badge">S3</span>
-                        <span class="tech-badge">Lambda</span>
-                        <span class="tech-badge">CloudFormation</span>
-                    </div>
-
-                    <div class="project-actions">
-                        <a href="aws-projects.html" class="project-link">
-                            <i class="fas fa-cloud"></i> Explore AWS Projects
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="projects-cta">
-                <p>Explore all projects on GitHub</p>
-                <a href="https://github.com/Nishchal-Panta?tab=repositories" target="_blank" class="btn btn-primary">
-                    <i class="fab fa-github"></i> View GitHub Profile
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section class="certifications" id="certifications">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Certificates & Achievements</h2>
-                <p class="section-subtitle">Professional Credentials & Recognition</p>
-            </div>
-
-            <div class="certifications-grid">
-                <!-- AWS Academy Graduate- Cloud Architecting -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\aws-academy-graduate-cloud-architecting-training-ba.png"
-                            alt="AWS Academy Certificate" class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260504-31-jtwiz6.pdf"
-                                target="_blank" class="cert-view-btn" title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>AWS Academy Graduate</h3>
-                            <span class="cert-badge-status"><i class="fas fa-check-circle"></i> Active</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-cloud"></i> AWS Academy</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
-                        <p class="cert-description">Cloud Architecture specialization from AWS Academy</p>
-                    </div>
-                </div>
-
-                <!-- AWS certified Cloud Practitioner -->
-                <div class="cert-card highlight">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\aws-certified-cloud-practitioner.png"
-                            alt="AWS Certified Cloud Practitioner" class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\AWS Certified Cloud Practitioner certificate.pdf"
-                                target="_blank" class="cert-view-btn" title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>AWS Certified Cloud Practitioner</h3>
-                            <span class="cert-badge-status"><i class="fas fa-check-circle"></i> Verified</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-cloud"></i> Amazon Web Services</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> May 4, 2026 - May 4, 2029</p>
-                        <p class="cert-description">Official AWS Cloud Practitioner certification</p>
-                    </div>
-                </div>
-
-                <!-- Hackathon Achievement -->
-                <div class="cert-card highlight">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\hackWinCert.jpg" alt="Relay Hack Achievement" class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\hackWinCert.jpg" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Certificate of Achievement</h3>
-                            <span class="cert-badge-event">Hackathon</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-trophy"></i> Aqore X Relay Hack</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</p>
-                        <p class="cert-description">Techspire College Hackathon Winner</p>
-                    </div>
-                </div>
-
-                <!-- Leadership Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\future-forward.jpg" alt="Leadership & Communication Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\future-forward.jpg" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Future Forward Leadership</h3>
-                            <span class="cert-badge-event">Development</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-graduation-cap"></i> Professional Development</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2023</p>
-                        <p class="cert-description">Leadership & Communication excellence</p>
-                    </div>
-                </div>
-
-                <!-- TEDx Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\TEDX.jpg" alt="TEDx IIMS Certificate" class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\TEDX.jpg" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>TEDx Participation</h3>
-                            <span class="cert-badge-event">Speaker Event</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-microphone"></i> TEDx IIMS</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2024</p>
-                        <p class="cert-description">Participated to listen to multiple experienced speakers at TEDx
-                            event</p>
-                    </div>
-                </div>
-
-                <!-- AWS Academy Graduate - Cloud Foundations -->
-                <div class="cert-card highlight">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\aws-academy-graduate-cloud-foundations-training-bad.png"
-                            alt="AWS Cloud Foundations Certificate" class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260109-31-mhwu10.pdf"
-                                target="_blank" class="cert-view-btn" title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>AWS Academy Graduate</h3>
-                            <span class="cert-badge-status"><i class="fas fa-check-circle"></i> Active</span>
-                            <!-- <span class="cert-badge-status"><i class="fas fa-star"></i> Fellowship</span> -->
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-cloud"></i> AWS Academy</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
-                        <p class="cert-description">Cloud Foundations specialization from AWS Academy</p>
-                    </div>
-                </div>
-
-                <!-- Presentation Achievement -->
-                <div class="cert-card highlight">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\Presentation3.jpg" alt="Presentation Achievement"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\Presentation3.jpg" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Certificate of Achievement</h3>
-                            <span class="cert-badge-event"> Presentation</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-trophy"></i> Uniglobe SS/College</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2021</p>
-                        <p class="cert-description">Won third place in the college's presentation competition</p>
-                    </div>
-                </div>
-
-                <!-- Hugging Face Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\hugg.png" alt="Hugging Face Certificate" class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\HuggingFace_certificate.pdf" target="_blank"
-                                class="cert-view-btn" title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Working with Hugging Face</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i> Datacamp</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
-                        <p class="cert-description">Completed the Working with Hugging Face course</p>
-                    </div>
-                </div>
-
-                <!-- Deep learning with Pytorch Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\CPE0157249330671.png" alt="Deep Learning Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\certificate (1).pdf" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Introduction to Deep Learning with PyTorch</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i> Datacamp</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
-                        <p class="cert-description">Completed the Introduction to Deep Learning with PyTorch course</p>
-                    </div>
-                </div>
-
-                <!-- Supervised Learning Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\SupervisedLearning.png" alt="Supervised Learning Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\certificate (2).pdf" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Supervised Learning with scikit-learn</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i> Datacamp</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
-                        <p class="cert-description">Completed the Supervised Learning with scikit-learn course</p>
-                    </div>
-                </div>
-
-                <!-- Unsupervised Learning Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\UnsupervisedLearning.png" alt="Unsupervised Learning Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\certificate (2).pdf" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Unsupervised Learning in Python</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i> Datacamp</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
-                        <p class="cert-description">Completed the Unsupervised Learning in Python course</p>
-                    </div>
-                </div>
-                <!-- Web Development (Laravel) Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\1769050129517.jpg" alt="Web Development Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\1769050129517.jpg" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Web Development(Laravel)</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i> IIMS College</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</p>
-                        <p class="cert-description">Completed the Web Development(Laravel) course</p>
-                    </div>
-                </div>
-                <!-- Introduction to Programming Using Python Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\1768641269462.jpg" alt="Web Development Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\certificate.pdf" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Introduction to Programming Using Python</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i>Datacamp</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</p>
-                        <p class="cert-description">Completed the Introduction to Programming Using Python course</p>
-                    </div>
-                </div>
-                <!-- Hack4SafeFood: Hackathon for Innovating Food Safety in Nepal Participation Certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\1767339969067.jpg"
-                            alt="Hack4SafeFood: Hackathon for Innovating Food Safety in Nepal Participation Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\1767339969067.jpg" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Hack4SafeFood: Hackathon for Innovating Food Safety in Nepal</h3>
-                            <span class="cert-badge-event">Hackathon</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i>Nepal Food Scientists and Technologists
-                            Association</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</p>
-                        <p class="cert-description">Participated in the Hack4SafeFood: Hackathon for Innovating Food
-                            Safety in Nepal</p>
-                    </div>
-                </div>
-                <!-- Data Manipulation with pandas certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\Screenshot 2026-07-09 081646.png"
-                            alt="Hack4SafeFood: Hackathon for Innovating Food Safety in Nepal Participation Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\pandas.pdf" target="_blank" class="cert-view-btn"
-                                title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Data Manipulation with pandas</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i> Datacamp</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</p>
-                        <p class="cert-description">Completed the Data Manipulation with pandas course</p>
-                    </div>
-                </div>
-                <!-- Intermediate Python certificate -->
-                <div class="cert-card">
-                    <div class="cert-image-wrapper">
-                        <img src="assets\certificates\1767088040057.jpg"
-                            alt="Hack4SafeFood: Hackathon for Innovating Food Safety in Nepal Participation Certificate"
-                            class="cert-image">
-                        <div class="cert-overlay">
-                            <a href="assets\certificates\Intermediate Python Certificate.pdf" target="_blank"
-                                class="cert-view-btn" title="View Certificate">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cert-content">
-                        <div class="cert-header">
-                            <h3>Intermediate Python</h3>
-                            <span class="cert-badge-event">Course</span>
-                        </div>
-                        <p class="cert-issuer"><i class="fas fa-laptop-code"></i> Datacamp</p>
-                        <p class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</p>
-                        <p class="cert-description">Completed the Intermediate Python course</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>"
-
-    <!-- Education Section -->
-    <section class="education" id="education">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Education</h2>
-                <p class="section-subtitle">Academic Background & Learning</p>
-            </div>
-
-            <div class="education-content">
-                <div class="education-card">
-                    <div class="education-header">
-                        <h3>Bachelor of Computer Science (BCS)</h3>
-                        <span class="education-duration">2023 - Present</span>
-                    </div>
-                    <p class="education-institution">IIMS College & Taylor's University, Kathmandu</p>
-
-                    <div class="education-details">
-                        <h4>Relevant Coursework:</h4>
-                        <div class="coursework-tags">
-                            <span>Data Mining</span>
-                            <span>Machine Learning</span>
-                            <span>Database Management</span>
-                            <span>Web Technologies</span>
-                            <span>Software Engineering</span>
-                            <span>Cloud Architecture</span>
-                            <span>Data Structures</span>
-                            <span>Algorithms</span>
-                        </div>
-                    </div>
-
-                    <p class="education-description">
-                        Comprehensive BCS program combining theoretical foundations with practical industry skills.
-                        Focus on modern technologies, security practices, and real-world application development.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Journey Timeline Section -->
-    <section class="journey" id="journey">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">My Journey</h2>
-                <p class="section-subtitle">Technical Growth & Milestones</p>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <h3>BCS Program Started</h3>
-                        <p class="timeline-date">2023</p>
-                        <p>Began Bachelor of Computer Science at IIMS College & Taylor's University with focus on
-                            foundational CS concepts and emerging technologies.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <h3>Deep Learning & Cybersecurity Focus</h3>
-                        <p class="timeline-date">2024</p>
-                        <p>Developed neural network intrusion detection system using PyTorch. Explored cybersecurity and
-                            machine learning concepts in depth.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <h3>Full-Stack E-Commerce Platform</h3>
-                        <p class="timeline-date">2025</p>
-                        <p>Built production-ready e-commerce platform with Laravel, MySQL, comprehensive security, and
-                            admin analytics dashboard.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <h3>AWS Cloud Fellow</h3>
-                        <p class="timeline-date">Feb 2026 - May 2026</p>
-                        <p>Selected for CloudMandap DAAI Fellowship. Studying cloud design patterns, scalability, IAM,
-                            and AWS solution architecture best practices.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">
-                        <i class="fab fa-aws"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <h3>AWS Certified Cloud Practitioner</h3>
-                        <p class="timeline-date">2026</p>
-                        <p>Achieved AWS Certified Cloud Practitioner certification during DAAI Fellowship. Completed AWS
-                            Academy Cloud Architecting program.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <h3>Continuous Growth</h3>
-                        <p class="timeline-date">Ongoing</p>
-                        <p>Building expertise in cybersecurity, fintech analytics, and agritech. Contributing to
-                            open-source projects and expanding technical horizons.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CV / Resume Section -->
-    <section class="cv-section" id="cv">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Resume</h2>
-                <p class="section-subtitle">Download My Full CV</p>
-            </div>
-
-            <div class="cv-content">
-                <div class="cv-preview">
-                    <div class="cv-card">
-                        <div class="cv-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <h3>Nishchal Panta - CV</h3>
-                        <p>Complete resume with detailed experience, projects, and certifications</p>
-
-                        <div class="cv-highlights">
-                            <span><i class="fas fa-check"></i> Professional Summary</span>
-                            <span><i class="fas fa-check"></i> Technical Skills</span>
-                            <span><i class="fas fa-check"></i> Project Details</span>
-                            <span><i class="fas fa-check"></i> Certifications</span>
-                        </div>
-
-                        <div class="cv-actions">
-                            <a href="assets/files/Nishchal_Panta_CV.pdf" target="_blank" class="btn btn-primary">
-                                <i class="fas fa-eye"></i> View CV
-                            </a>
-                            <a href="assets/files/Nishchal_Panta_CV.pdf" download class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download CV
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cv-info">
-                    <h3>Quick Highlights</h3>
-
-                    <div class="highlight-section">
-                        <h4>Core Competencies</h4>
-                        <ul>
-                            <li>Full-Stack Web Development (Laravel, PHP, MySQL)</li>
-                            <li>Machine Learning & Neural Networks (PyTorch, TensorFlow)</li>
-                            <li>Cloud Architecture & AWS Services</li>
-                            <li>Cybersecurity & Threat Detection</li>
-                            <li>Database Design & Management</li>
-                        </ul>
-                    </div>
-
-                    <div class="highlight-section">
-                        <h4>Professional Attributes</h4>
-                        <ul>
-                            <li>AWS Certified Cloud Practitioner</li>
-                            <li>Problem-solving & Algorithm Design</li>
-                            <li>Leadership & Team Collaboration</li>
-                            <li>Production-Grade Code Quality</li>
-                            <li>Agile & DevOps Mindset</li>
-                        </ul>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="section-subtitle">Get In Touch For Opportunities & Collaborations</p>
-            </div>
-
-            <div class="contact-content">
-                <div class="contact-form-wrapper">
-                    <form id="contact-form" class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message"
-                                placeholder="Share your thoughts, opportunities, or questions..." rows="6"
-                                required></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-submit">
-                            <i class="fas fa-paper-plane"></i> Send Message
+                        <button class="btn btn-outline copy-email-btn" id="copyEmailBtn" data-email="nishchalpanta426@gmail.com" aria-label="Copy email address to clipboard">
+                            <i class="fas fa-copy"></i>
+                            <span class="btn-text">Copy Email</span>
+                            <span class="copy-tooltip" id="copyTooltip">Click to copy</span>
                         </button>
+                    </div>
 
-                        <div id="contact-status" class="contact-status"></div>
-                    </form>
+                    <p class="hero-narrative">
+                        From intrusion-detection research to production Laravel to AWS cloud work, each step builds on the last. <a href="#journey">Read the trajectory</a> or start with the proof below.
+                    </p>
+
+                    <!-- Verified Real Metrics Strip -->
+                    <div class="metrics-strip">
+                        <div class="metric-item">
+                            <span class="metric-value">ROC/AUC</span>
+                            <span class="metric-label">Evaluated IDS Detection Model</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">12</span>
+                            <span class="metric-label">Database Migrations in Production</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">AWS</span>
+                            <span class="metric-label">Certified Cloud Practitioner</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">1st</span>
+                            <span class="metric-label">Techspire Relay Hack Winner</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
+                <div class="hero-visual">
+                    <div class="profile-card">
+                        <div class="profile-image-container">
+                            <img src="assets/images/1768701296757.jpg" alt="Nishchal Panta" class="profile-image" loading="eager">
                         </div>
-                        <h3>Email</h3>
-                        <a href="mailto:nishchalpanta426@gmail.com">nishchalpanta426@gmail.com</a>
+                        <div class="profile-meta">
+                            <div class="profile-meta-title">Nishchal Panta</div>
+                            <div class="profile-meta-sub">Kathmandu, Nepal &bull; IIMS & Taylor's University</div>
+                            <div class="profile-socials">
+                                <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub Profile">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/nishchal-panta-3890b1292" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn Profile">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://facebook.com/nishchal.panta.9" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook Profile">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://instagram.com/nishchalpanta" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram Profile">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Technical Focus Matrix -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Background & Core Competencies</span>
+                    <h2 class="section-title">Engineering Discipline</h2>
+                    <p class="section-subtitle">
+                        Theoretical foundations paired with hands-on systems implementation.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-bio">
+                        <p>
+                            I am a Bachelor of Computer Science student at <strong>IIMS College</strong> (affiliated with <strong>Taylor's University</strong>). My approach to software engineering emphasizes resilient architecture, clean codebases, and measurable outcomes.
+                        </p>
+                        <p>
+                            Starting with an interest in cybersecurity, I implemented deep-learning intrusion detection models with PyTorch on the IDS 2018 benchmark. Moving toward scalable systems, I built a production-style Laravel platform featuring complex relational schema designs, role-based access control, and complete defensive security measures against CSRF and XSS attacks.
+                        </p>
+                        <p>
+                            As an <strong>AWS Cloud Fellow</strong> at CloudMandap, I am deepening my operational knowledge in infrastructure design, IAM least-privilege security, VPC networking, and serverless architectures.
+                        </p>
                     </div>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                    <div class="about-matrix">
+                        <div class="matrix-card spotlight-card">
+                            <div class="spotlight-content">
+                                <div class="matrix-card-header">
+                                    <div class="matrix-icon-badge">
+                                        <i class="fas fa-cloud"></i>
+                                    </div>
+                                    <h3>Cloud & Systems Architecture</h3>
+                                </div>
+                                <p>
+                                    Infrastructure design with AWS services (EC2, S3, Lambda, IAM, VPC), automated deployment pipelines with GitHub Actions, and containerized workflows.
+                                </p>
+                                <div class="matrix-tech-row">
+                                    <span class="tech-tag">AWS Architecture</span>
+                                    <span class="tech-tag">IAM & Security</span>
+                                    <span class="tech-tag">CI/CD</span>
+                                    <span class="tech-tag">Docker</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Location</h3>
-                        <p>Kathmandu, Nepal</p>
-                    </div>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
+                        <div class="matrix-card spotlight-card">
+                            <div class="spotlight-content">
+                                <div class="matrix-card-header">
+                                    <div class="matrix-icon-badge">
+                                        <i class="fas fa-network-wired"></i>
+                                    </div>
+                                    <h3>Applied Machine Learning</h3>
+                                </div>
+                                <p>
+                                    Supervised deep neural networks for threat detection, feature extraction from raw traffic data, and rigorous validation through ROC/AUC metrics.
+                                </p>
+                                <div class="matrix-tech-row">
+                                    <span class="tech-tag">PyTorch</span>
+                                    <span class="tech-tag">Scikit-learn</span>
+                                    <span class="tech-tag">Pandas</span>
+                                    <span class="tech-tag">Model Validation</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Phone</h3>
-                        <p><a href="tel:+9779841841334">+977 9841841334</a></p>
+
+                        <div class="matrix-card spotlight-card">
+                            <div class="spotlight-content">
+                                <div class="matrix-card-header">
+                                    <div class="matrix-icon-badge">
+                                        <i class="fas fa-server"></i>
+                                    </div>
+                                    <h3>Full-Stack Application Engineering</h3>
+                                </div>
+                                <p>
+                                    Relational schema modeling, RESTful API design, authentication, RBAC authorization, and performant frontend state management.
+                                </p>
+                                <div class="matrix-tech-row">
+                                    <span class="tech-tag">Laravel 11</span>
+                                    <span class="tech-tag">PHP 8.2</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">Tailwind CSS</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="social-links-section">
-                <h3>Follow Me On</h3>
-                <div class="social-links">
-                    <a href="https://github.com/Nishchal-Panta" target="_blank" class="social-button"
-                        aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://linkedin.com/in/nishchal-panta-3890b1292" target="_blank" class="social-button"
-                        aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://facebook.com/nishchal.panta.9" target="_blank" class="social-button"
-                        aria-label="Facebook">
-                        <i class="fab fa-facebook"></i>
-                        <span>Facebook</span>
-                    </a>
-                    <a href="https://instagram.com/nishchalpanta" target="_blank" class="social-button"
-                        aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a>
+        <!-- Technical Skills Section -->
+        <section class="skills-section" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Tooling & Environment</span>
+                    <h2 class="section-title">Technical Stack</h2>
+                    <p class="section-subtitle">
+                        Technologies and platforms utilized across production projects and academic research.
+                    </p>
+                </div>
+
+                <div class="skills-category-grid">
+                    <div class="skill-category-card spotlight-card">
+                        <div class="spotlight-content">
+                            <h3 class="category-title">
+                                <i class="fas fa-code"></i> Languages
+                            </h3>
+                            <div class="skill-list">
+                                <span class="skill-item">Python</span>
+                                <span class="skill-item">PHP 8.x</span>
+                                <span class="skill-item">JavaScript (ES6+)</span>
+                                <span class="skill-item">Java</span>
+                                <span class="skill-item">SQL</span>
+                                <span class="skill-item">HTML5 / CSS3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card spotlight-card">
+                        <div class="spotlight-content">
+                            <h3 class="category-title">
+                                <i class="fas fa-layer-group"></i> Frameworks & Runtimes
+                            </h3>
+                            <div class="skill-list">
+                                <span class="skill-item">Laravel 11</span>
+                                <span class="skill-item">PyTorch</span>
+                                <span class="skill-item">Node.js</span>
+                                <span class="skill-item">Scikit-learn</span>
+                                <span class="skill-item">Tailwind CSS</span>
+                                <span class="skill-item">Alpine.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card spotlight-card">
+                        <div class="spotlight-content">
+                            <h3 class="category-title">
+                                <i class="fas fa-cloud-upload-alt"></i> Cloud & DevOps
+                            </h3>
+                            <div class="skill-list">
+                                <span class="skill-item">AWS EC2 / S3</span>
+                                <span class="skill-item">AWS Lambda</span>
+                                <span class="skill-item">AWS IAM / VPC</span>
+                                <span class="skill-item">GitHub Actions</span>
+                                <span class="skill-item">Docker</span>
+                                <span class="skill-item">Git Version Control</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card spotlight-card">
+                        <div class="spotlight-content">
+                            <h3 class="category-title">
+                                <i class="fas fa-database"></i> Databases & Storage
+                            </h3>
+                            <div class="skill-list">
+                                <span class="skill-item">MySQL</span>
+                                <span class="skill-item">Schema Design</span>
+                                <span class="skill-item">Database Migrations</span>
+                                <span class="skill-item">Indexing</span>
+                                <span class="skill-item">ORM Query Tuning</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card spotlight-card">
+                        <div class="spotlight-content">
+                            <h3 class="category-title">
+                                <i class="fas fa-brain"></i> Machine Learning
+                            </h3>
+                            <div class="skill-list">
+                                <span class="skill-item">Deep Neural Networks</span>
+                                <span class="skill-item">Supervised Learning</span>
+                                <span class="skill-item">Unsupervised Learning</span>
+                                <span class="skill-item">Pandas / NumPy</span>
+                                <span class="skill-item">Hugging Face</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card spotlight-card">
+                        <div class="spotlight-content">
+                            <h3 class="category-title">
+                                <i class="fas fa-shield-halved"></i> Security & Systems
+                            </h3>
+                            <div class="skill-list">
+                                <span class="skill-item">Network Intrusion Detection</span>
+                                <span class="skill-item">RBAC Authorization</span>
+                                <span class="skill-item">CSRF & XSS Prevention</span>
+                                <span class="skill-item">Postman API Testing</span>
+                                <span class="skill-item">Linux Environments</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Featured Projects Section with Interactive Filter Tabs -->
+        <section class="projects-section" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Engineering Work</span>
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">
+                        End-to-end architectures demonstrating practical problem-solving across cloud, machine learning, and web development.
+                    </p>
+                </div>
+
+                <!-- Motion Primitives Filter Navigation -->
+                <div class="filter-container">
+                    <div class="filter-nav" role="tablist" aria-label="Project filter tabs">
+                        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Work</button>
+                        <button class="filter-btn" data-filter="cloud" role="tab" aria-selected="false">Cloud & DevOps</button>
+                        <button class="filter-btn" data-filter="ml" role="tab" aria-selected="false">AI & Machine Learning</button>
+                        <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Full-Stack Web</button>
+                    </div>
+                </div>
+
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Project 1: Cybersecurity IDS -->
+                    <div class="project-card spotlight-card" data-category="ml">
+                        <div class="spotlight-content">
+                            <div class="project-meta-bar">
+                                <span class="project-domain">Machine Learning & Security</span>
+                                <span class="project-badge-featured">Research</span>
+                            </div>
+                            <h3 class="project-title">Neural Network Cybersecurity Threat Detection</h3>
+                            <p class="project-description">
+                                Deep-learning intrusion detection system classifying malicious network activity from the CSE-CIC-IDS2018 dataset. Features multi-step preprocessing, handling imbalanced data distributions, and regularization with Dropout.
+                            </p>
+                            <div class="project-architecture">
+                                <div class="project-architecture-label">Network Architecture</div>
+                                <div class="project-architecture-value">4-Layer MLP (512 &rarr; 256 &rarr; 128 &rarr; 2) &bull; ReLU &bull; Early Stopping</div>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">Pandas</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/Nishchal-Panta/Cybersecurity_threat_detection" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <i class="fab fa-github"></i> Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Laravel E-Commerce -->
+                    <div class="project-card spotlight-card" data-category="web">
+                        <div class="spotlight-content">
+                            <div class="project-meta-bar">
+                                <span class="project-domain">Web Engineering</span>
+                                <span class="project-badge-featured">Full-Stack</span>
+                            </div>
+                            <h3 class="project-title">Production Laravel E-Commerce Platform</h3>
+                            <p class="project-description">
+                                Multi-role electronic commerce platform including buyer storefront, administrative inventory management, real-time analytics, and role-based access control with comprehensive security enforcement.
+                            </p>
+                            <div class="project-architecture">
+                                <div class="project-architecture-label">System Highlights</div>
+                                <div class="project-architecture-value">12 DB Migrations &bull; RBAC Middleware &bull; CSRF/XSS Mitigation</div>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tech-tag">Laravel 11</span>
+                                <span class="tech-tag">PHP 8.2</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">Alpine.js</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/Nishchal-Panta/E-commerce_website" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <i class="fab fa-github"></i> Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Dedicated AWS Cloud Showcase Card -->
+                    <div class="project-card spotlight-card aws-spotlight-card" data-category="cloud">
+                        <div class="spotlight-content">
+                            <div class="project-meta-bar">
+                                <span class="project-domain">Cloud Infrastructure</span>
+                                <span class="project-badge-featured">AWS Showcase</span>
+                            </div>
+                            <h3 class="project-title">AWS Cloud Architecture Portfolio</h3>
+                            <p class="project-description">
+                                Dedicated collection of AWS solutions including serverless contact handlers via Amazon SES & API Gateway, S3 static asset delivery, IAM security policy automation, and CloudFormation infrastructure templates.
+                            </p>
+                            <div class="project-architecture">
+                                <div class="project-architecture-label">Key AWS Services</div>
+                                <div class="project-architecture-value">Lambda &bull; SES &bull; API Gateway &bull; S3 &bull; EC2 &bull; IAM</div>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tech-tag">AWS Lambda</span>
+                                <span class="tech-tag">API Gateway</span>
+                                <span class="tech-tag">CloudFormation</span>
+                                <span class="tech-tag">Serverless</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="aws-projects.html" class="project-link">
+                                    <i class="fas fa-arrow-right"></i> Explore AWS Infrastructure
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Share Market Analysis -->
+                    <div class="project-card spotlight-card" data-category="ml">
+                        <div class="spotlight-content">
+                            <div class="project-meta-bar">
+                                <span class="project-domain">Data Science</span>
+                                <span class="project-badge-featured">Analytics</span>
+                            </div>
+                            <h3 class="project-title">NEPSE Share Market Quantitative Analysis</h3>
+                            <p class="project-description">
+                                Exploratory data analysis and quantitative modeling of Nepal Stock Exchange transactional datasets. Analyzed volume trends, volatility indices, and sector distributions using statistical methods.
+                            </p>
+                            <div class="project-architecture">
+                                <div class="project-architecture-label">Methodology</div>
+                                <div class="project-architecture-value">Exploratory Data Analysis &bull; Statistical Correlation &bull; Matplotlib Visuals</div>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Matplotlib</span>
+                                <span class="tech-tag">Quantitative EDA</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/Nishchal-Panta/Share-market_analysis.git" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <i class="fab fa-github"></i> Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: VeggieScan -->
+                    <div class="project-card spotlight-card" data-category="ml">
+                        <div class="spotlight-content">
+                            <div class="project-meta-bar">
+                                <span class="project-domain">AgriTech</span>
+                                <span class="project-badge-featured">Contributor</span>
+                            </div>
+                            <h3 class="project-title">VeggieScan &bull; Crop Disease Detection</h3>
+                            <p class="project-description">
+                                Contributor to a bilingual AgriTech web app that detects vegetable diseases from images with treatment guidance in English and Nepali, plus live Nepal market prices. Disease inference is powered by the Gemini API rather than a custom-trained vision model.
+                            </p>
+                            <div class="project-architecture">
+                                <div class="project-architecture-label">Focus Area</div>
+                                <div class="project-architecture-value">Gemini 2.0 API &bull; FastAPI &bull; MongoDB Caching</div>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Google Gemini</span>
+                                <span class="tech-tag">MongoDB</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/Kaushik22864/VeggieScan.git" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <i class="fab fa-github"></i> Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Panta Store Android -->
+                    <div class="project-card spotlight-card" data-category="web">
+                        <div class="spotlight-content">
+                            <div class="project-meta-bar">
+                                <span class="project-domain">Mobile Engineering</span>
+                                <span class="project-badge-featured">Android</span>
+                            </div>
+                            <h3 class="project-title">Panta Store &bull; Mobile Inventory Client</h3>
+                            <p class="project-description">
+                                Native Android application for retail inventory reconciliation, stock-level tracking, and SKU management with local storage and transaction logging.
+                            </p>
+                            <div class="project-architecture">
+                                <div class="project-architecture-label">Environment</div>
+                                <div class="project-architecture-value">Java &bull; Android SDK &bull; SQLite Integration</div>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tech-tag">Java</span>
+                                <span class="tech-tag">Android SDK</span>
+                                <span class="tech-tag">SQLite</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/Nishchal-Panta/PantaStoreApp.git" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <i class="fab fa-github"></i> Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 7: Relay Hack Hackathon Winner -->
+                    <div class="project-card spotlight-card" data-category="web">
+                        <div class="spotlight-content">
+                            <div class="project-meta-bar">
+                                <span class="project-domain">Hackathon Winner</span>
+                                <span class="project-badge-featured">1st Place</span>
+                            </div>
+                            <h3 class="project-title">Aqore X Relay Hack Platform</h3>
+                            <p class="project-description">
+                                Relay-hack entry: a database-driven candidate ranking subsystem built under sprint conditions, winning first prize for engineering architecture and speed of delivery.
+                            </p>
+                            <div class="project-architecture">
+                                <div class="project-architecture-label">Outcome</div>
+                                <div class="project-architecture-value">1st Place Winner at Techspire College Relay Hack</div>
+                            </div>
+                            <div class="project-tags">
+                                <span class="tech-tag">Laravel</span>
+                                <span class="tech-tag">MS SQL Server</span>
+                                <span class="tech-tag">Stored Procedures</span>
+                                <span class="tech-tag">JSON APIs</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/Albratoburner/Hackathon-relay-hack.git" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    <i class="fab fa-github"></i> Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications & Verification Matrix -->
+        <section class="certifications-section" id="certifications">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Credentials & Verification</span>
+                    <h2 class="section-title">Certifications & Accreditations</h2>
+                    <p class="section-subtitle">
+                        Verified professional certifications and technical achievements with verifiable credentials.
+                    </p>
+                </div>
+
+                <!-- Certification Filter Tabs -->
+                <div class="filter-container">
+                    <div class="filter-nav" role="tablist" aria-label="Certification filter tabs">
+                        <button class="filter-btn active" data-cert-filter="all" role="tab" aria-selected="true">All Credentials</button>
+                        <button class="filter-btn" data-cert-filter="aws" role="tab" aria-selected="false">AWS & Cloud</button>
+                        <button class="filter-btn" data-cert-filter="data" role="tab" aria-selected="false">Machine Learning & Data</button>
+                        <button class="filter-btn" data-cert-filter="awards" role="tab" aria-selected="false">Competitions & Leadership</button>
+                    </div>
+                </div>
+
+                <div class="certifications-grid" id="certsGrid">
+                    <!-- AWS Certified Cloud Practitioner -->
+                    <div class="cert-card spotlight-card" data-category="aws">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">Amazon Web Services</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                            </div>
+                            <h3 class="cert-title">AWS Certified Cloud Practitioner</h3>
+                            <div class="cert-date">Valid: May 2026 &ndash; May 2029</div>
+                            <p class="cert-description">
+                                Official Amazon Web Services validation covering cloud security, architecture design, and core AWS compute/storage/networking services.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/AWS Certified Cloud Practitioner certificate.pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AWS Academy Cloud Architecting -->
+                    <div class="cert-card spotlight-card" data-category="aws">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/aws-academy-graduate-cloud-architecting-training-ba.png" alt="AWS Academy Cloud Architecting" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">AWS Academy</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Completed</span>
+                            </div>
+                            <h3 class="cert-title">AWS Academy Graduate &bull; Cloud Architecting</h3>
+                            <div class="cert-date">Issued: 2026</div>
+                            <p class="cert-description">
+                                Advanced curriculum in designing resilient, high-performing, secure, and cost-optimized architectures on AWS infrastructure.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260504-31-jtwiz6.pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Training Badge (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AWS Academy Cloud Foundations -->
+                    <div class="cert-card spotlight-card" data-category="aws">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/aws-academy-graduate-cloud-foundations-training-bad.png" alt="AWS Academy Cloud Foundations" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">AWS Academy</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Completed</span>
+                            </div>
+                            <h3 class="cert-title">AWS Academy Graduate &bull; Cloud Foundations</h3>
+                            <div class="cert-date">Issued: 2026</div>
+                            <p class="cert-description">
+                                Detailed study of cloud concepts, security practices, architecture models, pricing strategies, and support systems.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260109-31-mhwu10.pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Training Badge (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hackathon Winner Certificate -->
+                    <div class="cert-card spotlight-card" data-category="awards">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/hackWinCert.jpg" alt="Relay Hackathon Winner" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">Aqore &bull; Techspire</span>
+                                <span class="cert-status-badge"><i class="fas fa-trophy"></i> 1st Place</span>
+                            </div>
+                            <h3 class="cert-title">Relay Hack Winner Certificate</h3>
+                            <div class="cert-date">Issued: 2025</div>
+                            <p class="cert-description">
+                                Awarded first place in the Relay Hack sprint hackathon for rapid full-stack architecture prototyping and execution.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/hackWinCert.jpg" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Award Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deep Learning with PyTorch -->
+                    <div class="cert-card spotlight-card" data-category="data">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/CPE0157249330671.png" alt="Deep Learning with PyTorch" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">DataCamp</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                            </div>
+                            <h3 class="cert-title">Deep Learning with PyTorch</h3>
+                            <div class="cert-date">Issued: 2026</div>
+                            <p class="cert-description">
+                                Neural network construction, backpropagation, optimizer selection, regularization techniques, and evaluation.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/certificate (1).pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Supervised Learning -->
+                    <div class="cert-card spotlight-card" data-category="data">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/SupervisedLearning.png" alt="Supervised Learning with scikit-learn" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">DataCamp</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                            </div>
+                            <h3 class="cert-title">Supervised Learning with Scikit-Learn</h3>
+                            <div class="cert-date">Issued: 2026</div>
+                            <p class="cert-description">
+                                Classification, regression models, cross-validation, hyperparameter tuning, and ROC curve evaluation.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/certificate (2).pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unsupervised Learning -->
+                    <div class="cert-card spotlight-card" data-category="data">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/UnsupervisedLearning.png" alt="Unsupervised Learning in Python" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">DataCamp</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                            </div>
+                            <h3 class="cert-title">Unsupervised Learning in Python</h3>
+                            <div class="cert-date">Issued: 2026</div>
+                            <p class="cert-description">
+                                Clustering algorithms, dimensionality reduction with PCA, t-SNE visualization, and recommender principles.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/certificate (2).pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Working with Hugging Face -->
+                    <div class="cert-card spotlight-card" data-category="data">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/hugg.png" alt="Working with Hugging Face" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">DataCamp</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                            </div>
+                            <h3 class="cert-title">Working with Hugging Face</h3>
+                            <div class="cert-date">Issued: 2026</div>
+                            <p class="cert-description">
+                                Pre-trained Transformer pipelines, tokenizer operations, and fine-tuning for natural language processing tasks.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/HuggingFace_certificate.pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Manipulation with pandas -->
+                    <div class="cert-card spotlight-card" data-category="data">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/Screenshot 2026-07-09 081646.png" alt="Data Manipulation with pandas" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">DataCamp</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                            </div>
+                            <h3 class="cert-title">Data Manipulation with Pandas</h3>
+                            <div class="cert-date">Issued: 2025</div>
+                            <p class="cert-description">
+                                DataFrame slicing, aggregation, multi-table joins, time-series indexing, and data cleaning workflows.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/pandas.pdf" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Development Laravel -->
+                    <div class="cert-card spotlight-card" data-category="awards">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/1769050129517.jpg" alt="Web Development Laravel" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">IIMS College</span>
+                                <span class="cert-status-badge"><i class="fas fa-check-circle"></i> Completed</span>
+                            </div>
+                            <h3 class="cert-title">Web Development (Laravel Specialization)</h3>
+                            <div class="cert-date">Issued: 2026</div>
+                            <p class="cert-description">
+                                Structured MVC architecture, Eloquent ORM relationships, middleware routing, and REST endpoint construction.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/1769050129517.jpg" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leadership Certificate -->
+                    <div class="cert-card spotlight-card" data-category="awards">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/future-forward.jpg" alt="Future Forward Leadership" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">Professional Development</span>
+                                <span class="cert-status-badge"><i class="fas fa-award"></i> Leadership</span>
+                            </div>
+                            <h3 class="cert-title">Future Forward Leadership</h3>
+                            <div class="cert-date">Issued: 2023</div>
+                            <p class="cert-description">
+                                Leadership, team communication, and strategic project execution program.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/future-forward.jpg" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TEDx IIMS Certificate -->
+                    <div class="cert-card spotlight-card" data-category="awards">
+                        <div class="cert-card-media">
+                            <img src="assets/certificates/TEDX.jpg" alt="TEDx IIMS Event" class="cert-thumbnail" loading="lazy">
+                        </div>
+                        <div class="cert-card-body">
+                            <div class="cert-tag-row">
+                                <span class="cert-issuer-badge">TEDx IIMS</span>
+                                <span class="cert-status-badge"><i class="fas fa-microphone"></i> Event</span>
+                            </div>
+                            <h3 class="cert-title">TEDx IIMS Participation</h3>
+                            <div class="cert-date">Issued: 2024</div>
+                            <p class="cert-description">
+                                Participation in intellectual exchange and industry innovation speaker forums.
+                            </p>
+                            <div class="cert-footer">
+                                <a href="assets/certificates/TEDX.jpg" target="_blank" rel="noopener noreferrer" class="cert-view-link">
+                                    <i class="fas fa-external-link-alt"></i> View Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Technical Journey -->
+        <section class="journey-section" id="journey">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Education & Milestones</span>
+                    <h2 class="section-title">Academic & Technical Trajectory</h2>
+                    <p class="section-subtitle">
+                        Progressive milestones combining formal university computer science with active cloud engineering.
+                    </p>
+                </div>
+
+                <div class="journey-grid">
+                    <!-- Left: Formal Education Card -->
+                    <div class="education-card spotlight-card">
+                        <div class="spotlight-content">
+                            <div class="education-badge">Academic Degree</div>
+                            <h3 class="education-title">Bachelor of Computer Science (BCS)</h3>
+                            <div class="education-institution">IIMS College & Taylor's University &bull; 2023 &ndash; Present</div>
+                            <div class="education-coursework-title">Relevant Core Coursework</div>
+                            <div class="education-tags">
+                                <span class="tech-tag">Data Mining</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">Database Management</span>
+                                <span class="tech-tag">Software Engineering</span>
+                                <span class="tech-tag">Data Structures & Algorithms</span>
+                                <span class="tech-tag">Cloud Architecture</span>
+                            </div>
+                            <p class="education-desc">
+                                Comprehensive undergraduate curriculum focusing on algorithm design, system architecture, database normalization, and mathematical foundations for modern computing.
+                            </p>
+                            <div class="education-progress-note">Follow the timeline: 5 chapters, 2023 to 2026. Each chapter names what was built next.</div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Chronological Timeline -->
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-chapter">Chapter 01 &middot; Beginnings</div>
+                            <div class="timeline-date">2023</div>
+                            <h4 class="timeline-title">BCS Program Commenced</h4>
+                            <p class="timeline-text">
+                                Started Bachelor of Computer Science degree at IIMS College in partnership with Taylor's University, building foundation in procedural and object-oriented software engineering.
+                            </p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-chapter">Chapter 02 &middot; Research</div>
+                            <div class="timeline-date">2024</div>
+                            <h4 class="timeline-title">Deep Learning & Network Security Research</h4>
+                            <p class="timeline-text">
+                                Researched intrusion detection classification. Implemented PyTorch multilayer perceptron architectures on the CSE-CIC-IDS2018 dataset achieving high ROC/AUC detection benchmarks.
+                            </p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-chapter">Chapter 03 &middot; Building</div>
+                            <div class="timeline-date">2025</div>
+                            <h4 class="timeline-title">Production Web Architecture & Hackathon Winner</h4>
+                            <p class="timeline-text">
+                                Built production-grade Laravel 11 e-commerce platform with 12 database migrations. Won 1st Place at the Techspire College Relay Hack for rapid full-stack delivery.
+                            </p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-chapter">Chapter 04 &middot; Cloud</div>
+                            <div class="timeline-date">Feb 2026 &ndash; May 2026</div>
+                            <h4 class="timeline-title">CloudMandap AWS Cloud Fellowship</h4>
+                            <p class="timeline-text">
+                                Selected for the CloudMandap DAAI Fellowship. Deepened practical knowledge of AWS infrastructure, VPC design patterns, IAM security postures, and serverless workflows.
+                            </p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-chapter">Chapter 05 &middot; Validation</div>
+                            <div class="timeline-date">2026</div>
+                            <h4 class="timeline-title">AWS Certified Cloud Practitioner Credential</h4>
+                            <p class="timeline-text">
+                                Successfully obtained the official AWS Certified Cloud Practitioner credential and completed both Cloud Foundations and Cloud Architecting AWS Academy graduate tracks.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CV / Resume Section (Skiper UI inspired Product Block) -->
+        <section class="cv-section" id="cv">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Curriculum Vitae</span>
+                    <h2 class="section-title">Resume & Qualifications</h2>
+                    <p class="section-subtitle">
+                        Comprehensive summary of professional experience, projects, and certifications ready for recruiter review.
+                    </p>
+                </div>
+
+                <div class="cv-layout">
+                    <!-- CV Document Card -->
+                    <div class="cv-action-card spotlight-card">
+                        <div class="spotlight-content">
+                            <div>
+                                <div class="cv-meta-pill">Verified PDF Document &bull; 100 KB</div>
+                                <h3 class="cv-action-title">Nishchal Panta &bull; Software Engineer</h3>
+                                <p class="cv-action-desc">
+                                    Current resume detailing academic accomplishments, GitHub repositories, cloud architecture fellowships, and technical project implementations.
+                                </p>
+                                <ul class="cv-specs-list">
+                                    <li><i class="fas fa-check"></i> AWS Certified Cloud Practitioner credentials</li>
+                                    <li><i class="fas fa-check"></i> Production full-stack Laravel & PyTorch implementations</li>
+                                    <li><i class="fas fa-check"></i> Tailored for backend and cloud engineering roles</li>
+                                </ul>
+                            </div>
+                            <div class="cv-btn-row">
+                                <a href="assets/files/Nishchal_Panta_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="fas fa-file-pdf"></i> View PDF
+                                </a>
+                                <a href="assets/files/Nishchal_Panta_CV.pdf" download="Nishchal_Panta_CV.pdf" class="btn btn-secondary">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recruiter Quick Competencies Matrix -->
+                    <div class="cv-highlights-card spotlight-card">
+                        <div class="spotlight-content">
+                            <h3 class="cv-highlights-title">Recruiter Competency Checklist</h3>
+                            <div class="competency-grid">
+                                <div class="competency-column">
+                                    <h4>Technical Competencies</h4>
+                                    <ul class="competency-list">
+                                        <li>Relational Database Modeling & MySQL</li>
+                                        <li>REST API Construction & Architecture</li>
+                                        <li>PyTorch Neural Network Training</li>
+                                        <li>AWS Infrastructure (EC2, S3, IAM, Lambda)</li>
+                                        <li>Automated CI/CD with GitHub Actions</li>
+                                    </ul>
+                                </div>
+                                <div class="competency-column">
+                                    <h4>Professional Attributes</h4>
+                                    <ul class="competency-list">
+                                        <li>Defensive Security Focus (XSS, CSRF)</li>
+                                        <li>Hackathon Winner (1st Place Techspire)</li>
+                                        <li>CloudMandap Fellowship Graduate</li>
+                                        <li>Disciplined Git branching & code quality</li>
+                                        <li>Clear documentation & presentation skills</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Direct Communication</span>
+                    <h2 class="section-title">Get in Touch</h2>
+                    <p class="section-subtitle">
+                        Interested in collaboration, internship opportunities, or discussing technical projects? Send a direct message or connect across platforms.
+                    </p>
+                </div>
+
+                <div class="contact-layout">
+                    <!-- Form Card connected to AWS SES API Gateway -->
+                    <div class="contact-form-card spotlight-card">
+                        <div class="spotlight-content">
+                            <form id="contact-form" class="contact-form" novalidate>
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Jane Doe" required autocomplete="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" id="email" name="email" class="form-input" placeholder="e.g. jane@example.com" required autocomplete="email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea id="message" name="message" class="form-textarea" placeholder="Detail your project or opportunity..." required></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" id="submitBtn">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+
+                                <div id="contact-status" class="contact-status" role="alert" aria-live="polite"></div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Direct Info Column -->
+                    <div class="contact-sidebar">
+                        <div class="contact-info-card spotlight-card">
+                            <div class="spotlight-content">
+                                <div class="info-item">
+                                    <div class="info-icon-box">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <div class="info-title">Email</div>
+                                        <div class="info-value">
+                                            <a href="mailto:nishchalpanta426@gmail.com">nishchalpanta426@gmail.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon-box">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <div class="info-title">Location</div>
+                                        <div class="info-value">Kathmandu, Nepal (UTC+5:45)</div>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon-box">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <div class="info-title">Phone</div>
+                                        <div class="info-value">
+                                            <a href="tel:+9779841841334">+977 9841841334</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links-grid">
+                            <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer" class="social-nav-btn">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://linkedin.com/in/nishchal-panta-3890b1292" target="_blank" rel="noopener noreferrer" class="social-nav-btn">
+                                <i class="fab fa-linkedin-in"></i> LinkedIn
+                            </a>
+                            <a href="https://facebook.com/nishchal.panta.9" target="_blank" rel="noopener noreferrer" class="social-nav-btn">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </a>
+                            <a href="https://instagram.com/nishchalpanta" target="_blank" rel="noopener noreferrer" class="social-nav-btn">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
+            <div class="footer-top">
+                <div class="footer-brand">
                     <h4>Nishchal Panta</h4>
-                    <p>Software Engineer | Cloud Developer | Machine Learning Enthusiast</p>
+                    <p>
+                        Undergraduate Computer Scientist & AWS Cloud Practitioner building dependable software solutions.
+                    </p>
                 </div>
 
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#cv">Resume</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
+                <div class="footer-links">
+                    <div class="footer-link-group">
+                        <h5>Navigation</h5>
+                        <ul>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#certifications">Certificates</a></li>
+                        </ul>
+                    </div>
 
-                <div class="footer-section">
-                    <h4>Social</h4>
-                    <div class="footer-social">
-                        <a href="https://github.com/Nishchal-Panta" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/nishchal-panta-3890b1292" target="_blank"
-                            aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://facebook.com/nishchal.panta.9" target="_blank" aria-label="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://instagram.com/nishchalpanta" target="_blank" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                    <div class="footer-link-group">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="aws-projects.html">AWS Architecture</a></li>
+                            <li><a href="assets/files/Nishchal_Panta_CV.pdf" target="_blank">Resume (PDF)</a></li>
+                            <li><a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer">GitHub Profile</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <p>&copy; 2026 Nishchal Panta. All rights reserved.</p>
+                <p>Designed with intentional constraint &bull; Semantic HTML5, Vanilla CSS & ES6 JS.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Main JavaScript -->
     <script src="script.js"></script>
 </body>
 

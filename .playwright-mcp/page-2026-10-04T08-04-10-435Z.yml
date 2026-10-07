@@ -1,0 +1,721 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Nishchal Panta Home" [ref=e4] [cursor=pointer]:
+        - /url: "#hero"
+        - generic [ref=e5]: NP
+        - generic [ref=e6]: Nishchal Panta
+      - navigation "Main Navigation" [ref=e7]:
+        - link "About" [ref=e8] [cursor=pointer]:
+          - /url: "#about"
+        - link "Skills" [ref=e9] [cursor=pointer]:
+          - /url: "#skills"
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: "#projects"
+        - link "Certifications" [ref=e11] [cursor=pointer]:
+          - /url: "#certifications"
+        - link "Journey" [ref=e12] [cursor=pointer]:
+          - /url: "#journey"
+        - link "Resume" [ref=e13] [cursor=pointer]:
+          - /url: "#cv"
+        - link "Contact" [ref=e14] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=e15]:
+        - button "Switch to dark mode" [ref=e16] [cursor=pointer]:
+          - generic [ref=e17]: 
+        - text: 
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: Open to Software Engineering & Cloud Internships
+        - heading "Nishchal Panta" [level=1] [ref=e26]
+        - paragraph [ref=e27]: BCS Undergraduate • AWS Cloud Fellow • Backend Engineer
+        - paragraph [ref=e28]: Building reliable software from deep-learning intrusion detection systems to production-grade web platforms. Passionate about cloud architecture, database systems, and secure application development. Based in Kathmandu, Nepal.
+        - generic [ref=e29]:
+          - link " View Projects" [ref=e30] [cursor=pointer]:
+            - /url: "#projects"
+            - generic [ref=e31]: 
+            - text: View Projects
+          - link " View Resume" [ref=e32] [cursor=pointer]:
+            - /url: assets/files/Nishchal_Panta_CV.pdf
+            - generic [ref=e33]: 
+            - text: View Resume
+          - button "Copy email address to clipboard" [ref=e34] [cursor=pointer]:
+            - generic [ref=e35]: 
+            - generic [ref=e36]: Copy Email
+            - generic: Click to copy
+        - paragraph [ref=e37]:
+          - text: From intrusion-detection research to production Laravel to AWS cloud work, each step builds on the last.
+          - link "Read the trajectory" [ref=e38] [cursor=pointer]:
+            - /url: "#journey"
+          - text: or start with the proof below.
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: ROC/AUC
+            - generic [ref=e42]: Evaluated IDS Detection Model
+          - generic [ref=e43]:
+            - generic [ref=e44]: "12"
+            - generic [ref=e45]: Database Migrations in Production
+          - generic [ref=e46]:
+            - generic [ref=e47]: AWS
+            - generic [ref=e48]: Certified Cloud Practitioner
+          - generic [ref=e49]:
+            - generic [ref=e50]: 1st
+            - generic [ref=e51]: Techspire Relay Hack Winner
+      - generic [ref=e53]:
+        - img "Nishchal Panta" [ref=e55]
+        - generic [ref=e56]:
+          - generic [ref=e57]: Nishchal Panta
+          - generic [ref=e58]: Kathmandu, Nepal • IIMS & Taylor's University
+          - generic [ref=e59]:
+            - link "GitHub Profile" [ref=e60] [cursor=pointer]:
+              - /url: https://github.com/Nishchal-Panta
+              - generic [ref=e61]: 
+            - link "LinkedIn Profile" [ref=e62] [cursor=pointer]:
+              - /url: https://linkedin.com/in/nishchal-panta-3890b1292
+              - generic [ref=e63]: 
+            - link "Facebook Profile" [ref=e64] [cursor=pointer]:
+              - /url: https://facebook.com/nishchal.panta.9
+              - generic [ref=e65]: 
+            - link "Instagram Profile" [ref=e66] [cursor=pointer]:
+              - /url: https://instagram.com/nishchalpanta
+              - generic [ref=e67]: 
+    - generic [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]: Background & Core Competencies
+        - heading "Engineering Discipline" [level=2] [ref=e72]
+        - paragraph [ref=e73]: Theoretical foundations paired with hands-on systems implementation.
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - paragraph [ref=e76]:
+            - text: I am a Bachelor of Computer Science student at
+            - strong [ref=e77]: IIMS College
+            - text: (affiliated with
+            - strong [ref=e78]: Taylor's University
+            - text: ). My approach to software engineering emphasizes resilient architecture, clean codebases, and measurable outcomes.
+          - paragraph [ref=e79]: Starting with an interest in cybersecurity, I implemented deep-learning intrusion detection models with PyTorch on the IDS 2018 benchmark. Moving toward scalable systems, I built a production-style Laravel platform featuring complex relational schema designs, role-based access control, and complete defensive security measures against CSRF and XSS attacks.
+          - paragraph [ref=e80]:
+            - text: As an
+            - strong [ref=e81]: AWS Cloud Fellow
+            - text: at CloudMandap, I am deepening my operational knowledge in infrastructure design, IAM least-privilege security, VPC networking, and serverless architectures.
+        - generic [ref=e82]:
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: 
+              - heading "Cloud & Systems Architecture" [level=3] [ref=e88]
+            - paragraph [ref=e89]: Infrastructure design with AWS services (EC2, S3, Lambda, IAM, VPC), automated deployment pipelines with GitHub Actions, and containerized workflows.
+            - generic [ref=e90]:
+              - generic [ref=e91]: AWS Architecture
+              - generic [ref=e92]: IAM & Security
+              - generic [ref=e93]: CI/CD
+              - generic [ref=e94]: Docker
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - generic [ref=e98]: 
+              - heading "Applied Machine Learning" [level=3] [ref=e100]
+            - paragraph [ref=e101]: Supervised deep neural networks for threat detection, feature extraction from raw traffic data, and rigorous validation through ROC/AUC metrics.
+            - generic [ref=e102]:
+              - generic [ref=e103]: PyTorch
+              - generic [ref=e104]: Scikit-learn
+              - generic [ref=e105]: Pandas
+              - generic [ref=e106]: Model Validation
+          - generic [ref=e108]:
+            - generic [ref=e109]:
+              - generic [ref=e110]: 
+              - heading "Full-Stack Application Engineering" [level=3] [ref=e112]
+            - paragraph [ref=e113]: Relational schema modeling, RESTful API design, authentication, RBAC authorization, and performant frontend state management.
+            - generic [ref=e114]:
+              - generic [ref=e115]: Laravel 11
+              - generic [ref=e116]: PHP 8.2
+              - generic [ref=e117]: MySQL
+              - generic [ref=e118]: Tailwind CSS
+    - generic [ref=e120]:
+      - generic [ref=e121]:
+        - generic [ref=e122]: Tooling & Environment
+        - heading "Technical Stack" [level=2] [ref=e123]
+        - paragraph [ref=e124]: Technologies and platforms utilized across production projects and academic research.
+      - generic [ref=e125]:
+        - generic [ref=e127]:
+          - heading " Languages" [level=3] [ref=e128]:
+            - generic [ref=e129]: 
+            - text: Languages
+          - generic [ref=e130]:
+            - generic [ref=e131]: Python
+            - generic [ref=e132]: PHP 8.x
+            - generic [ref=e133]: JavaScript (ES6+)
+            - generic [ref=e134]: Java
+            - generic [ref=e135]: SQL
+            - generic [ref=e136]: HTML5 / CSS3
+        - generic [ref=e138]:
+          - heading " Frameworks & Runtimes" [level=3] [ref=e139]:
+            - generic [ref=e140]: 
+            - text: Frameworks & Runtimes
+          - generic [ref=e141]:
+            - generic [ref=e142]: Laravel 11
+            - generic [ref=e143]: PyTorch
+            - generic [ref=e144]: Node.js
+            - generic [ref=e145]: Scikit-learn
+            - generic [ref=e146]: Tailwind CSS
+            - generic [ref=e147]: Alpine.js
+        - generic [ref=e149]:
+          - heading " Cloud & DevOps" [level=3] [ref=e150]:
+            - generic [ref=e151]: 
+            - text: Cloud & DevOps
+          - generic [ref=e152]:
+            - generic [ref=e153]: AWS EC2 / S3
+            - generic [ref=e154]: AWS Lambda
+            - generic [ref=e155]: AWS IAM / VPC
+            - generic [ref=e156]: GitHub Actions
+            - generic [ref=e157]: Docker
+            - generic [ref=e158]: Git Version Control
+        - generic [ref=e160]:
+          - heading " Databases & Storage" [level=3] [ref=e161]:
+            - generic [ref=e162]: 
+            - text: Databases & Storage
+          - generic [ref=e163]:
+            - generic [ref=e164]: MySQL
+            - generic [ref=e165]: Schema Design
+            - generic [ref=e166]: Database Migrations
+            - generic [ref=e167]: Indexing
+            - generic [ref=e168]: ORM Query Tuning
+        - generic [ref=e170]:
+          - heading " Machine Learning" [level=3] [ref=e171]:
+            - generic [ref=e172]: 
+            - text: Machine Learning
+          - generic [ref=e173]:
+            - generic [ref=e174]: Deep Neural Networks
+            - generic [ref=e175]: Supervised Learning
+            - generic [ref=e176]: Unsupervised Learning
+            - generic [ref=e177]: Pandas / NumPy
+            - generic [ref=e178]: Hugging Face
+        - generic [ref=e180]:
+          - heading " Security & Systems" [level=3] [ref=e181]:
+            - generic [ref=e182]: 
+            - text: Security & Systems
+          - generic [ref=e183]:
+            - generic [ref=e184]: Network Intrusion Detection
+            - generic [ref=e185]: RBAC Authorization
+            - generic [ref=e186]: CSRF & XSS Prevention
+            - generic [ref=e187]: Postman API Testing
+            - generic [ref=e188]: Linux Environments
+    - generic [ref=e190]:
+      - generic [ref=e191]:
+        - generic [ref=e192]: Engineering Work
+        - heading "Featured Projects" [level=2] [ref=e193]
+        - paragraph [ref=e194]: End-to-end architectures demonstrating practical problem-solving across cloud, machine learning, and web development.
+      - tablist "Project filter tabs" [ref=e196]:
+        - tab "All Work" [selected] [ref=e197] [cursor=pointer]
+        - tab "Cloud & DevOps" [ref=e198] [cursor=pointer]
+        - tab "AI & Machine Learning" [ref=e199] [cursor=pointer]
+        - tab "Full-Stack Web" [ref=e200] [cursor=pointer]
+      - generic [ref=e201]:
+        - generic [ref=e203]:
+          - generic [ref=e204]:
+            - generic [ref=e205]: Machine Learning & Security
+            - generic [ref=e206]: Research
+          - heading "Neural Network Cybersecurity Threat Detection" [level=3] [ref=e207]
+          - paragraph [ref=e208]: Deep-learning intrusion detection system classifying malicious network activity from the CSE-CIC-IDS2018 dataset. Features multi-step preprocessing, handling imbalanced data distributions, and regularization with Dropout.
+          - generic [ref=e209]:
+            - generic [ref=e210]: Network Architecture
+            - generic [ref=e211]: 4-Layer MLP (512 → 256 → 128 → 2) • ReLU • Early Stopping
+          - generic [ref=e212]:
+            - generic [ref=e213]: Python
+            - generic [ref=e214]: PyTorch
+            - generic [ref=e215]: Scikit-learn
+            - generic [ref=e216]: Pandas
+          - link " Repository" [ref=e218] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/Cybersecurity_threat_detection
+            - generic [ref=e219]: 
+            - text: Repository
+        - generic [ref=e221]:
+          - generic [ref=e222]:
+            - generic [ref=e223]: Web Engineering
+            - generic [ref=e224]: Full-Stack
+          - heading "Production Laravel E-Commerce Platform" [level=3] [ref=e225]
+          - paragraph [ref=e226]: Multi-role electronic commerce platform including buyer storefront, administrative inventory management, real-time analytics, and role-based access control with comprehensive security enforcement.
+          - generic [ref=e227]:
+            - generic [ref=e228]: System Highlights
+            - generic [ref=e229]: 12 DB Migrations • RBAC Middleware • CSRF/XSS Mitigation
+          - generic [ref=e230]:
+            - generic [ref=e231]: Laravel 11
+            - generic [ref=e232]: PHP 8.2
+            - generic [ref=e233]: MySQL
+            - generic [ref=e234]: Tailwind CSS
+            - generic [ref=e235]: Alpine.js
+          - link " Repository" [ref=e237] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/E-commerce_website
+            - generic [ref=e238]: 
+            - text: Repository
+        - generic [ref=e240]:
+          - generic [ref=e241]:
+            - generic [ref=e242]: Cloud Infrastructure
+            - generic [ref=e243]: AWS Showcase
+          - heading "AWS Cloud Architecture Portfolio" [level=3] [ref=e244]
+          - paragraph [ref=e245]: Dedicated collection of AWS solutions including serverless contact handlers via Amazon SES & API Gateway, S3 static asset delivery, IAM security policy automation, and CloudFormation infrastructure templates.
+          - generic [ref=e246]:
+            - generic [ref=e247]: Key AWS Services
+            - generic [ref=e248]: Lambda • SES • API Gateway • S3 • EC2 • IAM
+          - generic [ref=e249]:
+            - generic [ref=e250]: AWS Lambda
+            - generic [ref=e251]: API Gateway
+            - generic [ref=e252]: CloudFormation
+            - generic [ref=e253]: Serverless
+          - link " Explore AWS Infrastructure" [ref=e255] [cursor=pointer]:
+            - /url: aws-projects.html
+            - generic [ref=e256]: 
+            - text: Explore AWS Infrastructure
+        - generic [ref=e258]:
+          - generic [ref=e259]:
+            - generic [ref=e260]: Data Science
+            - generic [ref=e261]: Analytics
+          - heading "NEPSE Share Market Quantitative Analysis" [level=3] [ref=e262]
+          - paragraph [ref=e263]: Exploratory data analysis and quantitative modeling of Nepal Stock Exchange transactional datasets. Analyzed volume trends, volatility indices, and sector distributions using statistical methods.
+          - generic [ref=e264]:
+            - generic [ref=e265]: Methodology
+            - generic [ref=e266]: Exploratory Data Analysis • Statistical Correlation • Matplotlib Visuals
+          - generic [ref=e267]:
+            - generic [ref=e268]: Python
+            - generic [ref=e269]: Pandas
+            - generic [ref=e270]: Matplotlib
+            - generic [ref=e271]: Quantitative EDA
+          - link " Repository" [ref=e273] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/Share-market_analysis.git
+            - generic [ref=e274]: 
+            - text: Repository
+        - generic [ref=e276]:
+          - generic [ref=e277]:
+            - generic [ref=e278]: AgriTech
+            - generic [ref=e279]: Contributor
+          - heading "VeggieScan • Crop Disease Detection" [level=3] [ref=e280]
+          - paragraph [ref=e281]: Contributor to a bilingual AgriTech web app that detects vegetable diseases from images with treatment guidance in English and Nepali, plus live Nepal market prices. Disease inference is powered by the Gemini API rather than a custom-trained vision model.
+          - generic [ref=e282]:
+            - generic [ref=e283]: Focus Area
+            - generic [ref=e284]: Gemini 2.0 API • FastAPI • MongoDB Caching
+          - generic [ref=e285]:
+            - generic [ref=e286]: Python
+            - generic [ref=e287]: FastAPI
+            - generic [ref=e288]: Google Gemini
+            - generic [ref=e289]: MongoDB
+          - link " Repository" [ref=e291] [cursor=pointer]:
+            - /url: https://github.com/Kaushik22864/VeggieScan.git
+            - generic [ref=e292]: 
+            - text: Repository
+        - generic [ref=e294]:
+          - generic [ref=e295]:
+            - generic [ref=e296]: Mobile Engineering
+            - generic [ref=e297]: Android
+          - heading "Panta Store • Mobile Inventory Client" [level=3] [ref=e298]
+          - paragraph [ref=e299]: Native Android application for retail inventory reconciliation, stock-level tracking, and SKU management with local storage and transaction logging.
+          - generic [ref=e300]:
+            - generic [ref=e301]: Environment
+            - generic [ref=e302]: Java • Android SDK • SQLite Integration
+          - generic [ref=e303]:
+            - generic [ref=e304]: Java
+            - generic [ref=e305]: Android SDK
+            - generic [ref=e306]: SQLite
+          - link " Repository" [ref=e308] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/PantaStoreApp.git
+            - generic [ref=e309]: 
+            - text: Repository
+        - generic [ref=e311]:
+          - generic [ref=e312]:
+            - generic [ref=e313]: Hackathon Winner
+            - generic [ref=e314]: 1st Place
+          - heading "Aqore X Relay Hack Platform" [level=3] [ref=e315]
+          - paragraph [ref=e316]: "Relay-hack entry: a database-driven candidate ranking subsystem built under sprint conditions, winning first prize for engineering architecture and speed of delivery."
+          - generic [ref=e317]:
+            - generic [ref=e318]: Outcome
+            - generic [ref=e319]: 1st Place Winner at Techspire College Relay Hack
+          - generic [ref=e320]:
+            - generic [ref=e321]: Laravel
+            - generic [ref=e322]: MS SQL Server
+            - generic [ref=e323]: Stored Procedures
+            - generic [ref=e324]: JSON APIs
+          - link " Repository" [ref=e326] [cursor=pointer]:
+            - /url: https://github.com/Albratoburner/Hackathon-relay-hack.git
+            - generic [ref=e327]: 
+            - text: Repository
+    - generic [ref=e329]:
+      - generic [ref=e330]:
+        - generic [ref=e331]: Credentials & Verification
+        - heading "Certifications & Accreditations" [level=2] [ref=e332]
+        - paragraph [ref=e333]: Verified professional certifications and technical achievements with verifiable credentials.
+      - tablist "Certification filter tabs" [ref=e335]:
+        - tab "All Credentials" [selected] [ref=e336] [cursor=pointer]
+        - tab "AWS & Cloud" [ref=e337] [cursor=pointer]
+        - tab "Machine Learning & Data" [ref=e338] [cursor=pointer]
+        - tab "Competitions & Leadership" [ref=e339] [cursor=pointer]
+      - generic [ref=e340]:
+        - generic [ref=e341]:
+          - img "AWS Certified Cloud Practitioner" [ref=e343]
+          - generic [ref=e344]:
+            - generic [ref=e345]:
+              - generic [ref=e346]: Amazon Web Services
+              - generic [ref=e347]:
+                - generic [ref=e348]: 
+                - text: Verified
+            - heading "AWS Certified Cloud Practitioner" [level=3] [ref=e349]
+            - generic [ref=e350]: "Valid: May 2026 – May 2029"
+            - paragraph [ref=e351]: Official Amazon Web Services validation covering cloud security, architecture design, and core AWS compute/storage/networking services.
+            - link " View Certificate (PDF)" [ref=e353] [cursor=pointer]:
+              - /url: assets/certificates/AWS Certified Cloud Practitioner certificate.pdf
+              - generic [ref=e354]: 
+              - text: View Certificate (PDF)
+        - generic [ref=e355]:
+          - img "AWS Academy Cloud Architecting" [ref=e357]
+          - generic [ref=e358]:
+            - generic [ref=e359]:
+              - generic [ref=e360]: AWS Academy
+              - generic [ref=e361]:
+                - generic [ref=e362]: 
+                - text: Completed
+            - heading "AWS Academy Graduate • Cloud Architecting" [level=3] [ref=e363]
+            - generic [ref=e364]: "Issued: 2026"
+            - paragraph [ref=e365]: Advanced curriculum in designing resilient, high-performing, secure, and cost-optimized architectures on AWS infrastructure.
+            - link " View Training Badge (PDF)" [ref=e367] [cursor=pointer]:
+              - /url: assets/certificates/AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260504-31-jtwiz6.pdf
+              - generic [ref=e368]: 
+              - text: View Training Badge (PDF)
+        - generic [ref=e369]:
+          - img "AWS Academy Cloud Foundations" [ref=e371]
+          - generic [ref=e372]:
+            - generic [ref=e373]:
+              - generic [ref=e374]: AWS Academy
+              - generic [ref=e375]:
+                - generic [ref=e376]: 
+                - text: Completed
+            - heading "AWS Academy Graduate • Cloud Foundations" [level=3] [ref=e377]
+            - generic [ref=e378]: "Issued: 2026"
+            - paragraph [ref=e379]: Detailed study of cloud concepts, security practices, architecture models, pricing strategies, and support systems.
+            - link " View Training Badge (PDF)" [ref=e381] [cursor=pointer]:
+              - /url: assets/certificates/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260109-31-mhwu10.pdf
+              - generic [ref=e382]: 
+              - text: View Training Badge (PDF)
+        - generic [ref=e383]:
+          - img "Relay Hackathon Winner" [ref=e385]
+          - generic [ref=e386]:
+            - generic [ref=e387]:
+              - generic [ref=e388]: Aqore • Techspire
+              - generic [ref=e389]:
+                - generic [ref=e390]: 
+                - text: 1st Place
+            - heading "Relay Hack Winner Certificate" [level=3] [ref=e391]
+            - generic [ref=e392]: "Issued: 2025"
+            - paragraph [ref=e393]: Awarded first place in the Relay Hack sprint hackathon for rapid full-stack architecture prototyping and execution.
+            - link " View Award Certificate" [ref=e395] [cursor=pointer]:
+              - /url: assets/certificates/hackWinCert.jpg
+              - generic [ref=e396]: 
+              - text: View Award Certificate
+        - generic [ref=e397]:
+          - img "Deep Learning with PyTorch" [ref=e399]
+          - generic [ref=e400]:
+            - generic [ref=e401]:
+              - generic [ref=e402]: DataCamp
+              - generic [ref=e403]:
+                - generic [ref=e404]: 
+                - text: Verified
+            - heading "Deep Learning with PyTorch" [level=3] [ref=e405]
+            - generic [ref=e406]: "Issued: 2026"
+            - paragraph [ref=e407]: Neural network construction, backpropagation, optimizer selection, regularization techniques, and evaluation.
+            - link " View Certificate (PDF)" [ref=e409] [cursor=pointer]:
+              - /url: assets/certificates/certificate (1).pdf
+              - generic [ref=e410]: 
+              - text: View Certificate (PDF)
+        - generic [ref=e411]:
+          - img "Supervised Learning with scikit-learn" [ref=e413]
+          - generic [ref=e414]:
+            - generic [ref=e415]:
+              - generic [ref=e416]: DataCamp
+              - generic [ref=e417]:
+                - generic [ref=e418]: 
+                - text: Verified
+            - heading "Supervised Learning with Scikit-Learn" [level=3] [ref=e419]
+            - generic [ref=e420]: "Issued: 2026"
+            - paragraph [ref=e421]: Classification, regression models, cross-validation, hyperparameter tuning, and ROC curve evaluation.
+            - link " View Certificate (PDF)" [ref=e423] [cursor=pointer]:
+              - /url: assets/certificates/certificate (2).pdf
+              - generic [ref=e424]: 
+              - text: View Certificate (PDF)
+        - generic [ref=e425]:
+          - img "Unsupervised Learning in Python" [ref=e427]
+          - generic [ref=e428]:
+            - generic [ref=e429]:
+              - generic [ref=e430]: DataCamp
+              - generic [ref=e431]:
+                - generic [ref=e432]: 
+                - text: Verified
+            - heading "Unsupervised Learning in Python" [level=3] [ref=e433]
+            - generic [ref=e434]: "Issued: 2026"
+            - paragraph [ref=e435]: Clustering algorithms, dimensionality reduction with PCA, t-SNE visualization, and recommender principles.
+            - link " View Certificate (PDF)" [ref=e437] [cursor=pointer]:
+              - /url: assets/certificates/certificate (2).pdf
+              - generic [ref=e438]: 
+              - text: View Certificate (PDF)
+        - generic [ref=e439]:
+          - img "Working with Hugging Face" [ref=e441]
+          - generic [ref=e442]:
+            - generic [ref=e443]:
+              - generic [ref=e444]: DataCamp
+              - generic [ref=e445]:
+                - generic [ref=e446]: 
+                - text: Verified
+            - heading "Working with Hugging Face" [level=3] [ref=e447]
+            - generic [ref=e448]: "Issued: 2026"
+            - paragraph [ref=e449]: Pre-trained Transformer pipelines, tokenizer operations, and fine-tuning for natural language processing tasks.
+            - link " View Certificate (PDF)" [ref=e451] [cursor=pointer]:
+              - /url: assets/certificates/HuggingFace_certificate.pdf
+              - generic [ref=e452]: 
+              - text: View Certificate (PDF)
+        - generic [ref=e453]:
+          - img "Data Manipulation with pandas" [ref=e455]
+          - generic [ref=e456]:
+            - generic [ref=e457]:
+              - generic [ref=e458]: DataCamp
+              - generic [ref=e459]:
+                - generic [ref=e460]: 
+                - text: Verified
+            - heading "Data Manipulation with Pandas" [level=3] [ref=e461]
+            - generic [ref=e462]: "Issued: 2025"
+            - paragraph [ref=e463]: DataFrame slicing, aggregation, multi-table joins, time-series indexing, and data cleaning workflows.
+            - link " View Certificate (PDF)" [ref=e465] [cursor=pointer]:
+              - /url: assets/certificates/pandas.pdf
+              - generic [ref=e466]: 
+              - text: View Certificate (PDF)
+        - generic [ref=e467]:
+          - img "Web Development Laravel" [ref=e469]
+          - generic [ref=e470]:
+            - generic [ref=e471]:
+              - generic [ref=e472]: IIMS College
+              - generic [ref=e473]:
+                - generic [ref=e474]: 
+                - text: Completed
+            - heading "Web Development (Laravel Specialization)" [level=3] [ref=e475]
+            - generic [ref=e476]: "Issued: 2026"
+            - paragraph [ref=e477]: Structured MVC architecture, Eloquent ORM relationships, middleware routing, and REST endpoint construction.
+            - link " View Certificate" [ref=e479] [cursor=pointer]:
+              - /url: assets/certificates/1769050129517.jpg
+              - generic [ref=e480]: 
+              - text: View Certificate
+        - generic [ref=e481]:
+          - img "Future Forward Leadership" [ref=e483]
+          - generic [ref=e484]:
+            - generic [ref=e485]:
+              - generic [ref=e486]: Professional Development
+              - generic [ref=e487]:
+                - generic [ref=e488]: 
+                - text: Leadership
+            - heading "Future Forward Leadership" [level=3] [ref=e489]
+            - generic [ref=e490]: "Issued: 2023"
+            - paragraph [ref=e491]: Leadership, team communication, and strategic project execution program.
+            - link " View Certificate" [ref=e493] [cursor=pointer]:
+              - /url: assets/certificates/future-forward.jpg
+              - generic [ref=e494]: 
+              - text: View Certificate
+        - generic [ref=e495]:
+          - img "TEDx IIMS Event" [ref=e497]
+          - generic [ref=e498]:
+            - generic [ref=e499]:
+              - generic [ref=e500]: TEDx IIMS
+              - generic [ref=e501]:
+                - generic [ref=e502]: 
+                - text: Event
+            - heading "TEDx IIMS Participation" [level=3] [ref=e503]
+            - generic [ref=e504]: "Issued: 2024"
+            - paragraph [ref=e505]: Participation in intellectual exchange and industry innovation speaker forums.
+            - link " View Certificate" [ref=e507] [cursor=pointer]:
+              - /url: assets/certificates/TEDX.jpg
+              - generic [ref=e508]: 
+              - text: View Certificate
+    - generic [ref=e510]:
+      - generic [ref=e511]:
+        - generic [ref=e512]: Education & Milestones
+        - heading "Academic & Technical Trajectory" [level=2] [ref=e513]
+        - paragraph [ref=e514]: Progressive milestones combining formal university computer science with active cloud engineering.
+      - generic [ref=e515]:
+        - generic [ref=e517]:
+          - generic [ref=e518]: Academic Degree
+          - heading "Bachelor of Computer Science (BCS)" [level=3] [ref=e519]
+          - generic [ref=e520]: IIMS College & Taylor's University • 2023 – Present
+          - generic [ref=e521]: Relevant Core Coursework
+          - generic [ref=e522]:
+            - generic [ref=e523]: Data Mining
+            - generic [ref=e524]: Machine Learning
+            - generic [ref=e525]: Database Management
+            - generic [ref=e526]: Software Engineering
+            - generic [ref=e527]: Data Structures & Algorithms
+            - generic [ref=e528]: Cloud Architecture
+          - paragraph [ref=e529]: Comprehensive undergraduate curriculum focusing on algorithm design, system architecture, database normalization, and mathematical foundations for modern computing.
+          - generic [ref=e530]: "Follow the timeline: 5 chapters, 2023 to 2026. Each chapter names what was built next."
+        - generic [ref=e531]:
+          - generic [ref=e532]:
+            - generic [ref=e534]: Chapter 01 · Beginnings
+            - generic [ref=e535]: "2023"
+            - heading "BCS Program Commenced" [level=4] [ref=e536]
+            - paragraph [ref=e537]: Started Bachelor of Computer Science degree at IIMS College in partnership with Taylor's University, building foundation in procedural and object-oriented software engineering.
+          - generic [ref=e538]:
+            - generic [ref=e540]: Chapter 02 · Research
+            - generic [ref=e541]: "2024"
+            - heading "Deep Learning & Network Security Research" [level=4] [ref=e542]
+            - paragraph [ref=e543]: Researched intrusion detection classification. Implemented PyTorch multilayer perceptron architectures on the CSE-CIC-IDS2018 dataset achieving high ROC/AUC detection benchmarks.
+          - generic [ref=e544]:
+            - generic [ref=e546]: Chapter 03 · Building
+            - generic [ref=e547]: "2025"
+            - heading "Production Web Architecture & Hackathon Winner" [level=4] [ref=e548]
+            - paragraph [ref=e549]: Built production-grade Laravel 11 e-commerce platform with 12 database migrations. Won 1st Place at the Techspire College Relay Hack for rapid full-stack delivery.
+          - generic [ref=e550]:
+            - generic [ref=e552]: Chapter 04 · Cloud
+            - generic [ref=e553]: Feb 2026 – May 2026
+            - heading "CloudMandap AWS Cloud Fellowship" [level=4] [ref=e554]
+            - paragraph [ref=e555]: Selected for the CloudMandap DAAI Fellowship. Deepened practical knowledge of AWS infrastructure, VPC design patterns, IAM security postures, and serverless workflows.
+          - generic [ref=e556]:
+            - generic [ref=e558]: Chapter 05 · Validation
+            - generic [ref=e559]: "2026"
+            - heading "AWS Certified Cloud Practitioner Credential" [level=4] [ref=e560]
+            - paragraph [ref=e561]: Successfully obtained the official AWS Certified Cloud Practitioner credential and completed both Cloud Foundations and Cloud Architecting AWS Academy graduate tracks.
+    - generic [ref=e563]:
+      - generic [ref=e564]:
+        - generic [ref=e565]: Curriculum Vitae
+        - heading "Resume & Qualifications" [level=2] [ref=e566]
+        - paragraph [ref=e567]: Comprehensive summary of professional experience, projects, and certifications ready for recruiter review.
+      - generic [ref=e568]:
+        - generic [ref=e570]:
+          - generic [ref=e571]:
+            - generic [ref=e572]: Verified PDF Document • 100 KB
+            - heading "Nishchal Panta • Software Engineer" [level=3] [ref=e573]
+            - paragraph [ref=e574]: Current resume detailing academic accomplishments, GitHub repositories, cloud architecture fellowships, and technical project implementations.
+            - list [ref=e575]:
+              - listitem [ref=e576]:
+                - generic [ref=e577]: 
+                - text: AWS Certified Cloud Practitioner credentials
+              - listitem [ref=e578]:
+                - generic [ref=e579]: 
+                - text: Production full-stack Laravel & PyTorch implementations
+              - listitem [ref=e580]:
+                - generic [ref=e581]: 
+                - text: Tailored for backend and cloud engineering roles
+          - generic [ref=e582]:
+            - link " View PDF" [ref=e583] [cursor=pointer]:
+              - /url: assets/files/Nishchal_Panta_CV.pdf
+              - generic [ref=e584]: 
+              - text: View PDF
+            - link " Download" [ref=e585] [cursor=pointer]:
+              - /url: assets/files/Nishchal_Panta_CV.pdf
+              - generic [ref=e586]: 
+              - text: Download
+        - generic [ref=e588]:
+          - heading "Recruiter Competency Checklist" [level=3] [ref=e589]
+          - generic [ref=e590]:
+            - generic [ref=e591]:
+              - heading "Technical Competencies" [level=4] [ref=e592]
+              - list [ref=e593]:
+                - listitem [ref=e594]: • Relational Database Modeling & MySQL
+                - listitem [ref=e595]: • REST API Construction & Architecture
+                - listitem [ref=e596]: • PyTorch Neural Network Training
+                - listitem [ref=e597]: • AWS Infrastructure (EC2, S3, IAM, Lambda)
+                - listitem [ref=e598]: • Automated CI/CD with GitHub Actions
+            - generic [ref=e599]:
+              - heading "Professional Attributes" [level=4] [ref=e600]
+              - list [ref=e601]:
+                - listitem [ref=e602]: • Defensive Security Focus (XSS, CSRF)
+                - listitem [ref=e603]: • Hackathon Winner (1st Place Techspire)
+                - listitem [ref=e604]: • CloudMandap Fellowship Graduate
+                - listitem [ref=e605]: • Disciplined Git branching & code quality
+                - listitem [ref=e606]: • Clear documentation & presentation skills
+    - generic [ref=e608]:
+      - generic [ref=e609]:
+        - generic [ref=e610]: Direct Communication
+        - heading "Get in Touch" [level=2] [ref=e611]
+        - paragraph [ref=e612]: Interested in collaboration, internship opportunities, or discussing technical projects? Send a direct message or connect across platforms.
+      - generic [ref=e613]:
+        - generic [ref=e616]:
+          - generic [ref=e617]:
+            - generic [ref=e618]: Full Name
+            - textbox "Full Name" [ref=e619]:
+              - /placeholder: e.g. Jane Doe
+          - generic [ref=e620]:
+            - generic [ref=e621]: Email Address
+            - textbox "Email Address" [ref=e622]:
+              - /placeholder: e.g. jane@example.com
+          - generic [ref=e623]:
+            - generic [ref=e624]: Message
+            - textbox "Message" [ref=e625]:
+              - /placeholder: Detail your project or opportunity...
+          - button " Send Message" [ref=e626] [cursor=pointer]:
+            - generic [ref=e627]: 
+            - text: Send Message
+        - generic [ref=e628]:
+          - generic [ref=e630]:
+            - generic [ref=e631]:
+              - generic [ref=e632]: 
+              - generic [ref=e634]:
+                - generic [ref=e635]: Email
+                - link "nishchalpanta426@gmail.com" [ref=e637] [cursor=pointer]:
+                  - /url: mailto:nishchalpanta426@gmail.com
+            - generic [ref=e638]:
+              - generic [ref=e639]: 
+              - generic [ref=e641]:
+                - generic [ref=e642]: Location
+                - generic [ref=e643]: Kathmandu, Nepal (UTC+5:45)
+            - generic [ref=e644]:
+              - generic [ref=e645]: 
+              - generic [ref=e647]:
+                - generic [ref=e648]: Phone
+                - link "+977 9841841334" [ref=e650] [cursor=pointer]:
+                  - /url: tel:+9779841841334
+          - generic [ref=e651]:
+            - link " GitHub" [ref=e652] [cursor=pointer]:
+              - /url: https://github.com/Nishchal-Panta
+              - generic [ref=e653]: 
+              - text: GitHub
+            - link " LinkedIn" [ref=e654] [cursor=pointer]:
+              - /url: https://linkedin.com/in/nishchal-panta-3890b1292
+              - generic [ref=e655]: 
+              - text: LinkedIn
+            - link " Facebook" [ref=e656] [cursor=pointer]:
+              - /url: https://facebook.com/nishchal.panta.9
+              - generic [ref=e657]: 
+              - text: Facebook
+            - link " Instagram" [ref=e658] [cursor=pointer]:
+              - /url: https://instagram.com/nishchalpanta
+              - generic [ref=e659]: 
+              - text: Instagram
+  - contentinfo [ref=e660]:
+    - generic [ref=e661]:
+      - generic [ref=e662]:
+        - generic [ref=e663]:
+          - heading "Nishchal Panta" [level=4] [ref=e664]
+          - paragraph [ref=e665]: Undergraduate Computer Scientist & AWS Cloud Practitioner building dependable software solutions.
+        - generic [ref=e666]:
+          - generic [ref=e667]:
+            - heading "Navigation" [level=5] [ref=e668]
+            - list [ref=e669]:
+              - listitem [ref=e670]:
+                - link "About" [ref=e671] [cursor=pointer]:
+                  - /url: "#about"
+              - listitem [ref=e672]:
+                - link "Skills" [ref=e673] [cursor=pointer]:
+                  - /url: "#skills"
+              - listitem [ref=e674]:
+                - link "Projects" [ref=e675] [cursor=pointer]:
+                  - /url: "#projects"
+              - listitem [ref=e676]:
+                - link "Certificates" [ref=e677] [cursor=pointer]:
+                  - /url: "#certifications"
+          - generic [ref=e678]:
+            - heading "Resources" [level=5] [ref=e679]
+            - list [ref=e680]:
+              - listitem [ref=e681]:
+                - link "AWS Architecture" [ref=e682] [cursor=pointer]:
+                  - /url: aws-projects.html
+              - listitem [ref=e683]:
+                - link "Resume (PDF)" [ref=e684] [cursor=pointer]:
+                  - /url: assets/files/Nishchal_Panta_CV.pdf
+              - listitem [ref=e685]:
+                - link "GitHub Profile" [ref=e686] [cursor=pointer]:
+                  - /url: https://github.com/Nishchal-Panta
+              - listitem [ref=e687]:
+                - link "Contact" [ref=e688] [cursor=pointer]:
+                  - /url: "#contact"
+      - generic [ref=e689]:
+        - paragraph [ref=e690]: © 2026 Nishchal Panta. All rights reserved.
+        - paragraph [ref=e691]: Designed with intentional constraint • Semantic HTML5, Vanilla CSS & ES6 JS.

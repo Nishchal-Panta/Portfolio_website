@@ -1,0 +1,248 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - generic [ref=f5e3]:
+      - link "Skip to content" [ref=f5e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=f5e9]:
+        - heading "Navigation Menu" [level=2] [ref=f5e10]
+        - generic [ref=f5e11]:
+          - link "Homepage" [ref=f5e13] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f5e16]:
+            - navigation "Global" [ref=f5e17]:
+              - list [ref=f5e18]:
+                - listitem [ref=f5e19]:
+                  - button "Platform" [ref=f5e21] [cursor=pointer]
+                - listitem [ref=f5e24]:
+                  - button "Solutions" [ref=f5e26] [cursor=pointer]
+                - listitem [ref=f5e29]:
+                  - button "Resources" [ref=f5e31] [cursor=pointer]
+                - listitem [ref=f5e34]:
+                  - button "Open Source" [ref=f5e36] [cursor=pointer]
+                - listitem [ref=f5e39]:
+                  - button "Enterprise" [ref=f5e41] [cursor=pointer]
+                - listitem [ref=f5e44]:
+                  - link "Pricing" [ref=f5e45] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=f5e46]:
+              - button "Search or jump to, type / to search" [ref=f5e48] [cursor=pointer]:
+                - generic [ref=f5e51]:
+                  - generic [ref=f5e52]: Search
+                  - generic [aria-hidden] [ref=f5e53]: /
+              - link "Sign in" [ref=f5e55] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FAWS-Ecommerce_website
+              - link "Sign up" [ref=f5e58] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Nishchal-Panta%2FAWS-Ecommerce_website
+              - button "Appearance settings" [ref=f5e61] [cursor=pointer]
+    - main [ref=f5e68]:
+      - generic [ref=f5e69]:
+        - generic [ref=f5e70]:
+          - generic [ref=f5e72]:
+            - link "Nishchal-Panta" [ref=f5e76] [cursor=pointer]:
+              - /url: /Nishchal-Panta
+            - generic [ref=f5e77]: /
+            - strong [ref=f5e78]:
+              - link "AWS-Ecommerce_website" [ref=f5e79] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website
+            - generic [ref=f5e80]: Public
+          - generic [ref=f5e81]:
+            - list:
+              - listitem [ref=f5e82]:
+                - link "You must be signed in to change notification settings" [ref=f5e83] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FAWS-Ecommerce_website
+                  - text: Notifications
+              - listitem [ref=f5e86]:
+                - link "Fork 0" [ref=f5e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FAWS-Ecommerce_website
+                  - text: Fork
+                  - generic "0" [ref=f5e90]
+              - listitem [ref=f5e91]:
+                - link "You must be signed in to star a repository" [ref=f5e93] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FAWS-Ecommerce_website
+                  - text: Star
+                  - generic "0 users starred this repository" [ref=f5e96]: "0"
+        - navigation "Repository" [ref=f5e97]:
+          - list [ref=f5e98]:
+            - listitem [ref=f5e99]:
+              - link "Code" [ref=f5e100] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website
+            - listitem [ref=f5e104]:
+              - link "Issues" [ref=f5e105] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website/issues
+            - listitem [ref=f5e110]:
+              - link "Pull requests" [ref=f5e111] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website/pulls
+            - listitem [ref=f5e115]:
+              - link "Actions" [ref=f5e116] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website/actions
+            - listitem [ref=f5e120]:
+              - link "Projects" [ref=f5e121] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website/projects
+            - listitem [ref=f5e125]:
+              - link "Security and quality" [ref=f5e126] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website/security
+            - listitem [ref=f5e130]:
+              - link "Insights" [ref=f5e131] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website/pulse
+      - generic [ref=f5e148]:
+        - generic [ref=f5e151]:
+          - generic [ref=f5e152]:
+            - generic [ref=f5e153]:
+              - button "main branch" [ref=f5e155] [cursor=pointer]:
+                - generic [ref=f5e156]: main
+              - generic [ref=f5e160]:
+                - link "Branches" [ref=f5e161] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS-Ecommerce_website/branches
+                - link "Tags" [ref=f5e164] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS-Ecommerce_website/tags
+            - generic [ref=f5e167]:
+              - combobox "Go to file" [ref=f5e175]
+              - button "Code" [ref=f5e176] [cursor=pointer]
+          - generic [ref=f5e180]:
+            - generic [ref=f5e182]:
+              - heading "Latest commit" [level=2] [ref=f5e183]
+              - generic [ref=f5e186]:
+                - heading "History" [level=2] [ref=f5e187]
+                - link "10 Commits" [ref=f5e188] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS-Ecommerce_website/commits/main/
+            - heading "Folders and files" [level=2] [ref=f5e191]
+            - table "Folders and files" [ref=f5e192]:
+              - rowgroup:
+                - row "Name Last commit message Last commit date":
+                  - columnheader "Name"
+                  - columnheader "Last commit message"
+                  - columnheader "Last commit date"
+              - rowgroup [ref=f5e193]:
+                - row ".aws-sam, (Directory)" [ref=f5e194]:
+                  - cell [ref=f5e195]:
+                    - link ".aws-sam, (Directory)" [ref=f5e202] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/tree/main/.aws-sam
+                      - text: .aws-sam
+                  - cell [ref=f5e203]
+                  - cell [ref=f5e205]
+                - row ".github/workflows, (Directory)" [ref=f5e208]:
+                  - cell [ref=f5e209]:
+                    - link ".github/workflows, (Directory)" [ref=f5e216] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/tree/main/.github/workflows
+                      - text: .github/workflows
+                  - cell [ref=f5e217]
+                  - cell [ref=f5e219]
+                - row "backend, (Directory)" [ref=f5e222]:
+                  - cell [ref=f5e223]:
+                    - link "backend, (Directory)" [ref=f5e230] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/tree/main/backend
+                      - text: backend
+                  - cell [ref=f5e231]
+                  - cell [ref=f5e233]
+                - row "frontend, (Directory)" [ref=f5e236]:
+                  - cell [ref=f5e237]:
+                    - link "frontend, (Directory)" [ref=f5e244] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/tree/main/frontend
+                      - text: frontend
+                  - cell [ref=f5e245]
+                  - cell [ref=f5e247]
+                - row "infra/cfn, (Directory)" [ref=f5e250]:
+                  - cell [ref=f5e251]:
+                    - link "infra/cfn, (Directory)" [ref=f5e258] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/tree/main/infra/cfn
+                      - text: infra/cfn
+                  - cell [ref=f5e259]
+                  - cell [ref=f5e261]
+                - row "scripts, (Directory)" [ref=f5e264]:
+                  - cell [ref=f5e265]:
+                    - link "scripts, (Directory)" [ref=f5e272] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/tree/main/scripts
+                      - text: scripts
+                  - cell [ref=f5e273]
+                  - cell [ref=f5e275]
+                - row ".cloudfront-env, (File)" [ref=f5e278]:
+                  - cell [ref=f5e279]:
+                    - link ".cloudfront-env, (File)" [ref=f5e286] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/blob/main/.cloudfront-env
+                      - text: .cloudfront-env
+                  - cell [ref=f5e287]
+                  - cell [ref=f5e289]
+                - row ".gitignore, (File)" [ref=f5e292]:
+                  - cell [ref=f5e293]:
+                    - link ".gitignore, (File)" [ref=f5e300] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/blob/main/.gitignore
+                      - text: .gitignore
+                  - cell [ref=f5e301]
+                  - cell [ref=f5e303]
+                - row "package.json, (File)" [ref=f5e306]:
+                  - cell [ref=f5e307]:
+                    - link "package.json, (File)" [ref=f5e314] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/blob/main/package.json
+                      - text: package.json
+                  - cell [ref=f5e315]
+                  - cell [ref=f5e317]
+                - row "template.yaml, (File)" [ref=f5e320]:
+                  - cell [ref=f5e321]:
+                    - link "template.yaml, (File)" [ref=f5e328] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Ecommerce_website/blob/main/template.yaml
+                      - text: template.yaml
+                  - cell [ref=f5e329]
+                  - cell [ref=f5e331]
+        - generic [ref=f5e336]:
+          - generic [ref=f5e337]:
+            - heading "About" [level=2] [ref=f5e338]
+            - generic [ref=f5e339]: No description, website, or topics provided.
+            - generic [ref=f5e340]:
+              - link "Activity" [ref=f5e343] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Ecommerce_website/activity
+              - generic [ref=f5e346]:
+                - heading "Stars" [level=3] [ref=f5e347]
+                - generic [ref=f5e349]:
+                  - strong [ref=f5e352]: "0"
+                  - text: stars
+                - heading "Watchers" [level=3] [ref=f5e353]
+                - generic [ref=f5e355]:
+                  - strong [ref=f5e358]: "0"
+                  - text: watching
+                - heading "Forks" [level=3] [ref=f5e359]
+                - link [ref=f5e361] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS-Ecommerce_website/forks
+                  - strong [ref=f5e365]: "0"
+                  - text: forks
+            - link "Report repository" [ref=f5e367] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FAWS-Ecommerce_website&report=Nishchal-Panta+%28user%29
+          - heading "Releases" [level=2] [ref=f5e369]
+          - heading "Packages" [level=2] [ref=f5e373]
+          - heading "Contributors" [level=2] [ref=f5e376]
+          - heading "Languages" [level=2] [ref=f5e379]
+    - contentinfo [ref=f5e382]:
+      - heading "Footer" [level=2] [ref=f5e383]
+      - generic [ref=f5e384]:
+        - generic [ref=f5e385]:
+          - link "GitHub Homepage" [ref=f5e386] [cursor=pointer]:
+            - /url: https://github.com
+          - generic [ref=f5e389]: © 2026 GitHub, Inc.
+        - navigation "Footer" [ref=f5e390]:
+          - heading "Footer navigation" [level=3] [ref=f5e391]
+          - list "Footer navigation" [ref=f5e392]:
+            - listitem [ref=f5e393]:
+              - link "Terms" [ref=f5e394] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+            - listitem [ref=f5e395]:
+              - link "Privacy" [ref=f5e396] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+            - listitem [ref=f5e397]:
+              - link "Security" [ref=f5e398] [cursor=pointer]:
+                - /url: https://github.com/security
+            - listitem [ref=f5e399]:
+              - link "Status" [ref=f5e400] [cursor=pointer]:
+                - /url: https://www.githubstatus.com/
+            - listitem [ref=f5e401]:
+              - link "Community" [ref=f5e402] [cursor=pointer]:
+                - /url: https://github.community/
+            - listitem [ref=f5e403]:
+              - link "Docs" [ref=f5e404] [cursor=pointer]:
+                - /url: https://docs.github.com/
+            - listitem [ref=f5e405]:
+              - link "Contact" [ref=f5e406] [cursor=pointer]:
+                - /url: https://support.github.com?tags=dotcom-footer
+            - listitem [ref=f5e407]:
+              - button "Manage cookies" [ref=f5e409] [cursor=pointer]
+            - listitem [ref=f5e410]:
+              - button "Do not share my personal information" [ref=f5e412] [cursor=pointer]
+  - alert [ref=f5e415]

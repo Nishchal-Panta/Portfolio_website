@@ -1,0 +1,464 @@
+- generic [ref=f23e2]:
+  - generic [ref=f23e3]:
+    - link "Skip to content" [ref=f23e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=f23e9]:
+      - heading "Navigation Menu" [level=2] [ref=f23e10]
+      - generic [ref=f23e11]:
+        - link "Homepage" [ref=f23e13] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f23e16]:
+          - navigation "Global" [ref=f23e17]:
+            - list [ref=f23e18]:
+              - listitem [ref=f23e19]:
+                - button "Platform" [ref=f23e21] [cursor=pointer]
+              - listitem [ref=f23e24]:
+                - button "Solutions" [ref=f23e26] [cursor=pointer]
+              - listitem [ref=f23e29]:
+                - button "Resources" [ref=f23e31] [cursor=pointer]
+              - listitem [ref=f23e34]:
+                - button "Open Source" [ref=f23e36] [cursor=pointer]
+              - listitem [ref=f23e39]:
+                - button "Enterprise" [ref=f23e41] [cursor=pointer]
+              - listitem [ref=f23e44]:
+                - link "Pricing" [ref=f23e45] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=f23e46]:
+            - button "Search or jump to, type / to search" [ref=f23e48] [cursor=pointer]:
+              - generic [ref=f23e51]:
+                - generic [ref=f23e52]: Search
+                - generic [aria-hidden] [ref=f23e53]: /
+            - link "Sign in" [ref=f23e55] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FAlbratoburner%2FHackathon-relay-hack
+            - link "Sign up" [ref=f23e58] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Albratoburner%2FHackathon-relay-hack
+            - button "Appearance settings" [ref=f23e61] [cursor=pointer]
+  - main [ref=f23e68]:
+    - generic [ref=f23e69]:
+      - generic [ref=f23e70]:
+        - generic [ref=f23e72]:
+          - link "Albratoburner" [ref=f23e76] [cursor=pointer]:
+            - /url: /Albratoburner
+          - generic [ref=f23e77]: /
+          - strong [ref=f23e78]:
+            - link "Hackathon-relay-hack" [ref=f23e79] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack
+          - generic [ref=f23e80]: Public
+        - generic [ref=f23e81]:
+          - list:
+            - listitem [ref=f23e82]:
+              - link "You must be signed in to change notification settings" [ref=f23e83] [cursor=pointer]:
+                - /url: /login?return_to=%2FAlbratoburner%2FHackathon-relay-hack
+                - text: Notifications
+            - listitem [ref=f23e86]:
+              - link "Fork 0" [ref=f23e87] [cursor=pointer]:
+                - /url: /login?return_to=%2FAlbratoburner%2FHackathon-relay-hack
+                - text: Fork
+                - generic "0" [ref=f23e90]
+            - listitem [ref=f23e91]:
+              - link "You must be signed in to star a repository" [ref=f23e93] [cursor=pointer]:
+                - /url: /login?return_to=%2FAlbratoburner%2FHackathon-relay-hack
+                - text: Star
+                - generic "0 users starred this repository" [ref=f23e96]: "0"
+      - navigation "Repository" [ref=f23e97]:
+        - list [ref=f23e98]:
+          - listitem [ref=f23e99]:
+            - link "Code" [ref=f23e100] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack
+          - listitem [ref=f23e104]:
+            - link "Issues" [ref=f23e105] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack/issues
+          - listitem [ref=f23e110]:
+            - link "Pull requests" [ref=f23e111] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack/pulls
+          - listitem [ref=f23e115]:
+            - link "Actions" [ref=f23e116] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack/actions
+          - listitem [ref=f23e120]:
+            - link "Projects" [ref=f23e121] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack/projects
+          - listitem [ref=f23e125]:
+            - link "Security and quality" [ref=f23e126] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack/security
+          - listitem [ref=f23e130]:
+            - link "Insights" [ref=f23e131] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack/pulse
+    - generic [ref=f23e148]:
+      - generic [ref=f23e151]:
+        - generic [ref=f23e152]:
+          - generic [ref=f23e153]:
+            - button "main branch" [ref=f23e155] [cursor=pointer]:
+              - generic [ref=f23e156]: main
+            - generic [ref=f23e160]:
+              - link "Branches" [ref=f23e161] [cursor=pointer]:
+                - /url: /Albratoburner/Hackathon-relay-hack/branches
+              - link "Tags" [ref=f23e164] [cursor=pointer]:
+                - /url: /Albratoburner/Hackathon-relay-hack/tags
+          - generic [ref=f23e167]:
+            - combobox "Go to file" [ref=f23e175]
+            - button "Code" [ref=f23e176] [cursor=pointer]
+        - generic [ref=f23e179]:
+          - generic [ref=f23e180]:
+            - generic [ref=f23e182]:
+              - heading "Latest commit" [level=2] [ref=f23e183]
+              - generic [ref=f23e186]:
+                - heading "History" [level=2] [ref=f23e187]
+                - link "22 Commits" [ref=f23e188] [cursor=pointer]:
+                  - /url: /Albratoburner/Hackathon-relay-hack/commits/main/
+            - heading "Folders and files" [level=2] [ref=f23e191]
+            - table "Folders and files" [ref=f23e192]:
+              - rowgroup:
+                - row "Name Last commit message Last commit date":
+                  - columnheader "Name"
+                  - columnheader "Last commit message"
+                  - columnheader "Last commit date"
+              - rowgroup [ref=f23e193]:
+                - row "app, (Directory)" [ref=f23e194]:
+                  - cell [ref=f23e195]:
+                    - link "app, (Directory)" [ref=f23e202] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/app
+                      - text: app
+                  - cell [ref=f23e203]
+                  - cell [ref=f23e205]
+                - row "bootstrap, (Directory)" [ref=f23e208]:
+                  - cell [ref=f23e209]:
+                    - link "bootstrap, (Directory)" [ref=f23e216] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/bootstrap
+                      - text: bootstrap
+                  - cell [ref=f23e217]
+                  - cell [ref=f23e219]
+                - row "config, (Directory)" [ref=f23e222]:
+                  - cell [ref=f23e223]:
+                    - link "config, (Directory)" [ref=f23e230] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/config
+                      - text: config
+                  - cell [ref=f23e231]
+                  - cell [ref=f23e233]
+                - row "database, (Directory)" [ref=f23e236]:
+                  - cell [ref=f23e237]:
+                    - link "database, (Directory)" [ref=f23e244] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/database
+                      - text: database
+                  - cell [ref=f23e245]
+                  - cell [ref=f23e247]
+                - row "public, (Directory)" [ref=f23e250]:
+                  - cell [ref=f23e251]:
+                    - link "public, (Directory)" [ref=f23e258] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/public
+                      - text: public
+                  - cell [ref=f23e259]
+                  - cell [ref=f23e261]
+                - row "resources, (Directory)" [ref=f23e264]:
+                  - cell [ref=f23e265]:
+                    - link "resources, (Directory)" [ref=f23e272] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/resources
+                      - text: resources
+                  - cell [ref=f23e273]
+                  - cell [ref=f23e275]
+                - row "routes, (Directory)" [ref=f23e278]:
+                  - cell [ref=f23e279]:
+                    - link "routes, (Directory)" [ref=f23e286] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/routes
+                      - text: routes
+                  - cell [ref=f23e287]
+                  - cell [ref=f23e289]
+                - row "sql, (Directory)" [ref=f23e292]:
+                  - cell [ref=f23e293]:
+                    - link "sql, (Directory)" [ref=f23e300] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/sql
+                      - text: sql
+                  - cell [ref=f23e301]
+                  - cell [ref=f23e303]
+                - row "storage, (Directory)" [ref=f23e306]:
+                  - cell [ref=f23e307]:
+                    - link "storage, (Directory)" [ref=f23e314] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/storage
+                      - text: storage
+                  - cell [ref=f23e315]
+                  - cell [ref=f23e317]
+                - row "tests, (Directory)" [ref=f23e320]:
+                  - cell [ref=f23e321]:
+                    - link "tests, (Directory)" [ref=f23e328] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/tree/main/tests
+                      - text: tests
+                  - cell [ref=f23e329]
+                  - cell [ref=f23e331]
+                - row ".editorconfig, (File)" [ref=f23e334]:
+                  - cell [ref=f23e335]:
+                    - link ".editorconfig, (File)" [ref=f23e342] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/.editorconfig
+                      - text: .editorconfig
+                  - cell [ref=f23e343]
+                  - cell [ref=f23e345]
+                - row ".env.example, (File)" [ref=f23e348]:
+                  - cell [ref=f23e349]:
+                    - link ".env.example, (File)" [ref=f23e356] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/.env.example
+                      - text: .env.example
+                  - cell [ref=f23e357]
+                  - cell [ref=f23e359]
+                - row ".gitattributes, (File)" [ref=f23e362]:
+                  - cell [ref=f23e363]:
+                    - link ".gitattributes, (File)" [ref=f23e370] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/.gitattributes
+                      - text: .gitattributes
+                  - cell [ref=f23e371]
+                  - cell [ref=f23e373]
+                - row ".gitignore, (File)" [ref=f23e376]:
+                  - cell [ref=f23e377]:
+                    - link ".gitignore, (File)" [ref=f23e384] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/.gitignore
+                      - text: .gitignore
+                  - cell [ref=f23e385]
+                  - cell [ref=f23e387]
+                - row "README.md, (File)" [ref=f23e390]:
+                  - cell [ref=f23e391]:
+                    - link "README.md, (File)" [ref=f23e398] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/README.md
+                      - text: README.md
+                  - cell [ref=f23e399]
+                  - cell [ref=f23e401]
+                - row "artisan, (File)" [ref=f23e404]:
+                  - cell [ref=f23e405]:
+                    - link "artisan, (File)" [ref=f23e412] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/artisan
+                      - text: artisan
+                  - cell [ref=f23e413]
+                  - cell [ref=f23e415]
+                - row "composer.json, (File)" [ref=f23e418]:
+                  - cell [ref=f23e419]:
+                    - link "composer.json, (File)" [ref=f23e426] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/composer.json
+                      - text: composer.json
+                  - cell [ref=f23e427]
+                  - cell [ref=f23e429]
+                - row "composer.lock, (File)" [ref=f23e432]:
+                  - cell [ref=f23e433]:
+                    - link "composer.lock, (File)" [ref=f23e440] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/composer.lock
+                      - text: composer.lock
+                  - cell [ref=f23e441]
+                  - cell [ref=f23e443]
+                - row "package-lock.json, (File)" [ref=f23e446]:
+                  - cell [ref=f23e447]:
+                    - link "package-lock.json, (File)" [ref=f23e454] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/package-lock.json
+                      - text: package-lock.json
+                  - cell [ref=f23e455]
+                  - cell [ref=f23e457]
+                - row "package.json, (File)" [ref=f23e460]:
+                  - cell [ref=f23e461]:
+                    - link "package.json, (File)" [ref=f23e468] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/package.json
+                      - text: package.json
+                  - cell [ref=f23e469]
+                  - cell [ref=f23e471]
+                - row "phpunit.xml, (File)" [ref=f23e474]:
+                  - cell [ref=f23e475]:
+                    - link "phpunit.xml, (File)" [ref=f23e482] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/phpunit.xml
+                      - text: phpunit.xml
+                  - cell [ref=f23e483]
+                  - cell [ref=f23e485]
+                - row "vite.config.js, (File)" [ref=f23e488]:
+                  - cell [ref=f23e489]:
+                    - link "vite.config.js, (File)" [ref=f23e496] [cursor=pointer]:
+                      - /url: /Albratoburner/Hackathon-relay-hack/blob/main/vite.config.js
+                      - text: vite.config.js
+                  - cell [ref=f23e497]
+                  - cell [ref=f23e499]
+          - generic [ref=f23e503]:
+            - generic [ref=f23e504]:
+              - heading "Repository files navigation" [level=2] [ref=f23e505]
+              - navigation "Repository files" [ref=f23e506]:
+                - list [ref=f23e507]:
+                  - listitem [ref=f23e508]:
+                    - link "README" [ref=f23e509] [cursor=pointer]:
+                      - /url: "#"
+            - article [ref=f23e515]:
+              - generic [ref=f23e516]:
+                - 'heading "RealyHack: Intelligent Candidate Ranking Subsystem" [level=1] [ref=f23e517]'
+                - 'link "Permalink: RealyHack: Intelligent Candidate Ranking Subsystem" [ref=f23e518] [cursor=pointer]':
+                  - /url: "#realyhack-intelligent-candidate-ranking-subsystem"
+              - paragraph [ref=f23e521]: This repository contains a database-centric subsystem for staffing software focused on candidate sourcing, screening, shortlisting and assignment ranking. The project is implemented with Laravel (PHP) and MS SQL Server stored procedures that accept and return JSON payloads for business logic.
+              - paragraph [ref=f23e522]:
+                - strong [ref=f23e523]: What this repo demonstrates
+              - list [ref=f23e524]:
+                - listitem [ref=f23e525]: A production-quality stored procedure that ranks candidates for a job using JSON inputs/outputs.
+                - listitem [ref=f23e526]: Database-driven business logic with advanced SQL techniques (CTEs, window functions, temporary tables, TRY/CATCH).
+                - listitem [ref=f23e527]: A working Laravel backend + Blade/Tailwind frontend that exposes API endpoints and UI pages for jobs, candidates and ranking results.
+                - listitem [ref=f23e528]: Seeders and migrations to reproduce the demo data and schema.
+              - paragraph [ref=f23e529]:
+                - strong [ref=f23e530]: Key files
+              - list [ref=f23e531]:
+                - listitem [ref=f23e532]:
+                  - text: "SQL stored procedure:"
+                  - link "sql/sp_RankCandidatesForJob.sql" [ref=f23e533] [cursor=pointer]:
+                    - /url: /Albratoburner/Hackathon-relay-hack/blob/main/sql/sp_RankCandidatesForJob.sql
+                - listitem [ref=f23e534]:
+                  - text: "Stored-procedure deploy migration:"
+                  - link "database/migrations/2025_12_28_101200_deploy_sp_rank_candidates_for_job.php" [ref=f23e535] [cursor=pointer]:
+                    - /url: /Albratoburner/Hackathon-relay-hack/blob/main/database/migrations/2025_12_28_101200_deploy_sp_rank_candidates_for_job.php
+                - listitem [ref=f23e536]:
+                  - text: "Job seeder example:"
+                  - link "database/seeders/JobOrderSeeder.php" [ref=f23e537] [cursor=pointer]:
+                    - /url: /Albratoburner/Hackathon-relay-hack/blob/main/database/seeders/JobOrderSeeder.php
+                - listitem [ref=f23e538]:
+                  - text: "API tests:"
+                  - link "tests/Feature/RankingApiTest.php" [ref=f23e539] [cursor=pointer]:
+                    - /url: /Albratoburner/Hackathon-relay-hack/blob/main/tests/Feature/RankingApiTest.php
+              - paragraph [ref=f23e540]:
+                - strong [ref=f23e541]: Project Goals
+              - list [ref=f23e542]:
+                - listitem [ref=f23e543]: Showcase a realistic candidate ranking workflow used by staffing platforms.
+                - listitem [ref=f23e544]: Keep the business logic inside MS SQL Server using stored procedures and JSON for robust, portable, and auditable decision making.
+                - listitem [ref=f23e545]: Provide a usable UI for recruiters to run ranking jobs and inspect results.
+              - paragraph [ref=f23e546]:
+                - strong [ref=f23e547]: Tech stack
+              - list [ref=f23e548]:
+                - listitem [ref=f23e549]: "Backend: Laravel (PHP)"
+                - listitem [ref=f23e550]: "Database: MS SQL Server (stored procedures, JSON input/output)"
+                - listitem [ref=f23e551]: "Frontend: Laravel Blade + Tailwind CSS (Alpine.js where needed)"
+                - listitem [ref=f23e552]: "Tests: PHPUnit / Laravel Test Suite"
+              - paragraph [ref=f23e553]:
+                - strong [ref=f23e554]: Quickstart — Local (Windows)
+              - paragraph [ref=f23e555]: "Prerequisites:"
+              - list [ref=f23e556]:
+                - listitem [ref=f23e557]: PHP 8.1+ (matching composer requirements)
+                - listitem [ref=f23e558]: Composer
+                - listitem [ref=f23e559]: Node.js + npm
+                - listitem [ref=f23e560]: MS SQL Server (local or network) with a user that can create databases, objects, and run stored procedures
+              - paragraph [ref=f23e561]: "Steps:"
+              - list [ref=f23e562]:
+                - listitem [ref=f23e563]: "Copy the environment template and update DB connection values:"
+              - generic [ref=f23e564]:
+                - generic [ref=f23e565]:
+                  - text: copy .env.example .env
+                  - generic [ref=f23e566]: "# Edit .env to point to your SQL Server (DB_CONNECTION=sqlsrv, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD)"
+                - button "Copy code to clipboard" [ref=f23e568] [cursor=pointer]
+              - list [ref=f23e572]:
+                - listitem [ref=f23e573]: "Install PHP and JS dependencies:"
+              - generic [ref=f23e574]:
+                - generic [ref=f23e575]: composer install npm install npm run build
+                - button "Copy code to clipboard" [ref=f23e577] [cursor=pointer]
+              - list [ref=f23e581]:
+                - listitem [ref=f23e582]: "Run migrations and seeders (this project includes seed data for demo jobs and candidates):"
+              - generic [ref=f23e583]:
+                - generic [ref=f23e584]: php artisan migrate php artisan db:seed --class=JobOrderSeeder php artisan db:seed --class=CandidateSeeder
+                - button "Copy code to clipboard" [ref=f23e586] [cursor=pointer]
+              - list [ref=f23e590]:
+                - listitem [ref=f23e591]: "Deploy the ranking stored procedure (migration should already manage this, but you can run the SQL directly):"
+              - generic [ref=f23e592]:
+                - generic [ref=f23e593]: "-- Run the file: sql/sp_RankCandidatesForJob.sql on your SQL Server instance"
+                - button "Copy code to clipboard" [ref=f23e596] [cursor=pointer]
+              - list [ref=f23e600]:
+                - listitem [ref=f23e601]: "Serve the app:"
+              - generic [ref=f23e602]:
+                - generic [ref=f23e603]: php artisan serve
+                - button "Copy code to clipboard" [ref=f23e605] [cursor=pointer]
+              - paragraph [ref=f23e609]:
+                - text: Open the app in your browser at
+                - link "http://127.0.0.1:8000" [ref=f23e610] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000
+                - text: and use the Jobs / Candidates pages to exercise the ranking workflow.
+              - paragraph [ref=f23e611]:
+                - strong [ref=f23e612]: Stored Procedure — JSON Input/Output
+              - paragraph [ref=f23e613]:
+                - text: The stored procedure accepts a JSON payload describing the job request and skill weights, and returns a JSON array of ranked candidates including score breakdowns. See
+                - link "sql/sp_RankCandidatesForJob.sql" [ref=f23e614] [cursor=pointer]:
+                  - /url: /Albratoburner/Hackathon-relay-hack/blob/main/sql/sp_RankCandidatesForJob.sql
+                - text: for the exact parameters and example payload.
+              - paragraph [ref=f23e615]: "Suggested JSON input shape (example):"
+              - generic [ref=f23e616]:
+                - generic [ref=f23e617]: "{ \"jobId\": 123, \"requiredSkills\": [{\"skillId\": 4, \"minLevel\": 3},{\"skillId\": 8, \"minLevel\":2}], \"weights\": {\"skill\":0.5, \"experience\":0.25, \"availability\":0.15, \"location\":0.1} }"
+                - button "Copy code to clipboard" [ref=f23e619] [cursor=pointer]
+              - paragraph [ref=f23e623]: Output is a JSON array where each element contains candidate id, overall score, and component scores.
+              - paragraph [ref=f23e624]:
+                - strong [ref=f23e625]: API / Integration
+              - list [ref=f23e626]:
+                - listitem [ref=f23e627]:
+                  - text: The project exposes REST endpoints in
+                  - code [ref=f23e628]: routes/api.php
+                  - text: to run the ranking procedure and fetch results. The stored procedure is the source of truth for ranking logic and can be called from any backend (including .NET) for integration.
+              - paragraph [ref=f23e629]:
+                - strong [ref=f23e630]: Testing
+              - paragraph [ref=f23e631]: "Run the test suite with:"
+              - generic [ref=f23e632]:
+                - generic [ref=f23e633]: php artisan test
+                - button "Copy code to clipboard" [ref=f23e635] [cursor=pointer]
+              - paragraph [ref=f23e639]:
+                - text: "Focus tests:"
+                - link "tests/Feature/RankingApiTest.php" [ref=f23e640] [cursor=pointer]:
+                  - /url: /Albratoburner/Hackathon-relay-hack/blob/main/tests/Feature/RankingApiTest.php
+                - text: validates the ranking API behavior.
+              - paragraph [ref=f23e641]:
+                - strong [ref=f23e642]: Future enhancements
+              - list [ref=f23e643]:
+                - listitem [ref=f23e644]: Add a .NET API wrapper to demonstrate cross-stack integration with the stored procedure.
+                - listitem [ref=f23e645]: Angular front-end option for a single-page recruiter UI.
+                - listitem [ref=f23e646]: Timesheets, invoicing and payroll integration to expand the lifecycle coverage.
+      - generic [ref=f23e649]:
+        - generic [ref=f23e650]:
+          - heading "About" [level=2] [ref=f23e651]
+          - generic [ref=f23e652]: No description, website, or topics provided.
+          - heading "Resources" [level=3] [ref=f23e653]
+          - link "Readme" [ref=f23e655] [cursor=pointer]:
+            - /url: "#readme-ov-file"
+          - generic [ref=f23e658]:
+            - link "Activity" [ref=f23e661] [cursor=pointer]:
+              - /url: /Albratoburner/Hackathon-relay-hack/activity
+            - generic [ref=f23e664]:
+              - heading "Stars" [level=3] [ref=f23e665]
+              - generic [ref=f23e667]:
+                - strong [ref=f23e670]: "0"
+                - text: stars
+              - heading "Watchers" [level=3] [ref=f23e671]
+              - generic [ref=f23e673]:
+                - strong [ref=f23e676]: "0"
+                - text: watching
+              - heading "Forks" [level=3] [ref=f23e677]
+              - link [ref=f23e679] [cursor=pointer]:
+                - /url: /Albratoburner/Hackathon-relay-hack/forks
+                - strong [ref=f23e683]: "0"
+                - text: forks
+          - link "Report repository" [ref=f23e685] [cursor=pointer]:
+            - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FAlbratoburner%2FHackathon-relay-hack&report=Albratoburner+%28user%29
+        - heading "Releases" [level=2] [ref=f23e687]
+        - heading "Packages" [level=2] [ref=f23e691]
+        - heading "Contributors" [level=2] [ref=f23e694]
+        - heading "Languages" [level=2] [ref=f23e697]
+  - contentinfo [ref=f23e700]:
+    - heading "Footer" [level=2] [ref=f23e701]
+    - generic [ref=f23e702]:
+      - generic [ref=f23e703]:
+        - link "GitHub Homepage" [ref=f23e704] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=f23e707]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=f23e708]:
+        - heading "Footer navigation" [level=3] [ref=f23e709]
+        - list "Footer navigation" [ref=f23e710]:
+          - listitem [ref=f23e711]:
+            - link "Terms" [ref=f23e712] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=f23e713]:
+            - link "Privacy" [ref=f23e714] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=f23e715]:
+            - link "Security" [ref=f23e716] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=f23e717]:
+            - link "Status" [ref=f23e718] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=f23e719]:
+            - link "Community" [ref=f23e720] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=f23e721]:
+            - link "Docs" [ref=f23e722] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=f23e723]:
+            - link "Contact" [ref=f23e724] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=f23e725]:
+            - button "Manage cookies" [ref=f23e727] [cursor=pointer]
+          - listitem [ref=f23e728]:
+            - button "Do not share my personal information" [ref=f23e730] [cursor=pointer]

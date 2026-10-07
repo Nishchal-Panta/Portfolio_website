@@ -1,0 +1,895 @@
+- generic [ref=f27e2]:
+  - generic [ref=f27e3]:
+    - link "Skip to content" [ref=f27e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=f27e9]:
+      - heading "Navigation Menu" [level=2] [ref=f27e10]
+      - generic [ref=f27e11]:
+        - link "Homepage" [ref=f27e13] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f27e16]:
+          - navigation "Global" [ref=f27e17]:
+            - list [ref=f27e18]:
+              - listitem [ref=f27e19]:
+                - button "Platform" [ref=f27e21] [cursor=pointer]
+              - listitem [ref=f27e24]:
+                - button "Solutions" [ref=f27e26] [cursor=pointer]
+              - listitem [ref=f27e29]:
+                - button "Resources" [ref=f27e31] [cursor=pointer]
+              - listitem [ref=f27e34]:
+                - button "Open Source" [ref=f27e36] [cursor=pointer]
+              - listitem [ref=f27e39]:
+                - button "Enterprise" [ref=f27e41] [cursor=pointer]
+              - listitem [ref=f27e44]:
+                - link "Pricing" [ref=f27e45] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=f27e46]:
+            - button "Search or jump to, type / to search" [ref=f27e48] [cursor=pointer]:
+              - generic [ref=f27e51]:
+                - generic [ref=f27e52]: Search
+                - generic [aria-hidden] [ref=f27e53]: /
+            - link "Sign in" [ref=f27e55] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FAWS-Cybersecurity_threat_detection
+            - link "Sign up" [ref=f27e58] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Nishchal-Panta%2FAWS-Cybersecurity_threat_detection
+            - button "Appearance settings" [ref=f27e61] [cursor=pointer]
+  - main [ref=f27e68]:
+    - generic [ref=f27e69]:
+      - generic [ref=f27e70]:
+        - generic [ref=f27e72]:
+          - link "Nishchal-Panta" [ref=f27e76] [cursor=pointer]:
+            - /url: /Nishchal-Panta
+          - generic [ref=f27e77]: /
+          - strong [ref=f27e78]:
+            - link "AWS-Cybersecurity_threat_detection" [ref=f27e79] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection
+          - generic [ref=f27e80]: Public
+        - generic [ref=f27e81]:
+          - list:
+            - listitem [ref=f27e82]:
+              - link "You must be signed in to change notification settings" [ref=f27e83] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FAWS-Cybersecurity_threat_detection
+                - text: Notifications
+            - listitem [ref=f27e86]:
+              - link "Fork 0" [ref=f27e87] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FAWS-Cybersecurity_threat_detection
+                - text: Fork
+                - generic "0" [ref=f27e90]
+            - listitem [ref=f27e91]:
+              - link "You must be signed in to star a repository" [ref=f27e93] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FAWS-Cybersecurity_threat_detection
+                - text: Star
+                - generic "0 users starred this repository" [ref=f27e96]: "0"
+      - navigation "Repository" [ref=f27e97]:
+        - list [ref=f27e98]:
+          - listitem [ref=f27e99]:
+            - link "Code" [ref=f27e100] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection
+          - listitem [ref=f27e104]:
+            - link "Issues" [ref=f27e105] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/issues
+          - listitem [ref=f27e110]:
+            - link "Pull requests" [ref=f27e111] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/pulls
+          - listitem [ref=f27e115]:
+            - link "Actions" [ref=f27e116] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/actions
+          - listitem [ref=f27e120]:
+            - link "Projects" [ref=f27e121] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/projects
+          - listitem [ref=f27e125]:
+            - link "Security and quality" [ref=f27e126] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/security
+          - listitem [ref=f27e130]:
+            - link "Insights" [ref=f27e131] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/pulse
+    - generic [ref=f27e148]:
+      - generic [ref=f27e151]:
+        - generic [ref=f27e152]:
+          - generic [ref=f27e153]:
+            - button "main branch" [ref=f27e155] [cursor=pointer]:
+              - generic [ref=f27e156]: main
+            - generic [ref=f27e160]:
+              - link "Branches" [ref=f27e161] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/branches
+              - link "Tags" [ref=f27e164] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/tags
+          - generic [ref=f27e167]:
+            - combobox "Go to file" [ref=f27e175]
+            - button "Code" [ref=f27e176] [cursor=pointer]
+        - generic [ref=f27e179]:
+          - generic [ref=f27e180]:
+            - generic [ref=f27e182]:
+              - heading "Latest commit" [level=2] [ref=f27e183]
+              - generic [ref=f27e186]:
+                - heading "History" [level=2] [ref=f27e187]
+                - link "3 Commits" [ref=f27e188] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/commits/main/
+            - heading "Folders and files" [level=2] [ref=f27e191]
+            - table "Folders and files" [ref=f27e192]:
+              - rowgroup:
+                - row "Name Last commit message Last commit date":
+                  - columnheader "Name"
+                  - columnheader "Last commit message"
+                  - columnheader "Last commit date"
+              - rowgroup [ref=f27e193]:
+                - row ".gitignore, (File)" [ref=f27e194]:
+                  - cell [ref=f27e195]:
+                    - link ".gitignore, (File)" [ref=f27e202] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/.gitignore
+                      - text: .gitignore
+                  - cell [ref=f27e203]
+                  - cell [ref=f27e205]
+                - row "Architecture_Diagram.png, (File)" [ref=f27e208]:
+                  - cell [ref=f27e209]:
+                    - link "Architecture_Diagram.png, (File)" [ref=f27e216] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/Architecture_Diagram.png
+                      - text: Architecture_Diagram.png
+                  - cell [ref=f27e217]
+                  - cell [ref=f27e219]
+                - row "Inline_Policy-Glue_AND_Athena.json, (File)" [ref=f27e222]:
+                  - cell [ref=f27e223]:
+                    - link "Inline_Policy-Glue_AND_Athena.json, (File)" [ref=f27e230] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/Inline_Policy-Glue_AND_Athena.json
+                      - text: Inline_Policy-Glue_AND_Athena.json
+                  - cell [ref=f27e231]
+                  - cell [ref=f27e233]
+                - row "README.md, (File)" [ref=f27e236]:
+                  - cell [ref=f27e237]:
+                    - link "README.md, (File)" [ref=f27e244] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/README.md
+                      - text: README.md
+                  - cell [ref=f27e245]
+                  - cell [ref=f27e247]
+                - row "SS.pdf, (File)" [ref=f27e250]:
+                  - cell [ref=f27e251]:
+                    - link "SS.pdf, (File)" [ref=f27e258] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/SS.pdf
+                      - text: SS.pdf
+                  - cell [ref=f27e259]
+                  - cell [ref=f27e261]
+                - row "endpoint.ipynb, (File)" [ref=f27e264]:
+                  - cell [ref=f27e265]:
+                    - link "endpoint.ipynb, (File)" [ref=f27e272] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/endpoint.ipynb
+                      - text: endpoint.ipynb
+                  - cell [ref=f27e273]
+                  - cell [ref=f27e275]
+                - row "pipeline.ipynb, (File)" [ref=f27e278]:
+                  - cell [ref=f27e279]:
+                    - link "pipeline.ipynb, (File)" [ref=f27e286] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/pipeline.ipynb
+                      - text: pipeline.ipynb
+                  - cell [ref=f27e287]
+                  - cell [ref=f27e289]
+                - row "preprocess.py, (File)" [ref=f27e292]:
+                  - cell [ref=f27e293]:
+                    - link "preprocess.py, (File)" [ref=f27e300] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/blob/main/preprocess.py
+                      - text: preprocess.py
+                  - cell [ref=f27e301]
+                  - cell [ref=f27e303]
+          - generic [ref=f27e307]:
+            - generic [ref=f27e308]:
+              - heading "Repository files navigation" [level=2] [ref=f27e309]
+              - navigation "Repository files" [ref=f27e310]:
+                - list [ref=f27e311]:
+                  - listitem [ref=f27e312]:
+                    - link "README" [ref=f27e313] [cursor=pointer]:
+                      - /url: "#"
+              - button "Outline" [ref=f27e318] [cursor=pointer]
+            - article [ref=f27e322]:
+              - generic [ref=f27e323]:
+                - 'heading "AWS Cybersecurity Threat Detection: Machine Learning at Scale" [level=1] [ref=f27e324]'
+                - 'link "Permalink: AWS Cybersecurity Threat Detection: Machine Learning at Scale" [ref=f27e325] [cursor=pointer]':
+                  - /url: "#aws-cybersecurity-threat-detection-machine-learning-at-scale"
+              - generic [ref=f27e328]:
+                - heading "Overview" [level=2] [ref=f27e329]
+                - 'link "Permalink: Overview" [ref=f27e330] [cursor=pointer]':
+                  - /url: "#overview"
+              - paragraph [ref=f27e333]:
+                - text: This project demonstrates a
+                - strong [ref=f27e334]: production-ready machine learning pipeline
+                - text: for detecting cybersecurity threats in network traffic using Amazon SageMaker. By leveraging XGBoost classification and AWS's managed ML services, we build a scalable system that identifies suspicious network events in real-time with high accuracy.
+              - paragraph [ref=f27e335]: "The solution automates the complete ML lifecycle: from data preprocessing through model training, validation, and deployment—all orchestrated through SageMaker Pipelines."
+              - separator [ref=f27e336]
+              - generic [ref=f27e337]:
+                - heading "🎯 Project Goals" [level=2] [ref=f27e338]
+                - 'link "Permalink: 🎯 Project Goals" [ref=f27e339] [cursor=pointer]':
+                  - /url: "#-project-goals"
+              - list [ref=f27e342]:
+                - listitem [ref=f27e343]:
+                  - strong [ref=f27e344]: Detect network anomalies
+                  - text: that indicate potential security threats
+                - listitem [ref=f27e345]:
+                  - strong [ref=f27e346]: Automate ML workflows
+                  - text: to reduce manual intervention
+                - listitem [ref=f27e347]:
+                  - strong [ref=f27e348]: Scale predictions
+                  - text: with a production-ready SageMaker endpoint
+                - listitem [ref=f27e349]:
+                  - strong [ref=f27e350]: Maintain audit trails
+                  - text: of all model versions and deployments
+                - listitem [ref=f27e351]:
+                  - strong [ref=f27e352]: Enable real-time threat classification
+                  - text: for incoming network events
+              - separator [ref=f27e353]
+              - generic [ref=f27e354]:
+                - heading "🏗️ Architecture" [level=2] [ref=f27e355]
+                - 'link "Permalink: 🏗️ Architecture" [ref=f27e356] [cursor=pointer]':
+                  - /url: "#️-architecture"
+              - generic [ref=f27e359]:
+                - code [ref=f27e361]: Raw Network Logs (S3) ↓ [Preprocessing] (preprocess.py) ↓ Train/Validation Split ↓ [SageMaker Pipeline] - Preprocessing Step - Training Step (XGBoost) - Model Registry Step ↓ Model Package Group ("ThreatDetectionModels") ↓ [SageMaker Endpoint] (Real-time Inference) ↓ Threat Score + Classification
+                - button "Copy code to clipboard" [ref=f27e363] [cursor=pointer]
+              - generic [ref=f27e367]:
+                - heading "Components" [level=3] [ref=f27e368]
+                - 'link "Permalink: Components" [ref=f27e369] [cursor=pointer]':
+                  - /url: "#components"
+              - table [ref=f27e373]:
+                - rowgroup [ref=f27e374]:
+                  - row [ref=f27e375]:
+                    - columnheader "Component" [ref=f27e376]
+                    - columnheader "Purpose" [ref=f27e377]
+                - rowgroup [ref=f27e378]:
+                  - row [ref=f27e379]:
+                    - cell [ref=f27e380]:
+                      - strong [ref=f27e381]: SageMaker Processing
+                    - cell "Scales data preprocessing across distributed instances" [ref=f27e382]
+                  - row [ref=f27e383]:
+                    - cell [ref=f27e384]:
+                      - strong [ref=f27e385]: XGBoost Training
+                    - cell "Binary classification model (Suspicious vs Normal)" [ref=f27e386]
+                  - row [ref=f27e387]:
+                    - cell [ref=f27e388]:
+                      - strong [ref=f27e389]: Model Registry
+                    - cell "Version control and approval workflow for models" [ref=f27e390]
+                  - row [ref=f27e391]:
+                    - cell [ref=f27e392]:
+                      - strong [ref=f27e393]: SageMaker Endpoint
+                    - cell "REST API for real-time threat detection" [ref=f27e394]
+                  - row [ref=f27e395]:
+                    - cell [ref=f27e396]:
+                      - strong [ref=f27e397]: CloudWatch Logs
+                    - cell "Monitor pipeline execution and endpoint metrics" [ref=f27e398]
+              - separator [ref=f27e399]
+              - generic [ref=f27e400]:
+                - heading "📊 Dataset Features" [level=2] [ref=f27e401]
+                - 'link "Permalink: 📊 Dataset Features" [ref=f27e402] [cursor=pointer]':
+                  - /url: "#-dataset-features"
+              - paragraph [ref=f27e405]:
+                - text: The threat detection model analyzes
+                - strong [ref=f27e406]: 11 network event features
+                - text: ":"
+              - table [ref=f27e408]:
+                - rowgroup [ref=f27e409]:
+                  - row [ref=f27e410]:
+                    - columnheader "Feature" [ref=f27e411]
+                    - columnheader "Description" [ref=f27e412]
+                    - columnheader "Example" [ref=f27e413]
+                - rowgroup [ref=f27e414]:
+                  - row [ref=f27e415]:
+                    - cell [ref=f27e416]:
+                      - code [ref=f27e417]: src_ip_int
+                    - cell "Source IP as integer" [ref=f27e418]
+                    - cell "167772160" [ref=f27e419]
+                  - row [ref=f27e420]:
+                    - cell [ref=f27e421]:
+                      - code [ref=f27e422]: dst_ip_int
+                    - cell "Destination IP as integer" [ref=f27e423]
+                    - cell "134744072" [ref=f27e424]
+                  - row [ref=f27e425]:
+                    - cell [ref=f27e426]:
+                      - code [ref=f27e427]: src_port
+                    - cell "Source port number" [ref=f27e428]
+                    - cell "54321" [ref=f27e429]
+                  - row [ref=f27e430]:
+                    - cell [ref=f27e431]:
+                      - code [ref=f27e432]: dst_port
+                    - cell "Destination port number" [ref=f27e433]
+                    - cell "443" [ref=f27e434]
+                  - row [ref=f27e435]:
+                    - cell [ref=f27e436]:
+                      - code [ref=f27e437]: protocol
+                    - cell "Network protocol (0=TCP, 1=UDP, etc.)" [ref=f27e438]
+                    - cell "0" [ref=f27e439]
+                  - row [ref=f27e440]:
+                    - cell [ref=f27e441]:
+                      - code [ref=f27e442]: bytes_sent
+                    - cell "Upload bytes" [ref=f27e443]
+                    - cell "15000" [ref=f27e444]
+                  - row [ref=f27e445]:
+                    - cell [ref=f27e446]:
+                      - code [ref=f27e447]: bytes_recv
+                    - cell "Download bytes" [ref=f27e448]
+                    - cell "3200" [ref=f27e449]
+                  - row [ref=f27e450]:
+                    - cell [ref=f27e451]:
+                      - code [ref=f27e452]: duration_ms
+                    - cell "Connection duration" [ref=f27e453]
+                    - cell "120" [ref=f27e454]
+                  - row [ref=f27e455]:
+                    - cell [ref=f27e456]:
+                      - code [ref=f27e457]: packet_count
+                    - cell "Total packets exchanged" [ref=f27e458]
+                    - cell "45" [ref=f27e459]
+                  - row [ref=f27e460]:
+                    - cell [ref=f27e461]:
+                      - code [ref=f27e462]: flag
+                    - cell "TCP flags indicator" [ref=f27e463]
+                    - cell "1" [ref=f27e464]
+                  - row [ref=f27e465]:
+                    - cell [ref=f27e466]:
+                      - code [ref=f27e467]: byte_ratio
+                    - cell "Ratio of sent/received bytes" [ref=f27e468]
+                    - cell "4.69" [ref=f27e469]
+              - paragraph [ref=f27e470]:
+                - strong [ref=f27e471]: Target Variable
+                - text: ":"
+                - code [ref=f27e472]: label
+                - text: (1 = Suspicious, 0 = Normal)
+              - separator [ref=f27e473]
+              - generic [ref=f27e474]:
+                - heading "🚀 Quick Start" [level=2] [ref=f27e475]
+                - 'link "Permalink: 🚀 Quick Start" [ref=f27e476] [cursor=pointer]':
+                  - /url: "#-quick-start"
+              - generic [ref=f27e479]:
+                - heading "Prerequisites" [level=3] [ref=f27e480]
+                - 'link "Permalink: Prerequisites" [ref=f27e481] [cursor=pointer]':
+                  - /url: "#prerequisites"
+              - list [ref=f27e484]:
+                - listitem [ref=f27e485]: AWS Account with appropriate IAM permissions
+                - listitem [ref=f27e486]: Python 3.8+
+                - listitem [ref=f27e487]: AWS CLI configured with credentials
+                - listitem [ref=f27e488]: Jupyter environment (SageMaker Studio or local)
+              - generic [ref=f27e489]:
+                - heading "Installation" [level=3] [ref=f27e490]
+                - 'link "Permalink: Installation" [ref=f27e491] [cursor=pointer]':
+                  - /url: "#installation"
+              - list [ref=f27e494]:
+                - listitem [ref=f27e495]:
+                  - paragraph [ref=f27e496]:
+                    - strong [ref=f27e497]: Clone the repository
+                  - generic [ref=f27e498]:
+                    - generic [ref=f27e499]: git clone https://github.com/Nishchal-Panta/AWS-Cybersecurity_threat_detection.git cd AWS-Cybersecurity_threat_detection
+                    - button "Copy code to clipboard" [ref=f27e501] [cursor=pointer]
+                - listitem [ref=f27e505]:
+                  - paragraph [ref=f27e506]:
+                    - strong [ref=f27e507]: Set up environment variables
+                  - generic [ref=f27e508]:
+                    - generic [ref=f27e509]:
+                      - generic [ref=f27e510]: "# Create .env file (add to .gitignore)"
+                      - text: echo
+                      - generic [ref=f27e511]: "\"AWS_ACCOUNT_ID=<your-12-digit-account-id>\""
+                      - text: "> .env echo"
+                      - generic [ref=f27e512]: "\"AWS_REGION=us-east-1\""
+                      - text: ">> .env"
+                    - button "Copy code to clipboard" [ref=f27e514] [cursor=pointer]
+                - listitem [ref=f27e518]:
+                  - paragraph [ref=f27e519]:
+                    - strong [ref=f27e520]: Configure IAM Role
+                  - paragraph [ref=f27e521]:
+                    - text: Create an IAM role
+                    - code [ref=f27e522]: ThreatDetectionSageMakerRole
+                    - text: "with permissions for:"
+                  - list [ref=f27e523]:
+                    - listitem [ref=f27e524]: S3 bucket access (read/write)
+                    - listitem [ref=f27e525]: SageMaker full access
+                    - listitem [ref=f27e526]: CloudWatch Logs
+                  - paragraph [ref=f27e527]:
+                    - text: "Apply the provided policy:"
+                    - code [ref=f27e528]: Inline_Policy-Glue_AND_Athena.json
+              - separator [ref=f27e529]
+              - generic [ref=f27e530]:
+                - heading "📋 File Structure" [level=2] [ref=f27e531]
+                - 'link "Permalink: 📋 File Structure" [ref=f27e532] [cursor=pointer]':
+                  - /url: "#-file-structure"
+              - generic [ref=f27e535]:
+                - code [ref=f27e537]: "AWS-cybersecurity_threat_detection/ ├── README.md # Project documentation ├── pipeline.ipynb # SageMaker Pipeline definition ├── endpoint.ipynb # Endpoint deployment & testing ├── preprocess.py # Data preprocessing logic ├── Inline_Policy-Glue_AND_Athena.json # IAM policy template └── .env # Environment variables (git-ignored)"
+                - button "Copy code to clipboard" [ref=f27e539] [cursor=pointer]
+              - generic [ref=f27e543]:
+                - heading "File Descriptions" [level=3] [ref=f27e544]
+                - 'link "Permalink: File Descriptions" [ref=f27e545] [cursor=pointer]':
+                  - /url: "#file-descriptions"
+              - generic [ref=f27e548]:
+                - heading [level=4] [ref=f27e549]:
+                  - code [ref=f27e550]: pipeline.ipynb
+                - 'link "Permalink: pipeline.ipynb" [ref=f27e551] [cursor=pointer]':
+                  - /url: "#pipelineipynb"
+              - paragraph [ref=f27e554]:
+                - strong [ref=f27e555]: Purpose
+                - text: ": Orchestrates the complete ML workflow"
+              - paragraph [ref=f27e556]:
+                - strong [ref=f27e557]: Key Steps
+                - text: ":"
+              - list [ref=f27e558]:
+                - listitem [ref=f27e559]:
+                  - strong [ref=f27e560]: Preprocessing
+                  - text: ": Cleans data, removes NaN values, reorders columns (label first)"
+                - listitem [ref=f27e561]:
+                  - strong [ref=f27e562]: Train/Validation Split
+                  - text: ": 80/20 stratified split ensuring class balance"
+                - listitem [ref=f27e563]:
+                  - strong [ref=f27e564]: XGBoost Training
+                  - text: ": Binary classification with tuned hyperparameters"
+                - listitem [ref=f27e565]:
+                  - strong [ref=f27e566]: Model Registration
+                  - text: ": Auto-approves model and adds to registry"
+              - paragraph [ref=f27e567]:
+                - strong [ref=f27e568]: Hyperparameters
+                - text: ":"
+              - generic [ref=f27e569]:
+                - generic [ref=f27e570]: "{ \"objective\": \"binary:logistic\", # Binary classification \"num_round\": \"200\", # 200 boosting rounds \"max_depth\": \"6\", # Tree depth limit \"eta\": \"0.2\", # Learning rate \"subsample\": \"0.8\", # Row subsampling \"colsample_bytree\": \"0.8\", # Feature subsampling \"eval_metric\": \"auc\", # Evaluation metric \"scale_pos_weight\": \"10\" # Handle class imbalance }"
+                - button "Copy code to clipboard" [ref=f27e572] [cursor=pointer]
+              - generic [ref=f27e576]:
+                - heading [level=4] [ref=f27e577]:
+                  - code [ref=f27e578]: endpoint.ipynb
+                - 'link "Permalink: endpoint.ipynb" [ref=f27e579] [cursor=pointer]':
+                  - /url: "#endpointipynb"
+              - paragraph [ref=f27e582]:
+                - strong [ref=f27e583]: Purpose
+                - text: ": Deploys the model and tests real-time inference"
+              - paragraph [ref=f27e584]:
+                - strong [ref=f27e585]: Workflow
+                - text: ":"
+              - list [ref=f27e586]:
+                - listitem [ref=f27e587]: Retrieves the latest approved model from registry
+                - listitem [ref=f27e588]:
+                  - text: Deploys to
+                  - code [ref=f27e589]: ml.m5.large
+                  - text: instance with CSV serialization
+                - listitem [ref=f27e590]: Invokes endpoint with sample network event
+                - listitem [ref=f27e591]: Returns threat score (0-1) and classification
+              - paragraph [ref=f27e592]:
+                - strong [ref=f27e593]: Sample Prediction
+                - text: ":"
+              - generic [ref=f27e594]:
+                - generic [ref=f27e595]: "Input: \"167772160,134744072,54321,443,0,15000,3200,120,45,1,4.69\" Output: Threat score: 0.9660 Classification: SUSPICIOUS"
+                - button "Copy code to clipboard" [ref=f27e597] [cursor=pointer]
+              - generic [ref=f27e601]:
+                - heading [level=4] [ref=f27e602]:
+                  - code [ref=f27e603]: preprocess.py
+                - 'link "Permalink: preprocess.py" [ref=f27e604] [cursor=pointer]':
+                  - /url: "#preprocesspy"
+              - paragraph [ref=f27e607]:
+                - strong [ref=f27e608]: Purpose
+                - text: ": Handles data preprocessing in SageMaker Processing job"
+              - paragraph [ref=f27e609]:
+                - strong [ref=f27e610]: Operations
+                - text: ":"
+              - list [ref=f27e611]:
+                - listitem [ref=f27e612]: Concatenates CSV files from S3
+                - listitem [ref=f27e613]: Removes rows with missing values
+                - listitem [ref=f27e614]: Reorders columns (label first for XGBoost)
+                - listitem [ref=f27e615]: Stratified train/val split (80/20)
+                - listitem [ref=f27e616]: Outputs CSV files without headers
+              - paragraph [ref=f27e617]:
+                - strong [ref=f27e618]: I/O
+                - text: ":"
+              - list [ref=f27e619]:
+                - listitem [ref=f27e620]:
+                  - strong [ref=f27e621]: Input
+                  - text: ":"
+                  - code [ref=f27e622]: /opt/ml/processing/input/*.csv
+                - listitem [ref=f27e623]:
+                  - strong [ref=f27e624]: Output
+                  - text: ":"
+                  - list [ref=f27e625]:
+                    - listitem [ref=f27e626]:
+                      - text: "Train:"
+                      - code [ref=f27e627]: /opt/ml/processing/output/train/train.csv
+                    - listitem [ref=f27e628]:
+                      - text: "Validation:"
+                      - code [ref=f27e629]: /opt/ml/processing/output/validation/validation.csv
+              - separator [ref=f27e630]
+              - generic [ref=f27e631]:
+                - heading "🔄 Execution Steps" [level=2] [ref=f27e632]
+                - 'link "Permalink: 🔄 Execution Steps" [ref=f27e633] [cursor=pointer]':
+                  - /url: "#-execution-steps"
+              - generic [ref=f27e636]:
+                - 'heading "Step 1: Run the Training Pipeline" [level=3] [ref=f27e637]'
+                - 'link "Permalink: Step 1: Run the Training Pipeline" [ref=f27e638] [cursor=pointer]':
+                  - /url: "#step-1-run-the-training-pipeline"
+              - paragraph [ref=f27e641]:
+                - text: Open
+                - code [ref=f27e642]: pipeline.ipynb
+                - text: "in SageMaker Studio:"
+              - generic [ref=f27e643]:
+                - generic [ref=f27e644]: "# Load environment variables import os ACCOUNT_ID = os.getenv(\"AWS_ACCOUNT_ID\") REGION = os.getenv(\"AWS_REGION\", \"us-east-1\") # Execute pipeline pipeline.upsert(role_arn=ROLE_ARN) execution = pipeline.start() execution.wait() print(\"Pipeline complete. Model registered.\")"
+                - button "Copy code to clipboard" [ref=f27e646] [cursor=pointer]
+              - paragraph [ref=f27e650]:
+                - strong [ref=f27e651]: Expected Output
+                - text: ":"
+              - list [ref=f27e652]:
+                - listitem [ref=f27e653]: ✅ Preprocessing job completes
+                - listitem [ref=f27e654]: ✅ Training job trains for ~10-15 minutes
+                - listitem [ref=f27e655]: ✅ Model registered with "Approved" status
+                - listitem [ref=f27e656]: ✅ Ready for deployment
+              - generic [ref=f27e657]:
+                - 'heading "Step 2: Deploy the Endpoint" [level=3] [ref=f27e658]'
+                - 'link "Permalink: Step 2: Deploy the Endpoint" [ref=f27e659] [cursor=pointer]':
+                  - /url: "#step-2-deploy-the-endpoint"
+              - paragraph [ref=f27e662]:
+                - text: Open
+                - code [ref=f27e663]: endpoint.ipynb
+                - text: ":"
+              - generic [ref=f27e664]:
+                - generic [ref=f27e665]:
+                  - text: "# Deploy latest approved model predictor = model.deploy( initial_instance_count=1, instance_type=\"ml.m5.large\", endpoint_name=\"threat-detection-endpoint\" ) print("
+                  - generic [ref=f27e666]:
+                    - text: "f\"Endpoint live:"
+                    - generic [ref=f27e667]: "{predictor.endpoint_name}"
+                    - text: "\""
+                  - text: )
+                - button "Copy code to clipboard" [ref=f27e669] [cursor=pointer]
+              - paragraph [ref=f27e673]:
+                - strong [ref=f27e674]: Expected Output
+                - text: ":"
+              - generic [ref=f27e675]:
+                - code [ref=f27e677]: "Endpoint live: threat-detection-endpoint"
+                - button "Copy code to clipboard" [ref=f27e679] [cursor=pointer]
+              - generic [ref=f27e683]:
+                - 'heading "Step 3: Test with Sample Data" [level=3] [ref=f27e684]'
+                - 'link "Permalink: Step 3: Test with Sample Data" [ref=f27e685] [cursor=pointer]':
+                  - /url: "#step-3-test-with-sample-data"
+              - generic [ref=f27e688]:
+                - generic [ref=f27e689]:
+                  - text: "# Invoke endpoint with network event response = runtime.invoke_endpoint( EndpointName=\"threat-detection-endpoint\", ContentType=\"text/csv\", Body=\"167772160,134744072,54321,443,0,15000,3200,120,45,1,4.69\" ) score = float(response[\"Body\"].read().decode(\"utf-8\")) label = \"SUSPICIOUS\" if score >= 0.5 else \"NORMAL\" print("
+                  - generic [ref=f27e690]:
+                    - text: "f\"Threat score:"
+                    - generic [ref=f27e691]: "{score:.4f}"
+                    - text: "\""
+                  - text: ) print(
+                  - generic [ref=f27e692]:
+                    - text: "f\"Classification:"
+                    - generic [ref=f27e693]: "{label}"
+                    - text: "\""
+                  - text: )
+                - button "Copy code to clipboard" [ref=f27e695] [cursor=pointer]
+              - separator [ref=f27e699]
+              - generic [ref=f27e700]:
+                - heading "📈 Model Performance" [level=2] [ref=f27e701]
+                - 'link "Permalink: 📈 Model Performance" [ref=f27e702] [cursor=pointer]':
+                  - /url: "#-model-performance"
+              - paragraph [ref=f27e705]:
+                - strong [ref=f27e706]: XGBoost Configuration Rationale
+                - text: ":"
+              - table [ref=f27e708]:
+                - rowgroup [ref=f27e709]:
+                  - row [ref=f27e710]:
+                    - columnheader "Parameter" [ref=f27e711]
+                    - columnheader "Value" [ref=f27e712]
+                    - columnheader "Reasoning" [ref=f27e713]
+                - rowgroup [ref=f27e714]:
+                  - row [ref=f27e715]:
+                    - cell [ref=f27e716]:
+                      - code [ref=f27e717]: objective
+                    - cell [ref=f27e718]:
+                      - code [ref=f27e719]: binary:logistic
+                    - cell "Binary threat classification" [ref=f27e720]
+                  - row [ref=f27e721]:
+                    - cell [ref=f27e722]:
+                      - code [ref=f27e723]: scale_pos_weight
+                    - cell [ref=f27e724]:
+                      - code [ref=f27e725]: "10"
+                    - cell "Account for threat class imbalance" [ref=f27e726]
+                  - row [ref=f27e727]:
+                    - cell [ref=f27e728]:
+                      - code [ref=f27e729]: max_depth
+                    - cell [ref=f27e730]:
+                      - code [ref=f27e731]: "6"
+                    - cell "Prevent overfitting on sparse threat patterns" [ref=f27e732]
+                  - row [ref=f27e733]:
+                    - cell [ref=f27e734]:
+                      - code [ref=f27e735]: subsample
+                    - cell [ref=f27e736]:
+                      - code [ref=f27e737]: "0.8"
+                    - cell "Reduce variance with row subsampling" [ref=f27e738]
+                  - row [ref=f27e739]:
+                    - cell [ref=f27e740]:
+                      - code [ref=f27e741]: eta
+                    - cell [ref=f27e742]:
+                      - code [ref=f27e743]: "0.2"
+                    - cell "Moderate learning rate for stability" [ref=f27e744]
+                  - row [ref=f27e745]:
+                    - cell [ref=f27e746]:
+                      - code [ref=f27e747]: eval_metric
+                    - cell [ref=f27e748]:
+                      - code [ref=f27e749]: auc
+                    - cell "Focus on ranking quality (ROC-AUC)" [ref=f27e750]
+              - paragraph [ref=f27e751]:
+                - strong [ref=f27e752]: Expected Metrics
+                - text: ":"
+              - list [ref=f27e753]:
+                - listitem [ref=f27e754]: "AUC: 0.92+"
+                - listitem [ref=f27e755]: "Precision: 0.88+"
+                - listitem [ref=f27e756]: "Recall: 0.85+"
+              - separator [ref=f27e757]
+              - generic [ref=f27e758]:
+                - heading "🔐 Security Best Practices" [level=2] [ref=f27e759]
+                - 'link "Permalink: 🔐 Security Best Practices" [ref=f27e760] [cursor=pointer]':
+                  - /url: "#-security-best-practices"
+              - generic [ref=f27e763]:
+                - heading "Implemented" [level=3] [ref=f27e764]
+                - 'link "Permalink: Implemented" [ref=f27e765] [cursor=pointer]':
+                  - /url: "#implemented"
+              - paragraph [ref=f27e768]:
+                - text: ✅
+                - strong [ref=f27e769]: Environment Variables
+                - text: ": AWS Account ID and Region stored in"
+                - code [ref=f27e770]: .env
+                - text: (git-ignored)
+              - paragraph [ref=f27e771]:
+                - text: ✅
+                - strong [ref=f27e772]: IAM Roles
+                - text: ": Least-privilege role for SageMaker operations"
+              - paragraph [ref=f27e773]:
+                - text: ✅
+                - strong [ref=f27e774]: Endpoint Access
+                - text: ": VPC security groups restrict access"
+              - paragraph [ref=f27e775]:
+                - text: ✅
+                - strong [ref=f27e776]: Audit Trail
+                - text: ": Model registry tracks all versions and approvals"
+              - generic [ref=f27e777]:
+                - heading "Recommendations" [level=3] [ref=f27e778]
+                - 'link "Permalink: Recommendations" [ref=f27e779] [cursor=pointer]':
+                  - /url: "#recommendations"
+              - list [ref=f27e782]:
+                - listitem [ref=f27e783]:
+                  - text: 🔒
+                  - strong [ref=f27e784]: Enable S3 encryption
+                  - text: at rest (SSE-S3 or KMS)
+                - listitem [ref=f27e785]:
+                  - text: 🔒
+                  - strong [ref=f27e786]: Use VPC endpoints
+                  - text: for private S3/SageMaker communication
+                - listitem [ref=f27e787]:
+                  - text: 🔒
+                  - strong [ref=f27e788]: Enable CloudTrail
+                  - text: for API audit logs
+                - listitem [ref=f27e789]:
+                  - text: 🔒
+                  - strong [ref=f27e790]: Rotate credentials
+                  - text: regularly
+                - listitem [ref=f27e791]:
+                  - text: 🔒
+                  - strong [ref=f27e792]: Monitor endpoint
+                  - text: for unusual prediction patterns
+              - separator [ref=f27e793]
+              - generic [ref=f27e794]:
+                - heading "💰 Cost Optimization" [level=2] [ref=f27e795]
+                - 'link "Permalink: 💰 Cost Optimization" [ref=f27e796] [cursor=pointer]':
+                  - /url: "#-cost-optimization"
+              - generic [ref=f27e799]:
+                - heading "Estimated Monthly Costs" [level=3] [ref=f27e800]
+                - 'link "Permalink: Estimated Monthly Costs" [ref=f27e801] [cursor=pointer]':
+                  - /url: "#estimated-monthly-costs"
+              - table [ref=f27e805]:
+                - rowgroup [ref=f27e806]:
+                  - row [ref=f27e807]:
+                    - columnheader "Resource" [ref=f27e808]
+                    - columnheader "Instance" [ref=f27e809]
+                    - columnheader "Duration" [ref=f27e810]
+                    - columnheader "Cost" [ref=f27e811]
+                - rowgroup [ref=f27e812]:
+                  - row [ref=f27e813]:
+                    - cell "Processing Job" [ref=f27e814]
+                    - cell "ml.t3.medium (1)" [ref=f27e815]
+                    - cell "~5 min" [ref=f27e816]
+                    - cell "~$0.05" [ref=f27e817]
+                  - row [ref=f27e818]:
+                    - cell "Training Job" [ref=f27e819]
+                    - cell "ml.m5.xlarge (1)" [ref=f27e820]
+                    - cell "~15 min" [ref=f27e821]
+                    - cell "~$0.50" [ref=f27e822]
+                  - row [ref=f27e823]:
+                    - cell "Endpoint" [ref=f27e824]
+                    - cell "ml.m5.large (1)" [ref=f27e825]
+                    - cell "24/7" [ref=f27e826]
+                    - cell "~$50" [ref=f27e827]
+                  - row [ref=f27e828]:
+                    - cell [ref=f27e829]:
+                      - strong [ref=f27e830]: Total
+                    - cell "-" [ref=f27e831]
+                    - cell "-" [ref=f27e832]
+                    - cell [ref=f27e833]:
+                      - strong [ref=f27e834]: ~$50/month
+              - generic [ref=f27e835]:
+                - heading "Cost Reduction Tips" [level=3] [ref=f27e836]
+                - 'link "Permalink: Cost Reduction Tips" [ref=f27e837] [cursor=pointer]':
+                  - /url: "#cost-reduction-tips"
+              - list [ref=f27e840]:
+                - listitem [ref=f27e841]:
+                  - text: Use
+                  - strong [ref=f27e842]: Spot Instances
+                  - text: for training (up to 70% savings)
+                - listitem [ref=f27e843]:
+                  - strong [ref=f27e844]: Scale endpoint down
+                  - text: during low-traffic periods
+                - listitem [ref=f27e845]:
+                  - strong [ref=f27e846]: Batch inference
+                  - text: if real-time requirements allow
+                - listitem [ref=f27e847]:
+                  - strong [ref=f27e848]: Auto-scaling
+                  - text: based on CloudWatch metrics
+              - separator [ref=f27e849]
+              - generic [ref=f27e850]:
+                - heading "🔍 Monitoring & Troubleshooting" [level=2] [ref=f27e851]
+                - 'link "Permalink: 🔍 Monitoring & Troubleshooting" [ref=f27e852] [cursor=pointer]':
+                  - /url: "#-monitoring--troubleshooting"
+              - generic [ref=f27e855]:
+                - heading "CloudWatch Metrics" [level=3] [ref=f27e856]
+                - 'link "Permalink: CloudWatch Metrics" [ref=f27e857] [cursor=pointer]':
+                  - /url: "#cloudwatch-metrics"
+              - paragraph [ref=f27e860]: "Monitor these in CloudWatch dashboard:"
+              - generic [ref=f27e861]:
+                - code [ref=f27e863]: "/aws/sagemaker/Endpoints/threat-detection-endpoint ├── ModelLatency # Prediction latency (ms) ├── ModelInvocations # Inference count ├── ModelInvocation4XXErrors └── ModelInvocation5XXErrors"
+                - button "Copy code to clipboard" [ref=f27e865] [cursor=pointer]
+              - generic [ref=f27e869]:
+                - heading "Common Issues" [level=3] [ref=f27e870]
+                - 'link "Permalink: Common Issues" [ref=f27e871] [cursor=pointer]':
+                  - /url: "#common-issues"
+              - paragraph [ref=f27e874]:
+                - strong [ref=f27e875]: Issue
+                - text: ":"
+                - code [ref=f27e876]: ModelPackageArn
+                - text: not found
+              - list [ref=f27e877]:
+                - listitem [ref=f27e878]:
+                  - strong [ref=f27e879]: Solution
+                  - text: ": Ensure pipeline executed successfully and model was approved"
+              - paragraph [ref=f27e880]:
+                - strong [ref=f27e881]: Issue
+                - text: ": Endpoint in-service but predictions timeout"
+              - list [ref=f27e882]:
+                - listitem [ref=f27e883]:
+                  - strong [ref=f27e884]: Solution
+                  - text: ": Check S3 bucket accessibility and VPC configuration"
+              - paragraph [ref=f27e885]:
+                - strong [ref=f27e886]: Issue
+                - text: ": Poor model performance"
+              - list [ref=f27e887]:
+                - listitem [ref=f27e888]:
+                  - strong [ref=f27e889]: Solution
+                  - text: ": Review training logs, increase"
+                  - code [ref=f27e890]: max_depth
+                  - text: ", collect more threat labels"
+              - separator [ref=f27e891]
+              - generic [ref=f27e892]:
+                - heading "🤝 Contributing" [level=2] [ref=f27e893]
+                - 'link "Permalink: 🤝 Contributing" [ref=f27e894] [cursor=pointer]':
+                  - /url: "#-contributing"
+              - paragraph [ref=f27e897]: "Contributions are welcome! Please:"
+              - list [ref=f27e898]:
+                - listitem [ref=f27e899]: Fork the repository
+                - listitem [ref=f27e900]:
+                  - text: Create a feature branch (
+                  - code [ref=f27e901]: git checkout -b feature/improvement
+                  - text: )
+                - listitem [ref=f27e902]:
+                  - text: Commit changes (
+                  - code [ref=f27e903]: git commit -am 'Add improvement'
+                  - text: )
+                - listitem [ref=f27e904]:
+                  - text: Push to branch (
+                  - code [ref=f27e905]: git push origin feature/improvement
+                  - text: )
+                - listitem [ref=f27e906]: Open a Pull Request
+              - separator [ref=f27e907]
+              - generic [ref=f27e908]:
+                - heading "📚 References" [level=2] [ref=f27e909]
+                - 'link "Permalink: 📚 References" [ref=f27e910] [cursor=pointer]':
+                  - /url: "#-references"
+              - list [ref=f27e913]:
+                - listitem [ref=f27e914]:
+                  - link "AWS SageMaker Pipelines Documentation" [ref=f27e915] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html
+                - listitem [ref=f27e916]:
+                  - link "XGBoost Algorithm in SageMaker" [ref=f27e917] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost.html
+                - listitem [ref=f27e918]:
+                  - link "SageMaker Model Registry" [ref=f27e919] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry.html
+                - listitem [ref=f27e920]:
+                  - link "NIST Cybersecurity Framework" [ref=f27e921] [cursor=pointer]:
+                    - /url: https://www.nist.gov/cyberframework
+              - separator [ref=f27e922]
+              - generic [ref=f27e923]:
+                - heading "📞 Contact & Support" [level=2] [ref=f27e924]
+                - 'link "Permalink: 📞 Contact & Support" [ref=f27e925] [cursor=pointer]':
+                  - /url: "#-contact--support"
+              - paragraph [ref=f27e928]:
+                - strong [ref=f27e929]: Author
+                - text: ": Nishchal Panta"
+              - paragraph [ref=f27e930]:
+                - strong [ref=f27e931]: Repository
+                - text: ":"
+                - link "GitHub - AWS-Cybersecurity_threat_detection" [ref=f27e932] [cursor=pointer]:
+                  - /url: https://github.com/Nishchal-Panta/AWS-Cybersecurity_threat_detection
+              - paragraph [ref=f27e933]: For issues, questions, or suggestions, please open a GitHub Issue or contact the maintainer.
+              - separator [ref=f27e934]
+              - generic [ref=f27e935]:
+                - heading "📄 License" [level=2] [ref=f27e936]
+                - 'link "Permalink: 📄 License" [ref=f27e937] [cursor=pointer]':
+                  - /url: "#-license"
+              - paragraph [ref=f27e940]: This project is licensed under the MIT License - see LICENSE file for details.
+              - separator [ref=f27e941]
+              - generic [ref=f27e942]:
+                - heading "🙏 Acknowledgments" [level=2] [ref=f27e943]
+                - 'link "Permalink: 🙏 Acknowledgments" [ref=f27e944] [cursor=pointer]':
+                  - /url: "#-acknowledgments"
+              - list [ref=f27e947]:
+                - listitem [ref=f27e948]: AWS SageMaker team for excellent ML infrastructure
+                - listitem [ref=f27e949]: XGBoost community for the powerful gradient boosting library
+                - listitem [ref=f27e950]: Cybersecurity research community for threat detection methodologies
+              - separator [ref=f27e951]
+              - paragraph [ref=f27e952]:
+                - strong [ref=f27e953]: Last Updated
+                - text: ": May 2026"
+                - strong [ref=f27e954]: Status
+                - text: ": Production Ready ✅"
+      - generic [ref=f27e957]:
+        - generic [ref=f27e958]:
+          - heading "About" [level=2] [ref=f27e959]
+          - generic [ref=f27e960]: No description, website, or topics provided.
+          - heading "Resources" [level=3] [ref=f27e961]
+          - link "Readme" [ref=f27e963] [cursor=pointer]:
+            - /url: "#readme-ov-file"
+          - generic [ref=f27e966]:
+            - link "Activity" [ref=f27e969] [cursor=pointer]:
+              - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/activity
+            - generic [ref=f27e972]:
+              - heading "Stars" [level=3] [ref=f27e973]
+              - generic [ref=f27e975]:
+                - strong [ref=f27e978]: "0"
+                - text: stars
+              - heading "Watchers" [level=3] [ref=f27e979]
+              - generic [ref=f27e981]:
+                - strong [ref=f27e984]: "0"
+                - text: watching
+              - heading "Forks" [level=3] [ref=f27e985]
+              - link [ref=f27e987] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection/forks
+                - strong [ref=f27e991]: "0"
+                - text: forks
+          - link "Report repository" [ref=f27e993] [cursor=pointer]:
+            - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FAWS-Cybersecurity_threat_detection&report=Nishchal-Panta+%28user%29
+        - heading "Releases" [level=2] [ref=f27e995]
+        - heading "Packages" [level=2] [ref=f27e999]
+        - heading "Contributors" [level=2] [ref=f27e1002]
+        - heading "Languages" [level=2] [ref=f27e1005]
+  - contentinfo [ref=f27e1008]:
+    - heading "Footer" [level=2] [ref=f27e1009]
+    - generic [ref=f27e1010]:
+      - generic [ref=f27e1011]:
+        - link "GitHub Homepage" [ref=f27e1012] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=f27e1015]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=f27e1016]:
+        - heading "Footer navigation" [level=3] [ref=f27e1017]
+        - list "Footer navigation" [ref=f27e1018]:
+          - listitem [ref=f27e1019]:
+            - link "Terms" [ref=f27e1020] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=f27e1021]:
+            - link "Privacy" [ref=f27e1022] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=f27e1023]:
+            - link "Security" [ref=f27e1024] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=f27e1025]:
+            - link "Status" [ref=f27e1026] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=f27e1027]:
+            - link "Community" [ref=f27e1028] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=f27e1029]:
+            - link "Docs" [ref=f27e1030] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=f27e1031]:
+            - link "Contact" [ref=f27e1032] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=f27e1033]:
+            - button "Manage cookies" [ref=f27e1035] [cursor=pointer]
+          - listitem [ref=f27e1036]:
+            - button "Do not share my personal information" [ref=f27e1038] [cursor=pointer]

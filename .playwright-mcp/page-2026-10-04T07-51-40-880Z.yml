@@ -1,0 +1,835 @@
+- generic [ref=f4e2]:
+  - generic [ref=f4e3]:
+    - link "Skip to content" [ref=f4e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=f4e9]:
+      - heading "Navigation Menu" [level=2] [ref=f4e10]
+      - generic [ref=f4e11]:
+        - link "Homepage" [ref=f4e13] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f4e16]:
+          - navigation "Global" [ref=f4e17]:
+            - list [ref=f4e18]:
+              - listitem [ref=f4e19]:
+                - button "Platform" [ref=f4e21] [cursor=pointer]
+              - listitem [ref=f4e24]:
+                - button "Solutions" [ref=f4e26] [cursor=pointer]
+              - listitem [ref=f4e29]:
+                - button "Resources" [ref=f4e31] [cursor=pointer]
+              - listitem [ref=f4e34]:
+                - button "Open Source" [ref=f4e36] [cursor=pointer]
+              - listitem [ref=f4e39]:
+                - button "Enterprise" [ref=f4e41] [cursor=pointer]
+              - listitem [ref=f4e44]:
+                - link "Pricing" [ref=f4e45] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=f4e46]:
+            - button "Search or jump to, type / to search" [ref=f4e48] [cursor=pointer]:
+              - generic [ref=f4e51]:
+                - generic [ref=f4e52]: Search
+                - generic [aria-hidden] [ref=f4e53]: /
+            - link "Sign in" [ref=f4e55] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FLanguage_translation
+            - link "Sign up" [ref=f4e58] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Nishchal-Panta%2FLanguage_translation
+            - button "Appearance settings" [ref=f4e61] [cursor=pointer]
+  - main [ref=f4e68]:
+    - generic [ref=f4e69]:
+      - generic [ref=f4e70]:
+        - generic [ref=f4e72]:
+          - link "Nishchal-Panta" [ref=f4e76] [cursor=pointer]:
+            - /url: /Nishchal-Panta
+          - generic [ref=f4e77]: /
+          - strong [ref=f4e78]:
+            - link "Language_translation" [ref=f4e79] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation
+          - generic [ref=f4e80]: Public
+        - generic [ref=f4e81]:
+          - list:
+            - listitem [ref=f4e82]:
+              - link "You must be signed in to change notification settings" [ref=f4e83] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FLanguage_translation
+                - text: Notifications
+            - listitem [ref=f4e86]:
+              - link "Fork 0" [ref=f4e87] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FLanguage_translation
+                - text: Fork
+                - generic "0" [ref=f4e90]
+            - listitem [ref=f4e91]:
+              - link "You must be signed in to star a repository" [ref=f4e93] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FLanguage_translation
+                - text: Star
+                - generic "0 users starred this repository" [ref=f4e96]: "0"
+      - navigation "Repository" [ref=f4e97]:
+        - list [ref=f4e98]:
+          - listitem [ref=f4e99]:
+            - link "Code" [ref=f4e100] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation
+          - listitem [ref=f4e104]:
+            - link "Issues" [ref=f4e105] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation/issues
+          - listitem [ref=f4e110]:
+            - link "Pull requests" [ref=f4e111] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation/pulls
+          - listitem [ref=f4e115]:
+            - link "Actions" [ref=f4e116] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation/actions
+          - listitem [ref=f4e120]:
+            - link "Projects" [ref=f4e121] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation/projects
+          - listitem [ref=f4e125]:
+            - link "Security and quality" [ref=f4e126] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation/security
+          - listitem [ref=f4e130]:
+            - link "Insights" [ref=f4e131] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation/pulse
+    - generic [ref=f4e148]:
+      - generic [ref=f4e151]:
+        - generic [ref=f4e152]:
+          - generic [ref=f4e153]:
+            - button "main branch" [ref=f4e155] [cursor=pointer]:
+              - generic [ref=f4e156]: main
+            - generic [ref=f4e160]:
+              - link "Branches" [ref=f4e161] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Language_translation/branches
+              - link "Tags" [ref=f4e164] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Language_translation/tags
+          - generic [ref=f4e167]:
+            - combobox "Go to file" [ref=f4e175]
+            - button "Code" [ref=f4e176] [cursor=pointer]
+        - generic [ref=f4e179]:
+          - generic [ref=f4e180]:
+            - generic [ref=f4e182]:
+              - heading "Latest commit" [level=2] [ref=f4e183]
+              - generic [ref=f4e186]:
+                - heading "History" [level=2] [ref=f4e187]
+                - link "1 Commit" [ref=f4e188] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Language_translation/commits/main/
+            - heading "Folders and files" [level=2] [ref=f4e191]
+            - table "Folders and files" [ref=f4e192]:
+              - rowgroup:
+                - row "Name Last commit message Last commit date":
+                  - columnheader "Name"
+                  - columnheader "Last commit message"
+                  - columnheader "Last commit date"
+              - rowgroup [ref=f4e193]:
+                - row ".gitignore, (File)" [ref=f4e194]:
+                  - cell [ref=f4e195]:
+                    - link ".gitignore, (File)" [ref=f4e202] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/.gitignore
+                      - text: .gitignore
+                  - cell [ref=f4e203]
+                  - cell [ref=f4e205]
+                - row "Architecute_Diagram.png, (File)" [ref=f4e208]:
+                  - cell [ref=f4e209]:
+                    - link "Architecute_Diagram.png, (File)" [ref=f4e216] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/Architecute_Diagram.png
+                      - text: Architecute_Diagram.png
+                  - cell [ref=f4e217]
+                  - cell [ref=f4e219]
+                - row "Doc1.pdf, (File)" [ref=f4e222]:
+                  - cell [ref=f4e223]:
+                    - link "Doc1.pdf, (File)" [ref=f4e230] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/Doc1.pdf
+                      - text: Doc1.pdf
+                  - cell [ref=f4e231]
+                  - cell [ref=f4e233]
+                - row "README.md, (File)" [ref=f4e236]:
+                  - cell [ref=f4e237]:
+                    - link "README.md, (File)" [ref=f4e244] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/README.md
+                      - text: README.md
+                  - cell [ref=f4e245]
+                  - cell [ref=f4e247]
+                - row "S3_CORS_config.json, (File)" [ref=f4e250]:
+                  - cell [ref=f4e251]:
+                    - link "S3_CORS_config.json, (File)" [ref=f4e258] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/S3_CORS_config.json
+                      - text: S3_CORS_config.json
+                  - cell [ref=f4e259]
+                  - cell [ref=f4e261]
+                - row "Website-S3bucket_policy, (File)" [ref=f4e264]:
+                  - cell [ref=f4e265]:
+                    - link "Website-S3bucket_policy, (File)" [ref=f4e272] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/Website-S3bucket_policy
+                      - text: Website-S3bucket_policy
+                  - cell [ref=f4e273]
+                  - cell [ref=f4e275]
+                - row "index.html, (File)" [ref=f4e278]:
+                  - cell [ref=f4e279]:
+                    - link "index.html, (File)" [ref=f4e286] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/index.html
+                      - text: index.html
+                  - cell [ref=f4e287]
+                  - cell [ref=f4e289]
+                - row "inlineS3policy.json, (File)" [ref=f4e292]:
+                  - cell [ref=f4e293]:
+                    - link "inlineS3policy.json, (File)" [ref=f4e300] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/inlineS3policy.json
+                      - text: inlineS3policy.json
+                  - cell [ref=f4e301]
+                  - cell [ref=f4e303]
+                - row "lambda_function.py, (File)" [ref=f4e306]:
+                  - cell [ref=f4e307]:
+                    - link "lambda_function.py, (File)" [ref=f4e314] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Language_translation/blob/main/lambda_function.py
+                      - text: lambda_function.py
+                  - cell [ref=f4e315]
+                  - cell [ref=f4e317]
+          - generic [ref=f4e321]:
+            - generic [ref=f4e322]:
+              - heading "Repository files navigation" [level=2] [ref=f4e323]
+              - navigation "Repository files" [ref=f4e324]:
+                - list [ref=f4e325]:
+                  - listitem [ref=f4e326]:
+                    - link "README" [ref=f4e327] [cursor=pointer]:
+                      - /url: "#"
+              - button "Outline" [ref=f4e332] [cursor=pointer]
+            - article [ref=f4e336]:
+              - generic [ref=f4e337]:
+                - 'heading "Translate & Speak: Language Translator with AWS Integration" [level=1] [ref=f4e338]'
+                - 'link "Permalink: Translate & Speak: Language Translator with AWS Integration" [ref=f4e339] [cursor=pointer]':
+                  - /url: "#translate--speak-language-translator-with-aws-integration"
+              - paragraph [ref=f4e342]: A modern, serverless web application that translates text across 13 languages and generates natural-sounding speech using AWS Translate and Amazon Polly. Built with a beautiful UI featuring theme toggle, smooth animations, and complete cloud-based infrastructure.
+              - generic [ref=f4e343]:
+                - heading "🚀 Features" [level=2] [ref=f4e344]
+                - 'link "Permalink: 🚀 Features" [ref=f4e345] [cursor=pointer]':
+                  - /url: "#-features"
+              - generic [ref=f4e348]:
+                - heading "Core Functionality" [level=3] [ref=f4e349]
+                - 'link "Permalink: Core Functionality" [ref=f4e350] [cursor=pointer]':
+                  - /url: "#core-functionality"
+              - list [ref=f4e353]:
+                - listitem [ref=f4e354]:
+                  - strong [ref=f4e355]: 🌐 Multi-Language Translation
+                  - text: ": Support for 13 languages (English, French, German, Spanish, Italian, Portuguese, Japanese, Korean, Chinese, Arabic, Hindi, Dutch, and Auto-detect)"
+                - listitem [ref=f4e356]:
+                  - strong [ref=f4e357]: 🎙️ Text-to-Speech
+                  - text: ": Generate natural-sounding audio using Amazon Polly with multiple voice options"
+                - listitem [ref=f4e358]:
+                  - strong [ref=f4e359]: 🔄 Language Swap
+                  - text: ": Quick swap between source and target languages"
+                - listitem [ref=f4e360]:
+                  - strong [ref=f4e361]: 📥 Audio Download
+                  - text: ": Download translated speech as MP3 files"
+                - listitem [ref=f4e362]:
+                  - strong [ref=f4e363]: 📋 Copy Translation
+                  - text: ": One-click copy of translated text to clipboard"
+              - generic [ref=f4e364]:
+                - heading "UI/UX Enhancements" [level=3] [ref=f4e365]
+                - 'link "Permalink: UI/UX Enhancements" [ref=f4e366] [cursor=pointer]':
+                  - /url: "#uiux-enhancements"
+              - list [ref=f4e369]:
+                - listitem [ref=f4e370]:
+                  - strong [ref=f4e371]: 🎨 Dark Mode Toggle
+                  - text: ": Beautiful light and dark themes with complementary colors"
+                - listitem [ref=f4e372]:
+                  - strong [ref=f4e373]: ✨ Smooth Animations
+                  - text: ":"
+                  - list [ref=f4e374]:
+                    - listitem [ref=f4e375]: Fade-up entrance animations for cards
+                    - listitem [ref=f4e376]: Bounce effect on the main action button
+                    - listitem [ref=f4e377]: Glow animations on hover
+                    - listitem [ref=f4e378]: Wave animation for audio visualization
+                    - listitem [ref=f4e379]: Smooth 0.35s theme transitions
+                - listitem [ref=f4e380]:
+                  - strong [ref=f4e381]: 📱 Responsive Design
+                  - text: ": Works seamlessly on desktop and mobile devices"
+                - listitem [ref=f4e382]:
+                  - strong [ref=f4e383]: ♿ Accessibility
+                  - text: ": Proper ARIA labels and semantic HTML"
+              - generic [ref=f4e384]:
+                - heading "Security & Performance" [level=3] [ref=f4e385]
+                - 'link "Permalink: Security & Performance" [ref=f4e386] [cursor=pointer]':
+                  - /url: "#security--performance"
+              - list [ref=f4e389]:
+                - listitem [ref=f4e390]:
+                  - strong [ref=f4e391]: 🔐 Sensitive Data Protection
+                  - text: ": API endpoints stored in separate"
+                  - code [ref=f4e392]: config.js
+                  - text: (gitignored)
+                - listitem [ref=f4e393]:
+                  - strong [ref=f4e394]: ⚡ Serverless Architecture
+                  - text: ": No server maintenance, auto-scaling capabilities"
+                - listitem [ref=f4e395]:
+                  - strong [ref=f4e396]: 💾 CDN Distribution
+                  - text: ": CloudFront distribution for fast global content delivery"
+                - listitem [ref=f4e397]:
+                  - strong [ref=f4e398]: 🛡️ Least Privilege IAM
+                  - text: ": Granular AWS permissions for Lambda and S3 access"
+              - generic [ref=f4e399]:
+                - heading "🏗️ Architecture" [level=2] [ref=f4e400]
+                - 'link "Permalink: 🏗️ Architecture" [ref=f4e401] [cursor=pointer]':
+                  - /url: "#️-architecture"
+              - generic [ref=f4e404]:
+                - code [ref=f4e406]: "User Browser ↓ (HTTPS POST) CloudFront CDN ↓ API Gateway ↓ Lambda Function (textToSpeechPolly) ├→ Amazon Translate (translate text) ├→ Amazon Comprehend (optional: language detection) ├→ Amazon Polly (synthesize speech) └→ S3 Bucket (store audio files)"
+                - button "Copy code to clipboard" [ref=f4e408] [cursor=pointer]
+              - generic [ref=f4e412]:
+                - heading "Data Flow" [level=3] [ref=f4e413]
+                - 'link "Permalink: Data Flow" [ref=f4e414] [cursor=pointer]':
+                  - /url: "#data-flow"
+              - list [ref=f4e417]:
+                - listitem [ref=f4e418]:
+                  - strong [ref=f4e419]: Frontend
+                  - text: sends text, source language, target language, and voice preferences
+                - listitem [ref=f4e420]:
+                  - strong [ref=f4e421]: API Gateway
+                  - text: routes the POST request to Lambda
+                - listitem [ref=f4e422]:
+                  - strong [ref=f4e423]: Lambda Function
+                  - text: "orchestrates the translation and speech synthesis:"
+                  - list [ref=f4e424]:
+                    - listitem [ref=f4e425]: Translates text using AWS Translate
+                    - listitem [ref=f4e426]: Synthesizes speech using Amazon Polly with specified voice/engine
+                    - listitem [ref=f4e427]: Stores audio file in S3 bucket
+                    - listitem [ref=f4e428]: Generates presigned URL for audio download
+                - listitem [ref=f4e429]:
+                  - strong [ref=f4e430]: Frontend
+                  - text: displays results and provides audio playback and download
+              - generic [ref=f4e431]:
+                - heading "🛠️ Technologies" [level=2] [ref=f4e432]
+                - 'link "Permalink: 🛠️ Technologies" [ref=f4e433] [cursor=pointer]':
+                  - /url: "#️-technologies"
+              - generic [ref=f4e436]:
+                - heading "Frontend" [level=3] [ref=f4e437]
+                - 'link "Permalink: Frontend" [ref=f4e438] [cursor=pointer]':
+                  - /url: "#frontend"
+              - list [ref=f4e441]:
+                - listitem [ref=f4e442]:
+                  - strong [ref=f4e443]: HTML5
+                  - text: "- Semantic markup"
+                - listitem [ref=f4e444]:
+                  - strong [ref=f4e445]: CSS3
+                  - text: "- Modern styling with CSS variables and animations"
+                - listitem [ref=f4e446]:
+                  - strong [ref=f4e447]: Vanilla JavaScript
+                  - text: "- No frameworks, lightweight and fast"
+                - listitem [ref=f4e448]:
+                  - strong [ref=f4e449]: Emoji Icons
+                  - text: "- Lightweight alternative to icon fonts"
+              - generic [ref=f4e450]:
+                - heading "Backend" [level=3] [ref=f4e451]
+                - 'link "Permalink: Backend" [ref=f4e452] [cursor=pointer]':
+                  - /url: "#backend"
+              - list [ref=f4e455]:
+                - listitem [ref=f4e456]:
+                  - strong [ref=f4e457]: AWS Lambda
+                  - text: "- Serverless compute"
+                - listitem [ref=f4e458]:
+                  - strong [ref=f4e459]: Python 3.12
+                  - text: "- Lambda runtime"
+                - listitem [ref=f4e460]:
+                  - strong [ref=f4e461]: boto3
+                  - text: "- AWS SDK for Python"
+                - listitem [ref=f4e462]:
+                  - strong [ref=f4e463]: AWS Translate
+                  - text: "- Text translation service"
+                - listitem [ref=f4e464]:
+                  - strong [ref=f4e465]: Amazon Polly
+                  - text: "- Text-to-speech service"
+                - listitem [ref=f4e466]:
+                  - strong [ref=f4e467]: Amazon S3
+                  - text: "- Audio file storage"
+              - generic [ref=f4e468]:
+                - heading "Infrastructure" [level=3] [ref=f4e469]
+                - 'link "Permalink: Infrastructure" [ref=f4e470] [cursor=pointer]':
+                  - /url: "#infrastructure"
+              - list [ref=f4e473]:
+                - listitem [ref=f4e474]:
+                  - strong [ref=f4e475]: AWS API Gateway
+                  - text: "- REST API endpoint"
+                - listitem [ref=f4e476]:
+                  - strong [ref=f4e477]: CloudFront
+                  - text: "- CDN distribution"
+                - listitem [ref=f4e478]:
+                  - strong [ref=f4e479]: IAM
+                  - text: "- Identity and access management with least privilege principle"
+                - listitem [ref=f4e480]:
+                  - strong [ref=f4e481]: S3
+                  - text: "- Static website hosting and audio storage"
+              - generic [ref=f4e482]:
+                - heading "📁 File Structure" [level=2] [ref=f4e483]
+                - 'link "Permalink: 📁 File Structure" [ref=f4e484] [cursor=pointer]':
+                  - /url: "#-file-structure"
+              - generic [ref=f4e487]:
+                - code [ref=f4e489]: "Cloudmandap_projects/ ├── index.html # Main web application ├── config.js # API configuration (add to .gitignore) ├── .gitignore # Git ignore rules ├── lambda_function.py # AWS Lambda handler ├── inlineS3policy.json # S3 bucket policy for audio storage ├── S3_CORS_config.json # CORS configuration for S3 bucket ├── Website-S3bucket_policy # Website hosting bucket policy ├── Architecute_Diagram.png # System architecture visualization └── README.md # This file"
+                - button "Copy code to clipboard" [ref=f4e491] [cursor=pointer]
+              - generic [ref=f4e495]:
+                - heading "🔧 Setup Instructions" [level=2] [ref=f4e496]
+                - 'link "Permalink: 🔧 Setup Instructions" [ref=f4e497] [cursor=pointer]':
+                  - /url: "#-setup-instructions"
+              - generic [ref=f4e500]:
+                - heading "Prerequisites" [level=3] [ref=f4e501]
+                - 'link "Permalink: Prerequisites" [ref=f4e502] [cursor=pointer]':
+                  - /url: "#prerequisites"
+              - list [ref=f4e505]:
+                - listitem [ref=f4e506]: AWS Account with active subscription (not free tier, as AWS Translate requires paid access)
+                - listitem [ref=f4e507]: Basic knowledge of AWS services
+                - listitem [ref=f4e508]: Node.js or Python for local testing (optional)
+              - generic [ref=f4e509]:
+                - heading "Frontend Setup" [level=3] [ref=f4e510]
+                - 'link "Permalink: Frontend Setup" [ref=f4e511] [cursor=pointer]':
+                  - /url: "#frontend-setup"
+              - list [ref=f4e514]:
+                - listitem [ref=f4e515]:
+                  - paragraph [ref=f4e516]:
+                    - strong [ref=f4e517]: Update API Endpoint
+                    - text: in
+                    - code [ref=f4e518]: config.js
+                    - text: ":"
+                  - generic [ref=f4e519]:
+                    - generic [ref=f4e520]: "const CONFIG = { API_ENDPOINT: 'https://your-api-gateway-url/prod/synthesize', };"
+                    - button "Copy code to clipboard" [ref=f4e522] [cursor=pointer]
+                - listitem [ref=f4e526]:
+                  - paragraph [ref=f4e527]:
+                    - strong [ref=f4e528]: Deploy to S3
+                    - text: ":"
+                  - generic [ref=f4e529]:
+                    - generic [ref=f4e530]:
+                      - generic [ref=f4e531]: "# Create S3 bucket for website hosting"
+                      - text: aws s3 mb s3://polly-tts-frontend-text-to-speech-app
+                      - generic [ref=f4e532]: "# Upload files"
+                      - text: aws s3 cp index.html s3://polly-tts-frontend-text-to-speech-app/ aws s3 cp config.js s3://polly-tts-frontend-text-to-speech-app/
+                      - generic [ref=f4e533]: "# Enable website hosting"
+                      - text: aws s3 website s3://polly-tts-frontend-text-to-speech-app/ \ --index-document index.html
+                    - button "Copy code to clipboard" [ref=f4e535] [cursor=pointer]
+                - listitem [ref=f4e539]:
+                  - paragraph [ref=f4e540]:
+                    - strong [ref=f4e541]: Apply CORS Configuration
+                    - text: ":"
+                  - generic [ref=f4e542]:
+                    - generic [ref=f4e543]: aws s3api put-bucket-cors \ --bucket polly-tts-frontend-text-to-speech-app \ --cors-configuration file://S3_CORS_config.json
+                    - button "Copy code to clipboard" [ref=f4e545] [cursor=pointer]
+              - generic [ref=f4e549]:
+                - heading "Backend Setup" [level=3] [ref=f4e550]
+                - 'link "Permalink: Backend Setup" [ref=f4e551] [cursor=pointer]':
+                  - /url: "#backend-setup"
+              - list [ref=f4e554]:
+                - listitem [ref=f4e555]:
+                  - paragraph [ref=f4e556]:
+                    - strong [ref=f4e557]: Create IAM Role
+                    - text: (
+                    - code [ref=f4e558]: polly-lambda-role
+                    - text: "):"
+                  - list [ref=f4e559]:
+                    - listitem [ref=f4e560]: "Trusted entity: Lambda service"
+                    - listitem [ref=f4e561]:
+                      - text: "Permissions:"
+                      - list [ref=f4e562]:
+                        - listitem [ref=f4e563]:
+                          - code [ref=f4e564]: translate:TranslateText
+                        - listitem [ref=f4e565]:
+                          - code [ref=f4e566]: polly:SynthesizeSpeech
+                        - listitem [ref=f4e567]:
+                          - code [ref=f4e568]: s3:PutObject
+                        - listitem [ref=f4e569]:
+                          - code [ref=f4e570]: s3:GetObject
+                        - listitem [ref=f4e571]: CloudWatch Logs permissions
+                - listitem [ref=f4e572]:
+                  - paragraph [ref=f4e573]:
+                    - strong [ref=f4e574]: Create Lambda Function
+                    - text: ":"
+                  - list [ref=f4e575]:
+                    - listitem [ref=f4e576]: "Runtime: Python 3.12"
+                    - listitem [ref=f4e577]:
+                      - text: "Handler:"
+                      - code [ref=f4e578]: lambda_function.lambda_handler
+                    - listitem [ref=f4e579]: "Memory: 256 MB (minimum)"
+                    - listitem [ref=f4e580]: "Timeout: 30 seconds"
+                    - listitem [ref=f4e581]:
+                      - text: "Role:"
+                      - code [ref=f4e582]: polly-lambda-role
+                - listitem [ref=f4e583]:
+                  - paragraph [ref=f4e584]:
+                    - strong [ref=f4e585]: Set Environment Variables
+                    - text: "in Lambda:"
+                  - generic [ref=f4e586]:
+                    - code [ref=f4e588]: AWS_REGION_NAME = us-east-1 S3_BUCKET_NAME = polly-tts-audio-fromspeech URL_EXPIRY_SECONDS = 3600
+                    - button "Copy code to clipboard" [ref=f4e590] [cursor=pointer]
+                - listitem [ref=f4e594]:
+                  - paragraph [ref=f4e595]:
+                    - strong [ref=f4e596]: Upload Lambda Code
+                    - text: ":"
+                  - generic [ref=f4e597]:
+                    - generic [ref=f4e598]: zip lambda_function.zip lambda_function.py aws lambda update-function-code \ --function-name textToSpeechPolly \ --zip-file fileb://lambda_function.zip
+                    - button "Copy code to clipboard" [ref=f4e600] [cursor=pointer]
+                - listitem [ref=f4e604]:
+                  - paragraph [ref=f4e605]:
+                    - strong [ref=f4e606]: Create API Gateway
+                    - text: ":"
+                  - list [ref=f4e607]:
+                    - listitem [ref=f4e608]: REST API with POST method
+                    - listitem [ref=f4e609]: "Integration: Lambda function"
+                    - listitem [ref=f4e610]: Enable CORS
+                    - listitem [ref=f4e611]:
+                      - text: Deploy to
+                      - code [ref=f4e612]: prod
+                      - text: stage
+                - listitem [ref=f4e613]:
+                  - paragraph [ref=f4e614]:
+                    - strong [ref=f4e615]: Create S3 Bucket for Audio Storage
+                    - text: ":"
+                  - generic [ref=f4e616]:
+                    - generic [ref=f4e617]: aws s3 mb s3://polly-tts-audio-fromspeech aws s3api put-bucket-policy \ --bucket polly-tts-audio-fromspeech \ --policy file://inlineS3policy.json
+                    - button "Copy code to clipboard" [ref=f4e619] [cursor=pointer]
+                - listitem [ref=f4e623]:
+                  - paragraph [ref=f4e624]:
+                    - strong [ref=f4e625]: Enable CloudFront CDN
+                    - text: "(optional but recommended):"
+                  - list [ref=f4e626]:
+                    - listitem [ref=f4e627]: "Origin: API Gateway URL"
+                    - listitem [ref=f4e628]: Distribution domain name for API access
+                    - listitem [ref=f4e629]: "Cache policy: Conservative for API responses"
+              - generic [ref=f4e630]:
+                - heading "🔐 Security Considerations" [level=2] [ref=f4e631]
+                - 'link "Permalink: 🔐 Security Considerations" [ref=f4e632] [cursor=pointer]':
+                  - /url: "#-security-considerations"
+              - generic [ref=f4e635]:
+                - heading "API Key Protection" [level=3] [ref=f4e636]
+                - 'link "Permalink: API Key Protection" [ref=f4e637] [cursor=pointer]':
+                  - /url: "#api-key-protection"
+              - list [ref=f4e640]:
+                - listitem [ref=f4e641]:
+                  - strong [ref=f4e642]: Never expose API endpoints
+                  - text: in frontend code
+                - listitem [ref=f4e643]:
+                  - text: Store
+                  - code [ref=f4e644]: config.js
+                  - text: in
+                  - code [ref=f4e645]: .gitignore
+                  - text: to prevent accidental commits
+                - listitem [ref=f4e646]: Regenerate API keys if ever exposed
+                - listitem [ref=f4e647]: Use environment variables for sensitive data in Lambda
+              - generic [ref=f4e648]:
+                - heading "IAM Permissions" [level=3] [ref=f4e649]
+                - 'link "Permalink: IAM Permissions" [ref=f4e650] [cursor=pointer]':
+                  - /url: "#iam-permissions"
+              - list [ref=f4e653]:
+                - listitem [ref=f4e654]:
+                  - text: Lambda role uses
+                  - strong [ref=f4e655]: least privilege principle
+                  - text: ":"
+                  - list [ref=f4e656]:
+                    - listitem [ref=f4e657]: Only translate, polly, and S3 PUT/GET permissions
+                    - listitem [ref=f4e658]: Restricted to specific S3 bucket
+                    - listitem [ref=f4e659]: No admin or overly broad permissions
+              - generic [ref=f4e660]:
+                - heading "CORS Configuration" [level=3] [ref=f4e661]
+                - 'link "Permalink: CORS Configuration" [ref=f4e662] [cursor=pointer]':
+                  - /url: "#cors-configuration"
+              - list [ref=f4e665]:
+                - listitem [ref=f4e666]: Bucket CORS restricted to specific frontend domain
+                - listitem [ref=f4e667]: Prevents unauthorized cross-origin requests
+                - listitem [ref=f4e668]: Regularly audit and update allowed origins
+              - generic [ref=f4e669]:
+                - heading "S3 Bucket Security" [level=3] [ref=f4e670]
+                - 'link "Permalink: S3 Bucket Security" [ref=f4e671] [cursor=pointer]':
+                  - /url: "#s3-bucket-security"
+              - list [ref=f4e674]:
+                - listitem [ref=f4e675]: Enable versioning for audio files
+                - listitem [ref=f4e676]: Set object lifecycle policies (delete old files)
+                - listitem [ref=f4e677]: Enable default encryption
+                - listitem [ref=f4e678]: Block public access except for specific bucket policies
+              - generic [ref=f4e679]:
+                - heading "📊 Pricing Estimation" [level=2] [ref=f4e680]
+                - 'link "Permalink: 📊 Pricing Estimation" [ref=f4e681] [cursor=pointer]':
+                  - /url: "#-pricing-estimation"
+              - generic [ref=f4e684]:
+                - heading "AWS Services Used" [level=3] [ref=f4e685]
+                - 'link "Permalink: AWS Services Used" [ref=f4e686] [cursor=pointer]':
+                  - /url: "#aws-services-used"
+              - list [ref=f4e689]:
+                - listitem [ref=f4e690]:
+                  - strong [ref=f4e691]: AWS Translate
+                  - text: ": $0.15 per 100,000 characters"
+                - listitem [ref=f4e692]:
+                  - strong [ref=f4e693]: Amazon Polly
+                  - text: ": $4.00 per 1 million characters (neural engine: $24.00)"
+                - listitem [ref=f4e694]:
+                  - strong [ref=f4e695]: S3
+                  - text: ": $0.023 per GB (storage) + $0.0004 per 10,000 PUT requests"
+                - listitem [ref=f4e696]:
+                  - strong [ref=f4e697]: Lambda
+                  - text: ": $0.20 per 1M requests + compute duration"
+                - listitem [ref=f4e698]:
+                  - strong [ref=f4e699]: CloudFront
+                  - text: ": $0.085 per GB (data transfer)"
+              - paragraph [ref=f4e700]: "Example monthly cost for 10,000 translations (average 100 chars each):"
+              - list [ref=f4e701]:
+                - listitem [ref=f4e702]: "Translate: ~$0.15"
+                - listitem [ref=f4e703]: "Polly (neural): ~$2.40"
+                - listitem [ref=f4e704]: "S3: ~$0.01"
+                - listitem [ref=f4e705]: "Lambda: ~$0.05"
+                - listitem [ref=f4e706]:
+                  - strong [ref=f4e707]: "Total: ~$2.60"
+                  - text: (excluding CloudFront if minimal)
+              - generic [ref=f4e708]:
+                - heading "🎨 Theme System" [level=2] [ref=f4e709]
+                - 'link "Permalink: 🎨 Theme System" [ref=f4e710] [cursor=pointer]':
+                  - /url: "#-theme-system"
+              - generic [ref=f4e713]:
+                - heading "Light Theme" [level=3] [ref=f4e714]
+                - 'link "Permalink: Light Theme" [ref=f4e715] [cursor=pointer]':
+                  - /url: "#light-theme"
+              - list [ref=f4e718]:
+                - listitem [ref=f4e719]:
+                  - strong [ref=f4e720]: Background
+                  - text: ": Pure white (#ffffff)"
+                - listitem [ref=f4e721]:
+                  - strong [ref=f4e722]: Text
+                  - text: ": Dark charcoal (#1a1a1a)"
+                - listitem [ref=f4e723]:
+                  - strong [ref=f4e724]: Accent
+                  - text: ": Deep purple (#534AB7)"
+                - listitem [ref=f4e725]:
+                  - strong [ref=f4e726]: High contrast
+                  - text: for accessibility
+              - generic [ref=f4e727]:
+                - heading "Dark Theme" [level=3] [ref=f4e728]
+                - 'link "Permalink: Dark Theme" [ref=f4e729] [cursor=pointer]':
+                  - /url: "#dark-theme"
+              - list [ref=f4e732]:
+                - listitem [ref=f4e733]:
+                  - strong [ref=f4e734]: Background
+                  - text: ": Deep blue-gray (#1e1e2e)"
+                - listitem [ref=f4e735]:
+                  - strong [ref=f4e736]: Text
+                  - text: ": Light gray (#e8e8e8)"
+                - listitem [ref=f4e737]:
+                  - strong [ref=f4e738]: Accent
+                  - text: ": Light purple (#7c6fd1)"
+                - listitem [ref=f4e739]:
+                  - strong [ref=f4e740]: Eye-friendly
+                  - text: for night use
+              - paragraph [ref=f4e741]: "Both themes maintain:"
+              - list [ref=f4e742]:
+                - listitem [ref=f4e743]:
+                  - strong [ref=f4e744]: Perfect contrast ratios
+                  - text: (WCAG AA compliant)
+                - listitem [ref=f4e745]:
+                  - strong [ref=f4e746]: 0.35s smooth transitions
+                - listitem [ref=f4e747]:
+                  - strong [ref=f4e748]: Persistent selection
+                  - text: via localStorage
+                - listitem [ref=f4e749]:
+                  - strong [ref=f4e750]: Automatic detection
+                  - text: of system preference on first visit
+              - generic [ref=f4e751]:
+                - heading "🎬 Animation Effects" [level=2] [ref=f4e752]
+                - 'link "Permalink: 🎬 Animation Effects" [ref=f4e753] [cursor=pointer]':
+                  - /url: "#-animation-effects"
+              - generic [ref=f4e756]:
+                - heading "Entrance Animations" [level=3] [ref=f4e757]
+                - 'link "Permalink: Entrance Animations" [ref=f4e758] [cursor=pointer]':
+                  - /url: "#entrance-animations"
+              - list [ref=f4e761]:
+                - listitem [ref=f4e762]:
+                  - strong [ref=f4e763]: fadeUp
+                  - text: ": Cards and inputs slide in smoothly"
+                - listitem [ref=f4e764]:
+                  - strong [ref=f4e765]: slideIn
+                  - text: ": Theme toggle button enters from left"
+                - listitem [ref=f4e766]:
+                  - strong [ref=f4e767]: cascade
+                  - text: ": Progressive animation delays for form elements"
+              - generic [ref=f4e768]:
+                - heading "Interactive Animations" [level=3] [ref=f4e769]
+                - 'link "Permalink: Interactive Animations" [ref=f4e770] [cursor=pointer]':
+                  - /url: "#interactive-animations"
+              - list [ref=f4e773]:
+                - listitem [ref=f4e774]:
+                  - strong [ref=f4e775]: bounce
+                  - text: ": Main action button pulses gently"
+                - listitem [ref=f4e776]:
+                  - strong [ref=f4e777]: glow
+                  - text: ": Theme toggle glows on hover"
+                - listitem [ref=f4e778]:
+                  - strong [ref=f4e779]: waveBar
+                  - text: ": Audio visualization bars animate during playback"
+                - listitem [ref=f4e780]:
+                  - strong [ref=f4e781]: scale
+                  - text: ": Buttons scale smoothly on click"
+              - generic [ref=f4e782]:
+                - heading "Transition Animations" [level=3] [ref=f4e783]
+                - 'link "Permalink: Transition Animations" [ref=f4e784] [cursor=pointer]':
+                  - /url: "#transition-animations"
+              - list [ref=f4e787]:
+                - listitem [ref=f4e788]:
+                  - strong [ref=f4e789]: 0.25s
+                  - text: on form inputs
+                - listitem [ref=f4e790]:
+                  - strong [ref=f4e791]: 0.35s
+                  - text: on theme changes
+                - listitem [ref=f4e792]:
+                  - strong [ref=f4e793]: 0.3s
+                  - text: on button states
+              - generic [ref=f4e794]:
+                - heading "🚀 Performance Tips" [level=2] [ref=f4e795]
+                - 'link "Permalink: 🚀 Performance Tips" [ref=f4e796] [cursor=pointer]':
+                  - /url: "#-performance-tips"
+              - list [ref=f4e799]:
+                - listitem [ref=f4e800]:
+                  - strong [ref=f4e801]: Lazy load
+                  - text: Lambda function container (warm-up)
+                - listitem [ref=f4e802]:
+                  - strong [ref=f4e803]: Use CloudFront caching
+                  - text: for API responses (short TTL)
+                - listitem [ref=f4e804]:
+                  - strong [ref=f4e805]: Compress audio files
+                  - text: before S3 upload
+                - listitem [ref=f4e806]:
+                  - strong [ref=f4e807]: Implement rate limiting
+                  - text: on API Gateway
+                - listitem [ref=f4e808]:
+                  - strong [ref=f4e809]: Monitor Lambda duration
+                  - text: and optimize code
+                - listitem [ref=f4e810]:
+                  - strong [ref=f4e811]: Cache API responses
+                  - text: in browser (if appropriate)
+              - generic [ref=f4e812]:
+                - heading "🐛 Troubleshooting" [level=2] [ref=f4e813]
+                - 'link "Permalink: 🐛 Troubleshooting" [ref=f4e814] [cursor=pointer]':
+                  - /url: "#-troubleshooting"
+              - generic [ref=f4e817]:
+                - heading "API Endpoint Not Found" [level=3] [ref=f4e818]
+                - 'link "Permalink: API Endpoint Not Found" [ref=f4e819] [cursor=pointer]':
+                  - /url: "#api-endpoint-not-found"
+              - list [ref=f4e822]:
+                - listitem [ref=f4e823]:
+                  - text: Verify
+                  - code [ref=f4e824]: config.js
+                  - text: is loaded before main script
+                - listitem [ref=f4e825]: Check browser console for loading errors
+                - listitem [ref=f4e826]:
+                  - text: Ensure file is in same directory as
+                  - code [ref=f4e827]: index.html
+              - generic [ref=f4e828]:
+                - heading "Audio Won't Play" [level=3] [ref=f4e829]
+                - 'link "Permalink: Audio Won''t Play" [ref=f4e830] [cursor=pointer]':
+                  - /url: "#audio-wont-play"
+              - list [ref=f4e833]:
+                - listitem [ref=f4e834]: Check browser's CORS policy
+                - listitem [ref=f4e835]: Verify S3 CORS configuration is applied
+                - listitem [ref=f4e836]: Ensure presigned URL is not expired
+              - generic [ref=f4e837]:
+                - heading "Translation Fails" [level=3] [ref=f4e838]
+                - 'link "Permalink: Translation Fails" [ref=f4e839] [cursor=pointer]':
+                  - /url: "#translation-fails"
+              - list [ref=f4e842]:
+                - listitem [ref=f4e843]: Verify AWS Translate supports language pair
+                - listitem [ref=f4e844]: Check IAM role has translate permissions
+                - listitem [ref=f4e845]: Review Lambda CloudWatch logs
+              - generic [ref=f4e846]:
+                - heading "Theme Toggle Not Working" [level=3] [ref=f4e847]
+                - 'link "Permalink: Theme Toggle Not Working" [ref=f4e848] [cursor=pointer]':
+                  - /url: "#theme-toggle-not-working"
+              - list [ref=f4e851]:
+                - listitem [ref=f4e852]: Check browser localStorage availability
+                - listitem [ref=f4e853]:
+                  - text: Verify JavaScript
+                  - code [ref=f4e854]: initTheme()
+                  - text: runs on page load
+                - listitem [ref=f4e855]: Clear browser cache and reload
+              - generic [ref=f4e856]:
+                - heading "📚 AWS Service Documentation" [level=2] [ref=f4e857]
+                - 'link "Permalink: 📚 AWS Service Documentation" [ref=f4e858] [cursor=pointer]':
+                  - /url: "#-aws-service-documentation"
+              - list [ref=f4e861]:
+                - listitem [ref=f4e862]:
+                  - link "AWS Translate" [ref=f4e863] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/translate/
+                - listitem [ref=f4e864]:
+                  - link "Amazon Polly" [ref=f4e865] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/polly/
+                - listitem [ref=f4e866]:
+                  - link "AWS Lambda" [ref=f4e867] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/lambda/
+                - listitem [ref=f4e868]:
+                  - link "API Gateway" [ref=f4e869] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/apigateway/
+                - listitem [ref=f4e870]:
+                  - link "CloudFront" [ref=f4e871] [cursor=pointer]:
+                    - /url: https://docs.aws.amazon.com/cloudfront/
+              - generic [ref=f4e872]:
+                - heading "📝 License" [level=2] [ref=f4e873]
+                - 'link "Permalink: 📝 License" [ref=f4e874] [cursor=pointer]':
+                  - /url: "#-license"
+              - paragraph [ref=f4e877]: This project is open source and available under the MIT License.
+              - generic [ref=f4e878]:
+                - heading "👤 Author" [level=2] [ref=f4e879]
+                - 'link "Permalink: 👤 Author" [ref=f4e880] [cursor=pointer]':
+                  - /url: "#-author"
+              - paragraph [ref=f4e883]: Created as a cloud-based translation and text-to-speech application demonstrating AWS serverless architecture, modern web development, and cloud infrastructure best practices.
+              - separator [ref=f4e884]
+              - paragraph [ref=f4e885]:
+                - strong [ref=f4e886]: Last Updated
+                - text: ": May 2026"
+                - strong [ref=f4e887]: Version
+                - text: ": 1.0.0"
+                - strong [ref=f4e888]: Status
+                - text: ": Production Ready"
+      - generic [ref=f4e891]:
+        - generic [ref=f4e892]:
+          - heading "About" [level=2] [ref=f4e893]
+          - generic [ref=f4e894]: No description, website, or topics provided.
+          - heading "Resources" [level=3] [ref=f4e895]
+          - link "Readme" [ref=f4e897] [cursor=pointer]:
+            - /url: "#readme-ov-file"
+          - generic [ref=f4e900]:
+            - link "Activity" [ref=f4e903] [cursor=pointer]:
+              - /url: /Nishchal-Panta/Language_translation/activity
+            - generic [ref=f4e906]:
+              - heading "Stars" [level=3] [ref=f4e907]
+              - generic [ref=f4e909]:
+                - strong [ref=f4e912]: "0"
+                - text: stars
+              - heading "Watchers" [level=3] [ref=f4e913]
+              - generic [ref=f4e915]:
+                - strong [ref=f4e918]: "0"
+                - text: watching
+              - heading "Forks" [level=3] [ref=f4e919]
+              - link [ref=f4e921] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Language_translation/forks
+                - strong [ref=f4e925]: "0"
+                - text: forks
+          - link "Report repository" [ref=f4e927] [cursor=pointer]:
+            - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FLanguage_translation&report=Nishchal-Panta+%28user%29
+        - heading "Releases" [level=2] [ref=f4e929]
+        - heading "Packages" [level=2] [ref=f4e933]
+        - heading "Contributors" [level=2] [ref=f4e936]
+        - heading "Languages" [level=2] [ref=f4e939]
+  - contentinfo [ref=f4e942]:
+    - heading "Footer" [level=2] [ref=f4e943]
+    - generic [ref=f4e944]:
+      - generic [ref=f4e945]:
+        - link "GitHub Homepage" [ref=f4e946] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=f4e949]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=f4e950]:
+        - heading "Footer navigation" [level=3] [ref=f4e951]
+        - list "Footer navigation" [ref=f4e952]:
+          - listitem [ref=f4e953]:
+            - link "Terms" [ref=f4e954] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=f4e955]:
+            - link "Privacy" [ref=f4e956] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=f4e957]:
+            - link "Security" [ref=f4e958] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=f4e959]:
+            - link "Status" [ref=f4e960] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=f4e961]:
+            - link "Community" [ref=f4e962] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=f4e963]:
+            - link "Docs" [ref=f4e964] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=f4e965]:
+            - link "Contact" [ref=f4e966] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=f4e967]:
+            - button "Manage cookies" [ref=f4e969] [cursor=pointer]
+          - listitem [ref=f4e970]:
+            - button "Do not share my personal information" [ref=f4e972] [cursor=pointer]

@@ -1,0 +1,192 @@
+- generic [active] [ref=f28e1]:
+  - generic [ref=f28e2]:
+    - generic [ref=f28e3]:
+      - link "Skip to content" [ref=f28e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=f28e9]:
+        - heading "Navigation Menu" [level=2] [ref=f28e10]
+        - generic [ref=f28e11]:
+          - link "Homepage" [ref=f28e13] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f28e16]:
+            - navigation "Global" [ref=f28e17]:
+              - list [ref=f28e18]:
+                - listitem [ref=f28e19]:
+                  - button "Platform" [ref=f28e21] [cursor=pointer]
+                - listitem [ref=f28e24]:
+                  - button "Solutions" [ref=f28e26] [cursor=pointer]
+                - listitem [ref=f28e29]:
+                  - button "Resources" [ref=f28e31] [cursor=pointer]
+                - listitem [ref=f28e34]:
+                  - button "Open Source" [ref=f28e36] [cursor=pointer]
+                - listitem [ref=f28e39]:
+                  - button "Enterprise" [ref=f28e41] [cursor=pointer]
+                - listitem [ref=f28e44]:
+                  - link "Pricing" [ref=f28e45] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=f28e46]:
+              - button "Search or jump to, type / to search" [ref=f28e48] [cursor=pointer]:
+                - generic [ref=f28e51]:
+                  - generic [ref=f28e52]: Search
+                  - generic [aria-hidden] [ref=f28e53]: /
+              - link "Sign in" [ref=f28e55] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FAWS_Inventory-management-system
+              - link "Sign up" [ref=f28e58] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Nishchal-Panta%2FAWS_Inventory-management-system
+              - button "Appearance settings" [ref=f28e61] [cursor=pointer]
+    - main [ref=f28e68]:
+      - generic [ref=f28e69]:
+        - generic [ref=f28e70]:
+          - generic [ref=f28e72]:
+            - link "Nishchal-Panta" [ref=f28e76] [cursor=pointer]:
+              - /url: /Nishchal-Panta
+            - generic [ref=f28e77]: /
+            - strong [ref=f28e78]:
+              - link "AWS_Inventory-management-system" [ref=f28e79] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system
+            - generic [ref=f28e80]: Public
+          - generic [ref=f28e81]:
+            - list:
+              - listitem [ref=f28e82]:
+                - link "You must be signed in to change notification settings" [ref=f28e83] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FAWS_Inventory-management-system
+                  - text: Notifications
+              - listitem [ref=f28e86]:
+                - link "Fork 0" [ref=f28e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FAWS_Inventory-management-system
+                  - text: Fork
+                  - generic "0" [ref=f28e90]
+              - listitem [ref=f28e91]:
+                - link "You must be signed in to star a repository" [ref=f28e93] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FAWS_Inventory-management-system
+                  - text: Star
+                  - generic "0 users starred this repository" [ref=f28e96]: "0"
+        - navigation "Repository" [ref=f28e97]:
+          - list [ref=f28e98]:
+            - listitem [ref=f28e99]:
+              - link "Code" [ref=f28e100] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system
+            - listitem [ref=f28e104]:
+              - link "Issues" [ref=f28e105] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system/issues
+            - listitem [ref=f28e110]:
+              - link "Pull requests" [ref=f28e111] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system/pulls
+            - listitem [ref=f28e115]:
+              - link "Actions" [ref=f28e116] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system/actions
+            - listitem [ref=f28e120]:
+              - link "Projects" [ref=f28e121] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system/projects
+            - listitem [ref=f28e125]:
+              - link "Security and quality" [ref=f28e126] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system/security
+            - listitem [ref=f28e130]:
+              - link "Insights" [ref=f28e131] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system/pulse
+      - generic [ref=f28e148]:
+        - generic [ref=f28e151]:
+          - generic [ref=f28e152]:
+            - generic [ref=f28e153]:
+              - button "main branch" [ref=f28e155] [cursor=pointer]:
+                - generic [ref=f28e156]: main
+              - generic [ref=f28e160]:
+                - link "Branches" [ref=f28e161] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS_Inventory-management-system/branches
+                - link "Tags" [ref=f28e164] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS_Inventory-management-system/tags
+            - generic [ref=f28e167]:
+              - combobox "Go to file" [ref=f28e175]
+              - button "Code" [ref=f28e176] [cursor=pointer]
+          - generic [ref=f28e180]:
+            - generic [ref=f28e182]:
+              - heading "Latest commit" [level=2] [ref=f28e183]
+              - generic [ref=f28e186]:
+                - heading "History" [level=2] [ref=f28e187]
+                - link "1 Commit" [ref=f28e188] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS_Inventory-management-system/commits/main/
+            - heading "Folders and files" [level=2] [ref=f28e191]
+            - table "Folders and files" [ref=f28e192]:
+              - rowgroup:
+                - row "Name Last commit message Last commit date":
+                  - columnheader "Name"
+                  - columnheader "Last commit message"
+                  - columnheader "Last commit date"
+              - rowgroup [ref=f28e193]:
+                - row "frontend-dashboard, (Directory)" [ref=f28e194]:
+                  - cell [ref=f28e195]:
+                    - link "frontend-dashboard, (Directory)" [ref=f28e202] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS_Inventory-management-system/tree/main/frontend-dashboard
+                      - text: frontend-dashboard
+                  - cell [ref=f28e203]
+                  - cell [ref=f28e205]
+                - row "panta-frontend, (Directory)" [ref=f28e208]:
+                  - cell [ref=f28e209]:
+                    - link "panta-frontend, (Directory)" [ref=f28e216] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/AWS_Inventory-management-system/tree/main/panta-frontend
+                      - text: panta-frontend
+                  - cell [ref=f28e217]
+                  - cell [ref=f28e219]
+        - generic [ref=f28e224]:
+          - generic [ref=f28e225]:
+            - heading "About" [level=2] [ref=f28e226]
+            - generic [ref=f28e227]: No description, website, or topics provided.
+            - generic [ref=f28e228]:
+              - link "Activity" [ref=f28e231] [cursor=pointer]:
+                - /url: /Nishchal-Panta/AWS_Inventory-management-system/activity
+              - generic [ref=f28e234]:
+                - heading "Stars" [level=3] [ref=f28e235]
+                - generic [ref=f28e237]:
+                  - strong [ref=f28e240]: "0"
+                  - text: stars
+                - heading "Watchers" [level=3] [ref=f28e241]
+                - generic [ref=f28e243]:
+                  - strong [ref=f28e246]: "0"
+                  - text: watching
+                - heading "Forks" [level=3] [ref=f28e247]
+                - link [ref=f28e249] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS_Inventory-management-system/forks
+                  - strong [ref=f28e253]: "0"
+                  - text: forks
+            - link "Report repository" [ref=f28e255] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FAWS_Inventory-management-system&report=Nishchal-Panta+%28user%29
+          - heading "Releases" [level=2] [ref=f28e257]
+          - heading "Packages" [level=2] [ref=f28e261]
+          - heading "Contributors" [level=2] [ref=f28e264]
+          - heading "Languages" [level=2] [ref=f28e267]
+    - contentinfo [ref=f28e270]:
+      - heading "Footer" [level=2] [ref=f28e271]
+      - generic [ref=f28e272]:
+        - generic [ref=f28e273]:
+          - link "GitHub Homepage" [ref=f28e274] [cursor=pointer]:
+            - /url: https://github.com
+          - generic [ref=f28e277]: © 2026 GitHub, Inc.
+        - navigation "Footer" [ref=f28e278]:
+          - heading "Footer navigation" [level=3] [ref=f28e279]
+          - list "Footer navigation" [ref=f28e280]:
+            - listitem [ref=f28e281]:
+              - link "Terms" [ref=f28e282] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+            - listitem [ref=f28e283]:
+              - link "Privacy" [ref=f28e284] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+            - listitem [ref=f28e285]:
+              - link "Security" [ref=f28e286] [cursor=pointer]:
+                - /url: https://github.com/security
+            - listitem [ref=f28e287]:
+              - link "Status" [ref=f28e288] [cursor=pointer]:
+                - /url: https://www.githubstatus.com/
+            - listitem [ref=f28e289]:
+              - link "Community" [ref=f28e290] [cursor=pointer]:
+                - /url: https://github.community/
+            - listitem [ref=f28e291]:
+              - link "Docs" [ref=f28e292] [cursor=pointer]:
+                - /url: https://docs.github.com/
+            - listitem [ref=f28e293]:
+              - link "Contact" [ref=f28e294] [cursor=pointer]:
+                - /url: https://support.github.com?tags=dotcom-footer
+            - listitem [ref=f28e295]:
+              - button "Manage cookies" [ref=f28e297] [cursor=pointer]
+            - listitem [ref=f28e298]:
+              - button "Do not share my personal information" [ref=f28e300] [cursor=pointer]
+  - alert [ref=f28e303]

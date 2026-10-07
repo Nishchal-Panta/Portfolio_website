@@ -1,0 +1,486 @@
+- generic [active] [ref=f22e1]:
+  - generic [ref=f22e2]:
+    - generic [ref=f22e3]:
+      - link "Skip to content" [ref=f22e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=f22e9]:
+        - heading "Navigation Menu" [level=2] [ref=f22e10]
+        - generic [ref=f22e11]:
+          - link "Homepage" [ref=f22e13] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f22e16]:
+            - navigation "Global" [ref=f22e17]:
+              - list [ref=f22e18]:
+                - listitem [ref=f22e19]:
+                  - button "Platform" [ref=f22e21] [cursor=pointer]
+                - listitem [ref=f22e24]:
+                  - button "Solutions" [ref=f22e26] [cursor=pointer]
+                - listitem [ref=f22e29]:
+                  - button "Resources" [ref=f22e31] [cursor=pointer]
+                - listitem [ref=f22e34]:
+                  - button "Open Source" [ref=f22e36] [cursor=pointer]
+                - listitem [ref=f22e39]:
+                  - button "Enterprise" [ref=f22e41] [cursor=pointer]
+                - listitem [ref=f22e44]:
+                  - link "Pricing" [ref=f22e45] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=f22e46]:
+              - button "Search or jump to, type / to search" [ref=f22e48] [cursor=pointer]:
+                - generic [ref=f22e51]:
+                  - generic [ref=f22e52]: Search
+                  - generic [aria-hidden] [ref=f22e53]: /
+              - link "Sign in" [ref=f22e55] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FKaushik22864%2FVeggieScan
+              - link "Sign up" [ref=f22e58] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Kaushik22864%2FVeggieScan
+              - button "Appearance settings" [ref=f22e61] [cursor=pointer]
+    - main [ref=f22e68]:
+      - generic [ref=f22e69]:
+        - generic [ref=f22e70]:
+          - generic [ref=f22e72]:
+            - link "Kaushik22864" [ref=f22e76] [cursor=pointer]:
+              - /url: /Kaushik22864
+            - generic [ref=f22e77]: /
+            - strong [ref=f22e78]:
+              - link "VeggieScan" [ref=f22e79] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan
+            - generic [ref=f22e80]: Public
+          - generic [ref=f22e81]:
+            - list:
+              - listitem [ref=f22e82]:
+                - link "You must be signed in to change notification settings" [ref=f22e83] [cursor=pointer]:
+                  - /url: /login?return_to=%2FKaushik22864%2FVeggieScan
+                  - text: Notifications
+              - listitem [ref=f22e86]:
+                - link "Fork 0" [ref=f22e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2FKaushik22864%2FVeggieScan
+                  - text: Fork
+                  - generic "0" [ref=f22e90]
+              - listitem [ref=f22e91]:
+                - link "You must be signed in to star a repository" [ref=f22e93] [cursor=pointer]:
+                  - /url: /login?return_to=%2FKaushik22864%2FVeggieScan
+                  - text: Star
+                  - generic "0 users starred this repository" [ref=f22e96]: "0"
+        - navigation "Repository" [ref=f22e97]:
+          - list [ref=f22e98]:
+            - listitem [ref=f22e99]:
+              - link "Code" [ref=f22e100] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan
+            - listitem [ref=f22e104]:
+              - link "Issues" [ref=f22e105] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/issues
+            - listitem [ref=f22e110]:
+              - link "Pull requests" [ref=f22e111] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/pulls
+            - listitem [ref=f22e115]:
+              - link "Actions" [ref=f22e116] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/actions
+            - listitem [ref=f22e120]:
+              - link "Projects" [ref=f22e121] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/projects
+            - listitem [ref=f22e125]:
+              - link "Security and quality" [ref=f22e126] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/security
+            - listitem [ref=f22e130]:
+              - link "Insights" [ref=f22e131] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/pulse
+      - generic [ref=f22e148]:
+        - generic [ref=f22e151]:
+          - generic [ref=f22e152]:
+            - generic [ref=f22e153]:
+              - button "main branch" [ref=f22e155] [cursor=pointer]:
+                - generic [ref=f22e156]: main
+              - generic [ref=f22e160]:
+                - link [ref=f22e568] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/branches
+                  - generic [ref=f22e569]:
+                    - strong [ref=f22e570]: "1"
+                    - text: Branch
+                - link [ref=f22e571] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/tags
+                  - generic [ref=f22e572]:
+                    - strong [ref=f22e573]: "0"
+                    - text: Tags
+            - generic [ref=f22e167]:
+              - combobox "Go to file" [ref=f22e175]
+              - button "Code" [ref=f22e176] [cursor=pointer]
+          - generic [ref=f22e179]:
+            - generic [ref=f22e180]:
+              - generic [ref=f22e182]:
+                - heading "Latest commit" [level=2] [ref=f22e183]
+                - generic [ref=f22e574]:
+                  - generic [ref=f22e576]:
+                    - img "author" [ref=f22e577]
+                    - generic "Apil120" [ref=f22e578]
+                  - generic [ref=f22e579]:
+                    - link "Update README.md to enhance project description, features, setup inst…" [ref=f22e582] [cursor=pointer]:
+                      - /url: /Kaushik22864/VeggieScan/commit/66b3a089214efe05181c06c77fb8265d80a91882
+                    - button "Open commit details" [ref=f22e583] [cursor=pointer]
+                - generic [ref=f22e185]:
+                  - generic [ref=f22e587]:
+                    - link "Commit 66b3a08" [ref=f22e588] [cursor=pointer]:
+                      - /url: /Kaushik22864/VeggieScan/commit/66b3a089214efe05181c06c77fb8265d80a91882
+                      - text: 66b3a08
+                    - text: ·
+                    - generic "Jun 23, 2025, 8:13 PM GMT+5:45" [ref=f22e589]: Jun 23, 2025last year
+                  - generic [ref=f22e186]:
+                    - heading "History" [level=2] [ref=f22e187]
+                    - link "50 Commits" [ref=f22e188] [cursor=pointer]:
+                      - /url: /Kaushik22864/VeggieScan/commits/main/
+              - heading "Folders and files" [level=2] [ref=f22e191]
+              - table "Folders and files" [ref=f22e192]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message"
+                    - columnheader "Last commit date"
+                - rowgroup [ref=f22e193]:
+                  - row [ref=f22e590]:
+                    - cell [ref=f22e195]:
+                      - link "backend, (Directory)" [ref=f22e202] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/tree/main/backend
+                        - text: backend
+                    - cell [ref=f22e591]:
+                      - link "Refactor get_trends function to ensure DataFrame is processed only if…" [ref=f22e594] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/commit/4b7eb15ab2ed4a8fa53e12186e9fd961bd1997bf
+                    - cell "Jun 6, 2025last year" [ref=f22e595]
+                  - row [ref=f22e596]:
+                    - cell [ref=f22e209]:
+                      - link "frontend, (Directory)" [ref=f22e216] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/tree/main/frontend
+                        - text: frontend
+                    - cell [ref=f22e597]:
+                      - link "Fix grammatical error in health status message for vegetable results" [ref=f22e600] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/commit/4190498da877a3421a4a483e6b9c64621dd37e85
+                    - cell "Jun 6, 2025last year" [ref=f22e601]
+                  - row [ref=f22e602]:
+                    - cell [ref=f22e223]:
+                      - link ".gitignore, (File)" [ref=f22e230] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/blob/main/.gitignore
+                        - text: .gitignore
+                    - cell [ref=f22e603]:
+                      - link "Add image upload functionality and implement Google search in the bac…" [ref=f22e606] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/commit/5091b10b4fe54626ff78f8a91772065320d8b5db
+                    - cell "Jun 4, 2025last year" [ref=f22e607]
+                  - row [ref=f22e608]:
+                    - cell [ref=f22e237]:
+                      - link "README.md, (File)" [ref=f22e244] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/blob/main/README.md
+                        - text: README.md
+                    - cell [ref=f22e609]:
+                      - link "Update README.md to enhance project description, features, setup inst…" [ref=f22e612] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/commit/66b3a089214efe05181c06c77fb8265d80a91882
+                    - cell "Jun 23, 2025last year" [ref=f22e613]
+                  - row [ref=f22e614]:
+                    - cell [ref=f22e251]:
+                      - link "requirements.txt, (File)" [ref=f22e258] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/blob/main/requirements.txt
+                        - text: requirements.txt
+                    - cell [ref=f22e615]:
+                      - link "Update requirements.txt to reflect changes in dependencies" [ref=f22e618] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/commit/093580acb0ceaeaed562422bac21a954fcc98485
+                    - cell "Jun 6, 2025last year" [ref=f22e619]
+                  - row [ref=f22e620]:
+                    - cell [ref=f22e265]:
+                      - link "test.ipynb, (File)" [ref=f22e272] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/blob/main/test.ipynb
+                        - text: test.ipynb
+                    - cell [ref=f22e621]:
+                      - link "Refactor code structure for improved readability and maintainability" [ref=f22e624] [cursor=pointer]:
+                        - /url: /Kaushik22864/VeggieScan/commit/f8d318ba1351067d3e021b837771860689b81d3c
+                    - cell "Jun 3, 2025last year" [ref=f22e625]
+            - generic [ref=f22e279]:
+              - generic [ref=f22e280]:
+                - heading "Repository files navigation" [level=2] [ref=f22e281]
+                - navigation "Repository files" [ref=f22e282]:
+                  - list [ref=f22e283]:
+                    - listitem [ref=f22e284]:
+                      - link "README" [ref=f22e285] [cursor=pointer]:
+                        - /url: "#"
+                - button "Outline" [ref=f22e290] [cursor=pointer]
+              - article [ref=f22e294]:
+                - generic [ref=f22e295]:
+                  - heading "VeggieScan 🥬" [level=1] [ref=f22e296]
+                  - 'link "Permalink: VeggieScan 🥬" [ref=f22e297] [cursor=pointer]':
+                    - /url: "#veggiescan-"
+                - paragraph [ref=f22e300]: VeggieScan is an AI-powered web application that helps farmers and gardeners identify diseases in vegetables and provides treatment recommendations in both English and Nepali languages. It also provides real-time market price information for vegetables in Nepal.
+                - generic [ref=f22e301]:
+                  - heading "Features 🌟" [level=2] [ref=f22e302]
+                  - 'link "Permalink: Features 🌟" [ref=f22e303] [cursor=pointer]':
+                    - /url: "#features-"
+                - list [ref=f22e306]:
+                  - listitem [ref=f22e307]:
+                    - strong [ref=f22e308]: Disease Detection
+                    - text: ": Upload images of vegetables to detect diseases using AI"
+                  - listitem [ref=f22e309]:
+                    - strong [ref=f22e310]: Bilingual Support
+                    - text: ": Get results in both English and Nepali"
+                  - listitem [ref=f22e311]:
+                    - strong [ref=f22e312]: Treatment Recommendations
+                    - text: ": Receive detailed cure information for detected diseases"
+                  - listitem [ref=f22e313]:
+                    - strong [ref=f22e314]: Market Trends
+                    - text: ": View current market prices for vegetables"
+                  - listitem [ref=f22e315]:
+                    - strong [ref=f22e316]: Smart Caching
+                    - text: ": Efficient response times through MongoDB caching system"
+                  - listitem [ref=f22e317]:
+                    - strong [ref=f22e318]: User-Friendly Interface
+                    - text: ": Simple and intuitive web interface"
+                - generic [ref=f22e319]:
+                  - heading "Tech Stack 💻" [level=2] [ref=f22e320]
+                  - 'link "Permalink: Tech Stack 💻" [ref=f22e321] [cursor=pointer]':
+                    - /url: "#tech-stack-"
+                - list [ref=f22e324]:
+                  - listitem [ref=f22e325]:
+                    - strong [ref=f22e326]: Frontend
+                    - text: ": HTML, CSS, JavaScript"
+                  - listitem [ref=f22e327]:
+                    - strong [ref=f22e328]: Backend
+                    - text: ": FastAPI (Python)"
+                  - listitem [ref=f22e329]:
+                    - strong [ref=f22e330]: AI Model
+                    - text: ": Google Gemini 2.0"
+                  - listitem [ref=f22e331]:
+                    - strong [ref=f22e332]: Database
+                    - text: ": MongoDB"
+                  - listitem [ref=f22e333]:
+                    - strong [ref=f22e334]: Image Processing
+                    - text: ": Python"
+                  - listitem [ref=f22e335]:
+                    - strong [ref=f22e336]: Translation
+                    - text: ": AI-powered English-Nepali translations"
+                - generic [ref=f22e337]:
+                  - heading "Project Structure 📁" [level=2] [ref=f22e338]
+                  - 'link "Permalink: Project Structure 📁" [ref=f22e339] [cursor=pointer]':
+                    - /url: "#project-structure-"
+                - generic [ref=f22e342]:
+                  - code [ref=f22e344]: "VeggieScan/ ├── backend/ │ ├── ai/ │ │ └── ai_resp/ # AI response generation │ ├── database/ # Database operations │ ├── models/ # Data models │ └── searchbot/ # Market price scraping ├── frontend/ │ ├── englishIndex.html # English interface │ ├── index.html # Nepali interface │ ├── style.css │ └── trends.css └── requirements.txt"
+                  - button "Copy code to clipboard" [ref=f22e346] [cursor=pointer]
+                - generic [ref=f22e350]:
+                  - heading "Prerequisites 🔧" [level=2] [ref=f22e351]
+                  - 'link "Permalink: Prerequisites 🔧" [ref=f22e352] [cursor=pointer]':
+                    - /url: "#prerequisites-"
+                - list [ref=f22e355]:
+                  - listitem [ref=f22e356]: Python 3.x
+                  - listitem [ref=f22e357]: MongoDB
+                  - listitem [ref=f22e358]: Google Gemini API Key
+                - generic [ref=f22e359]:
+                  - heading "Setup 🚀" [level=2] [ref=f22e360]
+                  - 'link "Permalink: Setup 🚀" [ref=f22e361] [cursor=pointer]':
+                    - /url: "#setup-"
+                - list [ref=f22e364]:
+                  - listitem [ref=f22e365]: "Clone the repository:"
+                - generic [ref=f22e366]:
+                  - generic [ref=f22e367]: git clone https://github.com/Kaushik22864//VeggieScan.git cd VeggieScan
+                  - button "Copy code to clipboard" [ref=f22e369] [cursor=pointer]
+                - list [ref=f22e373]:
+                  - listitem [ref=f22e374]: "Install dependencies:"
+                - generic [ref=f22e375]:
+                  - generic [ref=f22e376]: pip install -r requirements.txt
+                  - button "Copy code to clipboard" [ref=f22e378] [cursor=pointer]
+                - list [ref=f22e382]:
+                  - listitem [ref=f22e383]:
+                    - text: "Set up environment variables: Create a"
+                    - code [ref=f22e384]: .env
+                    - text: "file and add:"
+                - generic [ref=f22e385]:
+                  - generic [ref=f22e386]: GOOGLE_API_KEY=your_gemini_api_key
+                  - button "Copy code to clipboard" [ref=f22e388] [cursor=pointer]
+                - list [ref=f22e392]:
+                  - listitem [ref=f22e393]: "Start MongoDB:"
+                - generic [ref=f22e394]:
+                  - generic [ref=f22e395]: mongod
+                  - button "Copy code to clipboard" [ref=f22e397] [cursor=pointer]
+                - list [ref=f22e401]:
+                  - listitem [ref=f22e402]: "Run the application:"
+                - generic [ref=f22e403]:
+                  - generic [ref=f22e404]: uvicorn backend.api:app --reload
+                  - button "Copy code to clipboard" [ref=f22e406] [cursor=pointer]
+                - generic [ref=f22e410]:
+                  - heading "Usage 🌿" [level=2] [ref=f22e411]
+                  - 'link "Permalink: Usage 🌿" [ref=f22e412] [cursor=pointer]':
+                    - /url: "#usage-"
+                - list [ref=f22e415]:
+                  - listitem [ref=f22e416]:
+                    - text: Open
+                    - code [ref=f22e417]: http://localhost:8000
+                    - text: in your web browser
+                  - listitem [ref=f22e418]: Choose your preferred language (English/Nepali)
+                  - listitem [ref=f22e419]: Upload an image of a vegetable
+                  - listitem [ref=f22e420]: Get instant disease detection and treatment recommendations
+                  - listitem [ref=f22e421]: View market trends through the trends page
+                - generic [ref=f22e422]:
+                  - heading "API Endpoints 🔌" [level=2] [ref=f22e423]
+                  - 'link "Permalink: API Endpoints 🔌" [ref=f22e424] [cursor=pointer]':
+                    - /url: "#api-endpoints-"
+                - list [ref=f22e427]:
+                  - listitem [ref=f22e428]:
+                    - code [ref=f22e429]: POST /upload
+                    - text: ": Upload vegetable image for disease detection"
+                  - listitem [ref=f22e430]:
+                    - code [ref=f22e431]: POST /get_trends
+                    - text: ": Get market price trends for vegetables"
+                - generic [ref=f22e432]:
+                  - heading "Features in Detail 📝" [level=2] [ref=f22e433]
+                  - 'link "Permalink: Features in Detail 📝" [ref=f22e434] [cursor=pointer]':
+                    - /url: "#features-in-detail-"
+                - generic [ref=f22e437]:
+                  - heading "Disease Detection" [level=3] [ref=f22e438]
+                  - 'link "Permalink: Disease Detection" [ref=f22e439] [cursor=pointer]':
+                    - /url: "#disease-detection"
+                - list [ref=f22e442]:
+                  - listitem [ref=f22e443]: Supports multiple vegetable types
+                  - listitem [ref=f22e444]: Real-time AI analysis
+                  - listitem [ref=f22e445]: Cached responses for improved performance
+                - generic [ref=f22e446]:
+                  - heading "Market Trends" [level=3] [ref=f22e447]
+                  - 'link "Permalink: Market Trends" [ref=f22e448] [cursor=pointer]':
+                    - /url: "#market-trends"
+                - list [ref=f22e451]:
+                  - listitem [ref=f22e452]: Daily updates of vegetable prices
+                  - listitem [ref=f22e453]: Historical data tracking
+                  - listitem [ref=f22e454]: Price comparisons
+                - generic [ref=f22e455]:
+                  - heading "Contributing 🤝" [level=2] [ref=f22e456]
+                  - 'link "Permalink: Contributing 🤝" [ref=f22e457] [cursor=pointer]':
+                    - /url: "#contributing-"
+                - paragraph [ref=f22e460]: Contributions are welcome! Please feel free to submit a Pull Request.
+                - generic [ref=f22e461]:
+                  - heading "License 📄" [level=2] [ref=f22e462]
+                  - 'link "Permalink: License 📄" [ref=f22e463] [cursor=pointer]':
+                    - /url: "#license-"
+                - paragraph [ref=f22e466]: This project is licensed under the MIT License - see the LICENSE file for details.
+                - generic [ref=f22e467]:
+                  - heading "Acknowledgments 🙏" [level=2] [ref=f22e468]
+                  - 'link "Permalink: Acknowledgments 🙏" [ref=f22e469] [cursor=pointer]':
+                    - /url: "#acknowledgments-"
+                - list [ref=f22e472]:
+                  - listitem [ref=f22e473]: Google Gemini AI for disease detection
+                  - listitem [ref=f22e474]: Kalimati Market for price data
+                  - listitem [ref=f22e475]: Contributors and supporters
+                - generic [ref=f22e476]:
+                  - heading "Contact 📧" [level=2] [ref=f22e477]
+                  - 'link "Permalink: Contact 📧" [ref=f22e478] [cursor=pointer]':
+                    - /url: "#contact-"
+                - paragraph [ref=f22e481]: For questions and support, please open an issue in the GitHub repository.
+        - generic [ref=f22e484]:
+          - generic [ref=f22e485]:
+            - heading "About" [level=2] [ref=f22e486]
+            - paragraph [ref=f22e487]: 🌿 VeggieScan – AI Veggie Disease Detector & Market Tracker VeggieScan is a bilingual (English/Nepali) AI-powered web app that helps farmers detect vegetable diseases from images and get treatment tips. It also shows real-time market prices of vegetables in Nepal. Built with FastAPI, MongoDB, and Google Gemini.
+            - heading "Resources" [level=3] [ref=f22e488]
+            - link "Readme" [ref=f22e490] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+            - generic [ref=f22e493]:
+              - link "Activity" [ref=f22e496] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/activity
+              - generic [ref=f22e499]:
+                - heading "Stars" [level=3] [ref=f22e500]
+                - generic [ref=f22e502]:
+                  - strong [ref=f22e505]: "0"
+                  - text: stars
+                - heading "Watchers" [level=3] [ref=f22e506]
+                - generic [ref=f22e508]:
+                  - strong [ref=f22e511]: "0"
+                  - text: watching
+                - heading "Forks" [level=3] [ref=f22e512]
+                - link [ref=f22e514] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/forks
+                  - strong [ref=f22e518]: "0"
+                  - text: forks
+            - link "Report repository" [ref=f22e520] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FKaushik22864%2FVeggieScan&report=Kaushik22864+%28user%29
+          - generic [ref=f22e626]:
+            - heading [level=2] [ref=f22e627]:
+              - link "Releases" [ref=f22e629] [cursor=pointer]:
+                - /url: /Kaushik22864/VeggieScan/releases
+            - generic [ref=f22e630]: No releases published
+          - generic [ref=f22e631]:
+            - heading "Contributors (2)" [level=2] [ref=f22e632]:
+              - generic [ref=f22e633]:
+                - link "Contributors" [ref=f22e634] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/graphs/contributors
+                - generic [aria-hidden] [ref=f22e635]: "2"
+                - generic [ref=f22e636]: (2)
+            - list [ref=f22e637]:
+              - listitem [ref=f22e638]:
+                - link [ref=f22e639] [cursor=pointer]:
+                  - /url: /Kaushik22864
+                  - img "@Kaushik22864" [ref=f22e640]
+                - generic "Kaushik22864 Kaushik Joshi" [ref=f22e641]:
+                  - link [ref=f22e642] [cursor=pointer]:
+                    - /url: /Kaushik22864
+                    - strong [ref=f22e643]: Kaushik22864
+                    - text: Kaushik Joshi
+              - listitem [ref=f22e644]:
+                - link [ref=f22e645] [cursor=pointer]:
+                  - /url: /Nishchal-Panta
+                  - img "@Nishchal-Panta" [ref=f22e646]
+                - generic "Nishchal-Panta" [ref=f22e647]:
+                  - link [ref=f22e648] [cursor=pointer]:
+                    - /url: /Nishchal-Panta
+                    - strong [ref=f22e649]: Nishchal-Panta
+          - generic [ref=f22e650]:
+            - heading "Languages" [level=2] [ref=f22e651]
+            - generic [ref=f22e653]:
+              - 'progressbar "Jupyter Notebook: 51.4%" [ref=f22e654]'
+              - 'progressbar "HTML: 25.9%" [ref=f22e655]'
+              - 'progressbar "Python: 13.8%" [ref=f22e656]'
+              - 'progressbar "CSS: 8.9%" [ref=f22e657]'
+            - list [ref=f22e658]:
+              - listitem [ref=f22e659]:
+                - link "Jupyter Notebook 51.4%" [ref=f22e660] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/search?l=jupyter-notebook
+                  - generic [ref=f22e662]: Jupyter Notebook
+                  - generic [ref=f22e663]: 51.4%
+              - listitem [ref=f22e664]:
+                - link "HTML 25.9%" [ref=f22e665] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/search?l=html
+                  - generic [ref=f22e667]: HTML
+                  - generic [ref=f22e668]: 25.9%
+              - listitem [ref=f22e669]:
+                - link "Python 13.8%" [ref=f22e670] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/search?l=python
+                  - generic [ref=f22e672]: Python
+                  - generic [ref=f22e673]: 13.8%
+              - listitem [ref=f22e674]:
+                - link "CSS 8.9%" [ref=f22e675] [cursor=pointer]:
+                  - /url: /Kaushik22864/VeggieScan/search?l=css
+                  - generic [ref=f22e677]: CSS
+                  - generic [ref=f22e678]: 8.9%
+    - contentinfo [ref=f22e535]:
+      - heading "Footer" [level=2] [ref=f22e536]
+      - generic [ref=f22e537]:
+        - generic [ref=f22e538]:
+          - link "GitHub Homepage" [ref=f22e539] [cursor=pointer]:
+            - /url: https://github.com
+          - generic [ref=f22e542]: © 2026 GitHub, Inc.
+        - navigation "Footer" [ref=f22e543]:
+          - heading "Footer navigation" [level=3] [ref=f22e544]
+          - list "Footer navigation" [ref=f22e545]:
+            - listitem [ref=f22e546]:
+              - link "Terms" [ref=f22e547] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+            - listitem [ref=f22e548]:
+              - link "Privacy" [ref=f22e549] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+            - listitem [ref=f22e550]:
+              - link "Security" [ref=f22e551] [cursor=pointer]:
+                - /url: https://github.com/security
+            - listitem [ref=f22e552]:
+              - link "Status" [ref=f22e553] [cursor=pointer]:
+                - /url: https://www.githubstatus.com/
+            - listitem [ref=f22e554]:
+              - link "Community" [ref=f22e555] [cursor=pointer]:
+                - /url: https://github.community/
+            - listitem [ref=f22e556]:
+              - link "Docs" [ref=f22e557] [cursor=pointer]:
+                - /url: https://docs.github.com/
+            - listitem [ref=f22e558]:
+              - link "Contact" [ref=f22e559] [cursor=pointer]:
+                - /url: https://support.github.com?tags=dotcom-footer
+            - listitem [ref=f22e560]:
+              - button "Manage cookies" [ref=f22e562] [cursor=pointer]
+            - listitem [ref=f22e563]:
+              - button "Do not share my personal information" [ref=f22e565] [cursor=pointer]
+  - alert [ref=f22e679]

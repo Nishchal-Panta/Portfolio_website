@@ -1,0 +1,286 @@
+- generic [ref=f1e2]:
+  - generic [ref=f1e3]:
+    - link "Skip to content" [ref=f1e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=f1e9]:
+      - heading "Navigation Menu" [level=2] [ref=f1e10]
+      - generic [ref=f1e11]:
+        - link "Homepage" [ref=f1e13] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f1e16]:
+          - navigation "Global" [ref=f1e17]:
+            - list [ref=f1e18]:
+              - listitem [ref=f1e19]:
+                - button "Platform" [ref=f1e21] [cursor=pointer]
+              - listitem [ref=f1e24]:
+                - button "Solutions" [ref=f1e26] [cursor=pointer]
+              - listitem [ref=f1e29]:
+                - button "Resources" [ref=f1e31] [cursor=pointer]
+              - listitem [ref=f1e34]:
+                - button "Open Source" [ref=f1e36] [cursor=pointer]
+              - listitem [ref=f1e39]:
+                - button "Enterprise" [ref=f1e41] [cursor=pointer]
+              - listitem [ref=f1e44]:
+                - link "Pricing" [ref=f1e45] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=f1e46]:
+            - button "Search or jump to, type / to search" [ref=f1e48] [cursor=pointer]:
+              - generic [ref=f1e51]:
+                - generic [ref=f1e52]: Search
+                - generic [aria-hidden] [ref=f1e53]: /
+            - link "Sign in" [ref=f1e55] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%3Ftab%3Drepositories
+            - link "Sign up" [ref=f1e58] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2FNishchal-Panta&source=header
+            - button "Appearance settings" [ref=f1e61] [cursor=pointer]
+  - main [ref=f1e67]:
+    - generic [ref=f1e70]:
+      - generic [ref=f1e71]:
+        - generic:
+          - generic:
+            - generic:
+              - img "@Nishchal-Panta"
+            - generic:
+              - strong: Nishchal-Panta
+              - generic:
+                - generic:
+                  - link "Follow":
+                    - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%3Ftab%3Drepositories
+      - navigation "User profile" [ref=f1e74]:
+        - link "Overview" [ref=f1e75] [cursor=pointer]:
+          - /url: /Nishchal-Panta
+        - link "Repositories 14" [ref=f1e78] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=repositories
+          - text: Repositories
+          - generic "14" [ref=f1e81]
+        - link "Projects" [ref=f1e82] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=projects
+        - link "Packages" [ref=f1e85] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=packages
+        - link "Stars 1" [ref=f1e88] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=stars
+          - text: Stars
+          - generic "1" [ref=f1e91]
+    - generic [ref=f1e93]:
+      - generic [ref=f1e95]:
+        - generic:
+          - generic:
+            - generic:
+              - img "@Nishchal-Panta"
+            - generic:
+              - generic:
+                - strong: Nishchal-Panta
+            - generic:
+              - generic:
+                - generic:
+                  - link "Follow":
+                    - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%3Ftab%3Drepositories
+        - generic [ref=f1e96]:
+          - generic [ref=f1e97]:
+            - link [ref=f1e99] [cursor=pointer]:
+              - /url: https://avatars.githubusercontent.com/u/194055204?v=4
+              - img "View Nishchal-Panta's full-sized avatar" [ref=f1e100]
+            - heading "Nishchal-Panta" [level=1] [ref=f1e102]
+          - generic [ref=f1e104]:
+            - link "Follow" [ref=f1e111] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%3Ftab%3Drepositories
+            - generic [ref=f1e112]:
+              - generic [ref=f1e114]:
+                - link "7 followers" [ref=f1e115] [cursor=pointer]:
+                  - /url: https://github.com/Nishchal-Panta?tab=followers
+                - text: ·
+                - link "7 following" [ref=f1e118] [cursor=pointer]:
+                  - /url: https://github.com/Nishchal-Panta?tab=following
+              - list
+          - generic [ref=f1e119]:
+            - heading [level=2] [ref=f1e120]:
+              - link "Achievements" [ref=f1e121] [cursor=pointer]:
+                - /url: /Nishchal-Panta?tab=achievements
+            - link [ref=f1e123] [cursor=pointer]:
+              - /url: /Nishchal-Panta?achievement=quickdraw&tab=achievements
+              - 'img "Achievement: Quickdraw" [ref=f1e124]'
+          - generic [ref=f1e125]:
+            - heading "Highlights" [level=2] [ref=f1e126]
+            - list [ref=f1e127]:
+              - listitem [ref=f1e128]:
+                - 'generic "Label: Pro" [ref=f1e131]': Pro
+          - button "Block or report user" [ref=f1e133] [cursor=pointer]
+      - generic [ref=f1e138]:
+        - search "Repositories" [ref=f1e141]:
+          - generic [ref=f1e142]:
+            - searchbox "Find a repository…" [ref=f1e144]
+            - generic [ref=f1e145]:
+              - group [ref=f1e146]:
+                - button "Type" [ref=f1e147] [cursor=pointer]
+              - group [ref=f1e149]:
+                - button "Language" [ref=f1e150] [cursor=pointer]
+              - group [ref=f1e152]:
+                - button "Sort" [ref=f1e153] [cursor=pointer]
+        - list [ref=f1e156]:
+          - listitem [ref=f1e157]:
+            - generic [ref=f1e158]:
+              - heading "Portfolio_website Public" [level=3] [ref=f1e160]:
+                - link "Portfolio_website" [ref=f1e161] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Portfolio_website
+                - generic [ref=f1e162]: Public
+              - paragraph [ref=f1e164]: This repo has a portfolio website showcasing my projects, skills, certificates, achievements and other details
+              - generic [ref=f1e165]:
+                - generic [ref=f1e166]: HTML
+                - text: Updated Jul 9, 2026on Jul 9
+          - listitem [ref=f1e169]:
+            - generic [ref=f1e170]:
+              - heading "AWS_Inventory-management-system Public" [level=3] [ref=f1e172]:
+                - link "AWS_Inventory-management-system" [ref=f1e173] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS_Inventory-management-system
+                - generic [ref=f1e174]: Public
+              - generic [ref=f1e175]:
+                - generic [ref=f1e176]: CSS
+                - text: Updated May 29, 2026on May 29
+          - listitem [ref=f1e179]:
+            - generic [ref=f1e180]:
+              - heading "AWS-Cybersecurity_threat_detection Public" [level=3] [ref=f1e182]:
+                - link "AWS-Cybersecurity_threat_detection" [ref=f1e183] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS-Cybersecurity_threat_detection
+                - generic [ref=f1e184]: Public
+              - generic [ref=f1e185]:
+                - generic [ref=f1e186]: Jupyter Notebook
+                - text: Updated May 22, 2026on May 22
+          - listitem [ref=f1e189]:
+            - generic [ref=f1e190]:
+              - heading "AWS-Ecommerce_website Public" [level=3] [ref=f1e192]:
+                - link "AWS-Ecommerce_website" [ref=f1e193] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS-Ecommerce_website
+                - generic [ref=f1e194]: Public
+              - generic [ref=f1e195]:
+                - generic [ref=f1e196]: TypeScript
+                - text: Updated May 21, 2026on May 21
+          - listitem [ref=f1e199]:
+            - generic [ref=f1e200]:
+              - heading "Language_translation Public" [level=3] [ref=f1e202]:
+                - link "Language_translation" [ref=f1e203] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Language_translation
+                - generic [ref=f1e204]: Public
+              - generic [ref=f1e205]:
+                - generic [ref=f1e206]: HTML
+                - text: Updated May 17, 2026on May 17
+          - listitem [ref=f1e209]:
+            - generic [ref=f1e210]:
+              - heading "E-commerce_website Public" [level=3] [ref=f1e212]:
+                - link "E-commerce_website" [ref=f1e213] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/E-commerce_website
+                - generic [ref=f1e214]: Public
+              - paragraph [ref=f1e216]: A production-ready Laravel e-commerce platform built to sell wholesale-imported products in Nepal — manage catalog, inventory, orders and analytics from a single admin panel.
+              - generic [ref=f1e217]:
+                - generic [ref=f1e218]: Blade
+                - text: Updated Jan 26, 2026on Jan 26
+          - listitem [ref=f1e221]:
+            - generic [ref=f1e222]:
+              - heading "Vibe Public" [level=3] [ref=f1e224]:
+                - link "Vibe" [ref=f1e225] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Vibe
+                - generic [ref=f1e226]: Public
+              - paragraph [ref=f1e228]: Just a repo for a viber
+              - generic [ref=f1e229]:
+                - generic [ref=f1e230]: JavaScript
+                - text: Updated Jan 19, 2026on Jan 19
+          - listitem [ref=f1e233]:
+            - generic [ref=f1e234]:
+              - heading "Cybersecurity_threat_detection Public" [level=3] [ref=f1e236]:
+                - link "Cybersecurity_threat_detection" [ref=f1e237] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Cybersecurity_threat_detection
+                - generic [ref=f1e238]: Public
+              - paragraph [ref=f1e240]: This is a Neural Network model that detects cybersecurity threats and flags it as bot or benign(harmless)
+              - generic [ref=f1e241]:
+                - generic [ref=f1e242]: Jupyter Notebook
+                - text: Updated Jan 17, 2026on Jan 17
+          - listitem [ref=f1e245]:
+            - generic [ref=f1e246]:
+              - heading "PantaStoreApp Public" [level=3] [ref=f1e248]:
+                - link "PantaStoreApp" [ref=f1e249] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/PantaStoreApp
+                - generic [ref=f1e250]: Public
+              - paragraph [ref=f1e252]: This repo contains an application I made to track the inventory of my retail store named 'Panta store', later on it would also have user login features for my customers to view the inventory , and …
+              - generic [ref=f1e253]:
+                - generic [ref=f1e254]: Java
+                - text: Updated Jan 17, 2026on Jan 17
+          - listitem [ref=f1e257]:
+            - generic [ref=f1e258]:
+              - heading "AWS_lab Public" [level=3] [ref=f1e260]:
+                - link "AWS_lab" [ref=f1e261] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AWS_lab
+                - generic [ref=f1e262]: Public
+              - generic [ref=f1e263]:
+                - generic [ref=f1e264]: HTML
+                - text: Updated Dec 20, 2025on Dec 20, 2025
+          - listitem [ref=f1e267]:
+            - generic [ref=f1e268]:
+              - heading "Customer_behavior_analysis Public" [level=3] [ref=f1e270]:
+                - link "Customer_behavior_analysis" [ref=f1e271] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Customer_behavior_analysis
+                - generic [ref=f1e272]: Public
+              - paragraph [ref=f1e274]: This repo contains customer buying pattern analysis with association rule mining and apriori in Python
+              - generic [ref=f1e275]:
+                - generic [ref=f1e276]: Jupyter Notebook
+                - text: Updated Nov 11, 2025on Nov 11, 2025
+          - listitem [ref=f1e279]:
+            - generic [ref=f1e280]:
+              - heading "Share-market_analysis Public" [level=3] [ref=f1e282]:
+                - link "Share-market_analysis" [ref=f1e283] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Share-market_analysis
+                - generic [ref=f1e284]: Public
+              - generic [ref=f1e285]:
+                - generic [ref=f1e286]: Jupyter Notebook
+                - text: Updated Nov 11, 2025on Nov 11, 2025
+          - listitem [ref=f1e289]:
+            - generic [ref=f1e290]:
+              - heading "AP Public" [level=3] [ref=f1e292]:
+                - link "AP" [ref=f1e293] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/AP
+                - generic [ref=f1e294]: Public
+              - generic [ref=f1e295]:
+                - generic [ref=f1e296]: Java
+                - text: Updated Aug 5, 2025on Aug 5, 2025
+          - listitem [ref=f1e299]:
+            - generic [ref=f1e300]:
+              - heading "MLPC_IndividualAssignment Public" [level=3] [ref=f1e302]:
+                - link "MLPC_IndividualAssignment" [ref=f1e303] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/MLPC_IndividualAssignment
+                - generic [ref=f1e304]: Public
+              - generic [ref=f1e305]:
+                - generic [ref=f1e306]: Jupyter Notebook
+                - text: Updated Jul 17, 2025on Jul 17, 2025
+  - contentinfo [ref=f1e309]:
+    - heading "Footer" [level=2] [ref=f1e310]
+    - generic [ref=f1e311]:
+      - generic [ref=f1e312]:
+        - link "GitHub Homepage" [ref=f1e313] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=f1e316]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=f1e317]:
+        - heading "Footer navigation" [level=3] [ref=f1e318]
+        - list "Footer navigation" [ref=f1e319]:
+          - listitem [ref=f1e320]:
+            - link "Terms" [ref=f1e321] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=f1e322]:
+            - link "Privacy" [ref=f1e323] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=f1e324]:
+            - link "Security" [ref=f1e325] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=f1e326]:
+            - link "Status" [ref=f1e327] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=f1e328]:
+            - link "Community" [ref=f1e329] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=f1e330]:
+            - link "Docs" [ref=f1e331] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=f1e332]:
+            - link "Contact" [ref=f1e333] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=f1e334]:
+            - button "Manage cookies" [ref=f1e336] [cursor=pointer]
+          - listitem [ref=f1e337]:
+            - button "Do not share my personal information" [ref=f1e339] [cursor=pointer]

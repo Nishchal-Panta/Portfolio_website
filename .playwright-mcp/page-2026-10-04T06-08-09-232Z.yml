@@ -1,0 +1,207 @@
+- generic [active] [ref=f2e1]:
+  - banner [ref=f2e2]:
+    - generic [ref=f2e3]:
+      - link "Nishchal Panta Home" [ref=f2e4] [cursor=pointer]:
+        - /url: index.html
+        - generic [ref=f2e5]: NP
+        - generic [ref=f2e6]: Nishchal Panta
+      - navigation "Main Navigation" [ref=f2e7]:
+        - link "← Back to Portfolio" [ref=f2e8] [cursor=pointer]:
+          - /url: index.html#projects
+        - link "Skills" [ref=f2e9] [cursor=pointer]:
+          - /url: index.html#skills
+        - link "Certifications" [ref=f2e10] [cursor=pointer]:
+          - /url: index.html#certifications
+        - link "Contact" [ref=f2e11] [cursor=pointer]:
+          - /url: index.html#contact
+      - generic [ref=f2e12]:
+        - button "Switch to light mode" [ref=f2e13] [cursor=pointer]:
+          - generic [ref=f2e14]: 
+        - text: 
+  - main [ref=f2e15]:
+    - generic [ref=f2e17]:
+      - generic [ref=f2e18]:
+        - generic [ref=f2e19]: 
+        - text: Amazon Web Services Architecture
+      - heading "Cloud Infrastructure & Solutions" [level=1] [ref=f2e20]
+      - paragraph [ref=f2e21]: Practical cloud architecture, serverless integrations, infrastructure as code, and security implementations developed by Nishchal Panta.
+      - generic [ref=f2e22]:
+        - generic [ref=f2e23]:
+          - generic [ref=f2e24]: AWS
+          - generic [ref=f2e25]: Certified Cloud Practitioner
+        - generic [ref=f2e26]:
+          - generic [ref=f2e27]: DAAI
+          - generic [ref=f2e28]: CloudMandap Fellowship
+        - generic [ref=f2e29]:
+          - generic [ref=f2e30]: 5+
+          - generic [ref=f2e31]: Cloud Architectures & Repos
+        - generic [ref=f2e32]:
+          - generic [ref=f2e33]: Serverless
+          - generic [ref=f2e34]: API Gateway & SES Handlers
+    - generic [ref=f2e36]:
+      - generic [ref=f2e37]:
+        - generic [ref=f2e38]: Repository Index
+        - heading "AWS Engineering Repositories" [level=2] [ref=f2e39]
+        - paragraph [ref=f2e40]: Architectural patterns across serverless compute, machine learning pipelines, and cloud hosting.
+      - generic [ref=f2e41]:
+        - generic [ref=f2e43]:
+          - generic [ref=f2e44]:
+            - generic [ref=f2e45]: Cloud Hosting
+            - generic [ref=f2e46]: Production
+          - heading "Cloud Infrastructure Static Web Delivery" [level=3] [ref=f2e47]
+          - paragraph [ref=f2e48]: Static web asset distribution architecture utilizing Amazon S3 storage and Amazon CloudFront CDN edge caching, integrated with automated GitHub Actions CI/CD workflows and custom domain DNS.
+          - generic [ref=f2e49]:
+            - generic [ref=f2e50]: Infrastructure Stack
+            - generic [ref=f2e51]: Amazon S3 • CloudFront • GitHub Actions • Route 53
+          - generic [ref=f2e52]:
+            - generic [ref=f2e53]: S3 Bucket Policies
+            - generic [ref=f2e54]: CloudFront
+            - generic [ref=f2e55]: CI/CD
+            - generic [ref=f2e56]: Static Hosting
+          - link " View Repository" [ref=f2e58] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/Portfolio_website
+            - generic [ref=f2e59]: 
+            - text: View Repository
+        - generic [ref=f2e61]:
+          - generic [ref=f2e62]:
+            - generic [ref=f2e63]: Cloud ML
+            - generic [ref=f2e64]: Pipeline
+          - heading "AWS Cybersecurity ML Threat Detection" [level=3] [ref=f2e65]
+          - paragraph [ref=f2e66]: Cloud-native machine learning pipeline on Amazon SageMaker that ingests network flow records from S3, executes training jobs for an XGBoost threat classifier, and provisions managed endpoints for real-time traffic inference.
+          - generic [ref=f2e67]:
+            - generic [ref=f2e68]: Infrastructure Stack
+            - generic [ref=f2e69]: Amazon SageMaker • S3 • CloudWatch • IAM Roles
+          - generic [ref=f2e70]:
+            - generic [ref=f2e71]: SageMaker
+            - generic [ref=f2e72]: XGBoost
+            - generic [ref=f2e73]: S3 Datasets
+            - generic [ref=f2e74]: CloudWatch Logs
+          - link " View Repository" [ref=f2e76] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/AWS-Cybersecurity_threat_detection
+            - generic [ref=f2e77]: 
+            - text: View Repository
+        - generic [ref=f2e79]:
+          - generic [ref=f2e80]:
+            - generic [ref=f2e81]: Serverless Architecture
+            - generic [ref=f2e82]: In Development
+          - heading "Serverless E-Commerce Backend" [level=3] [ref=f2e83]
+          - paragraph [ref=f2e84]: Microservices architecture utilizing AWS Lambda compute functions, Amazon DynamoDB for low-latency document storage, AWS Cognito for secure customer identity and authentication, and S3 for product media.
+          - generic [ref=f2e85]:
+            - generic [ref=f2e86]: Infrastructure Stack
+            - generic [ref=f2e87]: AWS Lambda • DynamoDB • Cognito Auth • API Gateway
+          - generic [ref=f2e88]:
+            - generic [ref=f2e89]: AWS Lambda
+            - generic [ref=f2e90]: DynamoDB
+            - generic [ref=f2e91]: Cognito
+            - generic [ref=f2e92]: Next.js
+          - link " View Repository" [ref=f2e94] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/AWS-Ecommerce_website
+            - generic [ref=f2e95]: 
+            - text: View Repository
+        - generic [ref=f2e97]:
+          - generic [ref=f2e98]:
+            - generic [ref=f2e99]: AI Services
+            - generic [ref=f2e100]: In Development
+          - heading "Cloud Native Translation & Speech Synthesis" [level=3] [ref=f2e101]
+          - paragraph [ref=f2e102]: Event-driven application orchestrating Amazon Translate for neural language processing and Amazon Polly for text-to-speech audio synthesis, caching synthesized audio objects in Amazon S3.
+          - generic [ref=f2e103]:
+            - generic [ref=f2e104]: Infrastructure Stack
+            - generic [ref=f2e105]: Amazon Translate • Amazon Polly • S3 • API Gateway
+          - generic [ref=f2e106]:
+            - generic [ref=f2e107]: Amazon Translate
+            - generic [ref=f2e108]: Amazon Polly
+            - generic [ref=f2e109]: S3 Storage
+            - generic [ref=f2e110]: Serverless
+          - link " View Repository" [ref=f2e112] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/Language_translation
+            - generic [ref=f2e113]: 
+            - text: View Repository
+        - generic [ref=f2e115]:
+          - generic [ref=f2e116]:
+            - generic [ref=f2e117]: Enterprise Systems
+            - generic [ref=f2e118]: In Development
+          - heading "Cloud Inventory Management Platform" [level=3] [ref=f2e119]
+          - paragraph [ref=f2e120]: Distributed inventory management system supporting real-time SKU tracking, presigned S3 URL file uploads, demand forecasting endpoints, and role-based operator dashboards.
+          - generic [ref=f2e121]:
+            - generic [ref=f2e122]: Infrastructure Stack
+            - generic [ref=f2e123]: API Gateway • S3 Presigned URLs • Lambda • RDS MySQL
+          - generic [ref=f2e124]:
+            - generic [ref=f2e125]: React Dashboard
+            - generic [ref=f2e126]: Presigned S3 URLs
+            - generic [ref=f2e127]: API Gateway
+            - generic [ref=f2e128]: Inventory Analytics
+          - link " View Repository" [ref=f2e130] [cursor=pointer]:
+            - /url: https://github.com/Nishchal-Panta/AWS_Inventory-management-system
+            - generic [ref=f2e131]: 
+            - text: View Repository
+    - generic [ref=f2e134]:
+      - generic [ref=f2e136]:
+        - generic [ref=f2e137]: Cloud Fellow • Nishchal Panta
+        - heading "Discuss Cloud Solutions" [level=3] [ref=f2e138]
+        - paragraph [ref=f2e139]: Interested in exploring architectural design patterns, serverless pipelines, or cloud engineering opportunities?
+        - generic [ref=f2e140]:
+          - link " Send a Message" [ref=f2e141] [cursor=pointer]:
+            - /url: index.html#contact
+            - generic [ref=f2e142]: 
+            - text: Send a Message
+          - link " All Projects" [ref=f2e143] [cursor=pointer]:
+            - /url: index.html#projects
+            - generic [ref=f2e144]: 
+            - text: All Projects
+      - generic [ref=f2e146]:
+        - heading "AWS Core Focus Areas" [level=3] [ref=f2e147]
+        - generic [ref=f2e148]:
+          - generic [ref=f2e149]:
+            - heading "Compute & Serverless" [level=4] [ref=f2e150]
+            - list [ref=f2e151]:
+              - listitem [ref=f2e152]: • AWS Lambda function orchestration
+              - listitem [ref=f2e153]: • API Gateway REST endpoint routing
+              - listitem [ref=f2e154]: • Amazon EC2 compute instances
+              - listitem [ref=f2e155]: • Containerized deployment concepts
+          - generic [ref=f2e156]:
+            - heading "Storage, Security & Data" [level=4] [ref=f2e157]
+            - list [ref=f2e158]:
+              - listitem [ref=f2e159]: • Amazon S3 storage & lifecycle rules
+              - listitem [ref=f2e160]: • IAM least-privilege policies
+              - listitem [ref=f2e161]: • CloudFront CDN distribution
+              - listitem [ref=f2e162]: • Amazon DynamoDB & RDS MySQL
+  - contentinfo [ref=f2e163]:
+    - generic [ref=f2e164]:
+      - generic [ref=f2e165]:
+        - generic [ref=f2e166]:
+          - heading "Nishchal Panta" [level=4] [ref=f2e167]
+          - paragraph [ref=f2e168]: Undergraduate Computer Scientist & AWS Cloud Practitioner building dependable software solutions.
+        - generic [ref=f2e169]:
+          - generic [ref=f2e170]:
+            - heading "Portfolio" [level=5] [ref=f2e171]
+            - list [ref=f2e172]:
+              - listitem [ref=f2e173]:
+                - link "About" [ref=f2e174] [cursor=pointer]:
+                  - /url: index.html#about
+              - listitem [ref=f2e175]:
+                - link "Skills" [ref=f2e176] [cursor=pointer]:
+                  - /url: index.html#skills
+              - listitem [ref=f2e177]:
+                - link "Projects" [ref=f2e178] [cursor=pointer]:
+                  - /url: index.html#projects
+              - listitem [ref=f2e179]:
+                - link "Certificates" [ref=f2e180] [cursor=pointer]:
+                  - /url: index.html#certifications
+          - generic [ref=f2e181]:
+            - heading "Direct Links" [level=5] [ref=f2e182]
+            - list [ref=f2e183]:
+              - listitem [ref=f2e184]:
+                - link "Resume (PDF)" [ref=f2e185] [cursor=pointer]:
+                  - /url: assets/files/Nishchal_Panta_CV.pdf
+              - listitem [ref=f2e186]:
+                - link "GitHub" [ref=f2e187] [cursor=pointer]:
+                  - /url: https://github.com/Nishchal-Panta
+              - listitem [ref=f2e188]:
+                - link "LinkedIn" [ref=f2e189] [cursor=pointer]:
+                  - /url: https://linkedin.com/in/nishchal-panta-3890b1292
+              - listitem [ref=f2e190]:
+                - link "Contact" [ref=f2e191] [cursor=pointer]:
+                  - /url: index.html#contact
+      - generic [ref=f2e192]:
+        - paragraph [ref=f2e193]: © 2026 Nishchal Panta. All rights reserved.
+        - paragraph [ref=f2e194]: Designed with intentional constraint • Semantic HTML5, Vanilla CSS & ES6 JS.

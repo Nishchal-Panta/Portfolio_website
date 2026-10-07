@@ -1,0 +1,204 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e9]:
+      - heading "Navigation Menu" [level=2] [ref=e10]
+      - generic [ref=e11]:
+        - link "Homepage" [ref=e13] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e16]:
+          - navigation "Global" [ref=e17]:
+            - list [ref=e18]:
+              - listitem [ref=e19]:
+                - button "Platform" [ref=e21] [cursor=pointer]
+              - listitem [ref=e24]:
+                - button "Solutions" [ref=e26] [cursor=pointer]
+              - listitem [ref=e29]:
+                - button "Resources" [ref=e31] [cursor=pointer]
+              - listitem [ref=e34]:
+                - button "Open Source" [ref=e36] [cursor=pointer]
+              - listitem [ref=e39]:
+                - button "Enterprise" [ref=e41] [cursor=pointer]
+              - listitem [ref=e44]:
+                - link "Pricing" [ref=e45] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=e46]:
+            - button "Search or jump to, type / to search" [ref=e48] [cursor=pointer]:
+              - generic [ref=e51]:
+                - generic [ref=e52]: Search
+                - generic [aria-hidden] [ref=e53]: /
+            - link "Sign in" [ref=e55] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta
+            - link "Sign up" [ref=e58] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E&source=header
+            - button "Appearance settings" [ref=e61] [cursor=pointer]
+  - main [ref=e67]:
+    - generic [ref=e70]:
+      - generic [ref=e71]:
+        - generic:
+          - generic:
+            - generic:
+              - img "@Nishchal-Panta"
+            - generic:
+              - strong: Nishchal-Panta
+              - generic:
+                - generic:
+                  - link "Follow":
+                    - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta
+      - navigation "User profile" [ref=e74]:
+        - link "Overview" [ref=e75] [cursor=pointer]:
+          - /url: /Nishchal-Panta
+        - link "Repositories 14" [ref=e78] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=repositories
+          - text: Repositories
+          - generic "14" [ref=e81]
+        - link "Projects" [ref=e82] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=projects
+        - link "Packages" [ref=e85] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=packages
+        - link "Stars 1" [ref=e88] [cursor=pointer]:
+          - /url: /Nishchal-Panta?tab=stars
+          - text: Stars
+          - generic "1" [ref=e91]
+    - generic [ref=e93]:
+      - generic [ref=e95]:
+        - generic:
+          - generic:
+            - generic:
+              - img "@Nishchal-Panta"
+            - generic:
+              - generic:
+                - strong: Nishchal-Panta
+            - generic:
+              - generic:
+                - generic:
+                  - link "Follow":
+                    - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - link [ref=e99] [cursor=pointer]:
+              - /url: https://avatars.githubusercontent.com/u/194055204?v=4
+              - img "View Nishchal-Panta's full-sized avatar" [ref=e100]
+            - heading "Nishchal-Panta" [level=1] [ref=e102]
+          - generic [ref=e104]:
+            - link "Follow" [ref=e111] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta
+            - generic [ref=e112]:
+              - generic [ref=e114]:
+                - link "7 followers" [ref=e115] [cursor=pointer]:
+                  - /url: https://github.com/Nishchal-Panta?tab=followers
+                - text: ·
+                - link "7 following" [ref=e118] [cursor=pointer]:
+                  - /url: https://github.com/Nishchal-Panta?tab=following
+              - list
+          - generic [ref=e119]:
+            - heading [level=2] [ref=e120]:
+              - link "Achievements" [ref=e121] [cursor=pointer]:
+                - /url: /Nishchal-Panta?tab=achievements
+            - link [ref=e123] [cursor=pointer]:
+              - /url: /Nishchal-Panta?achievement=quickdraw&tab=achievements
+              - 'img "Achievement: Quickdraw" [ref=e124]'
+          - generic [ref=e125]:
+            - heading "Highlights" [level=2] [ref=e126]
+            - list [ref=e127]:
+              - listitem [ref=e128]:
+                - 'generic "Label: Pro" [ref=e131]': Pro
+          - button "Block or report user" [ref=e133] [cursor=pointer]
+      - generic [ref=e138]:
+        - generic [ref=e140]:
+          - heading "Pinned Loading" [level=2] [ref=e141]:
+            - text: Pinned
+            - generic: Loading
+            - status
+          - list [ref=e143]:
+            - listitem [ref=e144]:
+              - generic [ref=e146]:
+                - generic [ref=e148]:
+                  - link "Cybersecurity_threat_detection" [ref=e152] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/Cybersecurity_threat_detection
+                  - text: Public
+                - paragraph [ref=e153]: This is a Neural Network model that detects cybersecurity threats and flags it as bot or benign(harmless)
+                - paragraph [ref=e154]:
+                  - generic [ref=e155]: Jupyter Notebook
+            - listitem [ref=e157]:
+              - generic [ref=e159]:
+                - generic [ref=e161]:
+                  - link "E-commerce_website" [ref=e165] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/E-commerce_website
+                  - text: Public
+                - paragraph [ref=e166]: A production-ready Laravel e-commerce platform built to sell wholesale-imported products in Nepal — manage catalog, inventory, orders and analytics from a single admin panel.
+                - paragraph [ref=e167]:
+                  - generic [ref=e168]: Blade
+            - listitem [ref=e170]:
+              - generic [ref=e172]:
+                - generic [ref=e174]:
+                  - link "PantaStoreApp" [ref=e178] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/PantaStoreApp
+                  - text: Public
+                - paragraph [ref=e179]: This repo contains an application I made to track the inventory of my retail store named 'Panta store', later on it would also have user login features for my customers to view the inventory , and …
+                - paragraph [ref=e180]:
+                  - generic [ref=e181]: Java
+            - listitem [ref=e183]:
+              - generic [ref=e185]:
+                - generic [ref=e187]:
+                  - link "Share-market_analysis" [ref=e191] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/Share-market_analysis
+                  - text: Public
+                - paragraph [ref=e192]
+                - paragraph [ref=e193]:
+                  - generic [ref=e194]: Jupyter Notebook
+            - listitem [ref=e196]:
+              - generic [ref=e198]:
+                - generic [ref=e200]:
+                  - link "Albratoburner/Hackathon-relay-hack" [ref=e204] [cursor=pointer]:
+                    - /url: /Albratoburner/Hackathon-relay-hack
+                  - text: Public
+                - paragraph [ref=e205]
+                - paragraph [ref=e206]:
+                  - generic [ref=e207]: Blade
+            - listitem [ref=e209]:
+              - generic [ref=e211]:
+                - generic [ref=e213]:
+                  - link "Kaushik22864/VeggieScan" [ref=e217] [cursor=pointer]:
+                    - /url: /Kaushik22864/VeggieScan
+                  - text: Public
+                - paragraph [ref=e218]: 🌿 VeggieScan – AI Veggie Disease Detector & Market Tracker VeggieScan is a bilingual (English/Nepali) AI-powered web app that helps farmers detect vegetable diseases from images and get treatment t…
+                - paragraph [ref=e219]:
+                  - generic [ref=e220]: Jupyter Notebook
+        - img "Loading" [ref=e226]
+  - contentinfo [ref=e229]:
+    - heading "Footer" [level=2] [ref=e230]
+    - generic [ref=e231]:
+      - generic [ref=e232]:
+        - link "GitHub Homepage" [ref=e233] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=e236]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e237]:
+        - heading "Footer navigation" [level=3] [ref=e238]
+        - list "Footer navigation" [ref=e239]:
+          - listitem [ref=e240]:
+            - link "Terms" [ref=e241] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e242]:
+            - link "Privacy" [ref=e243] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e244]:
+            - link "Security" [ref=e245] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e246]:
+            - link "Status" [ref=e247] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e248]:
+            - link "Community" [ref=e249] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e250]:
+            - link "Docs" [ref=e251] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e252]:
+            - link "Contact" [ref=e253] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e254]:
+            - button "Manage cookies" [ref=e256] [cursor=pointer]
+          - listitem [ref=e257]:
+            - button "Do not share my personal information" [ref=e259] [cursor=pointer]

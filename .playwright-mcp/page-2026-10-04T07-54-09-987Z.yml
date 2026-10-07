@@ -1,0 +1,408 @@
+- generic [active] [ref=f29e1]:
+  - generic [ref=f29e2]:
+    - generic [ref=f29e3]:
+      - link "Skip to content" [ref=f29e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=f29e9]:
+        - heading "Navigation Menu" [level=2] [ref=f29e10]
+        - generic [ref=f29e11]:
+          - link "Homepage" [ref=f29e13] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f29e16]:
+            - navigation "Global" [ref=f29e17]:
+              - list [ref=f29e18]:
+                - listitem [ref=f29e19]:
+                  - button "Platform" [ref=f29e21] [cursor=pointer]
+                - listitem [ref=f29e24]:
+                  - button "Solutions" [ref=f29e26] [cursor=pointer]
+                - listitem [ref=f29e29]:
+                  - button "Resources" [ref=f29e31] [cursor=pointer]
+                - listitem [ref=f29e34]:
+                  - button "Open Source" [ref=f29e36] [cursor=pointer]
+                - listitem [ref=f29e39]:
+                  - button "Enterprise" [ref=f29e41] [cursor=pointer]
+                - listitem [ref=f29e44]:
+                  - link "Pricing" [ref=f29e45] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=f29e46]:
+              - button "Search or jump to, type / to search" [ref=f29e48] [cursor=pointer]:
+                - generic [ref=f29e51]:
+                  - generic [ref=f29e52]: Search
+                  - generic [aria-hidden] [ref=f29e53]: /
+              - link "Sign in" [ref=f29e55] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FE-commerce_website%2Ftree%2Fmain%2Fdatabase%2Fmigrations
+              - link "Sign up" [ref=f29e58] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Ffiles%2Fdisambiguate&source=header-repo&source_repo=Nishchal-Panta%2FE-commerce_website
+              - button "Appearance settings" [ref=f29e61] [cursor=pointer]
+    - main [ref=f29e68]:
+      - generic [ref=f29e69]:
+        - generic [ref=f29e70]:
+          - generic [ref=f29e72]:
+            - link "Nishchal-Panta" [ref=f29e76] [cursor=pointer]:
+              - /url: /Nishchal-Panta
+            - generic [ref=f29e77]: /
+            - strong [ref=f29e78]:
+              - link "E-commerce_website" [ref=f29e79] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website
+            - generic [ref=f29e80]: Public
+          - generic [ref=f29e81]:
+            - list:
+              - listitem [ref=f29e82]:
+                - link "You must be signed in to change notification settings" [ref=f29e83] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FE-commerce_website
+                  - text: Notifications
+              - listitem [ref=f29e86]:
+                - link "Fork 0" [ref=f29e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FE-commerce_website
+                  - text: Fork
+                  - generic "0" [ref=f29e90]
+              - listitem [ref=f29e91]:
+                - link "You must be signed in to star a repository" [ref=f29e93] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FE-commerce_website
+                  - text: Star
+                  - generic "0 users starred this repository" [ref=f29e96]: "0"
+        - navigation "Repository" [ref=f29e97]:
+          - list [ref=f29e98]:
+            - listitem [ref=f29e99]:
+              - link "Code" [ref=f29e100] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website
+            - listitem [ref=f29e104]:
+              - link "Issues" [ref=f29e105] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/issues
+            - listitem [ref=f29e110]:
+              - link "Pull requests" [ref=f29e111] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/pulls
+            - listitem [ref=f29e115]:
+              - link "Actions" [ref=f29e116] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/actions
+            - listitem [ref=f29e120]:
+              - link "Projects" [ref=f29e121] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/projects
+            - listitem [ref=f29e125]:
+              - link "Security and quality" [ref=f29e126] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/security
+            - listitem [ref=f29e130]:
+              - link "Insights" [ref=f29e131] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/pulse
+      - generic [ref=f29e142]:
+        - generic [ref=f29e552]:
+          - generic [ref=f29e555]:
+            - generic [ref=f29e556]:
+              - generic [ref=f29e557]:
+                - heading "Collapse file tree" [level=2] [ref=f29e558]:
+                  - button "Collapse file tree" [expanded] [ref=f29e559] [cursor=pointer]
+                - heading "Files" [level=2] [ref=f29e563]
+              - generic [ref=f29e564]:
+                - button "main branch" [ref=f29e566] [cursor=pointer]:
+                  - generic [ref=f29e567]: main
+                - button "Search this repository (forward slash)" [ref=f29e572] [cursor=pointer]
+            - combobox "Go to file" [ref=f29e580]
+            - navigation "File Tree Navigation" [ref=f29e586]:
+              - tree "Files" [ref=f29e588]:
+                - treeitem "app" [level=1] [ref=f29e589]
+                - treeitem "bootstrap" [level=1] [ref=f29e601]
+                - treeitem "config" [level=1] [ref=f29e613]
+                - treeitem "database" [expanded] [level=1] [ref=f29e625]:
+                  - group "database" [ref=f29e637]:
+                    - treeitem "migrations" [expanded] [level=2] [ref=f29e638]:
+                      - group "migrations" [ref=f29e653]:
+                        - treeitem "2024_01_01_000000_create_users_table.php" [level=3] [ref=f29e654]
+                        - treeitem "2024_01_01_000001_create_password_reset_tokens_table.php" [level=3] [ref=f29e666]
+                        - treeitem "2024_01_01_000002_create_products_table.php" [level=3] [ref=f29e678]
+                        - treeitem "2024_01_01_000003_create_product_images_table.php" [level=3] [ref=f29e690]
+                        - treeitem "2024_01_01_000004_create_orders_table.php" [level=3] [ref=f29e702]
+                        - treeitem "2024_01_01_000005_create_order_items_table.php" [level=3] [ref=f29e714]
+                        - treeitem "2024_01_01_000006_create_carts_table.php" [level=3] [ref=f29e726]
+                        - treeitem "2024_01_01_000007_create_reviews_table.php" [level=3] [ref=f29e738]
+                        - treeitem "2024_01_01_000008_create_review_photos_table.php" [level=3] [ref=f29e750]
+                        - treeitem "2024_01_01_000009_create_bug_reports_table.php" [level=3] [ref=f29e762]
+                        - treeitem "2024_01_01_000010_create_faqs_table.php" [level=3] [ref=f29e774]
+                        - treeitem "2024_01_01_000011_create_settings_table.php" [level=3] [ref=f29e786]
+                        - treeitem "2026_01_06_155947_create_cache_table.php" [level=3] [ref=f29e798]
+                        - treeitem "2026_01_06_155955_create_jobs_table.php" [level=3] [ref=f29e810]
+                        - treeitem "2026_01_06_155956_create_sessions_table.php" [level=3] [ref=f29e822]
+                        - treeitem "2026_01_07_103043_add_cancellation_reason_to_orders_table.php" [level=3] [ref=f29e834]
+                        - treeitem "2026_01_07_103049_add_cancellation_reason_to_orders_table.php" [level=3] [ref=f29e846]
+                        - treeitem "2026_01_07_103805_add_coordinates_to_settings_table.php" [level=3] [ref=f29e858]
+                        - treeitem "2026_01_10_042206_add_status_to_users_table.php" [level=3] [ref=f29e870]
+                        - treeitem "2026_01_26_000001_create_return_reasons_table.php" [level=3] [ref=f29e882]
+                        - treeitem "2026_01_26_000002_create_returns_table.php" [level=3] [ref=f29e894]
+                    - treeitem "seeders" [level=2] [ref=f29e906]
+                - treeitem "docker" [level=1] [ref=f29e921]
+                - treeitem "public" [level=1] [ref=f29e933]
+                - treeitem "resources" [level=1] [ref=f29e945]
+                - treeitem "routes" [level=1] [ref=f29e957]
+                - treeitem "storage" [level=1] [ref=f29e969]
+                - treeitem ".env.example" [level=1] [ref=f29e981]
+                - treeitem ".gitignore" [level=1] [ref=f29e989]
+                - treeitem "ADMIN_PANEL_GUIDE.md" [level=1] [ref=f29e997]
+                - treeitem "Dockerfile" [level=1] [ref=f29e1005]
+                - treeitem "README.md" [level=1] [ref=f29e1013]
+                - treeitem "RETURN_SYSTEM_FIXES.md" [level=1] [ref=f29e1021]
+                - treeitem "RETURN_SYSTEM_GUIDE.md" [level=1] [ref=f29e1029]
+                - treeitem "TESTING_CHECKLIST.md" [level=1] [ref=f29e1037]
+                - treeitem "apply-fixes.ps1" [level=1] [ref=f29e1045]
+                - treeitem "artisan" [level=1] [ref=f29e1053]
+                - treeitem "composer.json" [level=1] [ref=f29e1061]
+                - treeitem "composer.lock" [level=1] [ref=f29e1069]
+                - treeitem "docker-compose.yml" [level=1] [ref=f29e1077]
+                - treeitem "package-lock.json" [level=1] [ref=f29e1085]
+                - treeitem "package.json" [level=1] [ref=f29e1093]
+                - treeitem "postcss.config.js" [level=1] [ref=f29e1101]
+                - treeitem "setup-returns.ps1" [level=1] [ref=f29e1109]
+                - treeitem "tailwind.config.js" [level=1] [ref=f29e1117]
+                - treeitem "vite.config.js" [level=1] [ref=f29e1125]
+          - slider "Draggable pane splitter" [ref=f29e1134]
+        - generic [ref=f29e145]:
+          - generic [ref=f29e149]:
+            - generic [ref=f29e1135]:
+              - navigation [ref=f29e1136]:
+                - heading "Breadcrumbs" [level=2] [ref=f29e1137]
+                - list [ref=f29e1138]:
+                  - listitem [ref=f29e1139]:
+                    - link "E-commerce_website" [ref=f29e1140] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main
+                  - listitem [ref=f29e1141]:
+                    - text: /
+                    - link "database" [ref=f29e1142] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/database
+              - generic [ref=f29e1143]:
+                - text: /
+                - heading "migrations" [level=1] [ref=f29e1144]
+                - text: /
+              - button "Copy path" [ref=f29e1145] [cursor=pointer]
+            - generic [ref=f29e180]:
+              - heading "Directory actions" [level=2] [ref=f29e181]
+              - heading "More options" [level=2] [ref=f29e189]
+              - button "More options" [ref=f29e190] [cursor=pointer]
+          - generic [ref=f29e193]:
+            - generic [ref=f29e195]:
+              - heading "Latest commit" [level=2] [ref=f29e196]
+              - generic [ref=f29e1149]:
+                - generic [ref=f29e1151]:
+                  - link [ref=f29e1152] [cursor=pointer]:
+                    - /url: /Nishchal-Panta
+                    - img "Nishchal-Panta" [ref=f29e1153]
+                  - link "commits by Nishchal-Panta" [ref=f29e1154] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/E-commerce_website/commits?author=Nishchal-Panta
+                    - text: Nishchal-Panta
+                - generic [ref=f29e1155]:
+                  - link "added a return feature" [ref=f29e1158] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/E-commerce_website/commit/3a5457025ef7d7a1cbb10a769141aa11b14faf6d
+                  - button "success" [ref=f29e1159] [cursor=pointer]
+              - generic [ref=f29e198]:
+                - generic [ref=f29e1163]:
+                  - link "Commit 3a54570" [ref=f29e1164] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/E-commerce_website/commit/3a5457025ef7d7a1cbb10a769141aa11b14faf6d
+                    - text: 3a54570
+                  - text: ·
+                  - generic "Jan 26, 2026, 10:41 PM GMT+5:45" [ref=f29e1165]: Jan 26, 20269 months ago
+                - generic [ref=f29e199]:
+                  - heading "History" [level=2] [ref=f29e200]
+                  - link "History" [ref=f29e201] [cursor=pointer]:
+                    - /url: /Nishchal-Panta/E-commerce_website/commits/main/database/migrations
+            - generic [ref=f29e205]:
+              - heading "Folders and files" [level=2] [ref=f29e206]
+              - table "Folders and files" [ref=f29e207]:
+                - rowgroup [ref=f29e208]:
+                  - row [ref=f29e209]:
+                    - columnheader "Name" [ref=f29e210]
+                    - columnheader "Last commit message" [ref=f29e211]
+                    - columnheader "Last commit date" [ref=f29e213]
+                - rowgroup [ref=f29e215]:
+                  - row [ref=f29e216]:
+                    - cell [ref=f29e217]:
+                      - heading "parent directory" [level=3] [ref=f29e218]
+                      - link "Parent directory" [ref=f29e219] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/tree/main/database
+                        - generic [ref=f29e220]: ..
+                  - row [ref=f29e1166]:
+                    - cell [ref=f29e224]:
+                      - link "2024_01_01_000000_create_users_table.php, (File)" [ref=f29e231] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000000_create_users_table.php
+                        - text: 2024_01_01_000000_create_users_table.php
+                    - cell [ref=f29e1167]:
+                      - link "initial commit" [ref=f29e1170] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1171]
+                  - row [ref=f29e1172]:
+                    - cell [ref=f29e238]:
+                      - link "2024_01_01_000001_create_password_reset_tokens_table.php, (File)" [ref=f29e245] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000001_create_password_reset_tokens_table.php
+                        - text: 2024_01_01_000001_create_password_reset_tokens_table.php
+                    - cell [ref=f29e1173]:
+                      - link "initial commit" [ref=f29e1176] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1177]
+                  - row [ref=f29e1178]:
+                    - cell [ref=f29e252]:
+                      - link "2024_01_01_000002_create_products_table.php, (File)" [ref=f29e259] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000002_create_products_table.php
+                        - text: 2024_01_01_000002_create_products_table.php
+                    - cell [ref=f29e1179]:
+                      - link "initial commit" [ref=f29e1182] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1183]
+                  - row [ref=f29e1184]:
+                    - cell [ref=f29e266]:
+                      - link "2024_01_01_000003_create_product_images_table.php, (File)" [ref=f29e273] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000003_create_product_images_table.php
+                        - text: 2024_01_01_000003_create_product_images_table.php
+                    - cell [ref=f29e1185]:
+                      - link "initial commit" [ref=f29e1188] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1189]
+                  - row [ref=f29e1190]:
+                    - cell [ref=f29e280]:
+                      - link "2024_01_01_000004_create_orders_table.php, (File)" [ref=f29e287] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000004_create_orders_table.php
+                        - text: 2024_01_01_000004_create_orders_table.php
+                    - cell [ref=f29e1191]:
+                      - link "initial commit" [ref=f29e1194] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1195]
+                  - row [ref=f29e1196]:
+                    - cell [ref=f29e294]:
+                      - link "2024_01_01_000005_create_order_items_table.php, (File)" [ref=f29e301] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000005_create_order_items_table.php
+                        - text: 2024_01_01_000005_create_order_items_table.php
+                    - cell [ref=f29e1197]:
+                      - link "initial commit" [ref=f29e1200] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1201]
+                  - row [ref=f29e1202]:
+                    - cell [ref=f29e308]:
+                      - link "2024_01_01_000006_create_carts_table.php, (File)" [ref=f29e315] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000006_create_carts_table.php
+                        - text: 2024_01_01_000006_create_carts_table.php
+                    - cell [ref=f29e1203]:
+                      - link "initial commit" [ref=f29e1206] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1207]
+                  - row [ref=f29e1208]:
+                    - cell [ref=f29e322]:
+                      - link "2024_01_01_000007_create_reviews_table.php, (File)" [ref=f29e329] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000007_create_reviews_table.php
+                        - text: 2024_01_01_000007_create_reviews_table.php
+                    - cell [ref=f29e1209]:
+                      - link "initial commit" [ref=f29e1212] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1213]
+                  - row [ref=f29e1214]:
+                    - cell [ref=f29e336]:
+                      - link "2024_01_01_000008_create_review_photos_table.php, (File)" [ref=f29e343] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000008_create_review_photos_table.php
+                        - text: 2024_01_01_000008_create_review_photos_table.php
+                    - cell [ref=f29e1215]:
+                      - link "initial commit" [ref=f29e1218] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1219]
+                  - row [ref=f29e1220]:
+                    - cell [ref=f29e350]:
+                      - link "2024_01_01_000009_create_bug_reports_table.php, (File)" [ref=f29e357] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000009_create_bug_reports_table.php
+                        - text: 2024_01_01_000009_create_bug_reports_table.php
+                    - cell [ref=f29e1221]:
+                      - link "initial commit" [ref=f29e1224] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1225]
+                  - row [ref=f29e1226]:
+                    - cell [ref=f29e364]:
+                      - link "2024_01_01_000010_create_faqs_table.php, (File)" [ref=f29e371] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000010_create_faqs_table.php
+                        - text: 2024_01_01_000010_create_faqs_table.php
+                    - cell [ref=f29e1227]:
+                      - link "initial commit" [ref=f29e1230] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1231]
+                  - row [ref=f29e1232]:
+                    - cell [ref=f29e378]:
+                      - link "2024_01_01_000011_create_settings_table.php, (File)" [ref=f29e385] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2024_01_01_000011_create_settings_table.php
+                        - text: 2024_01_01_000011_create_settings_table.php
+                    - cell [ref=f29e1233]:
+                      - link "initial commit" [ref=f29e1236] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1237]
+                  - row [ref=f29e1238]:
+                    - cell [ref=f29e392]:
+                      - link "2026_01_06_155947_create_cache_table.php, (File)" [ref=f29e399] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_06_155947_create_cache_table.php
+                        - text: 2026_01_06_155947_create_cache_table.php
+                    - cell [ref=f29e1239]:
+                      - link "initial commit" [ref=f29e1242] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1243]
+                  - row [ref=f29e1244]:
+                    - cell [ref=f29e406]:
+                      - link "2026_01_06_155955_create_jobs_table.php, (File)" [ref=f29e413] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_06_155955_create_jobs_table.php
+                        - text: 2026_01_06_155955_create_jobs_table.php
+                    - cell [ref=f29e1245]:
+                      - link "initial commit" [ref=f29e1248] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1249]
+                  - row [ref=f29e1250]:
+                    - cell [ref=f29e420]:
+                      - link "2026_01_06_155956_create_sessions_table.php, (File)" [ref=f29e427] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_06_155956_create_sessions_table.php
+                        - text: 2026_01_06_155956_create_sessions_table.php
+                    - cell [ref=f29e1251]:
+                      - link "initial commit" [ref=f29e1254] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/149b5da9a781b8b3716bfe46f9028356f560656b
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1255]
+                  - row [ref=f29e1256]:
+                    - cell [ref=f29e434]:
+                      - link "2026_01_07_103043_add_cancellation_reason_to_orders_table.php, (File)" [ref=f29e441] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_07_103043_add_cancellation_reason_to_orders_table.php
+                        - text: 2026_01_07_103043_add_cancellation_reason_to_orders_table.php
+                    - cell [ref=f29e1257]:
+                      - link "added more features" [ref=f29e1260] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/e3828804283e00e95f264dd20fea1d46be4692d4
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1261]
+                  - row [ref=f29e1262]:
+                    - cell [ref=f29e448]:
+                      - link "2026_01_07_103049_add_cancellation_reason_to_orders_table.php, (File)" [ref=f29e455] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_07_103049_add_cancellation_reason_to_orders_table.php
+                        - text: 2026_01_07_103049_add_cancellation_reason_to_orders_table.php
+                    - cell [ref=f29e1263]:
+                      - link "added more features" [ref=f29e1266] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/e3828804283e00e95f264dd20fea1d46be4692d4
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1267]
+                  - row [ref=f29e1268]:
+                    - cell [ref=f29e462]:
+                      - link "2026_01_07_103805_add_coordinates_to_settings_table.php, (File)" [ref=f29e469] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_07_103805_add_coordinates_to_settings_table.php
+                        - text: 2026_01_07_103805_add_coordinates_to_settings_table.php
+                    - cell [ref=f29e1269]:
+                      - link "added more features" [ref=f29e1272] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/e3828804283e00e95f264dd20fea1d46be4692d4
+                    - cell "Jan 7, 20269 months ago" [ref=f29e1273]
+                  - row [ref=f29e1274]:
+                    - cell [ref=f29e476]:
+                      - link "2026_01_10_042206_add_status_to_users_table.php, (File)" [ref=f29e483] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_10_042206_add_status_to_users_table.php
+                        - text: 2026_01_10_042206_add_status_to_users_table.php
+                    - cell [ref=f29e1275]:
+                      - link "ready to host" [ref=f29e1278] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/6cb20ed7a711428c8bee580d953dde633b1ff0b3
+                    - cell "Jan 10, 20269 months ago" [ref=f29e1279]
+                  - row [ref=f29e1280]:
+                    - cell [ref=f29e490]:
+                      - link "2026_01_26_000001_create_return_reasons_table.php, (File)" [ref=f29e497] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_26_000001_create_return_reasons_table.php
+                        - text: 2026_01_26_000001_create_return_reasons_table.php
+                    - cell [ref=f29e1281]:
+                      - link "added a return feature" [ref=f29e1284] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/3a5457025ef7d7a1cbb10a769141aa11b14faf6d
+                    - cell "Jan 26, 20269 months ago" [ref=f29e1285]
+                  - row [ref=f29e1286]:
+                    - cell [ref=f29e504]:
+                      - link "2026_01_26_000002_create_returns_table.php, (File)" [ref=f29e511] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/blob/main/database/migrations/2026_01_26_000002_create_returns_table.php
+                        - text: 2026_01_26_000002_create_returns_table.php
+                    - cell [ref=f29e1287]:
+                      - link "added a return feature" [ref=f29e1290] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/E-commerce_website/commit/3a5457025ef7d7a1cbb10a769141aa11b14faf6d
+                    - cell "Jan 26, 20269 months ago" [ref=f29e1291]
+  - alert [ref=f29e1292]

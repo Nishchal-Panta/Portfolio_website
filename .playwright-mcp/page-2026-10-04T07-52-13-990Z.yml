@@ -1,0 +1,472 @@
+- generic [active] [ref=f21e1]:
+  - generic [ref=f21e2]:
+    - generic [ref=f21e3]:
+      - link "Skip to content" [ref=f21e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=f21e9]:
+        - heading "Navigation Menu" [level=2] [ref=f21e10]
+        - generic [ref=f21e11]:
+          - link "Homepage" [ref=f21e13] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f21e16]:
+            - navigation "Global" [ref=f21e17]:
+              - list [ref=f21e18]:
+                - listitem [ref=f21e19]:
+                  - button "Platform" [ref=f21e21] [cursor=pointer]
+                - listitem [ref=f21e24]:
+                  - button "Solutions" [ref=f21e26] [cursor=pointer]
+                - listitem [ref=f21e29]:
+                  - button "Resources" [ref=f21e31] [cursor=pointer]
+                - listitem [ref=f21e34]:
+                  - button "Open Source" [ref=f21e36] [cursor=pointer]
+                - listitem [ref=f21e39]:
+                  - button "Enterprise" [ref=f21e41] [cursor=pointer]
+                - listitem [ref=f21e44]:
+                  - link "Pricing" [ref=f21e45] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=f21e46]:
+              - button "Search or jump to, type / to search" [ref=f21e48] [cursor=pointer]:
+                - generic [ref=f21e51]:
+                  - generic [ref=f21e52]: Search
+                  - generic [aria-hidden] [ref=f21e53]: /
+              - link "Sign in" [ref=f21e55] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FCybersecurity_threat_detection
+              - link "Sign up" [ref=f21e58] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Nishchal-Panta%2FCybersecurity_threat_detection
+              - button "Appearance settings" [ref=f21e61] [cursor=pointer]
+    - main [ref=f21e68]:
+      - generic [ref=f21e69]:
+        - generic [ref=f21e70]:
+          - generic [ref=f21e72]:
+            - link "Nishchal-Panta" [ref=f21e76] [cursor=pointer]:
+              - /url: /Nishchal-Panta
+            - generic [ref=f21e77]: /
+            - strong [ref=f21e78]:
+              - link "Cybersecurity_threat_detection" [ref=f21e79] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection
+            - generic [ref=f21e80]: Public
+          - generic [ref=f21e81]:
+            - list:
+              - listitem [ref=f21e82]:
+                - link "You must be signed in to change notification settings" [ref=f21e83] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FCybersecurity_threat_detection
+                  - text: Notifications
+              - listitem [ref=f21e86]:
+                - link "Fork 0" [ref=f21e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FCybersecurity_threat_detection
+                  - text: Fork
+                  - generic "0" [ref=f21e90]
+              - listitem [ref=f21e91]:
+                - link "You must be signed in to star a repository" [ref=f21e93] [cursor=pointer]:
+                  - /url: /login?return_to=%2FNishchal-Panta%2FCybersecurity_threat_detection
+                  - text: Star
+                  - generic "0 users starred this repository" [ref=f21e96]: "0"
+        - navigation "Repository" [ref=f21e97]:
+          - list [ref=f21e98]:
+            - listitem [ref=f21e99]:
+              - link "Code" [ref=f21e100] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection
+            - listitem [ref=f21e104]:
+              - link "Issues" [ref=f21e105] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/issues
+            - listitem [ref=f21e110]:
+              - link "Pull requests" [ref=f21e111] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/pulls
+            - listitem [ref=f21e115]:
+              - link "Actions" [ref=f21e116] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/actions
+            - listitem [ref=f21e120]:
+              - link "Projects" [ref=f21e121] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/projects
+            - listitem [ref=f21e125]:
+              - link "Security and quality" [ref=f21e126] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/security
+            - listitem [ref=f21e130]:
+              - link "Insights" [ref=f21e131] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/pulse
+      - generic [ref=f21e577]:
+        - generic [ref=f21e580]:
+          - generic [ref=f21e581]:
+            - generic [ref=f21e582]:
+              - button "main branch" [ref=f21e584] [cursor=pointer]:
+                - generic [ref=f21e585]: main
+              - generic [ref=f21e589]:
+                - link [ref=f21e590] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Cybersecurity_threat_detection/branches
+                  - generic [ref=f21e593]:
+                    - strong [ref=f21e594]: "1"
+                    - text: Branch
+                - link [ref=f21e595] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Cybersecurity_threat_detection/tags
+                  - generic [ref=f21e598]:
+                    - strong [ref=f21e599]: "0"
+                    - text: Tags
+            - generic [ref=f21e600]:
+              - combobox "Go to file" [ref=f21e608]
+              - button "Code" [ref=f21e609] [cursor=pointer]
+          - generic [ref=f21e612]:
+            - generic [ref=f21e613]:
+              - generic [ref=f21e615]:
+                - heading "Latest commit" [level=2] [ref=f21e616]
+                - generic [ref=f21e617]:
+                  - generic [ref=f21e619]:
+                    - link [ref=f21e620] [cursor=pointer]:
+                      - /url: /Nishchal-Panta
+                      - img "Nishchal-Panta" [ref=f21e621]
+                    - link "commits by Nishchal-Panta" [ref=f21e622] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Cybersecurity_threat_detection/commits?author=Nishchal-Panta
+                      - text: Nishchal-Panta
+                  - generic [ref=f21e623]:
+                    - link "Revise README for improved clarity and detail" [ref=f21e626] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Cybersecurity_threat_detection/commit/cdf6a658218a7211600751e6e6c010d7c170633c
+                    - button "Open commit details" [ref=f21e627] [cursor=pointer]
+                - generic [ref=f21e630]:
+                  - generic [ref=f21e632]:
+                    - link "Commit cdf6a65" [ref=f21e633] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Cybersecurity_threat_detection/commit/cdf6a658218a7211600751e6e6c010d7c170633c
+                      - text: cdf6a65
+                    - text: ·
+                    - generic "Jan 17, 2026, 7:23 PM GMT+5:45" [ref=f21e634]: Jan 17, 20269 months ago
+                  - generic [ref=f21e635]:
+                    - heading "History" [level=2] [ref=f21e636]
+                    - link "16 Commits" [ref=f21e637] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/Cybersecurity_threat_detection/commits/main/
+              - heading "Folders and files" [level=2] [ref=f21e640]
+              - table "Folders and files" [ref=f21e641]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message"
+                    - columnheader "Last commit date"
+                - rowgroup [ref=f21e642]:
+                  - row [ref=f21e643]:
+                    - cell [ref=f21e644]:
+                      - link "README.md, (File)" [ref=f21e651] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/Cybersecurity_threat_detection/blob/main/README.md
+                        - text: README.md
+                    - cell [ref=f21e652]:
+                      - link "Revise README for improved clarity and detail" [ref=f21e655] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/Cybersecurity_threat_detection/commit/cdf6a658218a7211600751e6e6c010d7c170633c
+                    - cell "Jan 17, 20269 months ago" [ref=f21e656]
+                  - row [ref=f21e658]:
+                    - cell [ref=f21e659]:
+                      - link "nn-cybersecurity_threat_detection.ipynb, (File)" [ref=f21e666] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/Cybersecurity_threat_detection/blob/main/nn-cybersecurity_threat_detection.ipynb
+                        - text: nn-cybersecurity_threat_detection.ipynb
+                    - cell [ref=f21e667]:
+                      - link "final commit" [ref=f21e670] [cursor=pointer]:
+                        - /url: /Nishchal-Panta/Cybersecurity_threat_detection/commit/b46b4ef504ae4cf3dd65995f7702fcbd26662836
+                    - cell "Nov 12, 202511 months ago" [ref=f21e671]
+            - generic [ref=f21e674]:
+              - generic [ref=f21e675]:
+                - heading "Repository files navigation" [level=2] [ref=f21e676]
+                - navigation "Repository files" [ref=f21e677]:
+                  - list [ref=f21e678]:
+                    - listitem [ref=f21e679]:
+                      - link "README" [ref=f21e680] [cursor=pointer]:
+                        - /url: "#"
+                - button "Outline" [ref=f21e685] [cursor=pointer]
+              - article [ref=f21e689]:
+                - generic [ref=f21e690]:
+                  - heading "🛡️ Neural Network–Based Cybersecurity Threat Detection" [level=1] [ref=f21e691]
+                  - 'link "Permalink: 🛡️ Neural Network–Based Cybersecurity Threat Detection" [ref=f21e692] [cursor=pointer]':
+                    - /url: "#️-neural-networkbased-cybersecurity-threat-detection"
+                - generic [ref=f21e695]:
+                  - heading "Overview" [level=2] [ref=f21e696]
+                  - 'link "Permalink: Overview" [ref=f21e697] [cursor=pointer]':
+                    - /url: "#overview"
+                - paragraph [ref=f21e700]:
+                  - text: This project implements a deep learning–based intrusion detection system (IDS) using a fully connected neural network built with PyTorch. The model is trained to classify network traffic as
+                  - strong [ref=f21e701]: Benign (0)
+                  - text: or
+                  - strong [ref=f21e702]: Bot (1)
+                  - text: using a real-world intrusion detection dataset.
+                - paragraph [ref=f21e703]: "The notebook demonstrates a full machine learning pipeline: data loading, cleaning, feature engineering, exploratory analysis, model definition and training, early stopping and LR scheduling, and detailed evaluation with visualizations and metrics."
+                - separator [ref=f21e704]
+                - generic [ref=f21e705]:
+                  - heading "✨ Key Features" [level=2] [ref=f21e706]
+                  - 'link "Permalink: ✨ Key Features" [ref=f21e707] [cursor=pointer]':
+                    - /url: "#-key-features"
+                - list [ref=f21e710]:
+                  - listitem [ref=f21e711]: End-to-end cybersecurity threat detection pipeline implemented in a Jupyter Notebook
+                  - listitem [ref=f21e712]: Multi-layer neural network implemented with PyTorch
+                  - listitem [ref=f21e713]: Robust data preprocessing and feature engineering steps
+                  - listitem [ref=f21e714]: Early stopping and ReduceLROnPlateau learning-rate scheduler
+                  - listitem [ref=f21e715]: "Detailed evaluation: confusion matrix, ROC/AUC, precision–recall, training curves"
+                  - listitem [ref=f21e716]: Designed for realistic intrusion-detection datasets (tabular features, mixed numeric/categorical)
+                - separator [ref=f21e717]
+                - generic [ref=f21e718]:
+                  - heading "📂 Dataset" [level=2] [ref=f21e719]
+                  - 'link "Permalink: 📂 Dataset" [ref=f21e720] [cursor=pointer]':
+                    - /url: "#-dataset"
+                - list [ref=f21e723]:
+                  - listitem [ref=f21e724]: "Format: CSV (IDS 2018–style dataset assumed)"
+                  - listitem [ref=f21e725]:
+                    - text: "Target label encoding:"
+                    - list [ref=f21e726]:
+                      - listitem [ref=f21e727]:
+                        - code [ref=f21e728]: Benign
+                        - text: →
+                        - code [ref=f21e729]: "0"
+                      - listitem [ref=f21e730]:
+                        - code [ref=f21e731]: Bot
+                        - text: →
+                        - code [ref=f21e732]: "1"
+                  - listitem [ref=f21e733]: Contains a mixture of numeric and categorical network traffic features
+                - paragraph [ref=f21e734]: "Important: The dataset path is currently hardcoded in the notebook. Update it before running:"
+                - generic [ref=f21e735]:
+                  - generic [ref=f21e736]: pd.read_csv("IDS-2018_Intrusion.csv")
+                  - button "Copy code to clipboard" [ref=f21e738] [cursor=pointer]
+                - separator [ref=f21e742]
+                - generic [ref=f21e743]:
+                  - heading "🔍 Data Preprocessing & Feature Engineering" [level=2] [ref=f21e744]
+                  - 'link "Permalink: 🔍 Data Preprocessing & Feature Engineering" [ref=f21e745] [cursor=pointer]':
+                    - /url: "#-data-preprocessing--feature-engineering"
+                - paragraph [ref=f21e748]: "The notebook includes the following preprocessing pipeline:"
+                - list [ref=f21e749]:
+                  - listitem [ref=f21e750]:
+                    - paragraph [ref=f21e751]: Data cleaning
+                    - list [ref=f21e752]:
+                      - listitem [ref=f21e753]: Missing value detection and handling
+                      - listitem [ref=f21e754]: Duplicate row/column checks
+                      - listitem [ref=f21e755]: Column name sanitization (trim whitespace)
+                  - listitem [ref=f21e756]:
+                    - paragraph [ref=f21e757]: Label encoding
+                    - list [ref=f21e758]:
+                      - listitem [ref=f21e759]: Convert human-readable labels to numeric
+                      - listitem [ref=f21e760]: Fallback factorization for unexpected labels
+                  - listitem [ref=f21e761]:
+                    - paragraph [ref=f21e762]: Categorical feature handling
+                    - list [ref=f21e763]:
+                      - listitem [ref=f21e764]: One-hot encoding for categorical features with ≤ 20 unique values
+                      - listitem [ref=f21e765]: Automatic exclusion of high-cardinality categorical columns
+                      - listitem [ref=f21e766]: Timestamp columns removed if present
+                  - listitem [ref=f21e767]:
+                    - paragraph [ref=f21e768]: Feature scaling
+                    - list [ref=f21e769]:
+                      - listitem [ref=f21e770]: StandardScaler (zero mean, unit variance) applied to numeric features
+                  - listitem [ref=f21e771]:
+                    - paragraph [ref=f21e772]: Train/test split
+                    - list [ref=f21e773]:
+                      - listitem [ref=f21e774]: 80% training, 20% testing
+                      - listitem [ref=f21e775]: Stratified split to preserve class balance
+                - separator [ref=f21e776]
+                - generic [ref=f21e777]:
+                  - heading "🧠 Neural Network Architecture" [level=2] [ref=f21e778]
+                  - 'link "Permalink: 🧠 Neural Network Architecture" [ref=f21e779] [cursor=pointer]':
+                    - /url: "#-neural-network-architecture"
+                - paragraph [ref=f21e782]: "A fully connected feedforward neural network (MLP):"
+                - list [ref=f21e783]:
+                  - listitem [ref=f21e784]: Input → 512 → 256 → 128 → Output (2 classes / logits)
+                - paragraph [ref=f21e785]: "Architecture details:"
+                - list [ref=f21e786]:
+                  - listitem [ref=f21e787]: "Activation: ReLU"
+                  - listitem [ref=f21e788]: "Regularization: Dropout (0.25)"
+                  - listitem [ref=f21e789]: "Weight initialization: uniform and Kaiming (He) initializers supported"
+                  - listitem [ref=f21e790]: "Output: raw logits (use CrossEntropyLoss)"
+                - paragraph [ref=f21e791]: "Layer pattern:"
+                - generic [ref=f21e792]:
+                  - code [ref=f21e794]: Linear → ReLU → Dropout Linear → ReLU → Dropout Linear → ReLU Linear → Output
+                  - button "Copy code to clipboard" [ref=f21e796] [cursor=pointer]
+                - separator [ref=f21e800]
+                - generic [ref=f21e801]:
+                  - heading "⚙️ Training Configuration" [level=2] [ref=f21e802]
+                  - 'link "Permalink: ⚙️ Training Configuration" [ref=f21e803] [cursor=pointer]':
+                    - /url: "#️-training-configuration"
+                - list [ref=f21e806]:
+                  - listitem [ref=f21e807]: "Loss function: CrossEntropyLoss"
+                  - listitem [ref=f21e808]: "Optimizer: SGD with momentum"
+                  - listitem [ref=f21e809]: "Learning rate: 0.001"
+                  - listitem [ref=f21e810]: "Weight decay: 1e-5"
+                  - listitem [ref=f21e811]: "Scheduler: ReduceLROnPlateau"
+                  - listitem [ref=f21e812]: "Max epochs: 50"
+                  - listitem [ref=f21e813]: "Early stopping patience: 5 epochs"
+                  - listitem [ref=f21e814]: "Device support: CPU / CUDA (auto-detected)"
+                - paragraph [ref=f21e815]: "Training logs per epoch:"
+                - list [ref=f21e816]:
+                  - listitem [ref=f21e817]: Training loss
+                  - listitem [ref=f21e818]: Validation loss
+                  - listitem [ref=f21e819]: Training accuracy
+                  - listitem [ref=f21e820]: Validation accuracy
+                - paragraph [ref=f21e821]: The notebook saves the best-performing model (based on validation accuracy).
+                - separator [ref=f21e822]
+                - generic [ref=f21e823]:
+                  - heading "📊 Model Evaluation" [level=2] [ref=f21e824]
+                  - 'link "Permalink: 📊 Model Evaluation" [ref=f21e825] [cursor=pointer]':
+                    - /url: "#-model-evaluation"
+                - paragraph [ref=f21e828]: "Evaluation components included in the notebook:"
+                - list [ref=f21e829]:
+                  - listitem [ref=f21e830]: "Classification metrics: accuracy, precision, recall, F1"
+                  - listitem [ref=f21e831]: ROC curve and AUC score
+                  - listitem [ref=f21e832]: Precision–Recall curve
+                  - listitem [ref=f21e833]: Confusion matrix visualization
+                  - listitem [ref=f21e834]: Training vs validation loss and accuracy curves
+                - paragraph [ref=f21e835]: These visualizations help diagnose overfitting, class imbalance issues, and generalization performance.
+                - separator [ref=f21e836]
+                - generic [ref=f21e837]:
+                  - heading "🚀 How to Run" [level=2] [ref=f21e838]
+                  - 'link "Permalink: 🚀 How to Run" [ref=f21e839] [cursor=pointer]':
+                    - /url: "#-how-to-run"
+                - list [ref=f21e842]:
+                  - listitem [ref=f21e843]: "Clone the repository:"
+                - generic [ref=f21e844]:
+                  - generic [ref=f21e845]: git clone https://github.com/Nishchal-Panta/Cybersecurity_threat_detection.git cd Cybersecurity_threat_detection
+                  - button "Copy code to clipboard" [ref=f21e847] [cursor=pointer]
+                - list [ref=f21e851]:
+                  - listitem [ref=f21e852]: "Create and activate a Python virtual environment:"
+                - generic [ref=f21e853]:
+                  - generic [ref=f21e854]:
+                    - text: python -m venv .venv source .venv/bin/activate
+                    - generic [ref=f21e855]: "# macOS / Linux"
+                    - text: .venv\Scripts\activate
+                    - generic [ref=f21e856]: "# Windows (PowerShell)"
+                  - button "Copy code to clipboard" [ref=f21e858] [cursor=pointer]
+                - list [ref=f21e862]:
+                  - listitem [ref=f21e863]: "Install required packages:"
+                - generic [ref=f21e864]:
+                  - generic [ref=f21e865]: pip install torch torchvision torchaudio torchmetrics scikit-learn pandas matplotlib seaborn jupyterlab
+                  - button "Copy code to clipboard" [ref=f21e867] [cursor=pointer]
+                - list [ref=f21e871]:
+                  - listitem [ref=f21e872]: "Update the dataset path in the notebook to point to your local CSV file:"
+                - generic [ref=f21e873]:
+                  - generic [ref=f21e874]: pd.read_csv("path/to/IDS-2018_Intrusion.csv")
+                  - button "Copy code to clipboard" [ref=f21e876] [cursor=pointer]
+                - list [ref=f21e880]:
+                  - listitem [ref=f21e881]: "Launch Jupyter and run all cells:"
+                - generic [ref=f21e882]:
+                  - generic [ref=f21e883]:
+                    - text: jupyter lab
+                    - generic [ref=f21e884]: "# or jupyter notebook"
+                  - button "Copy code to clipboard" [ref=f21e886] [cursor=pointer]
+                - separator [ref=f21e890]
+                - generic [ref=f21e891]:
+                  - heading "🔮 Possible Improvements" [level=2] [ref=f21e892]
+                  - 'link "Permalink: 🔮 Possible Improvements" [ref=f21e893] [cursor=pointer]':
+                    - /url: "#-possible-improvements"
+                - list [ref=f21e896]:
+                  - listitem [ref=f21e897]: Support for multi-class attack detection (more attack labels beyond Bot/Benign)
+                  - listitem [ref=f21e898]: Use CNN / LSTM / Transformer models for sequence/time-series traffic data
+                  - listitem [ref=f21e899]: Feature selection (mutual information, recursive feature elimination, PCA)
+                  - listitem [ref=f21e900]: Hyperparameter tuning (Optuna, Ray Tune)
+                  - listitem [ref=f21e901]: Deploy as a real-time IDS API (FastAPI + Docker)
+                  - listitem [ref=f21e902]: Integrate with Spark for large-scale traffic logs and streaming ingestion
+                  - listitem [ref=f21e903]: Add explainability (SHAP) to help SOC analysts interpret alerts
+                - separator [ref=f21e904]
+                - generic [ref=f21e905]:
+                  - heading "🧪 Technologies Used" [level=2] [ref=f21e906]
+                  - 'link "Permalink: 🧪 Technologies Used" [ref=f21e907] [cursor=pointer]':
+                    - /url: "#-technologies-used"
+                - list [ref=f21e910]:
+                  - listitem [ref=f21e911]: Python
+                  - listitem [ref=f21e912]: PyTorch
+                  - listitem [ref=f21e913]: TorchMetrics
+                  - listitem [ref=f21e914]: Scikit-learn
+                  - listitem [ref=f21e915]: Pandas / NumPy
+                  - listitem [ref=f21e916]: Matplotlib / Seaborn
+                  - listitem [ref=f21e917]: JupyterLab / Jupyter Notebook
+                - separator [ref=f21e918]
+                - generic [ref=f21e919]:
+                  - heading "📜 License" [level=2] [ref=f21e920]
+                  - 'link "Permalink: 📜 License" [ref=f21e921] [cursor=pointer]':
+                    - /url: "#-license"
+                - paragraph [ref=f21e924]: This project is provided for academic and educational use. Dataset usage must comply with the original dataset license. Add a LICENSE file (e.g. MIT) if you intend to release code under a permissive license.
+                - separator [ref=f21e925]
+                - generic [ref=f21e926]:
+                  - heading "👤 Author" [level=2] [ref=f21e927]
+                  - 'link "Permalink: 👤 Author" [ref=f21e928] [cursor=pointer]':
+                    - /url: "#-author"
+                - paragraph [ref=f21e931]:
+                  - strong [ref=f21e932]: Nishchal Panta
+                  - text: BCS Student | Machine Learning & Data Science Enthusiast
+        - generic [ref=f21e935]:
+          - generic [ref=f21e936]:
+            - heading "About" [level=2] [ref=f21e937]
+            - paragraph [ref=f21e938]: This is a Neural Network model that detects cybersecurity threats and flags it as bot or benign(harmless)
+            - heading "Resources" [level=3] [ref=f21e939]
+            - link "Readme" [ref=f21e941] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+            - generic [ref=f21e944]:
+              - link "Activity" [ref=f21e947] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/activity
+              - generic [ref=f21e950]:
+                - heading "Stars" [level=3] [ref=f21e951]
+                - generic [ref=f21e953]:
+                  - strong [ref=f21e956]: "0"
+                  - text: stars
+                - heading "Watchers" [level=3] [ref=f21e957]
+                - generic [ref=f21e959]:
+                  - strong [ref=f21e962]: "0"
+                  - text: watching
+                - heading "Forks" [level=3] [ref=f21e963]
+                - link [ref=f21e965] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Cybersecurity_threat_detection/forks
+                  - strong [ref=f21e969]: "0"
+                  - text: forks
+            - link "Report repository" [ref=f21e971] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FCybersecurity_threat_detection&report=Nishchal-Panta+%28user%29
+          - generic [ref=f21e972]:
+            - heading [level=2] [ref=f21e973]:
+              - link "Releases" [ref=f21e975] [cursor=pointer]:
+                - /url: /Nishchal-Panta/Cybersecurity_threat_detection/releases
+            - generic [ref=f21e976]: No releases published
+          - generic [ref=f21e977]:
+            - heading "Contributors (1)" [level=2] [ref=f21e978]:
+              - generic [ref=f21e979]:
+                - link "Contributors" [ref=f21e980] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Cybersecurity_threat_detection/graphs/contributors
+                - generic [aria-hidden] [ref=f21e981]: "1"
+                - generic [ref=f21e982]: (1)
+            - list [ref=f21e983]:
+              - listitem [ref=f21e984]:
+                - link [ref=f21e985] [cursor=pointer]:
+                  - /url: /Nishchal-Panta
+                  - img "@Nishchal-Panta" [ref=f21e986]
+                - generic "Nishchal-Panta" [ref=f21e987]:
+                  - link [ref=f21e988] [cursor=pointer]:
+                    - /url: /Nishchal-Panta
+                    - strong [ref=f21e989]: Nishchal-Panta
+          - generic [ref=f21e990]:
+            - heading "Languages" [level=2] [ref=f21e991]
+            - 'progressbar "Jupyter Notebook: 100%" [ref=f21e994]'
+            - list [ref=f21e995]:
+              - listitem [ref=f21e996]:
+                - link "Jupyter Notebook 100%" [ref=f21e997] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/Cybersecurity_threat_detection/search?l=jupyter-notebook
+                  - generic [ref=f21e999]: Jupyter Notebook
+                  - generic [ref=f21e1000]: 100%
+    - contentinfo [ref=f21e535]:
+      - heading "Footer" [level=2] [ref=f21e536]
+      - generic [ref=f21e537]:
+        - generic [ref=f21e538]:
+          - link "GitHub Homepage" [ref=f21e539] [cursor=pointer]:
+            - /url: https://github.com
+          - generic [ref=f21e542]: © 2026 GitHub, Inc.
+        - navigation "Footer" [ref=f21e543]:
+          - heading "Footer navigation" [level=3] [ref=f21e544]
+          - list "Footer navigation" [ref=f21e545]:
+            - listitem [ref=f21e546]:
+              - link "Terms" [ref=f21e547] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+            - listitem [ref=f21e548]:
+              - link "Privacy" [ref=f21e549] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+            - listitem [ref=f21e550]:
+              - link "Security" [ref=f21e551] [cursor=pointer]:
+                - /url: https://github.com/security
+            - listitem [ref=f21e552]:
+              - link "Status" [ref=f21e553] [cursor=pointer]:
+                - /url: https://www.githubstatus.com/
+            - listitem [ref=f21e554]:
+              - link "Community" [ref=f21e555] [cursor=pointer]:
+                - /url: https://github.community/
+            - listitem [ref=f21e556]:
+              - link "Docs" [ref=f21e557] [cursor=pointer]:
+                - /url: https://docs.github.com/
+            - listitem [ref=f21e558]:
+              - link "Contact" [ref=f21e559] [cursor=pointer]:
+                - /url: https://support.github.com?tags=dotcom-footer
+            - listitem [ref=f21e560]:
+              - button "Manage cookies" [ref=f21e562] [cursor=pointer]
+            - listitem [ref=f21e563]:
+              - button "Do not share my personal information" [ref=f21e565] [cursor=pointer]
+  - alert [ref=f21e1002]

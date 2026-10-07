@@ -1,632 +1,588 @@
 /**
- * Nishchal Panta Portfolio - Main JavaScript
- * Handles interactivity, animations, and dynamic features
+ * Nishchal Panta - Portfolio Interactivity Engine
+ * High-performance, dependency-free vanilla JavaScript.
+ * Implements Motion Primitives (Spotlight & Filter Tabs) and Animata micro-interactions.
  */
 
-// ============================================
-// DOM Elements
-// ============================================
+'use strict';
 
-const themeToggle = document.getElementById('themeToggle');
-const menuToggle = document.getElementById('menuToggle');
-const navbar = document.getElementById('navbar');
-const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
-const cursor = document.getElementById('cursor');
-const typingText = document.querySelector('.typing-text');
-
-// ============================================
+// ==========================================================================
 // Theme Management
-// ============================================
-
-class ThemeManager {
+// ==========================================================================
+class ThemeController {
     constructor() {
-        this.theme = this.loadTheme();
+        this.toggleBtn = document.getElementById('themeToggle');
+        this.themeIcon = document.getElementById('themeIcon');
+        this.html = document.documentElement;
         this.init();
     }
 
-    loadTheme() {
-        // Check localStorage first
-        const saved = localStorage.getItem('theme');
-        if (saved) return saved;
-
-        // Check system preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
+    init() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            this.setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            this.setTheme('light');
+        } else {
+            this.setTheme('dark');
         }
 
-        return 'light';
+        if (this.toggleBtn) {
+            this.toggleBtn.addEventListener('click', () => this.toggleTheme());
+        }
+
+        // Listen for OS system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                this.setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
     }
 
-    init() {
-        this.applyTheme(this.theme);
-        themeToggle.addEventListener('click', () => this.toggle());
-    }
-
-    applyTheme(theme) {
-        const root = document.documentElement;
-        root.setAttribute('data-theme', theme);
+    setTheme(theme) {
+        this.html.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        this.updateToggleIcon();
+        this.updateIcon(theme);
     }
 
-    toggle() {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-        this.applyTheme(this.theme);
+    toggleTheme() {
+        const currentTheme = this.html.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
     }
 
-    updateToggleIcon() {
-        const icon = themeToggle.querySelector('i');
-        if (this.theme === 'dark') {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
+    updateIcon(theme) {
+        if (!this.themeIcon) return;
+        if (theme === 'dark') {
+            this.themeIcon.className = 'fas fa-sun';
+            this.toggleBtn.setAttribute('title', 'Switch to light mode');
+            this.toggleBtn.setAttribute('aria-label', 'Switch to light mode');
         } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+            this.themeIcon.className = 'fas fa-moon';
+            this.toggleBtn.setAttribute('title', 'Switch to dark mode');
+            this.toggleBtn.setAttribute('aria-label', 'Switch to dark mode');
         }
     }
 }
 
-// ============================================
-// Mobile Menu Management
-// ============================================
-
-class MobileMenu {
+// ==========================================================================
+// Motion Primitives - Spotlight Card Effect
+// Calculates dynamic mouse position for radial gradient border sheen
+// ==========================================================================
+class SpotlightEffect {
     constructor() {
+        this.cards = document.querySelectorAll('.spotlight-card');
         this.init();
     }
 
     init() {
-        menuToggle.addEventListener('click', () => this.toggle());
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => this.close());
+        if (!this.cards.length) return;
+
+        // Skip intensive mouse tracking if reduced motion is preferred
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        this.cards.forEach((card) => {
+            card.addEventListener('mousemove', (e) => this.handleMouseMove(e, card));
+            card.addEventListener('mouseleave', () => this.handleMouseLeave(card));
         });
     }
 
-    toggle() {
-        navMenu.classList.toggle('active');
+    handleMouseMove(e, card) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
     }
 
-    close() {
-        navMenu.classList.remove('active');
+    handleMouseLeave(card) {
+        card.style.setProperty('--mouse-x', '-200px');
+        card.style.setProperty('--mouse-y', '-200px');
     }
 }
 
-// ============================================
-// Typing Animation
-// ============================================
-
-class TypingAnimation {
-    constructor() {
-        this.roles = [
-            'Software Engineering Student',
-            'AWS Cloud Learner',
-            'Backend Developer',
-            'Full-Stack Developer',
-            'ML Enthusiast'
-        ];
-        this.currentIndex = 0;
-        this.isDeleting = false;
-        this.speed = 100;
-        this.deleteSpeed = 50;
-        this.pauseTime = 1500;
-        this.init();
-    }
-
-    init() {
-        if (typingText && cursor) {
-            this.type();
+// ==========================================================================
+// Segmented Filter Tabs (Projects & Certifications)
+// ==========================================================================
+class FilterTabs {
+    constructor(navSelector, itemsSelector, categoryAttr = 'data-category') {
+        this.nav = document.querySelector(navSelector);
+        this.items = document.querySelectorAll(itemsSelector);
+        this.categoryAttr = categoryAttr;
+        if (this.nav && this.items.length) {
+            this.init();
         }
     }
 
-    type() {
-        const current = this.roles[this.currentIndex];
-        const fullText = typingText.textContent;
+    init() {
+        const buttons = this.nav.querySelectorAll('.filter-btn');
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                const targetFilter = e.currentTarget.getAttribute('data-filter') || e.currentTarget.getAttribute('data-cert-filter');
+                this.setActiveTab(buttons, e.currentTarget);
+                this.filterItems(targetFilter);
+            });
+        });
+    }
 
-        if (this.isDeleting) {
-            typingText.textContent = fullText.substring(0, fullText.length - 1);
+    setActiveTab(buttons, activeBtn) {
+        buttons.forEach((btn) => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
+        activeBtn.classList.add('active');
+        activeBtn.setAttribute('aria-selected', 'true');
+    }
 
-            if (fullText.length === 0) {
-                this.isDeleting = false;
-                this.currentIndex = (this.currentIndex + 1) % this.roles.length;
-                setTimeout(() => this.type(), 500);
-                return;
-            }
-
-            setTimeout(() => this.type(), this.deleteSpeed);
-        } else {
-            if (fullText.length < current.length) {
-                typingText.textContent = current.substring(0, fullText.length + 1);
-                setTimeout(() => this.type(), this.speed);
+    filterItems(category) {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.items.forEach((item) => {
+            const itemCat = item.getAttribute(this.categoryAttr);
+            const show = category === 'all' || itemCat === category;
+            if (show) {
+                item.style.display = '';
+                if (reduceMotion) {
+                    item.style.opacity = '1';
+                    return;
+                }
+                item.classList.add('filter-fade-out');
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        item.classList.remove('filter-fade-out');
+                        item.style.opacity = '1';
+                    });
+                });
             } else {
-                setTimeout(() => {
-                    this.isDeleting = true;
-                    this.type();
-                }, this.pauseTime);
+                item.style.display = 'none';
+                item.style.opacity = '0';
             }
-        }
-    }
-}
-
-// ============================================
-// Scroll Reveal Effect
-// ============================================
-
-class ScrollReveal {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.animateElement(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe all revealable elements
-        const revealElements = document.querySelectorAll(
-            '.feature-card, .project-card, .cert-card, .skill-category, .timeline-item'
-        );
-
-        revealElements.forEach(el => {
-            el.classList.add('reveal');
-            observer.observe(el);
-        });
-
-        // Staggered animations for multiple items
-        this.setupStaggeredAnimations();
-        this.setupSkillBarAnimations();
-    }
-
-    animateElement(element) {
-        element.classList.add('active');
-        
-        // Apply different animations based on element type
-        if (element.classList.contains('project-card')) {
-            element.style.animation = 'liftIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
-        } else if (element.classList.contains('cert-card')) {
-            element.style.animation = 'liftIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
-        } else if (element.classList.contains('timeline-item')) {
-            element.style.animation = 'slideInLeft 0.6s ease-out forwards';
-        } else if (element.classList.contains('feature-card')) {
-            element.style.animation = 'fadeUp 0.5s ease-out forwards';
-        } else if (element.classList.contains('skill-category')) {
-            // When skill category is animated, make child stagger items visible
-            const staggerItems = element.querySelectorAll('.stagger-item');
-            staggerItems.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('visible');
-                }, index * 100);
-            });
-        }
-    }
-
-    setupStaggeredAnimations() {
-        // Stagger animations for skill tags within categories
-        const skillCategories = document.querySelectorAll('.skill-category');
-        
-        skillCategories.forEach(category => {
-            const tags = category.querySelectorAll('.skill-tag');
-            tags.forEach((tag, index) => {
-                tag.classList.add('stagger-item');
-            });
-        });
-    }
-
-    setupSkillBarAnimations() {
-        const observerOptions = {
-            threshold: 0.7,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bars = entry.target.querySelectorAll('.skill-bar');
-                    bars.forEach((bar, index) => {
-                        setTimeout(() => {
-                            const fillDiv = bar.querySelector('div');
-                            if (fillDiv) {
-                                fillDiv.style.animation = 'skillFill 1s ease-out forwards';
-                            }
-                        }, index * 100);
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        const skillsSections = document.querySelectorAll('.skills-grid');
-        skillsSections.forEach(section => {
-            observer.observe(section);
         });
     }
 }
 
-// ============================================
-// Navbar Management
-// ============================================
-
-class NavbarManager {
+// ==========================================================================
+// Animata - Copy Email Chip Micro-interaction
+// ==========================================================================
+class CopyEmailAction {
     constructor() {
-        this.lastScrollTop = 0;
+        this.btn = document.getElementById('copyEmailBtn');
+        this.tooltip = document.getElementById('copyTooltip');
+        if (this.btn) {
+            this.init();
+        }
+    }
+
+    init() {
+        this.btn.addEventListener('click', async () => {
+            const email = this.btn.getAttribute('data-email') || 'nishchalpanta426@gmail.com';
+            try {
+                await navigator.clipboard.writeText(email);
+                this.showSuccess();
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                this.showSuccess();
+            }
+        });
+    }
+
+    showSuccess() {
+        this.btn.classList.add('copied');
+        const icon = this.btn.querySelector('i');
+        const btnText = this.btn.querySelector('.btn-text');
+        
+        if (icon) icon.className = 'fas fa-check';
+        if (btnText) btnText.textContent = 'Copied!';
+        if (this.tooltip) this.tooltip.textContent = 'Copied to clipboard!';
+
+        setTimeout(() => {
+            this.btn.classList.remove('copied');
+            if (icon) icon.className = 'fas fa-copy';
+            if (btnText) btnText.textContent = 'Copy Email';
+            if (this.tooltip) this.tooltip.textContent = 'Click to copy';
+        }, 2200);
+    }
+}
+
+// ==========================================================================
+// Mobile Navigation Menu Controller
+// ==========================================================================
+class MobileNavController {
+    constructor() {
+        this.menuToggle = document.getElementById('menuToggle');
+        this.navMenu = document.getElementById('navMenu');
+        this.navLinks = document.querySelectorAll('.nav-link');
         this.init();
     }
 
     init() {
-        window.addEventListener('scroll', () => this.handleScroll());
-        this.setupSmoothScroll();
+        if (!this.menuToggle || !this.navMenu) return;
+
+        this.menuToggle.addEventListener('click', () => this.toggleMenu());
+
+        // Close when clicking nav links
+        this.navLinks.forEach((link) => {
+            link.addEventListener('click', () => this.closeMenu());
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.navMenu.classList.contains('active')) {
+                this.closeMenu();
+            }
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (
+                this.navMenu.classList.contains('active') &&
+                !this.navMenu.contains(e.target) &&
+                !this.menuToggle.contains(e.target)
+            ) {
+                this.closeMenu();
+            }
+        });
     }
 
-    handleScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Add shadow on scroll
-        if (scrollTop > 10) {
-            navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+    toggleMenu() {
+        const isOpen = this.navMenu.classList.contains('active');
+        if (isOpen) {
+            this.closeMenu();
         } else {
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            this.openMenu();
         }
-
-        this.lastScrollTop = scrollTop;
     }
 
-    setupSmoothScroll() {
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const target = document.querySelector(targetId);
+    openMenu() {
+        this.navMenu.classList.add('active');
+        this.menuToggle.setAttribute('aria-expanded', 'true');
+        const icon = this.menuToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-times';
+    }
 
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+    closeMenu() {
+        this.navMenu.classList.remove('active');
+        this.menuToggle.setAttribute('aria-expanded', 'false');
+        const icon = this.menuToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
     }
 }
 
-// ============================================
-// Contact Form Handler
-// ============================================
-
-const CONTACT_API_URL = "https://ue0l82ocg4.execute-api.us-east-1.amazonaws.com/contact";
-
-class ContactForm {
+// ==========================================================================
+// Active Navigation Spy (IntersectionObserver)
+// ==========================================================================
+class NavigationObserver {
     constructor() {
-        this.API_URL = CONTACT_API_URL;
+        this.sections = document.querySelectorAll('section[id]');
+        this.navLinks = document.querySelectorAll('.nav-link');
         this.init();
     }
 
     init() {
-        const form = document.getElementById("contact-form");
-        if (form) {
-            form.addEventListener("submit", (e) => this.handleSubmit(e));
-        }
+        if (!this.sections.length || !this.navLinks.length) return;
+
+        const options = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    this.setActiveLink(currentId);
+                }
+            });
+        }, options);
+
+        this.sections.forEach((sec) => observer.observe(sec));
     }
 
-    async handleSubmit(e) {
-        e.preventDefault();
+    setActiveLink(id) {
+        this.navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+}
 
-        const form = document.getElementById("contact-form");
-        const statusEl = document.getElementById("contact-status");
-        statusEl.textContent = "Sending...";
-        statusEl.className = "contact-status sending";
+// ==========================================================================
+// Contact Form Integration (AWS SES API Gateway)
+// ==========================================================================
+class ContactFormHandler {
+    constructor() {
+        this.form = document.getElementById('contact-form');
+        this.statusBox = document.getElementById('contact-status');
+        this.submitBtn = document.getElementById('submitBtn');
+        this.apiUrl = 'https://ue0l82ocg4.execute-api.us-east-1.amazonaws.com/contact';
+        this.init();
+    }
 
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
+    init() {
+        if (!this.form) return;
+
+        this.form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await this.handleSubmit();
+        });
+    }
+
+    async handleSubmit() {
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const message = messageInput.value.trim();
+
+        // Basic front-end validation
+        if (!name || !email || !message) {
+            this.showStatus('Please provide your name, email, and a message.', 'error');
+            return;
+        }
+
+        // Email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            this.showStatus('Please enter a valid email address.', 'error');
+            return;
+        }
+
+        this.setLoading(true);
+        this.showStatus('Sending message...', 'sending');
 
         try {
-            const res = await fetch(this.API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, message }),
+            const response = await fetch(this.apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, message })
             });
 
-            const data = await res.json().catch(() => ({}));
-            if (!res.ok || !data.ok) throw new Error(data.error || "Failed to send");
+            const data = await response.json().catch(() => ({}));
 
-            statusEl.textContent = "Sent successfully!";
-            statusEl.className = "contact-status success";
-            form.reset();
-            
+            if (!response.ok || !data.ok) {
+                throw new Error(data.error || 'Failed to send message');
+            }
+
+            this.showStatus('Thank you! Your message has been sent successfully.', 'success');
+            this.form.reset();
+
+            // Clear success status after 6 seconds
             setTimeout(() => {
-                statusEl.textContent = "";
-                statusEl.className = "contact-status";
-            }, 5000);
-        } catch (err) {
-            console.error('Contact form error:', err);
-            let errorMsg = err.message;
+                if (this.statusBox.classList.contains('success')) {
+                    this.statusBox.style.display = 'none';
+                    this.statusBox.className = 'contact-status';
+                }
+            }, 6000);
 
-            if (errorMsg.includes('Failed to fetch') || errorMsg.includes('CORS')) {
-                errorMsg = 'Connection error - please check the Amazon SES API Gateway configuration in script.js';
+        } catch (error) {
+            console.error('Contact Form Transmission Error:', error);
+            let displayMsg = 'Unable to send message at this time. Please reach out directly to nishchalpanta426@gmail.com.';
+            if (error.message && !error.message.includes('Failed to fetch')) {
+                displayMsg = `Notice: ${error.message}`;
             }
-            
-            statusEl.textContent = `Error: ${errorMsg}`;
-            statusEl.className = "contact-status error";
+            this.showStatus(displayMsg, 'error');
+        } finally {
+            this.setLoading(false);
         }
     }
-}
 
-// ============================================
-// Smooth Scroll Behavior
-// ============================================
+    setLoading(isLoading) {
+        if (!this.submitBtn) return;
+        this.submitBtn.disabled = isLoading;
+        if (isLoading) {
+            this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        } else {
+            this.submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        }
+    }
 
-function addScrollBehavior() {
-    // Add CSS for animations if not already present
-    if (!document.querySelector('style[data-scroll-behavior]')) {
-        const style = document.createElement('style');
-        style.setAttribute('data-scroll-behavior', 'true');
-        style.textContent = `
-            @keyframes slideInDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            @keyframes slideOutUp {
-                from {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                to {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
+    showStatus(message, type) {
+        if (!this.statusBox) return;
+        this.statusBox.textContent = message;
+        this.statusBox.className = `contact-status ${type}`;
+        this.statusBox.style.display = 'block';
     }
 }
 
-// ============================================
-// Parallax Effect (Optional)
-// ============================================
-
-class ParallaxEffect {
+// ==========================================================================
+// Scroll Progress (functional position indicator)
+// ==========================================================================
+class ScrollProgress {
     constructor() {
-        this.init();
+        this.bar = document.getElementById('scrollProgress');
+        this.ticking = false;
+        if (this.bar) {
+            this.init();
+        }
     }
 
     init() {
-        window.addEventListener('scroll', () => this.handleScroll());
-        // Use requestAnimationFrame for smooth parallax
-        window.addEventListener('scroll', () => this.requestParallaxUpdate());
-    }
-
-    handleScroll() {
-        const heroContent = document.querySelector('.hero-content');
-        if (heroContent) {
-            const scrollPosition = window.pageYOffset;
-            // Soft parallax effect - slower movement
-            heroContent.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            this.bar.style.display = 'none';
+            return;
         }
+        document.addEventListener('scroll', () => this.requestUpdate(), { passive: true });
+        window.addEventListener('resize', () => this.requestUpdate());
+        this.update();
     }
 
-    requestParallaxUpdate() {
+    requestUpdate() {
+        if (this.ticking) return;
+        this.ticking = true;
         requestAnimationFrame(() => {
-            const parallaxElements = document.querySelectorAll('[data-parallax]');
-            const scrollY = window.pageYOffset;
-
-            parallaxElements.forEach(element => {
-                const speed = element.getAttribute('data-parallax') || '0.5';
-                const offset = scrollY * speed;
-                element.style.transform = `translateY(${offset}px)`;
-            });
+            this.update();
+            this.ticking = false;
         });
+    }
+
+    update() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        this.bar.style.transform = `scaleX(${progress})`;
     }
 }
 
-// ============================================
-// Performance Optimization
-// ============================================
-
-class PerformanceOptimizer {
+// ==========================================================================
+// Reveal on Scroll (subtle, staggered, once)
+// ==========================================================================
+class RevealObserver {
     constructor() {
+        this.selector = '.section-header, .about-bio, .matrix-card, .skill-category-card, .project-card, .cert-card, .education-card, .timeline-item, .cv-action-card, .cv-highlights-card, .contact-form-card, .contact-info-card, .hero-content > *, .profile-card, .metrics-strip .metric-item';
+        this.items = document.querySelectorAll(this.selector);
         this.init();
     }
 
     init() {
-        // Lazy load images
-        if ('IntersectionObserver' in window) {
-            this.setupLazyLoading();
-        }
+        if (!this.items.length) return;
 
-        // Prefetch resources
-        this.setupPrefetch();
-    }
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    setupLazyLoading() {
-        const images = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+        // Group stagger by parent so grids rise in sequence
+        const groups = new Map();
+        this.items.forEach((el) => {
+            const parent = el.parentElement;
+            if (!groups.has(parent)) groups.set(parent, []);
+            groups.get(parent).push(el);
+        });
+
+        groups.forEach((siblings) => {
+            siblings.forEach((el, index) => {
+                if (siblings.length > 1) {
+                    el.style.setProperty('--reveal-delay', `${Math.min(index * 70, 280)}ms`);
+                }
+                el.classList.add('reveal');
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                    imageObserver.unobserve(img);
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
                 }
             });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -6% 0px'
         });
 
-        images.forEach(img => imageObserver.observe(img));
-    }
-
-    setupPrefetch() {
-        // Prefetch critical resources
-        const prefetchLinks = [
-            { rel: 'prefetch', href: 'assets/files/Nishchal_Panta_CV.pdf' }
-        ];
-
-        prefetchLinks.forEach(link => {
-            const el = document.createElement('link');
-            el.rel = link.rel;
-            el.href = link.href;
-            document.head.appendChild(el);
-        });
+        this.items.forEach((el) => observer.observe(el));
     }
 }
 
-// ============================================
-// Active Navigation Link
-// ============================================
-
-class ActiveNavigation {
+// ==========================================================================
+// Journey Narrative (progress fill + active chapter)
+// ==========================================================================
+class JourneyNarrative {
     constructor() {
-        this.init();
-    }
-
-    init() {
-        window.addEventListener('scroll', () => this.updateActiveLink());
-        this.updateActiveLink();
-    }
-
-    updateActiveLink() {
-        const sections = document.querySelectorAll('section');
-        const scrollPosition = window.pageYOffset + 100;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }
-}
-
-// ============================================
-// Initialization
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Initializing Nishchal Panta Portfolio');
-
-    // Initialize all managers
-    new ThemeManager();
-    new MobileMenu();
-    new TypingAnimation();
-    new ScrollReveal();
-    new NavbarManager();
-    new ContactForm();
-    new ActiveNavigation();
-    new PerformanceOptimizer();
-    new ParallaxEffect();
-
-    // Add scroll behavior styles
-    addScrollBehavior();
-
-    console.log('✓ Portfolio fully initialized');
-
-    // Log portfolio info
-    console.log('Portfolio Version: 1.0.0');
-    console.log('Built with: HTML5, CSS3, JavaScript (Vanilla)');
-    console.log('GitHub: https://github.com/Nishchal-Panta');
-});
-
-// ============================================
-// Keyboard Navigation
-// ============================================
-
-document.addEventListener('keydown', (e) => {
-    // ESC key closes mobile menu
-    if (e.key === 'Escape') {
-        const mobileMenu = document.getElementById('navMenu');
-        if (mobileMenu) {
-            mobileMenu.classList.remove('active');
+        this.timeline = document.querySelector('.journey-section .timeline');
+        this.items = document.querySelectorAll('.journey-section .timeline-item');
+        if (this.timeline) {
+            this.init();
         }
     }
-});
-
-// ============================================
-// Analytics & Tracking (Optional)
-// ============================================
-
-function trackEvent(eventName, eventData = {}) {
-    if (typeof gtag !== 'undefined') {
-        gtag('event', eventName, eventData);
-    }
-}
-
-// Track page view
-if (typeof window !== 'undefined') {
-    window.addEventListener('load', () => {
-        trackEvent('page_view', {
-            page_title: document.title,
-            page_location: window.location.href
-        });
-    });
-}
-
-// Track external links
-document.addEventListener('click', (e) => {
-    const link = e.target.closest('a[href^="http"]');
-    if (link && !link.href.includes(window.location.hostname)) {
-        trackEvent('external_link_click', {
-            link_url: link.href,
-            link_text: link.textContent
-        });
-    }
-});
-
-// ============================================
-// Album Drawer Toggle
-// ============================================
-
-class AlbumDrawer {
-    constructor() {
-        this.drawers = document.querySelectorAll('.drawer-toggle');
-        this.init();
-    }
 
     init() {
-        this.drawers.forEach(drawer => {
-            drawer.addEventListener('click', (e) => this.toggle(e));
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!reduceMotion) {
+            document.addEventListener('scroll', () => this.updateProgress(), { passive: true });
+            window.addEventListener('resize', () => this.updateProgress());
+            this.updateProgress();
+        } else {
+            this.timeline.style.setProperty('--journey-progress', '1');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    this.items.forEach((item) => item.classList.remove('is-active'));
+                    entry.target.classList.add('is-active');
+                }
+            });
+        }, {
+            rootMargin: '-35% 0px -45% 0px',
+            threshold: 0
         });
+
+        this.items.forEach((item) => observer.observe(item));
+        if (this.items.length) this.items[0].classList.add('is-active');
     }
 
-    toggle(e) {
-        const button = e.currentTarget;
-        const drawerId = button.getAttribute('data-drawer');
-        const drawerContent = document.getElementById(`${drawerId}-drawer`);
-        
-        if (!drawerContent) return;
-
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        
-        button.setAttribute('aria-expanded', !isExpanded);
-        drawerContent.classList.toggle('active');
+    updateProgress() {
+        const rect = this.timeline.getBoundingClientRect();
+        const viewportCenter = window.innerHeight * 0.6;
+        const total = rect.height;
+        const passed = viewportCenter - rect.top;
+        const progress = Math.min(1, Math.max(0, passed / total));
+        this.timeline.style.setProperty('--journey-progress', progress.toFixed(3));
     }
 }
 
-// Initialize Album Drawer
+// ==========================================================================
+// Application Bootstrap
+// ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    new AlbumDrawer();
-});
+    requestAnimationFrame(() => document.body.classList.add('loaded'));
 
+    // 1. Initialize Theme
+    new ThemeController();
+
+    // 2. Initialize Motion Primitives Spotlight Effect
+    new SpotlightEffect();
+
+    // 3. Initialize Project Filter Tabs
+    new FilterTabs('.projects-section .filter-nav', '#projectsGrid .project-card', 'data-category');
+
+    // 4. Initialize Certification Filter Tabs
+    new FilterTabs('.certifications-section .filter-nav', '#certsGrid .cert-card', 'data-category');
+
+    // 5. Initialize Copy Email Action (Animata)
+    new CopyEmailAction();
+
+    // 6. Initialize Mobile Navigation
+    new MobileNavController();
+
+    // 7. Initialize Active Navigation Spy
+    new NavigationObserver();
+
+    // 8. Initialize Contact Form Transmission Handler
+    new ContactFormHandler();
+
+    // 9. Storytelling motion: scroll progress, reveals, journey chapters
+    new ScrollProgress();
+    new RevealObserver();
+    new JourneyNarrative();
+});

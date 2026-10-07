@@ -1,0 +1,615 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e3]:
+    - link "Skip to content" [ref=f2e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=f2e9]:
+      - heading "Navigation Menu" [level=2] [ref=f2e10]
+      - generic [ref=f2e11]:
+        - link "Homepage" [ref=f2e13] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e16]:
+          - navigation "Global" [ref=f2e17]:
+            - list [ref=f2e18]:
+              - listitem [ref=f2e19]:
+                - button "Platform" [ref=f2e21] [cursor=pointer]
+              - listitem [ref=f2e24]:
+                - button "Solutions" [ref=f2e26] [cursor=pointer]
+              - listitem [ref=f2e29]:
+                - button "Resources" [ref=f2e31] [cursor=pointer]
+              - listitem [ref=f2e34]:
+                - button "Open Source" [ref=f2e36] [cursor=pointer]
+              - listitem [ref=f2e39]:
+                - button "Enterprise" [ref=f2e41] [cursor=pointer]
+              - listitem [ref=f2e44]:
+                - link "Pricing" [ref=f2e45] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=f2e46]:
+            - button "Search or jump to, type / to search" [ref=f2e48] [cursor=pointer]:
+              - generic [ref=f2e51]:
+                - generic [ref=f2e52]: Search
+                - generic [aria-hidden] [ref=f2e53]: /
+            - link "Sign in" [ref=f2e55] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FE-commerce_website
+            - link "Sign up" [ref=f2e58] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Nishchal-Panta%2FE-commerce_website
+            - button "Appearance settings" [ref=f2e61] [cursor=pointer]
+  - main [ref=f2e68]:
+    - generic [ref=f2e69]:
+      - generic [ref=f2e70]:
+        - generic [ref=f2e72]:
+          - link "Nishchal-Panta" [ref=f2e76] [cursor=pointer]:
+            - /url: /Nishchal-Panta
+          - generic [ref=f2e77]: /
+          - strong [ref=f2e78]:
+            - link "E-commerce_website" [ref=f2e79] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website
+          - generic [ref=f2e80]: Public
+        - generic [ref=f2e81]:
+          - list:
+            - listitem [ref=f2e82]:
+              - link "You must be signed in to change notification settings" [ref=f2e83] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FE-commerce_website
+                - text: Notifications
+            - listitem [ref=f2e86]:
+              - link "Fork 0" [ref=f2e87] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FE-commerce_website
+                - text: Fork
+                - generic "0" [ref=f2e90]
+            - listitem [ref=f2e91]:
+              - link "You must be signed in to star a repository" [ref=f2e93] [cursor=pointer]:
+                - /url: /login?return_to=%2FNishchal-Panta%2FE-commerce_website
+                - text: Star
+                - generic "0 users starred this repository" [ref=f2e96]: "0"
+      - navigation "Repository" [ref=f2e97]:
+        - list [ref=f2e98]:
+          - listitem [ref=f2e99]:
+            - link "Code" [ref=f2e100] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website
+          - listitem [ref=f2e104]:
+            - link "Issues" [ref=f2e105] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website/issues
+          - listitem [ref=f2e110]:
+            - link "Pull requests" [ref=f2e111] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website/pulls
+          - listitem [ref=f2e115]:
+            - link "Actions" [ref=f2e116] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website/actions
+          - listitem [ref=f2e120]:
+            - link "Projects" [ref=f2e121] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website/projects
+          - listitem [ref=f2e125]:
+            - link "Security and quality" [ref=f2e126] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website/security
+          - listitem [ref=f2e130]:
+            - link "Insights" [ref=f2e131] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website/pulse
+    - generic [ref=f2e148]:
+      - generic [ref=f2e151]:
+        - generic [ref=f2e152]:
+          - generic [ref=f2e153]:
+            - button "main branch" [ref=f2e155] [cursor=pointer]:
+              - generic [ref=f2e156]: main
+            - generic [ref=f2e160]:
+              - link "Branches" [ref=f2e161] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/branches
+              - link "Tags" [ref=f2e164] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/tags
+          - generic [ref=f2e167]:
+            - combobox "Go to file" [ref=f2e175]
+            - button "Code" [ref=f2e176] [cursor=pointer]
+        - generic [ref=f2e179]:
+          - generic [ref=f2e180]:
+            - generic [ref=f2e182]:
+              - heading "Latest commit" [level=2] [ref=f2e183]
+              - generic [ref=f2e186]:
+                - heading "History" [level=2] [ref=f2e187]
+                - link "8 Commits" [ref=f2e188] [cursor=pointer]:
+                  - /url: /Nishchal-Panta/E-commerce_website/commits/main/
+            - heading "Folders and files" [level=2] [ref=f2e191]
+            - table "Folders and files" [ref=f2e192]:
+              - rowgroup:
+                - row "Name Last commit message Last commit date":
+                  - columnheader "Name"
+                  - columnheader "Last commit message"
+                  - columnheader "Last commit date"
+              - rowgroup [ref=f2e193]:
+                - row "app, (Directory)" [ref=f2e194]:
+                  - cell [ref=f2e195]:
+                    - link "app, (Directory)" [ref=f2e202] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/app
+                      - text: app
+                  - cell [ref=f2e203]
+                  - cell [ref=f2e205]
+                - row "bootstrap, (Directory)" [ref=f2e208]:
+                  - cell [ref=f2e209]:
+                    - link "bootstrap, (Directory)" [ref=f2e216] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/bootstrap
+                      - text: bootstrap
+                  - cell [ref=f2e217]
+                  - cell [ref=f2e219]
+                - row "config, (Directory)" [ref=f2e222]:
+                  - cell [ref=f2e223]:
+                    - link "config, (Directory)" [ref=f2e230] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/config
+                      - text: config
+                  - cell [ref=f2e231]
+                  - cell [ref=f2e233]
+                - row "database, (Directory)" [ref=f2e236]:
+                  - cell [ref=f2e237]:
+                    - link "database, (Directory)" [ref=f2e244] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/database
+                      - text: database
+                  - cell [ref=f2e245]
+                  - cell [ref=f2e247]
+                - row "docker, (Directory)" [ref=f2e250]:
+                  - cell [ref=f2e251]:
+                    - link "docker, (Directory)" [ref=f2e258] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/docker
+                      - text: docker
+                  - cell [ref=f2e259]
+                  - cell [ref=f2e261]
+                - row "public, (Directory)" [ref=f2e264]:
+                  - cell [ref=f2e265]:
+                    - link "public, (Directory)" [ref=f2e272] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/public
+                      - text: public
+                  - cell [ref=f2e273]
+                  - cell [ref=f2e275]
+                - row "resources, (Directory)" [ref=f2e278]:
+                  - cell [ref=f2e279]:
+                    - link "resources, (Directory)" [ref=f2e286] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/resources
+                      - text: resources
+                  - cell [ref=f2e287]
+                  - cell [ref=f2e289]
+                - row "routes, (Directory)" [ref=f2e292]:
+                  - cell [ref=f2e293]:
+                    - link "routes, (Directory)" [ref=f2e300] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/routes
+                      - text: routes
+                  - cell [ref=f2e301]
+                  - cell [ref=f2e303]
+                - row "storage, (Directory)" [ref=f2e306]:
+                  - cell [ref=f2e307]:
+                    - link "storage, (Directory)" [ref=f2e314] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/tree/main/storage
+                      - text: storage
+                  - cell [ref=f2e315]
+                  - cell [ref=f2e317]
+                - row ".env.example, (File)" [ref=f2e320]:
+                  - cell [ref=f2e321]:
+                    - link ".env.example, (File)" [ref=f2e328] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/.env.example
+                      - text: .env.example
+                  - cell [ref=f2e329]
+                  - cell [ref=f2e331]
+                - row ".gitignore, (File)" [ref=f2e334]:
+                  - cell [ref=f2e335]:
+                    - link ".gitignore, (File)" [ref=f2e342] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/.gitignore
+                      - text: .gitignore
+                  - cell [ref=f2e343]
+                  - cell [ref=f2e345]
+                - row "ADMIN_PANEL_GUIDE.md, (File)" [ref=f2e348]:
+                  - cell [ref=f2e349]:
+                    - link "ADMIN_PANEL_GUIDE.md, (File)" [ref=f2e356] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/ADMIN_PANEL_GUIDE.md
+                      - text: ADMIN_PANEL_GUIDE.md
+                  - cell [ref=f2e357]
+                  - cell [ref=f2e359]
+                - row "Dockerfile, (File)" [ref=f2e362]:
+                  - cell [ref=f2e363]:
+                    - link "Dockerfile, (File)" [ref=f2e370] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/Dockerfile
+                      - text: Dockerfile
+                  - cell [ref=f2e371]
+                  - cell [ref=f2e373]
+                - row "README.md, (File)" [ref=f2e376]:
+                  - cell [ref=f2e377]:
+                    - link "README.md, (File)" [ref=f2e384] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/README.md
+                      - text: README.md
+                  - cell [ref=f2e385]
+                  - cell [ref=f2e387]
+                - row "RETURN_SYSTEM_FIXES.md, (File)" [ref=f2e390]:
+                  - cell [ref=f2e391]:
+                    - link "RETURN_SYSTEM_FIXES.md, (File)" [ref=f2e398] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/RETURN_SYSTEM_FIXES.md
+                      - text: RETURN_SYSTEM_FIXES.md
+                  - cell [ref=f2e399]
+                  - cell [ref=f2e401]
+                - row "RETURN_SYSTEM_GUIDE.md, (File)" [ref=f2e404]:
+                  - cell [ref=f2e405]:
+                    - link "RETURN_SYSTEM_GUIDE.md, (File)" [ref=f2e412] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/RETURN_SYSTEM_GUIDE.md
+                      - text: RETURN_SYSTEM_GUIDE.md
+                  - cell [ref=f2e413]
+                  - cell [ref=f2e415]
+                - row "TESTING_CHECKLIST.md, (File)" [ref=f2e418]:
+                  - cell [ref=f2e419]:
+                    - link "TESTING_CHECKLIST.md, (File)" [ref=f2e426] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/TESTING_CHECKLIST.md
+                      - text: TESTING_CHECKLIST.md
+                  - cell [ref=f2e427]
+                  - cell [ref=f2e429]
+                - row "apply-fixes.ps1, (File)" [ref=f2e432]:
+                  - cell [ref=f2e433]:
+                    - link "apply-fixes.ps1, (File)" [ref=f2e440] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/apply-fixes.ps1
+                      - text: apply-fixes.ps1
+                  - cell [ref=f2e441]
+                  - cell [ref=f2e443]
+                - row "artisan, (File)" [ref=f2e446]:
+                  - cell [ref=f2e447]:
+                    - link "artisan, (File)" [ref=f2e454] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/artisan
+                      - text: artisan
+                  - cell [ref=f2e455]
+                  - cell [ref=f2e457]
+                - row "composer.json, (File)" [ref=f2e460]:
+                  - cell [ref=f2e461]:
+                    - link "composer.json, (File)" [ref=f2e468] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/composer.json
+                      - text: composer.json
+                  - cell [ref=f2e469]
+                  - cell [ref=f2e471]
+                - row "composer.lock, (File)" [ref=f2e474]:
+                  - cell [ref=f2e475]:
+                    - link "composer.lock, (File)" [ref=f2e482] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/composer.lock
+                      - text: composer.lock
+                  - cell [ref=f2e483]
+                  - cell [ref=f2e485]
+                - row "docker-compose.yml, (File)" [ref=f2e488]:
+                  - cell [ref=f2e489]:
+                    - link "docker-compose.yml, (File)" [ref=f2e496] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/docker-compose.yml
+                      - text: docker-compose.yml
+                  - cell [ref=f2e497]
+                  - cell [ref=f2e499]
+                - row "package-lock.json, (File)" [ref=f2e502]:
+                  - cell [ref=f2e503]:
+                    - link "package-lock.json, (File)" [ref=f2e510] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/package-lock.json
+                      - text: package-lock.json
+                  - cell [ref=f2e511]
+                  - cell [ref=f2e513]
+                - row "package.json, (File)" [ref=f2e516]:
+                  - cell [ref=f2e517]:
+                    - link "package.json, (File)" [ref=f2e524] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/package.json
+                      - text: package.json
+                  - cell [ref=f2e525]
+                  - cell [ref=f2e527]
+                - row "postcss.config.js, (File)" [ref=f2e530]:
+                  - cell [ref=f2e531]:
+                    - link "postcss.config.js, (File)" [ref=f2e538] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/postcss.config.js
+                      - text: postcss.config.js
+                  - cell [ref=f2e539]
+                  - cell [ref=f2e541]
+                - row "setup-returns.ps1, (File)" [ref=f2e544]:
+                  - cell [ref=f2e545]:
+                    - link "setup-returns.ps1, (File)" [ref=f2e552] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/setup-returns.ps1
+                      - text: setup-returns.ps1
+                  - cell [ref=f2e553]
+                  - cell [ref=f2e555]
+                - row "tailwind.config.js, (File)" [ref=f2e558]:
+                  - cell [ref=f2e559]:
+                    - link "tailwind.config.js, (File)" [ref=f2e566] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/tailwind.config.js
+                      - text: tailwind.config.js
+                  - cell [ref=f2e567]
+                  - cell [ref=f2e569]
+                - row "vite.config.js, (File)" [ref=f2e572]:
+                  - cell [ref=f2e573]:
+                    - link "vite.config.js, (File)" [ref=f2e580] [cursor=pointer]:
+                      - /url: /Nishchal-Panta/E-commerce_website/blob/main/vite.config.js
+                      - text: vite.config.js
+                  - cell [ref=f2e581]
+                  - cell [ref=f2e583]
+          - generic [ref=f2e587]:
+            - generic [ref=f2e588]:
+              - heading "Repository files navigation" [level=2] [ref=f2e589]
+              - navigation "Repository files" [ref=f2e590]:
+                - list [ref=f2e591]:
+                  - listitem [ref=f2e592]:
+                    - link "README" [ref=f2e593] [cursor=pointer]:
+                      - /url: "#"
+              - button "Outline" [ref=f2e598] [cursor=pointer]
+            - article [ref=f2e602]:
+              - generic [ref=f2e603]:
+                - heading "E-Commerce Platform — Built for a Nepal-focused wholesale-to-retail business" [level=1] [ref=f2e604]
+                - 'link "Permalink: E-Commerce Platform — Built for a Nepal-focused wholesale-to-retail business" [ref=f2e605] [cursor=pointer]':
+                  - /url: "#e-commerce-platform--built-for-a-nepal-focused-wholesale-to-retail-business"
+              - paragraph [ref=f2e608]: "A production-ready e-commerce application built with Laravel 11 and MySQL, styled with Tailwind CSS and enhanced with Alpine.js. This project was created as the technical foundation for a real business idea: selling products online in Nepal by sourcing them in bulk from China. The codebase implements buyer-facing storefront functionality and a full-featured admin panel so you can manage products, inventory, orders, users and analytics — everything needed to start an online retail business that scales."
+              - paragraph [ref=f2e609]: This README summarizes what the code contains, how to run it locally, and practical recommendations and next steps to turn this project into a live, sellable product in Nepal.
+              - separator [ref=f2e610]
+              - paragraph [ref=f2e611]: Table of Contents
+              - list [ref=f2e612]:
+                - listitem [ref=f2e613]: Overview & Business Motive
+                - listitem [ref=f2e614]: What’s implemented (features & code analysis)
+                - listitem [ref=f2e615]: Tech stack & project layout
+                - listitem [ref=f2e616]: Quick setup (local / dev)
+                - listitem [ref=f2e617]: Production & deployment notes
+                - listitem [ref=f2e618]: Business / operational recommendations for Nepal (payments, shipping, imports)
+                - listitem [ref=f2e619]: What’s next to make it “sell-ready”
+                - listitem [ref=f2e620]: Testing & QA checklist
+                - listitem [ref=f2e621]: Contributing, support & license
+              - separator [ref=f2e622]
+              - paragraph [ref=f2e623]: Overview & business motive
+              - paragraph [ref=f2e624]: "This repository is more than a demo — it’s the engineering backbone for a small wholesale-to-retail e-commerce operation. The intended business model is:"
+              - list [ref=f2e625]:
+                - listitem [ref=f2e626]: Buy products in bulk from China (sourcing & importing).
+                - listitem [ref=f2e627]: List and sell those products online to Nepalese customers.
+                - listitem [ref=f2e628]: Keep lean operations with a simple admin panel for inventory/order management and analytics to guide purchasing decisions.
+              - paragraph [ref=f2e629]: "The application is structured to support that model: product catalog with multiple images, inventory management / low-stock alerts, orders and order items, cart + checkout flow, reviews, admin analytics, and tools for managing site settings, FAQs and bug reports."
+              - separator [ref=f2e630]
+              - paragraph [ref=f2e631]: What’s implemented — features & code analysis
+              - paragraph [ref=f2e632]: Key implemented features (buyer/customer)
+              - list [ref=f2e633]:
+                - listitem [ref=f2e634]: Product catalog with product detail pages and multiple product images.
+                - listitem [ref=f2e635]: Shopping cart and checkout flow (order creation, order detail pages).
+                - listitem [ref=f2e636]: User registration and authentication (with role separation).
+                - listitem [ref=f2e637]: Reviews system (product reviews + optional review photos).
+                - listitem [ref=f2e638]: "Account pages: orders, order details, account settings, FAQs and a report-issue flow."
+                - listitem [ref=f2e639]: Responsive Blade-based frontend with Tailwind CSS and Alpine.js + dark mode support.
+              - paragraph [ref=f2e640]: Key implemented features (admin panel)
+              - list [ref=f2e641]:
+                - listitem [ref=f2e642]: Admin dashboard with statistics and charts (Chart.js used for analytics).
+                - listitem [ref=f2e643]: Product management (CRUD), including multiple image uploads and product forms.
+                - listitem [ref=f2e644]: Order management with status updates.
+                - listitem [ref=f2e645]: Inventory management with low-stock alerts and inventory view.
+                - listitem [ref=f2e646]: User management (view, block/unblock, delete).
+                - listitem [ref=f2e647]: Bug report and FAQ management.
+                - listitem [ref=f2e648]: Website settings (text that appears in footer, contact, etc.).
+                - listitem [ref=f2e649]: Best-selling products & reporting pages.
+              - paragraph [ref=f2e650]: Security, stability, and performance
+              - list [ref=f2e651]:
+                - listitem [ref=f2e652]: Bcrypt password hashing, CSRF protection, XSS protection (Blade escaping).
+                - listitem [ref=f2e653]: Eloquent ORM to avoid raw SQL and reduce SQL injection risk.
+                - listitem [ref=f2e654]: Rate limiting on login attempts and role-based access control using middleware.
+                - listitem [ref=f2e655]: Secure file upload validation.
+                - listitem [ref=f2e656]: "Production optimizations included in the checklist: Vite, Tailwind purging, route/config/view caching, eager loading for common relationships."
+              - paragraph [ref=f2e657]: Code composition and notable files
+              - list [ref=f2e658]:
+                - listitem [ref=f2e659]: Laravel 11 backend (PHP 8.2+ expected)
+                - listitem [ref=f2e660]: routes/web.php — organizes routes including buyer and admin routes and a debug /api/test endpoint
+                - listitem [ref=f2e661]: resources/views/ — Blade views split into buyer (guest/app) and admin folders
+                - listitem [ref=f2e662]: app/Http/Controllers — multiple controllers (Auth, buyer controllers, admin controllers)
+                - listitem [ref=f2e663]: app/Models — Eloquent models implementing relationships (products, users, orders, reviews, carts, etc.)
+                - listitem [ref=f2e664]: database/migrations — 12 migrations including products, product_images, orders, order_items, carts, reviews, review_photos, faqs, settings, bug_reports
+                - listitem [ref=f2e665]: database/seeders — seeders for users, products, FAQs and settings
+                - listitem [ref=f2e666]: storage/ — file uploads and compiled views
+                - listitem [ref=f2e667]: docker-compose.yml — ready-made MySQL docker configuration
+                - listitem [ref=f2e668]: tailwind.config.js & vite.config.js — frontend build tooling
+                - listitem [ref=f2e669]: package.json & composer.json — node and PHP dependency manifests
+              - paragraph [ref=f2e670]: Development observations
+              - list [ref=f2e671]:
+                - listitem [ref=f2e672]: Middleware files include IsAdmin, IsBuyer, CheckBlocked to implement role enforcement and blocking behavior.
+                - listitem [ref=f2e673]: There are 10+ controllers split between auth, buyer and admin responsibilities.
+                - listitem [ref=f2e674]: Admin UI includes charts and visual cues for low stock and reports.
+                - listitem [ref=f2e675]: Frontend uses Alpine.js, Tailwind, Font Awesome and is built with Vite for fast local development.
+              - separator [ref=f2e676]
+              - paragraph [ref=f2e677]: Tech stack
+              - paragraph [ref=f2e678]: Backend
+              - list [ref=f2e679]:
+                - listitem [ref=f2e680]: Laravel 11, PHP 8.2+
+                - listitem [ref=f2e681]: MySQL 8.0 (Dockerized)
+                - listitem [ref=f2e682]: Eloquent ORM, migrations, seeders
+              - paragraph [ref=f2e683]: Frontend
+              - list [ref=f2e684]:
+                - listitem [ref=f2e685]: Blade templating
+                - listitem [ref=f2e686]: Tailwind CSS (with dark mode)
+                - listitem [ref=f2e687]: Alpine.js
+                - listitem [ref=f2e688]: Chart.js for admin analytics
+                - listitem [ref=f2e689]: Font Awesome
+              - paragraph [ref=f2e690]: Tools
+              - list [ref=f2e691]:
+                - listitem [ref=f2e692]: Vite build pipeline
+                - listitem [ref=f2e693]: Docker + docker-compose (for MySQL)
+                - listitem [ref=f2e694]: Composer, NPM
+              - separator [ref=f2e695]
+              - paragraph [ref=f2e696]: Quick setup (development)
+              - paragraph [ref=f2e697]: Prerequisites
+              - list [ref=f2e698]:
+                - listitem [ref=f2e699]: PHP 8.2+, Composer
+                - listitem [ref=f2e700]: Node.js v18+ and npm
+                - listitem [ref=f2e701]: Docker & Docker Compose
+                - listitem [ref=f2e702]: Git
+              - paragraph [ref=f2e703]: Quick start (standard dev flow)
+              - list [ref=f2e704]:
+                - listitem [ref=f2e705]:
+                  - paragraph [ref=f2e706]:
+                    - text: "Clone the repo: git clone"
+                    - link "https://github.com/Nishchal-Panta/E-commerce_website.git" [ref=f2e707] [cursor=pointer]:
+                      - /url: https://github.com/Nishchal-Panta/E-commerce_website.git
+                    - text: cd E-commerce_website
+                - listitem [ref=f2e708]:
+                  - paragraph [ref=f2e709]: "Install backend dependencies: composer install"
+                - listitem [ref=f2e710]:
+                  - paragraph [ref=f2e711]:
+                    - text: "Install frontend dependencies and build assets: npm install npm run dev # or"
+                    - code [ref=f2e712]: npm run build
+                    - text: for production bundles
+                - listitem [ref=f2e713]:
+                  - paragraph [ref=f2e714]: "Copy .env and set app configuration: cp .env.example .env"
+                  - generic [ref=f2e715]:
+                    - heading "update DB connection to use docker container if desired (see docker-compose.yml)" [level=1] [ref=f2e716]
+                    - 'link "Permalink: update DB connection to use docker container if desired (see docker-compose.yml)" [ref=f2e717] [cursor=pointer]':
+                      - /url: "#update-db-connection-to-use-docker-container-if-desired-see-docker-composeyml"
+                - listitem [ref=f2e720]:
+                  - paragraph [ref=f2e721]: "Start MySQL (docker-compose is provided): docker-compose up -d"
+                  - generic [ref=f2e722]:
+                    - heading "ensure DB host, user and password in .env match docker-compose settings" [level=1] [ref=f2e723]
+                    - 'link "Permalink: ensure DB host, user and password in .env match docker-compose settings" [ref=f2e724] [cursor=pointer]':
+                      - /url: "#ensure-db-host-user-and-password-in-env-match-docker-compose-settings"
+                - listitem [ref=f2e727]:
+                  - paragraph [ref=f2e728]: "Migrate and seed: php artisan key:generate php artisan migrate --seed"
+                - listitem [ref=f2e729]:
+                  - paragraph [ref=f2e730]: "Run the dev server: php artisan serve"
+              - paragraph [ref=f2e731]: Useful artisan commands
+              - list [ref=f2e732]:
+                - listitem [ref=f2e733]:
+                  - paragraph [ref=f2e734]: "Clear caches: php artisan cache:clear php artisan config:clear php artisan route:clear php artisan view:clear"
+                - listitem [ref=f2e735]:
+                  - paragraph [ref=f2e736]: "Fresh database (destructive): php artisan migrate:fresh --seed"
+                - listitem [ref=f2e737]:
+                  - paragraph [ref=f2e738]: "Route list: php artisan route:list"
+              - separator [ref=f2e739]
+              - paragraph [ref=f2e740]: Production & deployment notes
+              - paragraph [ref=f2e741]: Important production steps
+              - list [ref=f2e742]:
+                - listitem [ref=f2e743]: Configure .env for production (APP_ENV=production, secure APP_KEY, set DB credentials).
+                - listitem [ref=f2e744]: Use queue workers for long-running tasks (emails, image processing).
+                - listitem [ref=f2e745]: Configure cache & session driver (Redis recommended).
+                - listitem [ref=f2e746]: Use HTTPS everywhere and set up an SSL certificate (Let’s Encrypt).
+                - listitem [ref=f2e747]: Set appropriate file permissions for storage/ and bootstrap/cache/.
+                - listitem [ref=f2e748]: Use backups for DB and storage; implement regular snapshotting.
+                - listitem [ref=f2e749]: Monitor errors and performance (Sentry, NewRelic, or similar).
+              - paragraph [ref=f2e750]: Suggested hosting & infra
+              - list [ref=f2e751]:
+                - listitem [ref=f2e752]: Use a VPS or cloud provider (DigitalOcean, AWS, GCP) with managed DB or a secure instance.
+                - listitem [ref=f2e753]: Use a CDN for static assets for speed in Nepal.
+                - listitem [ref=f2e754]: Consider object storage (S3 or S3-compatible) for images if you expect many uploads.
+              - paragraph [ref=f2e755]: Database & scaling
+              - list [ref=f2e756]:
+                - listitem [ref=f2e757]: Add Redis for cache/session and to offload rate-limiting counters and queues.
+                - listitem [ref=f2e758]: Use database indexes for heavy queries (orders, product searches).
+                - listitem [ref=f2e759]: Use pagination and eager loading to prevent N+1 issues.
+              - separator [ref=f2e760]
+              - paragraph [ref=f2e761]: Business & operational recommendations for selling in Nepal
+              - paragraph [ref=f2e762]: Payments
+              - list [ref=f2e763]:
+                - listitem [ref=f2e764]: "Integrate Nepal-specific payment gateways: eSewa, Khalti, IME Pay, ConnectIPS if possible, plus local bank integrations and card payments (Stripe may not service Nepal directly)."
+                - listitem [ref=f2e765]: Offer cash-on-delivery as many customers in Nepal still prefer COD.
+                - listitem [ref=f2e766]: Implement invoicing and receipts in Nepali/English; consider multi-currency display but settle in NPR.
+              - paragraph [ref=f2e767]: Shipping & logistics
+              - list [ref=f2e768]:
+                - listitem [ref=f2e769]: Partner with local courier companies for domestic delivery (e.g., Nepal Post, private couriers).
+                - listitem [ref=f2e770]: Build shipping rate rules (weight/volume, zones).
+                - listitem [ref=f2e771]: Include expected delivery times and tracking (if available).
+              - paragraph [ref=f2e772]: Import & sourcing (China → Nepal)
+              - list [ref=f2e773]:
+                - listitem [ref=f2e774]: Account for lead time, customs duties, VAT, and import process when setting pricing.
+                - listitem [ref=f2e775]: Maintain an importer-facing inventory/purchase order workflow so you know when to reorder in bulk.
+                - listitem [ref=f2e776]: Keep a spreadsheet or simple subsystem to compare landed costs per SKU (unit price + shipping + import fees + taxes).
+              - paragraph [ref=f2e777]: Localization & compliance
+              - list [ref=f2e778]:
+                - listitem [ref=f2e779]: Use Nepali language support (Unicode UTF-8), local date/time, currency formatting (NPR).
+                - listitem [ref=f2e780]: Ensure return policy, T&Cs and privacy policy are clearly visible.
+                - listitem [ref=f2e781]: Comply with local regulations for e-commerce and taxes.
+              - paragraph [ref=f2e782]: Pricing & catalog strategy
+              - list [ref=f2e783]:
+                - listitem [ref=f2e784]: Use margin calculators; show cost, markup and suggested retail price in admin.
+                - listitem [ref=f2e785]: Start with a curated catalog (top-selling low-risk SKUs) rather than everything to simplify operations.
+              - paragraph [ref=f2e786]: Marketing & growth
+              - list [ref=f2e787]:
+                - listitem [ref=f2e788]: Add social logins and email marketing integration (Mailchimp, similar).
+                - listitem [ref=f2e789]: SEO-friendly product pages, meta tags and schema.org markup help organic discovery.
+                - listitem [ref=f2e790]: Track analytics (Google Analytics) and use admin charts to drive purchase decisions.
+              - separator [ref=f2e791]
+              - paragraph [ref=f2e792]: What’s next to make it sell-ready (technical + operational)
+              - paragraph [ref=f2e793]: Top-priority technical tasks
+              - list [ref=f2e794]:
+                - listitem [ref=f2e795]: Integrate at least one local payment gateway (eSewa or Khalti) and COD flow.
+                - listitem [ref=f2e796]: Add order email notifications and SMS notifications (order confirmations, shipping updates).
+                - listitem [ref=f2e797]: Add multi-warehouse or supplier indicators if you plan to manage stock across importer & retail inventory.
+                - listitem [ref=f2e798]: Implement product import tooling (CSV/XLSX) for bulk product additions from supplier catalogs.
+                - listitem [ref=f2e799]: Add basic audit logs for inventory / price changes.
+                - listitem [ref=f2e800]: Set up scheduled tasks and queues for background processing.
+              - paragraph [ref=f2e801]: Operational steps
+              - list [ref=f2e802]:
+                - listitem [ref=f2e803]: Finalize supplier relationships and define reorder points (use the inventory low-stock alerts already in the admin).
+                - listitem [ref=f2e804]: Prepare product photography guidelines and ensure good image quality for listing trust.
+                - listitem [ref=f2e805]: Create returns & refunds SOP and include it in site settings.
+              - paragraph [ref=f2e806]: Monetization & sellability
+              - list [ref=f2e807]:
+                - listitem [ref=f2e808]: Add invoicing, order export for accounting, and exportable reports (CSV/PDF).
+                - listitem [ref=f2e809]: Add admin role and permission granularity if other teammates will operate the site.
+              - separator [ref=f2e810]
+              - paragraph [ref=f2e811]: Testing & QA checklist (summary)
+              - paragraph [ref=f2e812]: "From the project’s TESTING_CHECKLIST.md and code review:"
+              - list [ref=f2e813]:
+                - listitem [ref=f2e814]: Backend migrations & seeders executed and validated (completed).
+                - listitem [ref=f2e815]: Frontend views and layout tested for responsiveness and dark mode (completed).
+                - listitem [ref=f2e816]: Route & auth protection verified (IsAdmin / IsBuyer / CheckBlocked middleware in place).
+                - listitem [ref=f2e817]: File upload validation and image resizing / validation present (confirm on staging).
+                - listitem [ref=f2e818]: "Performance: Vite, Tailwind purging, view/route/config caching applied; recommend load testing."
+              - paragraph [ref=f2e819]: Recommended tests before production
+              - list [ref=f2e820]:
+                - listitem [ref=f2e821]: End-to-end checkout test (including payment gateway & order lifecycle).
+                - listitem [ref=f2e822]: Import and inventory reconciliation test (supplier → admin → store).
+                - listitem [ref=f2e823]: "Security review: penetration test for file uploads, auth, rate limits."
+                - listitem [ref=f2e824]: Backup & restore test (database + uploads).
+              - separator [ref=f2e825]
+              - paragraph [ref=f2e826]: Contributing
+              - list [ref=f2e827]:
+                - listitem [ref=f2e828]: Fork the repo, create a feature branch, and open a PR with a clear description and testing steps.
+                - listitem [ref=f2e829]: For major features (payment gateways, shipping integration, supplier import), discuss proposed design in an issue first.
+      - generic [ref=f2e832]:
+        - generic [ref=f2e833]:
+          - heading "About" [level=2] [ref=f2e834]
+          - paragraph [ref=f2e835]: A production-ready Laravel e-commerce platform built to sell wholesale-imported products in Nepal — manage catalog, inventory, orders and analytics from a single admin panel.
+          - heading "Resources" [level=3] [ref=f2e836]
+          - link "Readme" [ref=f2e838] [cursor=pointer]:
+            - /url: "#readme-ov-file"
+          - generic [ref=f2e841]:
+            - link "Activity" [ref=f2e844] [cursor=pointer]:
+              - /url: /Nishchal-Panta/E-commerce_website/activity
+            - generic [ref=f2e847]:
+              - heading "Stars" [level=3] [ref=f2e848]
+              - generic [ref=f2e850]:
+                - strong [ref=f2e853]: "0"
+                - text: stars
+              - heading "Watchers" [level=3] [ref=f2e854]
+              - generic [ref=f2e856]:
+                - strong [ref=f2e859]: "0"
+                - text: watching
+              - heading "Forks" [level=3] [ref=f2e860]
+              - link [ref=f2e862] [cursor=pointer]:
+                - /url: /Nishchal-Panta/E-commerce_website/forks
+                - strong [ref=f2e866]: "0"
+                - text: forks
+          - link "Report repository" [ref=f2e868] [cursor=pointer]:
+            - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FNishchal-Panta%2FE-commerce_website&report=Nishchal-Panta+%28user%29
+        - heading "Releases" [level=2] [ref=f2e870]
+        - heading "Packages" [level=2] [ref=f2e874]
+        - heading "Contributors" [level=2] [ref=f2e877]
+        - heading "Languages" [level=2] [ref=f2e880]
+  - contentinfo [ref=f2e883]:
+    - heading "Footer" [level=2] [ref=f2e884]
+    - generic [ref=f2e885]:
+      - generic [ref=f2e886]:
+        - link "GitHub Homepage" [ref=f2e887] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=f2e890]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=f2e891]:
+        - heading "Footer navigation" [level=3] [ref=f2e892]
+        - list "Footer navigation" [ref=f2e893]:
+          - listitem [ref=f2e894]:
+            - link "Terms" [ref=f2e895] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=f2e896]:
+            - link "Privacy" [ref=f2e897] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=f2e898]:
+            - link "Security" [ref=f2e899] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=f2e900]:
+            - link "Status" [ref=f2e901] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=f2e902]:
+            - link "Community" [ref=f2e903] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=f2e904]:
+            - link "Docs" [ref=f2e905] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=f2e906]:
+            - link "Contact" [ref=f2e907] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=f2e908]:
+            - button "Manage cookies" [ref=f2e910] [cursor=pointer]
+          - listitem [ref=f2e911]:
+            - button "Do not share my personal information" [ref=f2e913] [cursor=pointer]
