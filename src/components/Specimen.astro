@@ -1,0 +1,124 @@
+---
+/**
+ * The specimen board.
+ *
+ * Five plates, one per group, each a ruled surface with a mono caption and a
+ * count, the marks laid on a fixed optical grid and the name set underneath in
+ * the body face. Everything is server-rendered: with JavaScript off, with
+ * reduced motion on, or on a touch device, the reader gets exactly this markup
+ * and the stylesheet's resting state, and nothing is hidden waiting for a
+ * script that may never run.
+ *
+ * The entrance, the tilt and the group filter are all opt-in and applied by
+ * src/scripts/specimen.ts once the section is near the viewport.
+ */
+import { PLATES } from '../data/logos';
+import { mark } from '../data/marks';
+
+const total = PLATES.reduce((n, p) => n + p.items.length, 0);
+---
+
+<div class="specimen" data-specimen>
+  <!-- Rendered hidden: without the script these buttons would do nothing, and
+       a control that cannot be pressed is worse than no control. The script
+       removes the attribute, and if it never runs the board below still shows
+       every plate, which is the correct static state. -->
+  <div class="specimen__filter" data-filter hidden>
+    <div class="specimen__groups" role="group" aria-label="Show one plate at a time">
+      <button type="button" class="specimen__group is-on" data-plate="all" aria-pressed="true">
+        Everything<span class="specimen__n">{total}</span>
+      </button>
+      {
+        PLATES.map((p) => (
+          <button
+            type="button"
+            class="specimen__group"
+            data-plate={p.id}
+            aria-pressed="false"
+          >
+            {p.name}
+            <span class="specimen__n">{p.items.length}</span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="specimen__plates" data-plates>
+    {
+      PLATES.map((plate) => (
+        <section
+          class="plate"
+          id={`plate-${plate.id}`}
+          data-plate-id={plate.id}
+          aria-labelledby={`plate-${plate.id}-h`}
+        >
+          <h3 class="plate__caption" id={`plate-${plate.id}-h`}>
+            <span class="plate__name">{plate.name}</span>
+            <span class="plate__dot" aria-hidden="true">
+              ·
+            </span>
+            <span class="plate__count">{plate.items.length}</span>
+          </h3>
+          <p class="plate__blurb">{plate.blurb}</p>
+
+          <ul class="plate__items" role="list">
+            {plate.items.map((item, i) => (
+              <li
+                class="tile"
+                style={`--i: ${i}${item.mark ? `; --brand: ${item.mark.brand}` : ''}`}
+                data-brand-on={item.mark?.brandOn}
+              >
+                {/* One element per transform, so the three never overwrite each
+                    other: the tile carries the entrance and the lift, the plate
+                    inside it carries the pointer tilt. data-tilt is not in the
+                    markup - the script marks tiles only when the section is
+                    near, and only when a fine pointer and welcome motion say
+                    the tilt would ever fire. */}
+                <div class="tile__plate">
+                  <span class="tile__slot" data-mark={item.mark?.file}>
+                    {item.mark ? (
+                      <span set:html={mark(item.mark.file)} />
+                    ) : (
+                      /* No official mark exists for this one. The slot stays in
+                         the grid so every name in a row sits on the same
+                         baseline, and nothing is drawn in its place. */
+                      <span class="tile__slot-empty" aria-hidden="true" />
+                    )}
+                  </span>
+
+                  <p class="tile__name">
+                    {item.link ? <a href={item.link}>{item.name}</a> : item.name}
+                  </p>
+
+                  {/* The second destination. It sits above the name's
+                      full-tile overlay (position: relative, so a click on its
+                      own words opens the documents) while the rest of the tile
+                      still opens the chapter - two links in one tile without
+                      either of them swallowing the other. */}
+                  {item.extra && (
+                    <p class="tile__extra">
+                      <a href={item.extra.href}>{item.extra.label}</a>
+                    </p>
+                  )}
+
+                  <p class="tile__context">{item.context ?? ''}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          {/* The plate's caption, read as one: whichever tile is being hovered
+              or focused inside this plate. It sits last, where a caption sits,
+              and its height is reserved whether or not anything is being said,
+              so a hover never moves the tiles above it. aria-hidden because the
+              tile's own line is still in the accessibility tree - it is only
+              moved out of the way visually, and only where a pointer exists to
+              drive this. Without script, or on a touch device, this element
+              stays hidden and every tile keeps its own line. */}
+          <p class="plate__context" aria-hidden="true"></p>
+        </section>
+      ))
+    }
+  </div>
+</div>

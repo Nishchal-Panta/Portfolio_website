@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photo curator, local only</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Photo curator</h1>
+      <p class="sub">
+        Local only. Nothing leaves this machine and nothing is ever deleted: marked photos move to
+        <code>assets/removed/&lt;timestamp&gt;/</code>.
+      </p>
+    </header>
+
+    <section class="bar">
+      <div class="counts">
+        <span><b id="cTotal">0</b> in the site</span>
+        <span><b id="cMarked">0</b> marked</span>
+        <span><b id="cStaged">0</b> staged</span>
+      </div>
+      <div class="actions">
+        <label class="btn">
+          Add photos
+          <input id="picker" type="file" accept="image/*" multiple hidden />
+        </label>
+        <button class="btn" id="unmark">Unmark all</button>
+        <button class="btn" id="download">Export JSON</button>
+        <button class="btn btn-warn" id="apply" disabled>Apply selection</button>
+      </div>
+    </section>
+
+    <p class="hint" id="hint">
+      Click a photo to mark it for removal. Drag files anywhere on this page to stage new ones.
+    </p>
+
+    <section id="filters" class="filters"></section>
+    <main id="grid" class="grid" aria-live="polite"></main>
+
+    <section class="staged-block">
+      <h2>Staged additions</h2>
+      <p class="sub">
+        These are waiting in <code>assets/photo_intake/</code>. Assign each one a section; the
+        ones you intend to use get copied into the site when you confirm with me.
+      </p>
+      <div id="staged" class="staged"></div>
+    </section>
+
+    <dialog id="assign">
+      <form method="dialog">
+        <h3 id="assignTitle">Assign photo</h3>
+        <label>
+          Section
+          <select id="aSection">
+            <option>Hero</option>
+            <option>Album</option>
+            <option>Events</option>
+            <option>Credentials</option>
+            <option>Site</option>
+            <option>Do not use</option>
+          </select>
+        </label>
+        <label id="aEventWrap" hidden>
+          Event
+          <select id="aEvent"></select>
+        </label>
+        <label>
+          Caption
+          <input id="aCaption" type="text" maxlength="160" placeholder="A short, neutral caption" />
+        </label>
+        <label>
+          Alt text
+          <input id="aAlt" type="text" maxlength="200" placeholder="Describe the photograph" />
+        </label>
+        <menu>
+          <button value="cancel" class="btn">Cancel</button>
+          <button value="save" class="btn btn-primary">Save</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

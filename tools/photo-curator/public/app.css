@@ -1,0 +1,314 @@
+:root {
+  --bg: #f6f4ef;
+  --surface: #fdfcfa;
+  --line: #e0dbcf;
+  --ink: #1a1917;
+  --muted: #6b665c;
+  --accent: #1a45c4;
+  --warn: #8f4207;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 24px clamp(16px, 4vw, 40px) 80px;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+h2 {
+  margin: 40px 0 4px;
+  font-size: 1.05rem;
+}
+
+.sub {
+  margin: 6px 0 0;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 0;
+  padding: 12px 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.counts {
+  display: flex;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.counts b {
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  color: #fff;
+  filter: brightness(1.1);
+}
+
+.btn-warn:not(:disabled) {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+.chip {
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.card button.shot {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  background: #efece4;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.card button.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.card .meta {
+  padding: 8px 10px 10px;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.card .name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.card .where {
+  color: var(--muted);
+}
+
+.card .act {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.card .act button {
+  font: inherit;
+  font-size: 11px;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.card .act button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.card[data-marked='true'] {
+  border-color: var(--warn);
+}
+
+.card[data-marked='true'] .shot {
+  position: relative;
+  opacity: 0.32;
+}
+
+.card[data-marked='true'] .shot::after {
+  content: 'marked for removal';
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 6px;
+  background: var(--warn);
+  color: #fff;
+  font: 600 11px/1.3 system-ui, sans-serif;
+  text-align: center;
+}
+
+.staged {
+  display: grid;
+  gap: 16px;
+  margin-top: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+}
+
+dialog {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 20px;
+  max-width: 420px;
+}
+
+dialog::backdrop {
+  background: rgb(26 25 23 / 0.4);
+}
+
+dialog h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+}
+
+dialog label {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+dialog input,
+dialog select {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+dialog menu {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+body.dragging::after {
+  content: 'drop to stage these photos';
+  position: fixed;
+  inset: 12px;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+  background: rgb(246 244 239 / 0.9);
+  color: var(--accent);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 60;
+}

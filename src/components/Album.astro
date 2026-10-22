@@ -1,0 +1,192 @@
+---
+import { getImage, Picture } from 'astro:assets';
+import { album } from '../data/album';
+
+/**
+ * The album: an ordered conveyor of three photographs at a time.
+ *
+ * Every photograph in the folder is in the DOM, not just the three on screen.
+ * That is what makes the no-JS path free: hide all but three and it is a
+ * conveyor, show all thirteen and it is a gallery.
+ *
+ * No figure is given a size of its own. A photograph with a definite height
+ * and `width: auto` is exactly as wide as its own proportions say, so the box
+ * is built around the picture and a portrait stays a portrait - and the ratio
+ * never has to be passed in as a CSS value. That matters here: the site's CSP
+ * is `style-src 'self'`, which blocks inline `style` attributes, so a ratio
+ * written as `style="--ar: …"` would never reach the page in production. The
+ * image's own `width`/`height` attributes carry the same information before a
+ * single byte has downloaded, which also keeps the row from shifting as the
+ * photographs arrive.
+ */
+
+/** Row derivatives. Small ones earn their place: a portrait 150px wide on
+ *  screen has no business downloading a 400px file, and `sizes` can only
+ *  steer the browser if there is a candidate sitting near the box. */
+const WIDTHS = [160, 240, 400, 640, 960];
+
+/* How wide the row's photographs can be, worked out per photograph rather
+   than promised once for the whole row.
+
+   The row's height is a fraction of its container, not of which photographs
+   are in it - `100cqw / 5.05` on one line, `(100cqw - gap) / 3.35` in the
+   phone's 1 + 2 - so a photograph's box is that height times its own ratio.
+   One shared `sizes` has to promise the widest photograph in the album, which
+   is what had a portrait decoded at 2.6x its box; one per photograph tells the
+   browser each box's own number.
+
+   The container is not the viewport either: it is the shell inside the page
+   grid, and above 78rem the page hands 190px to the rail, which is why the
+   row is *narrower* at 1280 than at 1200. Each band below is therefore the
+   container width where it stops growing, expressed as the smaller of a
+   length and a viewport unit: exact at the cap, and generous on the way up.
+   `tools/probe-album.mjs` measures the real box of all thirteen photographs
+   at several widths and fails if the promise is short or idle. */
+const ROW_DIVISOR = 5.05; // .album__row's height on one line, in cqw
+const PAIR_DIVISOR = 3.35; // .album__row's height in the phone's 1 + 2
+const GAP_PX = 12; // --album-gap
+
+/** One band of the promise: at `cap` container pixels the row stops growing,
+ *  and that happens at `atViewport` pixels of viewport. */
+const band = (mq: string | null, cap: number, atViewport: number): string => {
+  const px = Math.ceil(cap);
+  const vw = ((px / atViewport) * 100).toFixed(1);
+  return `${mq ? `(${mq}) ` : ''}min(${px}px, ${vw}vw)`;
+};
+
+const sizesFor = (photo: { src: { width: number; height: number } }): string => {
+  const ar = photo.src.width / photo.src.height;
+  return [
+    // 78rem and up: the rail takes 190px, so the container caps at 1008.
+    band('min-width: 78rem', (1008 / ROW_DIVISOR) * ar, 1438),
+    // 48rem to 78rem: one line of three, container capping at 1104.
+    band('min-width: 48rem', (1104 / ROW_DIVISOR) * ar, 1200),
+    // Below that: one above, two below, sharing one height.
+    band(null, ((706 - GAP_PX) / PAIR_DIVISOR) * ar, 768),
+  ].join(', ');
+};
+
+/** One larger derivative each, for the lightbox. The 29 MB original is never
+ *  one of them - it is not emitted into the output at all. */
+const FULL_WIDTH = 1600;
+
+const lightbox = await Promise.all(
+  album.map((p) => getImage({ src: p.src, width: FULL_WIDTH, format: 'webp', quality: 82 }))
+);
+---
+
+<section class="movement" id="album" aria-labelledby="album-title">
+  <div class="shell">
+    <div class="movement-head">
+      <p class="movement-index">07</p>
+      <h2 class="movement-title" id="album-title">Album</h2>
+      <p class="movement-lede">
+        Photographs rather than claims. Three at a time, in the order they were taken, each
+        shown at its own proportions - a portrait stays a portrait, and the row is measured
+        around it rather than cropped to a box.
+      </p>
+    </div>
+
+    <div class="album" data-album>
+      {/* The stage is the container the row measures itself against, and the
+          box the arrows are placed in. It is not the lightbox's parent: that
+          stays outside it, fixed to the viewport. */}
+      <div class="album__stage" data-album-stage>
+        <div
+          class="album__row"
+          data-album-row
+          role="group"
+          tabindex="0"
+          aria-label={`${album.length} photographs, shown three at a time. Left and right arrow keys step through them.`}
+        >
+          {
+            album.map((photo, i) => (
+              <figure class="album__figure" data-i={i} hidden={i >= 3}>
+                {/* With no script this is a link to the full-size photograph.
+                    With script it becomes the lightbox trigger, and the href
+                    is kept so the photo is still reachable either way. */}
+                <a
+                  class="album__link"
+                  href={lightbox[i].src}
+                  aria-label={`Open photograph ${i + 1} of ${album.length}`}
+                  data-album-open={i}
+                >
+                  <Picture
+                    src={photo.src}
+                    widths={WIDTHS}
+                    sizes={sizesFor(photo)}
+                    alt={photo.alt}
+                    loading={i < 3 ? 'eager' : 'lazy'}
+                    decoding={i < 3 ? 'sync' : 'async'}
+                    class="album__img"
+                  />
+                </a>
+                {photo.caption ? <figcaption class="album__cap">{photo.caption}</figcaption> : null}
+              </figure>
+            ))
+          }
+          {/* On a phone the first photograph takes a line of its own and the
+              two after it share the line below. This is what makes that
+              happen: it is full width and zero tall, so it always ends the
+              line it lands on. With script it sorts between slot 0 and slot 1;
+              without script it is switched off and the gallery wraps. */}
+          <div class="album__break" aria-hidden="true"></div>
+        </div>
+
+        {/* Both are in the DOM and focusable at rest - only their paint is
+            hidden, so a screen reader reaches them whether or not the pointer
+            happens to be over the album. */}
+        <button
+          class="album__arrow album__arrow--prev"
+          type="button"
+          data-album-prev
+          aria-label="Previous photograph"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false">
+            <path d="M14.5 5.5 8 12l6.5 6.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <button
+          class="album__arrow album__arrow--next"
+          type="button"
+          data-album-next
+          aria-label="Next photograph"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false">
+            <path d="M9.5 5.5 16 12l-6.5 6.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+
+      {/* The row changes on a timer, and a timer is not something to
+          interrupt a reader with. Only the changes they asked for - the
+          arrows, the keys, the swipe - are announced. */}
+      <p class="visually-hidden" data-album-live aria-live="polite"></p>
+
+      {/* The lightbox. Hidden until a photograph is activated; it is a dialog,
+          so focus is trapped inside it and returned on close. */}
+      <div class="album__lightbox" data-album-lightbox hidden role="dialog" aria-modal="true" aria-label="Photograph">
+        <div class="album__lightbox-inner">
+          <img class="album__lightbox-img" data-album-lightbox-img alt="" />
+          <p class="album__lightbox-counter" data-album-lightbox-counter></p>
+          <div class="album__lightbox-controls">
+            <button class="album__btn" type="button" data-album-lightbox-prev aria-label="Previous photograph">
+              ←
+            </button>
+            <button class="album__btn" type="button" data-album-lightbox-next aria-label="Next photograph">
+              →
+            </button>
+            <button class="album__btn" type="button" data-album-lightbox-close>
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { startAlbum } from '../scripts/album';
+  startAlbum();
+</script>

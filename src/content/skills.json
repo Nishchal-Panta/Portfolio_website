@@ -1,0 +1,72 @@
+{
+  "groups": [
+    {
+      "name": "Machine learning",
+      "blurb": "The thread I keep pulling on.",
+      "items": [
+        "Machine Learning",
+        "Deep Learning",
+        "Supervised Learning with scikit-learn",
+        "Unsupervised Learning in Python",
+        "Introduction to Deep Learning with PyTorch",
+        "Data Mining"
+      ]
+    },
+    {
+      "name": "Libraries",
+      "blurb": "What the models are actually written in.",
+      "items": ["PyTorch", "pandas", "Hugging Face"]
+    },
+    {
+      "name": "Language models",
+      "blurb": "Where I am heading next.",
+      "items": ["Transformer Models", "Large Language Models (LLM)"]
+    },
+    {
+      "name": "Languages",
+      "blurb": "Enough to be dangerous in each.",
+      "items": [
+        "Python (Programming Language)",
+        "Intermediate Python",
+        "Java",
+        "MySQL",
+        "Cascading Style Sheets (CSS)",
+        "HTML"
+      ]
+    },
+    {
+      "name": "Web and applications",
+      "blurb": "Things with users on the other end.",
+      "items": [
+        "Web Development (Laravel)",
+        "Laravel",
+        "Web Development",
+        "Full-Stack Development",
+        "Desktop Application Development",
+        "JavaFX"
+      ]
+    },
+    {
+      "name": "Cloud and platform",
+      "blurb": "The three-month detour that turned into a direction.",
+      "items": [
+        "Amazon Web Services (AWS)",
+        "Cloud Computing",
+        "Solution Architecture",
+        "Git",
+        "GitHub"
+      ]
+    },
+    {
+      "name": "Practice",
+      "blurb": "The part no repository records.",
+      "items": [
+        "Object-Oriented Programming (OOP)",
+        "Leadership",
+        "Communication",
+        "Presentation Skills"
+      ]
+    }
+  ],
+  "source":""
+}

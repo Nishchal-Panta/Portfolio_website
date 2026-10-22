@@ -1,0 +1,142 @@
+{
+  "generated": "2026-10-18T15:25:55.898Z",
+  "note": "Photo curation export. Nothing is deleted; marked photos were moved to the removed folder.",
+  "marked": [
+    {
+      "from": "src/assets/album/FB_IMG_1767083934972.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/FB_IMG_1767083934972.jpg"
+    },
+    {
+      "from": "src/assets/album/1790495164622.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/1790495164622.jpg"
+    },
+    {
+      "from": "src/assets/album/FB_IMG_1769050313046.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/FB_IMG_1769050313046.jpg"
+    },
+    {
+      "from": "src/assets/events/fellowship-start-02.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/fellowship-start-02.jpg"
+    },
+    {
+      "from": "src/assets/events/hackathon3-venue.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/hackathon3-venue.jpg"
+    },
+    {
+      "from": "src/assets/events/laravel-training-group.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/laravel-training-group.jpg"
+    },
+    {
+      "from": "src/assets/events/tedx-certificate-handover.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/tedx-certificate-handover.jpg"
+    },
+    {
+      "from": "src/assets/events/relayhack-team-01.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/relayhack-team-01.jpg"
+    },
+    {
+      "from": "src/assets/events/hackathon3-organisers.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/hackathon3-organisers.jpg"
+    },
+    {
+      "from": "src/assets/events/hackathon3-group-wide.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/hackathon3-group-wide.jpg"
+    },
+    {
+      "from": "src/assets/events/laravel-training-certificate.jpg",
+      "to": "assets/removed/2026-10-18T15-25-55-883Z/laravel-training-certificate.jpg"
+    }
+  ],
+  "assignments": {
+    "assets/photo_intake/1790495165040.jpg": {
+      "section": "Events",
+      "event": "cloudmandap-fellowship-2026",
+      "caption": "DAAI fellowship Certificate Handing",
+      "alt": ""
+    },
+    "src/assets/events/tedx-speaker.jpg": {
+      "section": "Events",
+      "event": "data-centric-session-2026",
+      "caption": "",
+      "alt": "IIMS Applied Data Science Club Members with Prof.Dr.Sudan Jha"
+    },
+    "src/assets/events/tedx-audience.jpg": {
+      "section": "Events",
+      "event": "data-centric-session-2026",
+      "caption": "",
+      "alt": "Participating in a guest lecture by Prof.Dr.Sudan Jha"
+    },
+    "src/assets/album/1790495165221.jpg": {
+      "section": "Events",
+      "event": "relay-hack-2025",
+      "caption": "The Winning Team",
+      "alt": ""
+    },
+    "src/assets/album/IMG-20260727-WA0183.jpg": {
+      "section": "Album",
+      "event": null,
+      "caption": "The Hackathon Organizing Team",
+      "alt": ""
+    },
+    "src/assets/album/1790495164487.jpg": {
+      "section": "Events",
+      "event": "hackathon3-2026",
+      "caption": "Received Certificate for Organizing the Event",
+      "alt": ""
+    },
+    "src/assets/album/IMG-20260728-WA0004.jpg": {
+      "section": "Events",
+      "event": "cloudmandap-fellowship-2026",
+      "caption": "With the Event Coordinator Phd scholar Mr. Anmol Adhikari",
+      "alt": ""
+    }
+  },
+  "staged": [],
+  "events": [
+    {
+      "id": "cloudmandap-fellowship-2026",
+      "title": "CloudMandap DAAI Fellowship",
+      "dateLabel": "Feb to May 2026"
+    },
+    {
+      "id": "data-centric-session-2026",
+      "title": "Data-centric intelligence session",
+      "dateLabel": "2026"
+    },
+    {
+      "id": "future-forward-2023",
+      "title": "Future Forward: leadership and communication",
+      "dateLabel": "30 Nov 2023"
+    },
+    {
+      "id": "hack4safefood-2025",
+      "title": "Hack4SafeFood",
+      "dateLabel": "6 Jun 2025"
+    },
+    {
+      "id": "hackathon3-2026",
+      "title": "IIMS International Hackathon 3.0, technical lead",
+      "dateLabel": "2026"
+    },
+    {
+      "id": "laravel-training-2026",
+      "title": "Web development with Laravel, 65 hours of training",
+      "dateLabel": "2026"
+    },
+    {
+      "id": "mentor-sprint-2025",
+      "title": "Mentor session and design sprint, Techspire College",
+      "dateLabel": "23 Dec 2025"
+    },
+    {
+      "id": "relay-hack-2025",
+      "title": "Relay Hack x Aqore, first place",
+      "dateLabel": "18 to 29 Dec 2025"
+    },
+    {
+      "id": "tedx-2024",
+      "title": "TEDx IIMS 2024",
+      "dateLabel": "2024"
+    }
+  ]
+}

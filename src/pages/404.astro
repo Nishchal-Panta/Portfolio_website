@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found, Nishchal Panta"
+  description="That page does not exist. The work, events, credentials and album are all on the front page."
+  noindex
+>
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="wordmark" href="/">Nishchal Panta</a>
+      <div class="header-actions">
+        <a class="header-contact" href="/#reach">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="shell notfound">
+      <p class="movement-index">404</p>
+      <h1>There is nothing at this address.</h1>
+      <p>
+        The link is broken or the page has moved. Everything worth reading is on the front page:
+        how I got here, the work, where I was in the room, and the certificates behind it.
+      </p>
+      <p>
+        <a class="header-contact" href="/">Go to the front page</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell site-footer__inner">
+      <p>&copy; 2026 Nishchal Panta.</p>
+      <nav aria-label="Footer">
+        <a href="/#work">The work</a>
+        <a href="/#credentials">Proof</a>
+        <a href="/#reach">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</BaseLayout>

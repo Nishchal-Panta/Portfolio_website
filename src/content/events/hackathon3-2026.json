@@ -1,0 +1,25 @@
+{
+  "title": "IIMS International Hackathon 3.0, technical lead",
+  "dateLabel": "2026",
+  "sortKey": "2026-08-01",
+  "role": "Technical Lead",
+  "organizer": "IIMS College with Perceptron AI",
+  "summary": "I was technical lead for IIMS International Hackathon 3.0, powered by Perceptron AI, which meant owning the build plan, the tooling and the review rhythm rather than only my own track. Organising it was the clearest evidence I had that I could hold a technical decision for other people, not just make one.",
+  "images": [
+    {
+      "src": "../../assets/events/hackathon3-team.jpg",
+      "alt": "Hackathon participants standing on a stage in front of an IIMS and Perceptron Hackathon 2026 backdrop."
+    },
+    {
+      "src": "../../assets/events/hackathon3-organising-certificate.jpg",
+      "alt": "Nishchal holding an organising certificate and giving a thumbs up, in front of the IIMS and Perceptron Hackathon 2026 banner.",
+      "caption": "Certificate for organising the event."
+    },
+    {
+      "src": "../../assets/events/hackathon3-coordinator.jpg",
+      "alt": "Nishchal standing beside the event coordinator, both facing the camera in front of the IIMS and Perceptron Hackathon 2026 banner.",
+      "caption": "With the event coordinator."
+    }
+  ],
+  "credential": null
+}

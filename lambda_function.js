@@ -9,26 +9,105 @@ const region =
 
 const ses = new SESClient({ region });
 
-const response = (statusCode, body) => ({
+// ---------------------------------------------------------------------------
+// Configuration
+// ---------------------------------------------------------------------------
+const ALLOWED_ORIGIN = process.env.ALLOW_ORIGIN || "*";
+const TO_EMAIL = process.env.TO_EMAIL;
+const FROM_EMAIL = process.env.FROM_EMAIL;
+
+// In-memory rate limiting. A Lambda container is not shared across every
+// concurrent invocation, so this is a soft limit that raises the cost of a
+// casual flood rather than a hard guarantee. Put CloudFront or API Gateway
+// throttling in front if you need a hard one.
+const WINDOW_MS = 60_000;
+const MAX_PER_WINDOW = 3;
+const seen = new Map();
+
+const LIMITS = {
+  name: { min: 1, max: 120 },
+  email: { min: 5, max: 200 },
+  message: { min: 10, max: 5000 },
+  website: { max: 200 }, // honeypot: must be empty
+};
+
+// Very small guard against the cheapest form of spam.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const URL_RE = /(https?:\/\/|www\.)/i;
+
+const headers = (extra = {}) => ({
+  "Content-Type": "application/json; charset=utf-8",
+  "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
+  "Access-Control-Allow-Methods": "POST,OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Vary": "Origin",
+  // Contact messages are personal data; keep them out of shared caches.
+  "Cache-Control": "no-store",
+  "X-Content-Type-Options": "nosniff",
+  ...extra,
+});
+
+const response = (statusCode, body, extra) => ({
   statusCode,
-  headers: {
-    "Content-Type": "application/json",
-    // IMPORTANT: set to your real domain in production
-    "Access-Control-Allow-Origin": process.env.ALLOW_ORIGIN || "*",
-    "Access-Control-Allow-Methods": "POST,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  },
+  headers: headers(extra),
   body: JSON.stringify(body),
 });
 
+const clientIp = (event) =>
+  event?.requestContext?.http?.sourceIp ||
+  event?.requestContext?.identity?.sourceIp ||
+  event?.headers?.["x-forwarded-for"]?.split(",")[0]?.trim() ||
+  "unknown";
+
+function rateLimited(ip) {
+  const now = Date.now();
+  for (const [key, stamp] of seen) {
+    if (now - stamp > WINDOW_MS) seen.delete(key);
+  }
+  const hits = (seen.get(ip) || 0) + 1;
+  seen.set(ip, hits);
+  return hits > MAX_PER_WINDOW;
+}
+
+const clean = (v) => (typeof v === "string" ? v.replace(/\0/g, "").trim() : "");
+
+function validate(body) {
+  const name = clean(body.name);
+  const email = clean(body.email);
+  const message = clean(body.message);
+  const website = clean(body.website);
+
+  if (website) return { ok: false, error: "Rejected" };
+
+  if (name.length < LIMITS.name.min || name.length > LIMITS.name.max)
+    return { ok: false, error: "Please give a name between 1 and 120 characters" };
+  if (!EMAIL_RE.test(email) || email.length > LIMITS.email.max)
+    return { ok: false, error: "That email address does not look right" };
+  if (message.length < LIMITS.message.min || message.length > LIMITS.message.max)
+    return { ok: false, error: "Message must be between 10 and 5,000 characters" };
+
+  // Everything the front end already checks, repeated here because the client
+  // is not a trust boundary.
+  const links = (message.match(new RegExp(URL_RE.source, "gi")) || []).length;
+  if (links > 4) return { ok: false, error: "Message contains too many links" };
+
+  return { ok: true, value: { name, email, message } };
+}
+
 export const handler = async (event) => {
-  // API Gateway HTTP API (v2) preflight
   const method =
     event?.requestContext?.http?.method ||
     event?.requestContext?.httpMethod ||
     event?.httpMethod;
 
-  if (method === "OPTIONS") return response(200, { ok: true });
+  if (method === "OPTIONS") return response(204, null);
+
+  if (method !== "POST")
+    return response(405, { ok: false, error: "Method not allowed" }, { Allow: "POST, OPTIONS" });
+
+  const ip = clientIp(event);
+  if (rateLimited(ip))
+    return response(429, { ok: false, error: "Too many messages. Please try again shortly." });
 
   let body;
   try {
@@ -36,37 +115,26 @@ export const handler = async (event) => {
   } catch {
     return response(400, { ok: false, error: "Invalid JSON" });
   }
+  if (!body || typeof body !== "object" || Array.isArray(body))
+    return response(400, { ok: false, error: "Invalid request" });
 
-  const name = String(body.name || "").trim();
-  const email = String(body.email || "").trim();
-  const message = String(body.message || "").trim();
+  const check = validate(body);
+  if (!check.ok) return response(400, { ok: false, error: check.error });
 
-  if (!name || !email || !message) {
-    return response(400, {
-      ok: false,
-      error: "name, email, message are required",
-    });
-  }
-  if (message.length > 5000) {
-    return response(400, { ok: false, error: "Message too long" });
-  }
+  if (!region)
+    return response(500, { ok: false, error: "Server misconfiguration: region not set" });
+  if (!TO_EMAIL || !FROM_EMAIL)
+    return response(500, { ok: false, error: "Server misconfiguration: mail routing not set" });
 
-  if (!region) {
-    // Extremely rare, but makes failures obvious if region isn't available
-    return response(500, {
-      ok: false,
-      error: "Server misconfiguration: region not set",
-    });
-  }
-
+  const { name, email, message } = check.value;
   const subject = `Portfolio contact from ${name}`;
   const text = `From: ${name} <${email}>\n\n${message}`;
 
   try {
     await ses.send(
       new SendEmailCommand({
-        Source: process.env.FROM_EMAIL, // verified in SES (domain identity covers any address on the domain)
-        Destination: { ToAddresses: [process.env.TO_EMAIL] }, // your inbox
+        Source: FROM_EMAIL, // verified in SES
+        Destination: { ToAddresses: [TO_EMAIL] },
         ReplyToAddresses: [email],
         Message: {
           Subject: { Data: subject, Charset: "UTF-8" },
@@ -77,7 +145,8 @@ export const handler = async (event) => {
 
     return response(200, { ok: true });
   } catch (err) {
-    console.error("SES send failed:", err);
+    console.error("SES send failed:", err?.name || err);
+    // Never leak provider detail back to the caller.
     return response(500, { ok: false, error: "Failed to send message" });
   }
 };

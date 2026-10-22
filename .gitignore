@@ -1,0 +1,16 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# tooling artefacts
+.playwright-mcp/
+
+# editor / os
+.DS_Store
+Thumbs.db
+*.log
+.env
+config.js

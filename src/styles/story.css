@@ -1,0 +1,638 @@
+/* ==========================================================================
+   The story layer.
+
+   ONE motion language: one easing, four durations, seven keyframes. Nothing
+   here bounces, floats or loops.
+
+   The keyframes and the durations live in this file and nowhere else. What
+   differs between engines is only the TRIGGER:
+
+     native     CSS scroll-driven animation, where the engine supports it
+     fallback   an IntersectionObserver, on the very same keyframes, for the
+                engines that do not (Firefox still ships none)
+
+   So a chapter arrives identically in every browser, and there is only ever
+   one spec to keep in step with itself.
+
+   Every resting state below is the FINISHED state. Motion is opt-in, so no
+   JavaScript, no native timeline, or reduced motion all land on the same
+   complete, readable story.
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/*  The four durations. These are the only four in the project.               */
+/* -------------------------------------------------------------------------- */
+:root {
+  --t-state: 150ms; /* hover, focus, colour */
+  --t-base: 250ms; /* a disclosure, a theme fallback */
+  --t-scene: 400ms; /* a photograph settling into place */
+  --t-chapter: 550ms; /* a chapter arriving */
+}
+
+/* ==========================================================================
+   Ambient
+
+   The field is a WebGL canvas, so it is in front of nothing and behind
+   everything. Normal alpha blending, never additive, so body copy keeps its
+   contrast exactly as measured on paper.
+   ========================================================================== */
+
+.motes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+/* The canvas is fixed at z-index 0, so everything that must sit above it is
+   lifted here. The header is lifted too, but it keeps its own sticky rule from
+   site.css: folding it into this group would reset `position` to relative and
+   silently drop the header off-screen as soon as the page scrolls. */
+.page,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   The pointer ring
+
+   A small soft ring that trails the pointer and opens over interactive
+   elements. The native cursor is never hidden; this sits beside it.
+   ========================================================================== */
+
+.pen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: -0.75rem 0 0 -0.75rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    width var(--t-state) var(--ease),
+    height var(--t-state) var(--ease),
+    margin var(--t-state) var(--ease),
+    border-color var(--t-state) var(--ease),
+    opacity var(--t-base) var(--ease);
+  will-change: transform;
+}
+
+/* over anything interactive the ring opens, like a pen lifting to write */
+.pen[data-over='true'] {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1.25rem 0 0 -1.25rem;
+  border-color: color-mix(in srgb, var(--accent) 75%, transparent);
+}
+
+.pen[data-ready='true'] {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   The opening: statement and portrait
+
+   The photograph is the full frame at its own 3:4 ratio, so no crop happens.
+   ========================================================================== */
+
+.opening__grid {
+  display: grid;
+  gap: var(--s-7);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+}
+
+@media (min-width: 62rem) {
+  .opening__grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+}
+
+.opening__portrait {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: start;
+}
+
+.opening__portrait figure {
+  margin: 0;
+}
+
+.opening__portrait .figure__frame {
+  background: var(--surface-sunk);
+  border: 0;
+  border-radius: var(--r-2);
+  overflow: hidden;
+  padding: 0;
+  width: min(19rem, 100%);
+}
+
+.opening__portrait img {
+  width: 100%;
+  height: auto;
+  /* the source is already 3:4 and the frame is 3:4, so this never crops */
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+.opening__portrait figcaption {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  max-width: 19rem;
+}
+
+/* ==========================================================================
+   The motion spec
+
+   Each element names its keyframe and its length here, once. Both triggers
+   below read these, so the two engines cannot drift apart.
+   ========================================================================== */
+
+.movement-head .movement-index {
+  --anim: beat-rise;
+  --dur: var(--t-chapter);
+  --range: entry 2% entry 16%;
+}
+
+.movement-head .movement-title {
+  --anim: beat-rise;
+  --dur: var(--t-chapter);
+  --range: entry 6% entry 26%;
+}
+
+.movement-head .movement-lede {
+  --anim: beat-fade;
+  --dur: var(--t-base);
+  --range: entry 12% entry 30%;
+}
+
+/* the body follows paragraph by paragraph */
+.movement .story-body > * {
+  --anim: beat-fade;
+  --dur: var(--t-base);
+}
+.movement .story-body > *:nth-child(1) {
+  --range: entry 16% entry 34%;
+}
+.movement .story-body > *:nth-child(2) {
+  --range: entry 20% entry 38%;
+}
+.movement .story-body > *:nth-child(3) {
+  --range: entry 24% entry 42%;
+}
+.movement .story-body > *:nth-child(4) {
+  --range: entry 28% entry 46%;
+}
+.movement .story-body > *:nth-child(5) {
+  --range: entry 32% entry 50%;
+}
+.movement .story-body > *:nth-child(n + 6) {
+  --range: entry 36% entry 54%;
+}
+
+.print {
+  --anim: print-settle;
+  --dur: var(--t-scene);
+  --range: entry 4% entry 30%;
+}
+
+.margin-note {
+  --anim: note-fade;
+  --dur: var(--t-base);
+  --range: entry 22% entry 46%;
+}
+
+.reveal {
+  --anim: beat-fade;
+  --dur: var(--t-chapter);
+  --range: entry 5% entry 45%;
+}
+
+/* ==========================================================================
+   The keyframes
+
+   Only transform and opacity are animated, anywhere in this file. That is what
+   keeps layout shift at zero while things move.
+   ========================================================================== */
+
+/* A chapter number or title: it settles, with a little depth behind it. */
+@keyframes beat-rise {
+  from {
+    opacity: 0;
+    transform: perspective(900px) translate3d(0, 0.9rem, -60px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) translate3d(0, 0, 0);
+  }
+}
+
+/* A paragraph of text: a fade and a few pixels of rise. */
+@keyframes beat-fade {
+  from {
+    opacity: 0;
+    transform: perspective(900px) translate3d(0, 0.4rem, -40px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) translate3d(0, 0, 0);
+  }
+}
+
+/* A photograph settling onto the page, like a print being laid down. */
+@keyframes print-settle {
+  from {
+    opacity: 0;
+    transform: perspective(1100px) translate3d(0, 0.5rem, -70px) rotate(-0.5deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1100px) translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+/* A margin note, written in just after the entry it annotates. */
+@keyframes note-fade {
+  from {
+    opacity: 0;
+    transform: perspective(900px) translate3d(0, 0.3rem, -25px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) translate3d(0, 0, 0);
+  }
+}
+
+/* The rule between chapters, drawing across as the next one arrives. */
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* The thread through a timeline, drawn as the reader moves along it. */
+@keyframes thread-draw {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Parallax. Deliberately slight, and only on two layers:
+   the chapter head, and the frame a photograph sits in. */
+@keyframes drift {
+  from {
+    transform: translate3d(0, 1.8%, 0);
+  }
+  to {
+    transform: translate3d(0, -1.8%, 0);
+  }
+}
+
+/* ==========================================================================
+   Trigger A: native scroll-driven animation
+
+   Where the engine supports it, the compositor does this work and no script
+   is involved at all.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    html[data-timeline='native'] :is(
+        .movement-head .movement-index,
+        .movement-head .movement-title,
+        .movement-head .movement-lede,
+        .movement .story-body > *,
+        .print,
+        .margin-note,
+        .reveal
+      ) {
+      animation-name: var(--anim);
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: var(--range);
+    }
+
+    /* pseudo-elements cannot join an :is() list, so they are named directly */
+    html[data-timeline='native'] .movement::before {
+      animation: rule-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
+    html[data-timeline='native'] .threaded::before {
+      animation: thread-draw linear both;
+      animation-timeline: view();
+      animation-range: contain 0% contain 100%;
+    }
+
+    /* parallax, one layer on the chapter head, one on a photograph's frame.
+       Both sit outside the element that reveals, so the two transforms compose
+       down the tree rather than overwriting each other. Native only: the
+       fallback has no scroll position to read without a listener. */
+    html[data-timeline='native'] .movement-head {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+
+    html[data-timeline='native'] .figure__frame {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/* ==========================================================================
+   Trigger B: the observer fallback
+
+   Firefox, and any engine that fails the @supports test above. Same keyframes,
+   same durations, the site's own easing. The observer adds .is-revealed once
+   and never takes it away, so nothing flickers when scrolling back.
+
+   Parallax and the drawn thread are deliberately not reproduced here. Both are
+   depth cues rather than story, both want a live scroll position, and both
+   would mean a scroll listener on the main thread. The reveals are the part
+   that carries the narrative, so those are what cross the gap.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-timeline='fallback'] :is(
+      .movement-head .movement-index,
+      .movement-head .movement-title,
+      .movement-head .movement-lede,
+      .movement .story-body > *,
+      .print,
+      .margin-note,
+      .reveal
+    ).is-revealed {
+    animation-name: var(--anim);
+    animation-duration: var(--dur);
+    animation-timing-function: var(--ease);
+    animation-fill-mode: both;
+  }
+}
+
+/* ==========================================================================
+   Inter-chapter rule
+
+   At rest it is a plain hairline. The animation only decides how far across
+   it has been drawn.
+   ========================================================================== */
+
+.movement {
+  border-top: 0;
+}
+
+.movement::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--border);
+  transform-origin: 0 50%;
+}
+
+.movement:first-of-type::before {
+  display: none;
+}
+
+/* ==========================================================================
+   The thread
+
+   A dedicated gutter, so it works at every width and never collides with a
+   date column. At rest it is simply drawn; under motion it draws itself.
+   ========================================================================== */
+
+.threaded {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.threaded::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  left: 0;
+  width: 1px;
+  background: var(--border);
+  transform-origin: 50% 0;
+}
+
+/* each entry owns its knot, so a knot sits on the thread whatever that
+   entry's own layout happens to be */
+.threaded > * {
+  position: relative;
+}
+
+.knot {
+  position: absolute;
+  left: -3.5px;
+  top: 1.75rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  transition: border-color var(--t-base) var(--ease);
+}
+
+.knot[data-current='true'] {
+  border-color: var(--accent);
+}
+
+/* ==========================================================================
+   The work: a chapter's figures sit in the flow
+
+   Deliberately NOT sticky and NOT absolutely positioned. An earlier version
+   stacked the images with position:absolute so they could cross-fade as the
+   chapter advanced. That was wrong for this content: with two figures it put
+   them on top of each other, collapsed the frames to a few pixels, and laid a
+   caption over the image above it. Every photograph here is real content that
+   should be read at once, so they sit side by side in a normal grid.
+   ========================================================================== */
+
+/* Two or more figures in a chapter share the row on desktop, and stack on a
+   narrow screen. Each keeps its own caption and its own alt text. */
+.chapter__stack {
+  display: grid;
+  gap: var(--s-4);
+}
+
+/* Every figure in a chapter is shown whole: never cropped, never stretched to
+   fill its box. A screenshot or a diagram that is quietly distorted is worse
+   than one with a little space around it. */
+.chapter__stack img {
+  object-fit: contain;
+}
+
+@media (min-width: 62rem) {
+  /* The two-column split has to land on .gallery, which is the element that
+     actually holds the figures. Putting it on .chapter__stack does nothing,
+     because that grid has only the gallery as a child. */
+  .chapter__stack .gallery:has(> .figure:nth-child(2)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+/* ==========================================================================
+   Pointer tilt
+
+   A few degrees at most, transform only, media only, and never under reduced
+   motion or on touch. The reveal lives on the wrapper and the drift on the
+   frame, so the tilt on the image composes with both instead of overwriting.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-tilt] {
+    transform: perspective(700px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
+    transition: transform var(--t-state) var(--ease);
+  }
+
+  [data-tilting='true'] {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Interactivity
+
+   A tint, an underline, a hair of lift, inside the two short durations.
+   Anything that is not interactive does not move.
+   ========================================================================== */
+
+.event,
+.ledger__row > summary {
+  transition:
+    background-color var(--t-state) var(--ease),
+    transform var(--t-state) var(--ease);
+}
+
+.ledger__row > summary:hover,
+.ledger__row > summary:focus-visible {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.event:has(a:hover) {
+  background: color-mix(in srgb, var(--accent) 3%, transparent);
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.header-contact {
+  transition:
+    color var(--t-state) var(--ease),
+    border-color var(--t-state) var(--ease);
+}
+
+.skip-link {
+  transition: transform var(--t-state) var(--ease);
+}
+
+/* ==========================================================================
+   Theme change: a spreading reveal
+
+   The new theme is uncovered by a circle that grows from the toggle out to the
+   farthest corner of the viewport, driven by the View Transitions API.
+   ========================================================================== */
+
+::view-transition-group(root) {
+  animation: none;
+}
+
+/* the old view holds still underneath instead of cross-fading */
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: 0;
+}
+
+::view-transition-new(root) {
+  animation: theme-spread var(--t-chapter) var(--ease) forwards;
+  mix-blend-mode: normal;
+  z-index: 1;
+}
+
+/* the circle origin is measured at click time and written to this variable */
+html {
+  --theme-x: 50%;
+  --theme-y: 50%;
+  --theme-r: 150%;
+}
+
+@keyframes theme-spread {
+  from {
+    clip-path: circle(0% at var(--theme-x) var(--theme-y));
+  }
+  to {
+    clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y));
+  }
+}
+
+/* Fallback for browsers without View Transitions: the colour tokens ease over
+   the base duration. Layout properties are deliberately not transitioned. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme-fallback='true'] body,
+  html[data-theme-fallback='true'] .site-header,
+  html[data-theme-fallback='true'] .site-footer {
+    transition:
+      background-color var(--t-base) var(--ease),
+      color var(--t-base) var(--ease),
+      border-color var(--t-base) var(--ease),
+      fill var(--t-base) var(--ease),
+      stroke var(--t-base) var(--ease);
+  }
+}
+
+/* ==========================================================================
+   Reduced motion
+
+   The whole story, in order, with nothing running. Nothing here is removed
+   and nothing is hidden: this is the same page, simply still.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .motes,
+  .pen {
+    display: none !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
+  /* the thread stays, drawn: it is structure, not decoration */
+  .threaded::before,
+  .movement::before {
+    transform: none;
+  }
+
+  /* Must match the specificity of any sticky rule it is cancelling. */
+  .chapter__stack {
+    position: static;
+  }
+
+  [data-tilt] {
+    transform: none !important;
+  }
+}

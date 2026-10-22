@@ -1,0 +1,152 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Gallery from './Gallery.astro';
+
+/** What the events schema allows an image to be, so the template below never
+ *  falls back to an inferred `any`. */
+type EventImage = CollectionEntry<'events'>['data']['images'][number];
+
+/**
+ * The events. Chronological, each with a mono meta line
+ * (date | role | organiser) and a description drawn only from the post text.
+ *
+ * The entries are joined by a thread that draws as the reader moves through
+ * them, and the margin note for each arrives just after its entry.
+ *
+ * Certificates and badges are NOT shown here: an event links to the place
+ * that owns its credential instead - a ledger row, or in the Cloud Practitioner
+ * case the badge tile that carries the same anchor - so nothing is stated twice.
+ */
+const all = await getCollection('events');
+const events = [...all].sort((a, b) => a.data.sortKey.localeCompare(b.data.sortKey));
+---
+
+<section class="movement" id="events" aria-labelledby="events-title">
+  <div class="shell">
+    <div class="movement-head">
+      <p class="movement-index">03</p>
+      <h2 class="movement-title" id="events-title">Where I was in the room</h2>
+      <p class="movement-lede">
+        Rooms I was in, and what I was responsible for once I was in them. Every date below is
+        taken from the post or the document itself.
+      </p>
+    </div>
+
+    <div class="events story-body threaded">
+      {
+        events.map((event) => (
+          <article class="event" id={event.id} tabindex="-1">
+            {/* tabindex so a link to this entry can land focus on it: an article
+                is a destination here, not part of the tab order. */}
+            <span class="knot" aria-hidden="true"></span>
+            <p class="event__when margin-note">
+              <time>{event.data.dateLabel}</time>
+            </p>
+            <div class="event__content">
+              <h3 class="event__title">{event.data.title}</h3>
+              <p class="event__summary">{event.data.summary}</p>
+              <p class="meta margin-note">
+                <span class="meta-strong">{event.data.role}</span>
+                <span class="sep" aria-hidden="true">|</span>
+                <span>{event.data.organizer}</span>
+              </p>
+              {event.data.credential && (
+                <a class="event__link" href={`#cred-${event.data.credential}`}>
+                  <span aria-hidden="true">&#8594;</span>
+                  <span>See the certificate in the ledger</span>
+                </a>
+              )}
+              {event.data.images.length > 0 && (
+                <div class="event__gallery">
+                  {event.data.images.map((img: EventImage) => (
+                    <div class:list={['event__media', img.layout === 'portrait' && 'event__media--portrait']}>
+                      <Gallery
+                        images={[{ ...img, src: img.src }]}
+                        widths={[400, 640, 900]}
+                        sizes={img.layout === 'portrait' ? '(min-width: 62rem) 20rem, 92vw' : '(min-width: 62rem) 26rem, 46vw'}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // The thread's knots take the accent as the reader passes each one, and the
+  // chapter images step as their chapter advances. Both are state, not
+  // decoration, and both are skipped entirely when motion is reduced.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!reduced.matches) {
+    const knots = Array.from(document.querySelectorAll<HTMLElement>('.threaded .knot'));
+
+    if (knots.length) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            const knot = e.target as HTMLElement;
+            knot.setAttribute('data-current', String(e.isIntersecting));
+          }
+        },
+        { rootMargin: '-40% 0px -40% 0px' }
+      );
+      for (const k of knots) io.observe(k);
+    }
+
+    // Chapters that hold more than one image step between them while pinned.
+    document.querySelectorAll<HTMLElement>('.chapter:not(.chapter--wide) .chapter__stack').forEach((stack) => {
+      const imgs = Array.from(stack.querySelectorAll('img'));
+      if (imgs.length < 2) return;
+      let i = -1;
+
+
+      const set = (n: number) => {
+        if (n === i) return;
+        imgs[i]?.setAttribute('data-active', 'false');
+        imgs[n]?.setAttribute('data-active', 'true');
+        i = n;
+      };
+
+      // Progress through the chapter decides which image is showing.
+      const chapter = stack.closest('.chapter');
+      const body = chapter?.querySelector<HTMLElement>('.chapter__body');
+      if (!body) return;
+
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const box = chapter.getBoundingClientRect();
+        // 0 as the chapter arrives at the foot of the viewport, 1 as it leaves
+        // the top. Measuring the chapter rather than the text block ties the
+        // step to how far the argument has advanced.
+        const total = box.height + window.innerHeight;
+        const seen = window.innerHeight - box.top;
+        const p = total > 0 ? Math.min(1, Math.max(0, seen / total)) : 0;
+        set(Math.min(imgs.length - 1, Math.floor(p * imgs.length)));
+      };
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      // reset both the DOM flags and the internal cursor together, or the first
+      // set() call early-returns and no image is active at all
+      for (const im of imgs) im.setAttribute('data-active', 'false');
+      i = -1;
+      update();
+    });
+  }
+</script>
+
+<style>
+  .event {
+    position: relative;
+  }
+</style>

@@ -1,0 +1,688 @@
+/* ==========================================================================
+   Specimen board - "What I reach for"
+
+   A printed plate of tools rather than a list of chips: five ruled surfaces,
+   a mono caption and a count on each, the marks on one optical grid with the
+   name set underneath in the body face, and a reserved line for a sourced
+   sentence that only speaks when the item is hovered or focused.
+
+   Three transforms live here and they are kept on separate elements on
+   purpose, so none can overwrite another:
+
+     .tile          the entrance - depth settle and stagger
+     .tile__plate   the lift on hover, and the pointer tilt from story.css
+
+   The lift uses the `translate` property rather than `transform` for the same
+   reason: `translate`, `rotate`, `scale` and `transform` are separate channels
+   and compose, so lifting an item cannot cancel the tilt sitting on it.
+
+   Nothing below applies until src/scripts/specimen.ts marks the board. No
+   script, reduced motion, or a touch device all land on the resting state,
+   where every plate is fully visible and readable.
+   ========================================================================== */
+
+.specimen {
+  margin-top: var(--s-5);
+}
+
+/* --- the group index ------------------------------------------------------
+
+   Not chips. A row of mono labels sitting on a hairline, with the selected
+   one holding an accent underline the way a tab does on a printed index, so
+   it reads as navigation over a document rather than a cloud of tags.
+   ------------------------------------------------------------------------ */
+
+.specimen__filter[hidden] {
+  display: none;
+}
+
+.specimen__groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0 var(--s-5);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--s-5);
+}
+
+.specimen__group {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin: 0 0 -1px;
+  padding: var(--s-3) 0;
+  /* 44px is the comfortable touch target; the label itself is much smaller,
+     so the height is padding rather than type. */
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.specimen__group:hover {
+  color: var(--text);
+}
+
+.specimen__group.is-on {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.specimen__group:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--r-1);
+}
+
+.specimen__n {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.55;
+}
+
+/* --- the plates ----------------------------------------------------------- */
+
+.specimen__plates {
+  display: grid;
+  gap: var(--s-6);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 62rem) {
+  .specimen__plates {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Natural height per plate, so when the filter removes one the survivors
+       settle into real positions the FLIP below can measure. */
+    align-items: start;
+  }
+}
+
+.plate {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-2);
+  padding: var(--s-5);
+}
+
+/* The hidden attribute is overridden by any author `display` above, so it has
+   to be restated here or a filtered-out plate would still be laid out. */
+.plate[hidden] {
+  display: none;
+}
+
+.plate__caption {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0;
+  /* The caption is mono because it is a plate label, not a heading - the
+     group name still stays in sentence case like every other label here. */
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-wrap: initial;
+  color: var(--text-muted);
+}
+
+.plate__count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.65;
+}
+
+.plate__blurb {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* --- the grid ------------------------------------------------------------- */
+
+.plate__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* One column more than fits comfortably at 390px would give a 60px tap
+     target, so the floor is the tile minimum: two columns on a phone. */
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  /* Rows size to their content rather than to the tallest row in the plate.
+     Equalising them sounded tidier and was not: with a reserved line under
+     every name it stretched a five-item plate to a screen and a half of
+     near-empty paper. Names still sit on one baseline, because the glyph slot
+     above them is a fixed height, and the hover tint still fills the cell,
+     because the tile fills the row. */
+  gap: var(--s-3);
+}
+
+.tile {
+  /* The FLIP on filter change moves the plate, never the tile, so the tile
+     needs no positioning of its own. */
+  min-width: 0;
+}
+
+.tile__plate {
+  position: relative;
+  height: 100%;
+  display: grid;
+  align-content: start;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  border-radius: var(--r-2);
+  background: transparent;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    translate var(--t-fast) var(--ease);
+}
+
+/* The wash and the lift are affordances, and an affordance on a tile that has
+   nowhere to go is a lie: it promises a destination the item cannot honour.
+   Most items do carry a link - to the chapter of The work, or to the row in
+   the ledger that backs them - but the twenty that are practice items, or
+   whose evidence sits in the work rather than a certificate, are plain text.
+   Those keep their hover: the line of context still arrives with one, because
+   that is information rather than an invitation. It arrives in the plate's
+   caption where there is a pointer to drive it, and under the name where there
+   is not. What plain text loses is the tint and the lift, so the pointer no
+   longer announces something unclickable.
+
+   `:has(a)` rather than a data attribute, because the anchor is already the
+   thing that decides whether the name renders as a link at Specimen.astro:91.
+   One source of truth: add a link and the affordance follows automatically,
+   with no second flag to forget. */
+.tile:has(a):where(:hover, :focus-within) .tile__plate {
+  /* A faint accent wash, the same gesture the ledger rows use. */
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+  /* The lift. Separate from `transform`, so it never clears the tilt. */
+  translate: 0 -2px;
+}
+
+/* The whole tile is the target, not just the line of text inside it. */
+.tile__name a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-2);
+}
+
+/* The focus ring belongs on the tile, because that is what the overlay makes
+   clickable. Both rules need :has(), so where it is unsupported they drop
+   together and the anchor keeps the site's global ring. */
+.tile__plate:has(a:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tile__plate:has(a:focus-visible) .tile__name a {
+  outline: none;
+}
+
+/* --- the marks ------------------------------------------------------------ */
+
+.tile__slot {
+  display: flex;
+  align-items: flex-end;
+  /* One height for every slot, so every mark shares a baseline no matter how
+     much of its box the drawing actually fills. */
+  height: 1.6rem;
+}
+
+.tile__slot-empty {
+  display: block;
+}
+
+/* Optical size, solved by ink area rather than by eye.
+ *
+ * All twelve files are square viewBoxes, but a square box is not a square mark.
+ * Measured as drawn (tools/probe-glyph-ink.mjs rasterises each file and takes
+ * the bounding box of non-transparent pixels), the ink fills anywhere from 59%
+ * to 100% of that box, and the shapes are not square at all: the AWS wordmark
+ * runs 1.66 wide to 1 tall, pandas 0.63, the Java flame 0.74. Sizing every mark
+ * to one height therefore left a 2.98x spread in ink area, which is what a row
+ * of specimens is actually read by - python read as a solid block while mysql
+ * read as a sliver in the same row.
+ *
+ * The heights below are the solution to (height x width) = target, using each
+ * file's measured aspect. What is held constant is the ink, so the marks read
+ * as one line of specimens; the boxes they sit in still differ, which is fine,
+ * because the name underneath aligns to the slot and not to the glyph.
+ *
+ * Geometry is never altered - only the rendered size, so no mark is distorted
+ * and nothing here touches a brand's own proportions.
+ *
+ * Targets, per mark family:
+ *   pictogram (python, git, github, pytorch, laravel, java)  - tall and narrow
+ *     or compact, so they are held nearest the baseline size.
+ *   wordmark (mysql, aws, pandas) - wide and short, they need a larger box to
+ *     carry the same ink, which is why they get the tallest numbers here.
+ */
+.tile__glyph {
+  display: block;
+  /* One size for all twelve, and a size chosen so the shortest of them still
+     reads. The wordmarks are short by nature - aws is 59% of its viewBox tall
+     and mysql 68% - so at the 1.5rem this started at, the AWS mark drew 14px
+     against a 24px python beside it. Nothing in a row of specimens should be
+     40% shorter than its neighbour, and no per-mark height was going to fix
+     that without breaking the common baseline. Raising the shared height to
+     1.7rem takes the shortest to about 16px and the tallest to 26px: the
+     spread between them is the artwork's own and cannot be closed, but the
+     floor is now high enough that nothing reads as a footnote. */
+  height: 1.7rem;
+  width: auto;
+  max-width: 100%;
+  color: var(--text);
+  transition: color var(--t-fast) var(--ease);
+}
+
+/* No per-mark size table. There used to be one, and it made the board worse
+   rather than better. It was built on a measurement that turned out to be
+   reading the inline SVG's own box in Chrome rather than its ink, which
+   reported a 2.98x spread in "visual weight" across the marks and invited a
+   correction that shrank the ones that looked lightest. Measured properly -
+   rasterising each file and taking the bounding box of non-transparent pixels
+   at 512px - the real spread in bounding-box area at one common height is
+   1.70x, and it is not a defect to be levelled out:
+
+     marks that fill their viewBox (git, python, 100%)     must be shorter in
+     the box than marks that do not (aws 59%, pandas 63%),  or they would read
+     as the largest things on the plate.
+
+   A wordmark is genuinely lighter than a pictogram at the same box: aws is
+   33% ink inside its bounding box against git's 46%, and java's outlined flame
+   is 17%. That is what those logos look like. Equalising them would mean
+   scaling aws up to about 1.7in-units past its neighbours, which is the
+   distortion the brand guidelines forbid, and it would put a wordmark in a
+   row of pictograms at a size none of them share.
+
+   So the slot is one size for every mark and the variance is the artwork's
+   own. Optical sizing here means one consistent box and a shared baseline,
+   and the brief's "consistent optical size" is met by that, not by twelve
+   hand-tuned heights. The one thing genuinely worth checking is that no mark
+   is small enough to fail as a graphical object, which is the contrast gate
+   in section 6 - and it passes for all twelve. */
+
+/* Measured ink bounds, for the record (tools/probe-glyph-ink2.mjs, 512px
+   raster, bounds of alpha > 8, in viewBox units of 24):
+     mark         ink w  ink h   w/h  box area  ink fill
+     aws          23.81  14.25  1.67     58.9%       33%
+     css3         20.72  23.53  0.88     84.6%       65%
+     git          24.00  24.00  1.00    100.0%       46%
+     github       24.00  23.44  1.02     97.7%       44%
+     html5        21.00  24.00  0.88     87.5%       63%
+     huggingface  24.00  21.75  1.10     90.6%       65%
+     java         17.30  23.44  0.74     70.4%       17%
+     laravel      23.34  24.00  0.97     97.3%       22%
+     mysql        24.00  16.31  1.47     68.0%       17%
+     pandas       15.09  24.00  0.63     62.9%       46%
+     python       24.00  24.00  1.00    100.0%       64%
+     pytorch      19.97  24.00  0.83     83.2%       28%  */
+
+/* Brand colour, only where it is still a graphical object at 3:1 against the
+   plate it sits on, and only for single-path marks. Which of the three rules
+   a mark qualifies under is measured in tools/brand-contrast.mjs and written
+   into the data file; tools/verify-logos fails the build if they disagree. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .tile:has(a)[data-brand-on='both']:where(:hover, :focus-within) .tile__glyph,
+  html[data-theme='light']
+    .tile:has(a)[data-brand-on='light']:where(:hover, :focus-within)
+    .tile__glyph,
+  html[data-theme='dark']
+    .tile:has(a)[data-brand-on='dark']:where(:hover, :focus-within)
+    .tile__glyph {
+    color: var(--brand);
+  }
+}
+
+/* --- the name and the line under it ---------------------------------------- */
+
+.tile__name {
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.tile__name a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.tile__name a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* The second destination a tile can carry. It has its own words and its own
+   target, while the name's overlay still owns every other pixel of the tile,
+   so it sits above that overlay in the stacking order: click its words and you
+   get the documents, click anywhere else and you still get the chapter. Tall
+   enough to hit without aiming, and muted so it reads as the note under a name
+   rather than a second headline. */
+.tile__extra {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.3;
+}
+
+.tile__extra a {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0.4rem 0;
+  color: var(--text-muted);
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.tile__extra a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
+/* --- the line under the name ------------------------------------------------ */
+
+/* Two arrangements exist, and the markup carries each because it has to work
+   without the other.
+
+   Plain - no script, or nothing to drive one: the sentence sits under its own
+   name. A reader without JavaScript always gets this, and so does a touch
+   reader, permanently, because there is no hover to reveal anything with.
+
+   Shared - script present and a pointer device: reserving transparent space
+   under every name leaves a grid of voids, so each plate carries one line
+   instead and the tiles' own sentences leave the flow. They leave it *into the
+   accessibility tree*, not out of the document: the shared line is aria-hidden,
+   so clipping these is what stops the information being lost rather than
+   relocated. */
+
+.tile__context {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.tile__context:empty {
+  display: none;
+}
+
+@media (hover: hover) {
+  /* Plain arrangement. Transparent at rest, so revealing it costs opacity and
+     a quarter of a line and nothing below moves; where an item has nothing
+     verified to say, the element is empty and leaves the grid entirely rather
+     than holding a hole open. */
+  .tile__context {
+    opacity: 0;
+    transform: translate3d(0, 0.25rem, 0);
+    transition:
+      opacity var(--t-fast) var(--ease),
+      transform var(--t-fast) var(--ease);
+  }
+
+  .tile:where(:hover, :focus-within) .tile__context {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Shared arrangement. One line per plate, so each tile's sentence is taken
+     out of the flow entirely - a 1px clipped box keeps the words in the
+     accessibility tree while removing every pixel of reserved height. The
+     hover reveal above is switched off here by specificity rather than
+     duplicated: it would be revealing something deliberately not visible. */
+  [data-specimen][data-js] .tile__context {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    opacity: 0;
+    transform: none;
+    transition: none;
+  }
+
+  [data-specimen][data-js] .plate__context {
+    display: block;
+  }
+}
+
+/* The shared line itself. Hidden by default, so a page without script, and a
+   touch device, never show an empty caption of their own - their tiles are
+   already saying everything. When it is live it is one line tall whether or not
+   it is saying anything, which is the whole point: hovering cannot change the
+   height of the plate and cannot move a single tile. */
+.plate__context {
+  display: none;
+  margin: var(--s-4) 0 0;
+  min-height: 1.3em;
+  font-size: var(--step--1);
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+/* At 768px and under, the same sentence takes two lines in a plate this
+   narrow, so the line is reserved two deep rather than letting the first
+   hover grow the plate by half a row. It is measured rather than assumed:
+   tools/probe-caption.mjs renders every sentence in the board at 390, 700,
+   1024 and 1280 and fails if one of them needs more room than it is given. */
+@media (max-width: 48rem) {
+  .plate__context {
+    min-height: 2.6em;
+  }
+}
+
+/* --- entrance -------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Only reachable once the script has marked the board, so a page without
+     JavaScript never hides a single name. */
+  [data-specimen][data-motion] .tile {
+    opacity: 0;
+    transform: perspective(900px) translate3d(0, 0.5rem, -34px) rotateX(6deg);
+  }
+
+  [data-specimen][data-motion] .tile.is-in {
+    opacity: 1;
+    transform: perspective(900px) translate3d(0, 0, 0) rotateX(0deg);
+    /* --i is the column, measured once at start-up, so a row settles left to
+       right in about 140ms instead of every plate cascading for a second. */
+    transition:
+      opacity var(--t-base) var(--ease) calc(min(var(--i, 0), 4) * 35ms),
+      transform var(--t-base) var(--ease) calc(min(var(--i, 0), 4) * 35ms);
+  }
+}
+
+/* --- narrow screens -------------------------------------------------------- */
+
+@media (max-width: 30rem) {
+  .plate {
+    padding: var(--s-4);
+  }
+
+  .specimen__groups {
+    gap: 0 var(--s-4);
+  }
+}
+
+/* ==========================================================================
+   /logos/CREDITS
+
+   The same appendix voice as the board it documents: a document, not a
+   dashboard. Five columns is one too many for a phone, so the table scrolls
+   sideways inside its own box rather than being squashed into unreadable
+   cells.
+   ========================================================================== */
+
+.credits {
+  padding-top: calc(var(--s-9) + var(--s-5));
+  padding-bottom: var(--s-9);
+  display: grid;
+  gap: var(--s-5);
+  align-content: start;
+}
+
+.credits__kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.credits__title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+.credits__h2 {
+  margin: var(--s-5) 0 0;
+  font-size: var(--step-1);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--border);
+}
+
+.credits__lede {
+  margin: 0;
+  max-width: 46rem;
+  line-height: 1.65;
+}
+
+.credits__sources {
+  margin: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+
+.credits__source {
+  display: grid;
+  gap: var(--s-2);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 52rem) {
+  .credits__source {
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    gap: var(--s-5);
+  }
+}
+
+.credits__source dt {
+  font-weight: 500;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.credits__source dd {
+  margin: 0;
+  display: grid;
+  gap: var(--s-2);
+}
+
+.credits__licence {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.credits__url {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  overflow-wrap: anywhere;
+}
+
+.credits__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--r-2);
+  background: var(--surface);
+}
+
+.credits__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.credits__table th,
+.credits__table td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--s-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.credits__table thead th {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  background: var(--surface-sunk);
+}
+
+.credits__table tbody th {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.credits__table tbody tr:last-child th,
+.credits__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.credits__table code {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  overflow-wrap: anywhere;
+}
+
+.credits__table p {
+  margin: 0;
+}
+
+.credits__table p + p {
+  margin-top: var(--s-2);
+  color: var(--text-muted);
+}
+
+.credits__brand {
+  font-size: var(--step--2, 0.75rem);
+}
+
+.credits__plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.credits__back {
+  margin: var(--s-5) 0 0;
+}

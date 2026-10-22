@@ -1,0 +1,184 @@
+---
+/**
+ * /logos/CREDITS - the table the footer points at.
+ *
+ * Generated from the same src/data/logos.ts the board is built from, so the
+ * page and the tiles cannot drift apart: if a mark is added to the board
+ * without a row here, tools/verify-logos fails the build rather than letting
+ * an attribution go missing.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import { PLATES } from '../../data/logos';
+import { MARK_FILES } from '../../data/marks';
+
+const items = PLATES.flatMap((p) => p.items);
+const marked = items.filter((i) => i.mark);
+const unmarked = items.filter((i) => !i.mark);
+
+/* A logo file with no row, or a row with no file, is exactly the omission this
+   page exists to prevent, so both are made build failures here rather than
+   left to be noticed. tools/verify-logos repeats the check from disk. */
+const referenced = marked.map((i) => i.mark!.file).sort();
+const orphaned = MARK_FILES.filter((f) => !referenced.includes(f));
+const missing = referenced.filter((f) => !MARK_FILES.includes(f));
+if (orphaned.length || missing.length) {
+  throw new Error(
+    `logo credits out of step with the mark files: ` +
+      `${orphaned.length ? `unreferenced ${orphaned.join(', ')}` : ''} ` +
+      `${missing.length ? `missing ${missing.join(', ')}` : ''}`
+  );
+}
+
+const sources = [
+  {
+    name: 'Simple Icons',
+    licence: 'CC0 1.0',
+    url: 'https://github.com/simple-icons/simple-icons',
+    note: 'The icon files are released under CC0, which is a dedication of the file and says nothing about the mark drawn in it. Every brand name and logo remains a trademark of its owner, and Simple Icons asks that the guidelines in its CONTRIBUTING file be followed: no distortion, no recolouring outside the brand, no use that implies the project is endorsed by the brand. Simple Icons also removes icons on request from a rights holder, which is why three of the twelve marks below come from Devicon instead.',
+  },
+  {
+    name: 'Devicon',
+    licence: 'MIT',
+    url: 'https://github.com/devicons/devicon',
+    note: 'The icon files are MIT. The same caveat applies: MIT covers the file, not the trademark inside it, and Oracle, Amazon and the other owners keep their brand guidelines.',
+  },
+  {
+    name: 'AWS Architecture Icons',
+    licence: "Amazon's own terms",
+    url: 'https://aws.amazon.com/architecture/icons/',
+    note: 'Not used. The set is handed out against acceptance of an Amazon licence agreement rather than a free licence, so it was not copied into this repository. The skill listed is AWS as a platform and names no particular service, so the AWS wordmark - reproduced by Devicon - is the correct mark for it anyway.',
+  },
+];
+---
+
+<BaseLayout
+  title="Logo credits"
+  description="Sources, licences and trademark notes for the tool logos shown on this site."
+>
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="wordmark" href="/">Nishchal Panta</a>
+      <div class="header-actions">
+        <a class="header-contact" href="/#reach">Contact</a>
+        <ThemeToggle />
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="shell credits">
+    <p class="credits__kicker">Appendix</p>
+    <h1 class="credits__title">Logo credits</h1>
+
+    <p class="credits__lede">
+      Every tool mark on this site was downloaded once, cleaned, and stored in
+      this repository. Nothing is fetched from a third party when the page
+      loads. This table records where each file came from, under what licence
+      the file is published, and what the brand owners still require of it.
+    </p>
+
+    <h2 class="credits__h2">Sources</h2>
+    <dl class="credits__sources">
+      {
+        sources.map((s) => (
+          <div class="credits__source">
+            <dt>
+              {s.name}
+              <span class="credits__licence">{s.licence}</span>
+            </dt>
+            <dd>
+              <p>{s.note}</p>
+              <p class="credits__url">
+                <a href={s.url} rel="noopener noreferrer" target="_blank">
+                  {s.url}
+                </a>
+              </p>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <h2 class="credits__h2">The marks in use</h2>
+    <div class="credits__scroll">
+      <table class="credits__table">
+        <caption class="visually-hidden">
+          Every tool logo on this site, with its source file, source, licence,
+          and brand usage note.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">File</th>
+            <th scope="col">Source URL</th>
+            <th scope="col">Licence</th>
+            <th scope="col">Guideline notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            marked.map((item) => (
+              <tr>
+                <th scope="row">{item.name}</th>
+                <td>
+                  <code>src/assets/logos/{item.mark!.file}.svg</code>
+                </td>
+                <td>
+                  <a
+                    href={item.mark!.fileUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="credits__url"
+                  >
+                    {item.mark!.fileUrl}
+                  </a>
+                </td>
+                <td>{item.mark!.licence}</td>
+                <td>
+                  <p>{item.mark!.note}</p>
+                  <p class="credits__brand">
+                    Brand colour <code>{item.mark!.brand}</code>, shown on
+                    {
+                      item.mark!.brandOn === 'both'
+                        ? 'both themes'
+                        : `the ${item.mark!.brandOn} theme only`
+                    }
+                    . A mark that helps identify the tool is a graphical object,
+                    so it has to clear 3:1 against the plate it sits on. Where the
+                    brand colour does not reach that on a theme, the mark keeps the
+                    ink tone there rather than being dimmed below it.
+                  </p>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="credits__h2">Items with no official logo</h2>
+    <p class="credits__lede">
+      {unmarked.length} of {items.length} items carry no mark. A practice,
+      a course title or a discipline does not have a logo, and drawing one
+      would be inventing a brand. These are set as plain text on the board.
+    </p>
+    <ul class="credits__plain" role="list">
+      {unmarked.map((i) => <li>{i.name}</li>)}
+    </ul>
+
+    <h2 class="credits__h2">Terms</h2>
+    <p class="credits__lede">
+      The icon files are published under CC0 or MIT. Those licences cover the
+      files, not the trademarks they draw, so every logo above remains the
+      property of its owner and is used here only to identify the tool named
+      beside it. Nothing on this site suggests that any of these companies
+      endorses it, the marks are never distorted or recoloured outside their
+      own brand colour, and no mark is used as a logo for anything but the tool
+      it belongs to.
+    </p>
+
+    <p class="credits__back">
+      <a href="/">Back to the portfolio</a>
+    </p>
+  </main>
+</BaseLayout>

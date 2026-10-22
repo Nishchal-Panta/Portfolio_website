@@ -1,0 +1,21 @@
+---
+export interface Props {
+  movements: { id: string; index: string; name: string }[];
+}
+const { movements } = Astro.props;
+---
+
+<nav class="rail" aria-label="Movements">
+  <ol class="rail__list" data-rail>
+    {
+      movements.map((m) => (
+        <li>
+          <a class="rail__link" href={`#${m.id}`} data-rail-link={m.id}>
+            <span class="rail__num">{m.index}</span>
+            <span class="rail__name">{m.name}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

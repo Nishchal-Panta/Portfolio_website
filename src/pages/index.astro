@@ -1,0 +1,560 @@
+---
+import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { BUILD } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Rail from '../components/Rail.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Events from '../components/Events.astro';
+import Credentials from '../components/Credentials.astro';
+import Specimen from '../components/Specimen.astro';
+import Album from '../components/Album.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Gallery from '../components/Gallery.astro';
+import { album as slides } from '../data/album';
+import architecture from '@assets/site/architecture.jpg';
+import hero from '@assets/site/hero.jpg';
+import idsDiagram from '@assets/site/ids-pipeline.png';
+import ttsApp from '@assets/events/tts-app-dark.jpg';
+import ttsError from '@assets/events/tts-app-error-full.jpg';
+
+const skillsEntry = await getEntry('skills', 'skills');
+
+const uniglobe = await getEntry('credentials', 'uniglobe');
+
+const movements = [
+  { id: 'opening', index: '00', name: 'Opening' },
+  { id: 'origin', index: '01', name: 'How I got here' },
+  { id: 'work', index: '02', name: 'The work' },
+  { id: 'events', index: '03', name: 'Where I was in the room' },
+  { id: 'credentials', index: '04', name: 'Proof' },
+  { id: 'skills-movement', index: '05', name: 'What I reach for' },
+  { id: 'site', index: '06', name: 'This site, too' },
+  { id: 'album', index: '07', name: 'Album' },
+  { id: 'reach', index: '08', name: 'Reach me' },
+];
+---
+
+<BaseLayout
+  title="Nishchal Panta, backend and machine learning from Kathmandu"
+  description="Nishchal Panta is a computer science undergraduate in Kathmandu building machine-learning models and the web platforms that serve them, and learning to run them properly on AWS."
+  ogImage="/og/image.png"
+>
+
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="wordmark" href="#opening">Nishchal Panta</a>
+      <div class="header-actions">
+        <a class="header-contact" href="#reach">Contact</a>
+        <ThemeToggle />
+      </div>
+    </div>
+    <div class="progress" aria-hidden="true"></div>
+  </header>
+  <div class="page">
+    <Rail movements={movements} />
+
+    <main id="main">
+    <!-- 00 ------------------------------------------------------------- -->
+    <section class="shell opening" id="opening">
+      <div class="opening__grid">
+        <div>
+          <p class="opening__range">2021 &ndash; 2026</p>
+          <h1>
+            Nishchal Panta, <em>building the model and the thing it runs in.</em>
+          </h1>
+          <p class="opening__line">
+            I build machine-learning models and the web platforms that serve them. Running them
+            properly on AWS is the part I am still working on.
+          </p>
+        </div>
+        <div class="opening__portrait print">
+          <figure>
+            <div class="figure__frame">
+              <Image
+                src={hero}
+                alt="Nishchal Panta in a brown blazer, looking up to his left, framed by an arch of cream and peach flowers."
+                widths={[420, 640, 900]}
+                sizes="(min-width: 62rem) 19rem, 74vw"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                quality={82}
+                data-tilt
+              />
+            </div>
+            <figcaption>Nishchal Panta</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="opening__meta">
+        <span class="meta">Kathmandu, Nepal</span>
+        <span class="meta">BCS, IIMS College with Taylor's University, since Sept 2023</span>
+        <span class="meta">AWS Certified Cloud Practitioner</span>
+      </div>
+      <a class="scroll-cue" href="#origin">
+        <span class="scroll-cue__line" aria-hidden="true"></span>
+        <span>Start at the beginning</span>
+      </a>
+    </section>
+
+    <!-- 01 ------------------------------------------------------------- -->
+    <section class="movement" id="origin" aria-labelledby="origin-title">
+      <div class="shell">
+        <div class="movement-head">
+          <p class="movement-index">01</p>
+          <h2 class="movement-title" id="origin-title">How I got here</h2>
+          <p class="movement-lede">
+            Nobody starts at the interesting part. This is the part before it.
+          </p>
+        </div>
+
+        <div class="origin">
+          <ol class="origin__steps story-body threaded">
+            <li class="origin__step"><span class="knot" aria-hidden="true"></span>
+              <p class="origin__when margin-note">2021&ndash;2023</p>
+              <div class="origin__what">
+                <h3>Science, first</h3>
+                <p>
+                  A levels at Uniglobe SS/College, in the science stream. I finished first in
+                  Stream Science for Grade&nbsp;11 Section&nbsp;A and second in the subject-wise
+                  presentation competition for Science and Language, which is where I found out I
+                  could hold a room by explaining something.
+                </p>
+                {
+                  uniglobe && (
+                    <p>
+                      <a href="#cred-uniglobe">See the certificate</a>
+                    </p>
+                  )
+                }
+              </div>
+            </li>
+            <li class="origin__step"><span class="knot" aria-hidden="true"></span>
+              <p class="origin__when margin-note">Sept 2023</p>
+              <div class="origin__what">
+                <h3>Computer science, at last</h3>
+                <p>
+                  Bachelor of Computer Science at IIMS College, affiliated with Taylor's
+                  University. The first year was largely procedural thinking and object-oriented
+                  design. The second turned into intrusion detection research.
+                </p>
+              </div>
+            </li>
+            <li class="origin__step"><span class="knot" aria-hidden="true"></span>
+              <p class="origin__when margin-note">2024&ndash;2025</p>
+              <div class="origin__what">
+                <h3>Security, then systems</h3>
+                <p>
+                  I started from an interest in intrusion detection, built a PyTorch model on the
+                  IDS&nbsp;2018 benchmark, and then asked the obvious next question: what does it
+                  take to put this behind a real interface? That question produced the Laravel
+                  e-commerce platform, and it is where most of my engineering actually lives.
+                </p>
+              </div>
+            </li>
+            <li class="origin__step"><span class="knot" aria-hidden="true"></span>
+              <p class="origin__when margin-note">2026</p>
+              <div class="origin__what">
+                <h3>Out of the laptop and onto the platform</h3>
+                <p>
+                  A three-month AWS fellowship at CloudMandap, the Cloud Practitioner exam, and
+                  two builds that run entirely on managed infrastructure. My profile now says
+                  agentic AI, LLM workflows and retrieval. I am working towards that rather than
+                  claiming it.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="origin__figure print">
+            {
+              uniglobe?.data.image && (
+                <figure class="figure">
+                  <div class="figure__frame">
+                    <Image
+                      src={uniglobe.data.image}
+                      alt={uniglobe.data.imageAlt ?? uniglobe.data.name}
+                      widths={[400, 640, 900]}
+                      sizes="(min-width: 62rem) 30rem, 92vw"
+                      loading="lazy"
+                      decoding="async"
+                      quality={80}
+                    />
+                  </div>
+                  <figcaption>{uniglobe.data.dateLabel}, from {uniglobe.data.issuer}.</figcaption>
+                </figure>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 ------------------------------------------------------------- -->
+    <section class="movement" id="work" aria-labelledby="work-title">
+      <div class="shell">
+        <div class="movement-head">
+          <p class="movement-index">02</p>
+          <h2 class="movement-title" id="work-title">The work</h2>
+          <p class="movement-lede">
+            Three things, in the order they taught me something. Read in order; each one is the
+            answer to a problem the previous one left open.
+          </p>
+        </div>
+
+        <div class="work">
+          <article class="chapter">
+            <div class="chapter__body story-body">
+              <p class="meta">2024&ndash;2025 <span aria-hidden="true">|</span> Machine learning</p>
+              <h3 class="chapter__title">Intrusion detection, twice</h3>
+              <p>
+                The first attempt was a deep-learning intrusion detection system on the
+                CSE-CIC-IDS2018 benchmark: a four-layer multilayer perceptron, 512 to 256 to
+                128 to 2, with ReLU activations, dropout, Kaiming initialisation, SGD and
+                early stopping. Preprocessing, one-hot encoding, feature scaling, stratified
+                splitting, and evaluation on ROC/AUC, F1 and the confusion matrix.
+              </p>
+              <p>
+                The part that mattered was the imbalance. Attack traffic is a small fraction
+                of everything else, so a model that scores well on accuracy tells you very
+                little about whether it works.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/Nishchal-Panta/Cybersecurity_threat_detection"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Cybersecurity_threat_detection on GitHub</a
+                >
+              </p>
+              <p>
+                The same problem, rebuilt on managed services. This second version runs the
+                whole lifecycle on AWS: a SageMaker Processing job cleans the raw CSV logs
+                and splits them 80/20, XGBoost trains on the result, the model is registered
+                and auto-approved under the package group <code>ThreatDetectionModels</code>,
+                and the approved version is deployed to a real-time endpoint named
+                <code>threat-detection-endpoint</code> on <code>ml.m5.large</code>. It scores
+                eleven network features per event, among them source and destination ports,
+                bytes sent and received, duration, packet count, TCP flags and a byte ratio,
+                and returns a threat score classified as normal or suspicious. Pipeline jobs
+                and endpoint metrics go to CloudWatch.
+              </p>
+              <p>
+                The README lists AUC, precision and recall under
+                <em>expected metrics</em>, not measured ones, so I am not quoting them as
+                results.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/Nishchal-Panta/AWS-Cybersecurity_threat_detection"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >AWS-Cybersecurity_threat_detection on GitHub</a
+                >
+              </p>
+            </div>
+            <div class="chapter__stack">
+              <Gallery
+                images={[
+                  {
+                    src: idsDiagram,
+                    alt: 'Architecture diagram of the AWS threat detection pipeline, in eight numbered blocks: data ingestion from network logs in S3, a SageMaker Processing job running preprocess.py, processed CSV in S3, XGBoost training, the ThreatDetectionModels model registry, deployment to a threat-detection-endpoint for real-time inference, security and observability through IAM and CloudWatch, and a storage bucket for model artifacts.',
+                    caption:
+                      'The pipeline, end to end. Open it full size to read the block labels.',
+                    enlarge: '/evidence/ids-pipeline.png',
+                  },
+                ]}
+                sizes="(min-width: 62rem) 34rem, 92vw"
+              />
+            </div>
+          </article>
+
+          <article class="chapter chapter--wide">
+            <div class="chapter__body story-body">
+              <p class="meta">2025 <span aria-hidden="true">|</span> Backend</p>
+              <h3 class="chapter__title">A production Laravel platform</h3>
+              <p>
+                A wholesale-to-retail e-commerce platform with a buyer storefront, an admin
+                dashboard, inventory management and analytics. Twelve database migrations,
+                role-based access control, CSRF and XSS mitigation, bcrypt password hashing and
+                secure session handling, with Chart.js on the admin side and Docker Compose for
+                local work.
+              </p>
+              <p>
+                This is the build I would talk about first. The modelling is unremarkable; the
+                discipline around roles, sessions and migrations is the part I am proud of.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/Nishchal-Panta/E-commerce_website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Repository on GitHub</a
+                >
+              </p>
+            </div>
+          </article>
+
+          <article class="chapter chapter--wide">
+            <div class="chapter__body story-body">
+              <p class="meta">2026 <span aria-hidden="true">|</span> Cloud</p>
+              <h3 class="chapter__title">Serverless, on AWS</h3>
+              <p>
+                An e-commerce platform built on the serverless stack rather than a server. The
+                infrastructure is a CloudFormation template, the backend and frontend are
+                split into their own packages, there is an OAuth2 token exchange endpoint,
+                and GitHub Actions carries the build through to deployment with monitoring
+                alongside it.
+              </p>
+              <p>
+                Alongside it, a language tool that detects the language, translates the text
+                and turns it into speech, entirely serverless.
+              </p>
+              <p>
+                Both were built to answer one question: how much of this work can be handed
+                to the platform, and what is genuinely left that needs me.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/Nishchal-Panta/AWS-Ecommerce_website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >AWS-Ecommerce_website on GitHub</a
+                >
+                <span aria-hidden="true"> &middot; </span>
+                <a
+                  href="https://github.com/Nishchal-Panta/Language_translation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Language_translation on GitHub</a
+                >
+              </p>
+            </div>
+            <div class="chapter__stack">
+              <Gallery
+                images={[
+                  {
+                    src: ttsApp,
+                    alt: 'A text-to-speech web application in its dark theme, with fields for the source text, the detected language and the output voice.',
+                    caption: 'The interface: source text, detected language, output voice.',
+                  },
+                  {
+                    src: ttsError,
+                    alt: 'The same text-to-speech application in its light theme, showing the error message the service actually returned.',
+                    caption:
+                      'The error the service returned.',
+                    enlarge: '/evidence/tts-app-error-full.jpg',
+                  },
+                ]}
+                widths={[400, 640]}
+                sizes="(min-width: 62rem) 20rem, 92vw"
+              />
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <Events />
+    <Credentials />
+
+    <!-- 05 ------------------------------------------------------------- -->
+    <section class="movement" id="skills-movement" aria-labelledby="skills-title">
+      <div class="shell">
+        <div class="movement-head">
+          <p class="movement-index">05</p>
+          <h2 class="movement-title" id="skills-title">What I reach for</h2>
+          <p class="movement-lede">
+            Grouped by what the work demanded of them, not by how confident I feel about them.
+            There are no percentages here.
+          </p>
+        </div>
+
+        <Specimen />
+
+        {
+          skillsEntry && (
+            <p class="ledger__issuer reveal" style="margin-top: var(--s-7)">
+              {skillsEntry.data.source}
+            </p>
+          )
+        }
+      </div>
+    </section>
+
+    <!-- 06 ------------------------------------------------------------- -->
+    <section class="movement" id="site" aria-labelledby="site-title">
+      <div class="shell">
+        <div class="movement-head">
+          <p class="movement-index">06</p>
+          <h2 class="movement-title" id="site-title">This site, too</h2>
+          <p class="movement-lede">
+            The page you are reading is deployed the same way I would deploy anything else I build.
+          </p>
+        </div>
+
+        <div class="site-note">
+          <ul class="facts story-body" role="list">
+            <li>
+              <b>Hosting</b>
+              <span>Static output on S3, served through CloudFront.</span>
+            </li>
+            <li>
+              <b>Build</b>
+              <span>Astro, static output, no client framework and no hydration runtime.</span>
+            </li>
+            <li>
+              <b>Contact</b>
+              <span>API Gateway to Lambda, delivering through Amazon SES.</span>
+            </li>
+            <li>
+              <b>Delivery</b>
+              <span>GitHub Actions builds, syncs and invalidates on every push.</span>
+            </li>
+            <li>
+              <b>Budget</b>
+              <span>Four fonts, no framework, no analytics, no trackers.</span>
+            </li>
+          </ul>
+
+          <figure class="figure print">
+            <div class="figure__frame">
+              <Image
+                src={architecture}
+                alt="Architecture diagram of this website: Cloudflare DNS to CloudFront over an ACM certificate, an S3 bucket as the static origin, and a serverless contact form through API Gateway to Lambda and Amazon SES, with GitHub Actions building and invalidating."
+                widths={[640, 1000, 1400]}
+                sizes="(min-width: 62rem) 40rem, 92vw"
+                loading="lazy"
+                decoding="async"
+                quality={82}
+              />
+            </div>
+            <figcaption>
+              How it is put together. Drawn by me, and kept honest against the actual workflow.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <Album slides={slides} label="Photographs from events, hackathons and training" />
+
+    <!-- 08 ------------------------------------------------------------- -->
+    <section class="movement" id="reach" aria-labelledby="reach-title">
+      <div class="shell">
+        <div class="movement-head">
+          <p class="movement-index">08</p>
+          <h2 class="movement-title" id="reach-title">Reach me</h2>
+          <p class="movement-lede">
+            Open to software engineering and cloud internships, and happy to talk about any of the
+            projects above.
+          </p>
+        </div>
+
+        <div class="reach">
+          <ul class="channels story-body" role="list">
+            <li>
+              <b>Email</b>
+              <a href="mailto:nishchalpanta426@gmail.com">nishchalpanta426@gmail.com</a>
+            </li>
+            <li>
+              <b>Phone</b>
+              <a href="tel:+9779841841334">+977 9841841334</a>
+            </li>
+            <li>
+              <b>LinkedIn</b>
+              <a href="https://www.linkedin.com/in/nishchal-panta-3890b1292/" target="_blank" rel="noopener noreferrer"
+                >nishchal-panta</a
+              >
+            </li>
+            <li>
+              <b>GitHub</b>
+              <a href="https://github.com/Nishchal-Panta" target="_blank" rel="noopener noreferrer"
+                >Nishchal-Panta</a
+              >
+            </li>
+            <li>
+              <b>Resume</b>
+              <a href="/cv/Nishchal_Panta_CV.pdf" target="_blank" rel="noopener noreferrer"
+                >Open the PDF</a
+              >
+            </li>
+          </ul>
+
+          <div class="story-body">
+            <ContactForm />
+          </div>
+        </div>
+      </div>
+    </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="shell site-footer__inner">
+      <p>&copy; 2026 Nishchal Panta. Built with Astro, hand-written CSS and no analytics.</p>
+      <nav aria-label="Footer">
+        <a href="#origin">How I got here</a>
+        <a href="#work">The work</a>
+        <a href="#credentials">Proof</a>
+        <a href="#album">Album</a>
+        <a href="#reach">Contact</a>
+      </nav>
+      <!-- The licence on the constellation figures asks for attribution where
+           they are shown, so it is here rather than buried in a data file. The
+           figures are CC BY-SA 4.0; the star coordinates are ESA's. -->
+      <p class="site-footer__credits">
+        Constellation figures:
+        <a href="https://github.com/Stellarium/stellarium/tree/master/skycultures/modern_iau"
+           rel="license noopener noreferrer" target="_blank">IAU / Sky &amp; Telescope</a>
+        (<a href="https://creativecommons.org/licenses/by-sa/4.0/"
+           rel="license noopener noreferrer" target="_blank">CC BY-SA 4.0</a>, via
+        <a href="https://stellarium.org/" rel="noopener noreferrer" target="_blank">Stellarium</a>).
+        Star data: <a href="https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239"
+           rel="noopener noreferrer" target="_blank">ESA Hipparcos</a>.
+        Tool logos are trademarks of their respective owners, shown only to
+        identify the tools named beside them; sources, licences and brand notes
+        are in the <a href="/logos/CREDITS" rel="noopener">logo credits table</a>.
+      </p>
+      <!-- A visible build stamp, so a stale bundle is obvious rather than argued about. -->
+      <p class="site-footer__build">build {BUILD}</p>
+    </div>
+  </footer>
+
+  <script>
+    // Two jobs only: which movement the rail is pointing at, and nothing else.
+    // Everything else is CSS, and works with this file absent.
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-rail-link]'));
+    if (links.length) {
+      const byId = new Map(links.map((l) => [l.dataset.railLink!, l]));
+      const sections = Array.from(byId.keys())
+        .map((id) => document.getElementById(id!))
+        .filter((el): el is HTMLElement => Boolean(el));
+
+      const visible = new Map<string, number>();
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const id = entry.target.id;
+            visible.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+          }
+          let bestId: string | null = null;
+          let best = 0;
+          for (const [id, ratio] of visible) {
+            if (ratio > best) {
+              best = ratio;
+              bestId = id;
+            }
+          }
+          for (const [id, link] of byId) {
+            if (id === bestId) link.setAttribute('aria-current', 'true');
+            else link.removeAttribute('aria-current');
+          }
+        },
+        { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.01, 0.5, 1] }
+      );
+      for (const s of sections) io.observe(s);
+    }
+  </script>
+</BaseLayout>

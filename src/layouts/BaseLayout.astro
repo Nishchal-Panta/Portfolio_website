@@ -1,0 +1,109 @@
+---
+import Ambient from '../components/Ambient.astro';
+import Debug from '../components/Debug.astro';
+import '../styles/site.css';
+import '../styles/story.css';
+import '../styles/specimen.css';
+import '../styles/album.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, ogImage = '/og/image.jpg', noindex = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site).href;
+const ogUrl = new URL(ogImage, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nishchal Panta" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/newsreader-500-latin.woff2"
+      crossorigin
+    />
+
+    {/*
+      The theme is decided here, before the body is painted, so there is never
+      a flash of the wrong ground. System preference is the default; a saved
+      choice wins. This runs only on load. The reveal runs on click, never here.
+
+      If you edit this script, re-run `npm run csp:hash` and update
+      docs/cloudfront-headers-policy.json, or the strict CSP will block it.
+    */}
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var saved = null;
+        try {
+          saved = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.setAttribute('data-theme', dark ? 'dark' : 'light');
+        // Firefox has no CSS scroll-driven animation yet. Marking it here, before
+        // paint, means the observer fallback engages with no visible frame of
+        // content sitting in the wrong state.
+        var native = !!(window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()'));
+        root.setAttribute('data-timeline', native ? 'native' : 'fallback');
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < metas.length; i++) {
+          if (metas[i].hasAttribute('media')) continue;
+          metas[i].setAttribute('content', dark ? '#111214' : '#f6f4ef');
+        }
+      })();
+    </script>
+
+    {/*
+      Without script the album is a plain gallery of every photograph rather
+      than a conveyor that cannot turn. This is a <link> and not a <style>
+      because the site's CSP is `style-src 'self'`: an inline <style> here
+      would be refused, and this stylesheet has to reach the page in
+      production, not only in dev.
+    */}
+    <noscript>
+      <link rel="stylesheet" href="/no-js-album.css" />
+    </noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <!-- Ink specks in the paper. Created by script only when it is wanted. -->
+    <canvas class="motes" id="motes" aria-hidden="true"></canvas>
+    <!-- The pen ring. Decorative, and hidden from assistive technology. -->
+    <div class="pen" id="pen" aria-hidden="true"></div>
+    <Ambient />
+    <Debug />
+    <slot />
+  </body>
+</html>

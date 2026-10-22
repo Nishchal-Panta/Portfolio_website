@@ -1,0 +1,25 @@
+{
+  "title": "Relay Hack x Aqore, first place",
+  "dateLabel": "18 to 29 Dec 2025",
+  "sortKey": "2025-12-18",
+  "role": "Winner, candidate screening subsystem",
+  "organizer": "Aqore Nepal with Techspire College",
+  "summary": "A twelve-day build sprint on the Staffing Software Innovation Challenge, a domain that is common globally but still early in Nepal. Working with two teammates I owned the candidate screening and shortlisting subsystem, a database-driven solution that ranks applicants against a role's requirements. We took first place.",
+  "images": [
+    {
+      "src": "../../assets/events/relayhack-team-02.jpg",
+      "alt": "Two participants at a Relay Hack certificate distribution holding a printed cheque between them."
+    },
+    {
+      "src": "../../assets/events/relayhack-winner-poster-portrait.jpg",
+      "alt": "A Relay Hack winner poster showing three teammates holding the winner cheque and a trophy.",
+      "layout": "portrait"
+    },
+    {
+      "src": "../../assets/events/relayhack-winning-team.jpg",
+      "alt": "Three teammates holding a printed winner cheque for Rs 6,000, in front of a Relay Hack standee.",
+      "caption": "The winning team."
+    }
+  ],
+  "credential": "relay-hack"
+}

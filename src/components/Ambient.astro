@@ -1,0 +1,493 @@
+---
+/**
+ * The ambient layer.
+ *
+ *   the field   motes in dark, a drifting network in light, morphing between
+ *               the two with the theme
+ *   the pen     a soft ring that trails the pointer and opens over controls
+ *   tilt        a few degrees on media, transform only
+ *
+ * Each refuses to run rather than run cheaply: all three are dropped under
+ * reduced motion, and the field is dropped on touch and low-power devices too.
+ *
+ * Nothing here takes pointer events or is exposed to assistive technology.
+ */
+---
+
+<script>
+  import { createField, MORPH_DEFAULT } from '../scripts/field';
+  import { startFallback, startTilt } from '../scripts/scroll';
+  import { startSpecimen } from '../scripts/specimen';
+  import { startDeeplink } from '../scripts/deeplink';
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(pointer: fine)');
+
+  const lowPower =
+    (navigator.hardwareConcurrency ?? 8) <= 4 ||
+    /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
+
+  // ---------------------------------------------------------------- the field
+  function initField() {
+    const canvas = document.getElementById('motes') as HTMLCanvasElement | null;
+    if (!canvas) return () => {};
+
+    const area = window.innerWidth * window.innerHeight;
+    /* The sky is counted for a night sky, not for density: about 140 to 220
+       stars on a desktop, fewer on a small screen, so the blue-noise spacing
+       has room and the stars never read as a thicket. */
+    const small = Math.min(window.innerWidth, window.innerHeight) < 700;
+    const starCount = small
+      ? Math.min(110, Math.max(60, Math.round(area / 16000)))
+      : Math.min(220, Math.max(140, Math.round(area / 6200)));
+    /* The constellation sizes itself from the viewport - four to seven figures
+       whatever the window - so the mote era's nodeCount is gone rather than
+       computed and then ignored. */
+    // Touch and low-power devices skip the flow field and keep scroll parallax only.
+    const flowOK = finePointer.matches && !lowPower;
+    const field = createField(canvas, starCount, flowOK);
+    if (!field) {
+      canvas.remove();
+      return () => {};
+    }
+
+    const css = getComputedStyle(document.documentElement);
+    const readPalette = () => {
+      field.setPalette(
+        css.getPropertyValue('--text-secondary').trim(),
+        css.getPropertyValue('--accent').trim()
+      );
+      // The dark sky is a warm off-white, taken from the token the design
+      // system already uses for text rather than a new hard-coded colour.
+      field.setSky(css.getPropertyValue('--text-secondary').trim());
+    };
+    readPalette();
+
+    const onResize = () => field.resize(window.innerWidth, window.innerHeight);
+    onResize();
+    window.addEventListener('resize', onResize, { passive: true });
+
+    /* ---- the morph -------------------------------------------------------
+       Dark shows motes, light shows the network. The target flips the moment
+       the theme changes, and the live value eases toward it over the morph
+       duration. Reversing mid-morph is just a new target, so a fast double
+       toggle cannot glitch: it simply changes which end the ease is heading
+       for.
+    */
+    let targetMix = document.documentElement.getAttribute('data-theme') === 'light' ? 1 : 0;
+    let mix = targetMix;
+    let sinceMorph = 99;
+
+    function onThemeChange() {
+      targetMix = document.documentElement.getAttribute('data-theme') === 'light' ? 1 : 0;
+      sinceMorph = 0;
+      readPalette();
+      themeChangeCount++;
+      lastThemeChange = new Date().toLocaleTimeString();
+    }
+    /* On the document, not the window. Measured in Chromium: an event dispatched
+       on the document reaches document listeners but NOT window listeners, so
+       listening on window here silently never fires. The dispatch in
+       ThemeToggle is also on the document, so the two now meet. */
+    document.addEventListener('themechange', onThemeChange);
+    // Belt and braces: react to the attribute itself, not only to the event.
+    // Whatever changes the theme - the button, the system preference, a stale
+    // listener - the field follows.
+    new MutationObserver(() => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 1 : 0;
+      if (next !== targetMix) {
+        targetMix = next;
+        sinceMorph = 0;
+      }
+      readPalette();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    // Eased with the site's own curve.
+    const ease = (t: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3);
+
+    /* One scroll state, read once per frame: position, smoothed velocity and
+       direction. Cached from a passive listener so the loop never reads
+       layout, and eased so a trackpad flick does not jolt the field. */
+    let scrollY = window.scrollY;
+    let lastScrollY = scrollY;
+    let scrollVel = 0;
+    let scrollDir = 0;
+    const onScroll = () => {
+      scrollY = window.scrollY;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    let pointer: { x: number; y: number } | null = null;
+    let pointerDown = false;
+    /* Pointer velocity, so slow movement can draw the field in while a fast
+       flick throws it aside. */
+    let pvx = 0;
+    let pvy = 0;
+    let lastPx = -1;
+    let lastPy = -1;
+    window.addEventListener(
+      'pointermove',
+      (e) => {
+        if (e.pointerType !== 'mouse') return;
+        if (lastPx >= 0) {
+          pvx = e.clientX - lastPx;
+          pvy = e.clientY - lastPy;
+        }
+        lastPx = e.clientX;
+        lastPy = e.clientY;
+        // CSS pixels, which is what both simulations work in.
+        pointer = { x: e.clientX, y: e.clientY };
+      },
+      { passive: true }
+    );
+    window.addEventListener('pointerleave', () => { pointer = null; lastPx = -1; pvx = 0; pvy = 0; }, { passive: true });
+    window.addEventListener('pointerdown', () => (pointerDown = true), { passive: true });
+    window.addEventListener('pointerup', () => (pointerDown = false), { passive: true });
+
+    let running = false;
+    let inView = true;
+    let t0 = performance.now();
+    let last = t0;
+
+      /* Live state for the ?debug=1 overlay: what the field actually decided,
+         which is the only honest answer to "it does not work here". */
+      let themeChangeCount = 0;
+      let lastThemeChange = 'never';
+      let fps = 0;
+      let scrollFrac = 0;
+      const dbg = ((window as unknown as { __field?: Record<string, unknown> }).__field ??= {});
+      dbg.backend = field.backend();
+      dbg.stars = starCount;
+      /* Written each frame rather than declared as getters: Object.assign
+         invokes a getter and copies its value, which would freeze the
+         overlay at whatever it read on the first frame. */
+    function frame(now: number) {
+      if (!running) return;
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      sinceMorph += dt;
+      integrate(dt);
+
+      const p = ease(sinceMorph / MORPH_DEFAULT);
+      mix = mix + (targetMix - mix) * Math.min(1, p * 0.5 + dt * 4);
+
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      scrollFrac = Math.min(1, Math.max(0, scrollY / max));
+      fps = fps ? fps * 0.9 + (1 / Math.max(dt, 0.001)) * 0.1 : 1 / Math.max(dt, 0.001);
+      /* Measured text blocks: the actual bounding boxes of the headline, the
+         lede and the body copy. Measured rather than assumed, because using
+         the whole .page quieted almost everything instead of just the copy.
+         Read here, before anything needs it, so it is never in the temporal
+         dead zone. */
+      const boxes = measureTextBoxes();
+      const media = measureMedia();
+
+      dbg.mode = targetMix > 0.5 ? 'constellation' : 'motes';
+      dbg.scrollVel = Math.round(scrollVel);
+      dbg.scrollDir = scrollDir > 0 ? 'down' : scrollDir < 0 ? 'up' : 'still';
+      dbg.textBoxes = boxes.length;
+      dbg.pointerXY = pointer ? Math.round(pointer.x) + ',' + Math.round(pointer.y) : '-';
+      const st = field.stats();
+      /* Speeds are published for the speed assertion rather than sampled from
+         the canvas, which cannot distinguish a slow star from a fast one. */
+      const sp = field.speeds();
+      dbg.shapeSpeed = Math.max(0, ...sp.shape).toFixed(1);
+      dbg.starSpeed = Math.max(0, ...sp.star).toFixed(1);
+      dbg.maxSpeed = st.maxSpeed.toFixed(1);
+      dbg.influenced = st.influenced;
+      dbg.onScreen = st.onScreen;
+      dbg.born = st.born;
+      dbg.retired = st.retired;
+      /* Which figures are out, by name, and the worst distance error inside
+         them: the two numbers that say the shapes are still rigid. */
+      const figs = field.shapes();
+      dbg.figures = figs.length;
+      dbg.constellations = figs.map((s) => s.name).join(' ');
+      dbg.shapeDev = (st.deviation * 100).toFixed(3) + '%';
+      /* Sampled layer positions and the measured text rectangles, published so
+         the parallax and contrast checks read real numbers. */
+      const layers = field.sampleLayers();
+      dbg.layers = layers;
+      dbg.boxes = boxes;
+      (window as unknown as { __textBoxes?: unknown }).__textBoxes = boxes;
+      const wnd = window as unknown as {
+        __fieldSpeeds?: unknown;
+        __fieldParticles?: unknown;
+        __fieldStarVel?: unknown;
+        __fieldStarPoints?: unknown;
+        __fieldStarHomes?: unknown;
+        __fieldDisp?: unknown;
+        __fieldCurl?: (x: number, y: number) => number;
+        __fieldFlow?: (x: number, y: number) => [number, number];
+        __fieldPointerXY?: unknown;
+        __shapes?: () => ReturnType<typeof field.shapes>;
+      };
+      wnd.__fieldSpeeds = sp;
+      wnd.__fieldParticles = field.positions();
+      wnd.__fieldStarVel = field.starVelocities();
+      wnd.__fieldStarPoints = field.starPoints();
+      wnd.__fieldStarHomes = field.starHomes();
+      wnd.__fieldDisp = field.disp();
+      wnd.__fieldPointerXY = dbg.pointerXY;
+      wnd.__fieldCurl = (x: number, y: number) => field.flowCurl(x, y);
+      wnd.__fieldFlow = (x: number, y: number) => field.flowSample(x, y);
+      wnd.__shapes = () => field.shapes();
+      dbg.peakFlow = st.peakFlow;
+      dbg.influenced = st.influenced;
+      dbg.mix = mix;
+      dbg.fps = Math.round(fps);
+      dbg.scroll = scrollFrac;
+      dbg.pointer = pointer ? 'mouse' : 'none';
+      dbg.lastThemeChange = lastThemeChange;
+      dbg.themeChangeCount = themeChangeCount;
+
+      field.draw({
+        scroll: scrollY,
+        scrollVel,
+        pointerVel: { x: pvx, y: pvy },
+        chapter: activeChapter(),
+        textBoxes: boxes,
+        avoid: boxes.concat(media),
+        pointer,
+        pointerDown,
+        time: (now - t0) / 1000,
+        mix,
+      });
+      requestAnimationFrame(frame);
+    }
+
+
+    /* Scroll velocity, eased so it settles rather than snapping to zero. */
+    function integrate(dt: number) {
+      const delta = scrollY - lastScrollY;
+      lastScrollY = scrollY;
+      const instant = Math.max(-120, Math.min(120, delta));
+      scrollVel = scrollVel * Math.pow(0.001, dt) + instant * (1 - Math.pow(0.001, dt));
+      if (Math.abs(scrollVel) < 0.4) scrollVel = 0;
+      scrollDir = Math.sign(scrollVel);
+      // pointer velocity decays too
+      pvx *= Math.pow(0.0001, dt);
+      pvy *= Math.pow(0.0001, dt);
+      if (Math.abs(pvx) < 0.2) pvx = 0;
+      if (Math.abs(pvy) < 0.2) pvy = 0;
+    }
+
+    /**
+     * The bounding boxes the field must keep quiet behind, measured from the
+     * live layout and recomputed on resize and when the content changes.
+     */
+    function measureTextBoxes() {
+      const out: {
+        left: number;
+        top: number;
+        right: number;
+        bottom: number;
+        kind: 'large' | 'body';
+        colour: string;
+      }[] = [];
+      const push = (el: Element | null, kind: 'large' | 'body') => {
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        if (r.width < 40 || r.height < 8) return;
+        if (r.bottom < -200 || r.top > innerHeight + 200) return;
+        // The computed colour goes with the box: the legibility check measures
+        // real contrast, so it needs the real ink, not a guess at it.
+        const ink = getComputedStyle(el).color;
+        const probe = document.createElement('span');
+        probe.style.color = ink;
+        document.body.appendChild(probe);
+        const rgb = getComputedStyle(probe).color;
+        probe.remove();
+        out.push({ left: r.left, top: r.top, right: r.right, bottom: r.bottom, kind, colour: rgb });
+      };
+      push(document.querySelector('.opening h1'), 'large');
+      push(document.querySelector('.movement-title'), 'large');
+      push(document.querySelector('.chapter__title'), 'large');
+      push(document.querySelector('.opening__line'), 'body');
+      push(document.querySelector('.movement-lede'), 'body');
+      for (const el of document.querySelectorAll('.story-body > *')) push(el, 'body');
+      for (const el of document.querySelectorAll('.chapter__body > p')) push(el, 'body');
+      for (const el of document.querySelectorAll('.event__summary')) push(el, 'body');
+      /* The rail is a column of type of its own, and figures were being placed
+         across it. One box for the whole nav rather than one per link: it is
+         the same quieting rule, measured the same way, for the cost of one
+         element instead of nine. */
+      push(document.querySelector('.rail'), 'body');
+      return out;
+    }
+
+    /* Photographs and diagrams. Kept out of the alpha calculation - only type
+       gets the field dimmed behind it - but passed to placement, because a
+       constellation drawn across someone's face reads as a bug. The element
+       list is static; only the rectangles are re-read. */
+    const MEDIA = Array.from(document.querySelectorAll('img, video, canvas'));
+
+    function measureMedia() {
+      const out: {
+        left: number;
+        top: number;
+        right: number;
+        bottom: number;
+        kind: 'large' | 'body';
+        colour: string;
+      }[] = [];
+      for (const el of MEDIA) {
+        const r = el.getBoundingClientRect();
+        if (r.width < 80 || r.height < 60) continue;
+        if (r.bottom < -240 || r.top > innerHeight + 240) continue;
+        out.push({
+          left: r.left,
+          top: r.top,
+          right: r.right,
+          bottom: r.bottom,
+          kind: 'body',
+          colour: 'rgb(0, 0, 0)',
+        });
+      }
+      return out;
+    }
+
+    /** The chapter the rail is currently on, so density can shift per beat. */
+    function activeChapter(): number {
+      const cur = document.querySelector<HTMLElement>('.rail__link[aria-current="true"], .rail__link[data-current="true"]');
+      if (cur) {
+        const m = (cur.textContent || '').match(/^(\d+)/);
+        if (m) return Number(m[1]);
+      }
+      let best = 0;
+      let bestD = Infinity;
+      const mid = innerHeight / 2;
+      document.querySelectorAll<HTMLElement>('.movement[id]').forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      return best;
+    }
+
+    function play() {
+      if (running) return;
+      running = true;
+      last = performance.now();
+      requestAnimationFrame(frame);
+    }
+    function pause() {
+      running = false;
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pause();
+      else if (inView) play();
+    });
+
+    /* Recompute the text boxes when the layout can have moved under them. */
+    const ro = new ResizeObserver(() => measureTextBoxes());
+    ro.observe(document.body);
+    window.addEventListener('load', () => measureTextBoxes(), { once: true });
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (!inView) pause();
+        else if (!document.hidden) play();
+      },
+      { threshold: 0 }
+    );
+    io.observe(canvas);
+
+    play();
+
+    return () => {
+      pause();
+      io.disconnect();
+      ro.disconnect();
+      document.removeEventListener('themechange', onThemeChange);
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('scroll', onScroll);
+      canvas.remove();
+    };
+  }
+
+  // -------------------------------------------------------------- the pen ring
+  function initPen() {
+    const pen = document.getElementById('pen');
+    if (!pen) return;
+
+    let x = -999;
+    let y = -999;
+    let cx = -999;
+    let cy = -999;
+    let alive = false;
+
+    const INTERACTIVE =
+      'a, button, summary, [tabindex]:not([tabindex="-1"]), input, textarea, select, label';
+
+    function loop() {
+      if (!alive) return;
+      cx += (x - cx) * 0.16;
+      cy += (y - cy) * 0.16;
+      pen.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0)`;
+      requestAnimationFrame(loop);
+    }
+
+    function stop() {
+      alive = false;
+      pen.setAttribute('data-ready', 'false');
+    }
+
+    window.addEventListener(
+      'pointermove',
+      (e: PointerEvent) => {
+        if (e.pointerType !== 'mouse') return;
+        x = e.clientX;
+        y = e.clientY;
+        pen.setAttribute('data-ready', 'true');
+        const over = !!(e.target as Element | null)?.closest?.(INTERACTIVE);
+        pen.setAttribute('data-over', String(over));
+        if (!alive) {
+          alive = true;
+          cx = x;
+          cy = y;
+          loop();
+        }
+      },
+      { passive: true }
+    );
+    document.addEventListener('pointerleave', stop, { passive: true });
+    window.addEventListener('blur', stop);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+    });
+  }
+
+  // ------------------------------------------------------------------- decide
+  const wantsField = !reduced.matches && !lowPower;
+  const wantsPen = !reduced.matches && finePointer.matches && !lowPower;
+
+  let teardown = () => {};
+  if (wantsField) teardown = initField();
+  else document.getElementById('motes')?.remove();
+
+  if (wantsPen) initPen();
+  else document.getElementById('pen')?.remove();
+
+  if (!reduced.matches && !lowPower) startTilt();
+
+  // Reveals: native where available, observed where not.
+  if (!reduced.matches) startFallback();
+
+  // Section 05 wires itself once it is near the window.
+  startSpecimen();
+
+  // Links that point at a credential row or an event open it and take focus
+  // with them. Navigation, not motion, so it runs whatever the reader asked
+  // for regarding motion.
+  startDeeplink();
+
+  reduced.addEventListener('change', (e) => {
+    if (!e.matches) return;
+    teardown();
+    document.getElementById('motes')?.remove();
+    document.getElementById('pen')?.remove();
+  });
+</script>

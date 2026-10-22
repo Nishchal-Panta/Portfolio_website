@@ -1,0 +1,19 @@
+{
+  "title": "Web development with Laravel, 65 hours of training",
+  "dateLabel": "2026",
+  "sortKey": "2026-02-01",
+  "role": "Trainee",
+  "organizer": "IIMS College with Taylor's University",
+  "summary": "Sixty-five hours of structured training on Laravel at IIMS College, in academic collaboration with Taylor's University. It moved me from writing PHP scripts to thinking in MVC terms: routing, middleware, Eloquent relationships and REST endpoints. This is the training that the e-commerce platform came out of.",
+  "images": [
+    {
+      "src": "../../assets/events/laravel-workshop.jpg",
+      "alt": "Inside the training workshop."
+    },
+    {
+      "src": "../../assets/events/laravel-training-receiving.jpg",
+      "alt": "A framed certificate being handed over at IIMS College, after completing 65 hours of web development training."
+    }
+  ],
+  "credential": "laravel-training"
+}

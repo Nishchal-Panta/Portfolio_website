@@ -1,0 +1,63 @@
+<!doctype html><meta charset="utf-8"><style>
+  body { margin: 0; font: 12px system-ui; }
+  .row { display: flex; gap: 12px; justify-content: center; width: 1104px; height: 218.6px;
+         border: 1px solid #ccc; margin-bottom: 8px; }
+  .fig { flex: 0 0 auto; margin: 0; overflow: hidden; border-radius: 6px; background: #ddd; }
+  .link { display: block; height: 100%; }
+  .img { display: block; height: 100%; width: auto; object-fit: cover; }
+
+  /* A: explicit height, width from the photograph. */
+  .a .fig { height: 100%; }
+  /* B: the current rule - needs --ar from somewhere. */
+  .b .fig { height: 100%; aspect-ratio: var(--ar, 1); }
+  .b .img { width: 100%; height: 100%; }
+  /* C: like A but the figure is told to shrink-wrap. */
+  .c .fig { height: 100%; width: max-content; }
+</style>
+<div class="row a">
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495164487.BhFOiEAW_12XWPe.jpg" width="480" height="640" alt=""></a>
+      </figure>
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495164622.BY3qM7Nj_1R9PEw.webp" width="1600" height="1598" alt=""></a>
+      </figure>
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495165040.PjekjcST_1qIghz.jpg" width="640" height="427" alt=""></a>
+      </figure></div>
+<div class="row b">
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495164487.BhFOiEAW_12XWPe.jpg" width="480" height="640" alt=""></a>
+      </figure>
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495164622.BY3qM7Nj_1R9PEw.webp" width="1600" height="1598" alt=""></a>
+      </figure>
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495165040.PjekjcST_1qIghz.jpg" width="640" height="427" alt=""></a>
+      </figure></div>
+<div class="row c">
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495164487.BhFOiEAW_12XWPe.jpg" width="480" height="640" alt=""></a>
+      </figure>
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495164622.BY3qM7Nj_1R9PEw.webp" width="1600" height="1598" alt=""></a>
+      </figure>
+      <figure class="fig">
+        <a class="link"><img class="img" src="1790495165040.PjekjcST_1qIghz.jpg" width="640" height="427" alt=""></a>
+      </figure></div>
+<script>
+  window.__r = () => [...document.querySelectorAll('.row')].map((row) => ({
+    row: row.className,
+    figs: [...row.querySelectorAll('.fig')].map((f) => {
+      const img = f.querySelector('img');
+      const fr = f.getBoundingClientRect();
+      const ir = img.getBoundingClientRect();
+      return {
+        fig: [Math.round(fr.width * 100) / 100, Math.round(fr.height * 100) / 100],
+        figAr: Math.round((fr.width / fr.height) * 10000) / 10000,
+        img: [Math.round(ir.width * 100) / 100, Math.round(ir.height * 100) / 100],
+        imgAr: Math.round((ir.width / ir.height) * 10000) / 10000,
+        natural: img.naturalWidth + 'x' + img.naturalHeight,
+      };
+    }),
+  }));
+</script>

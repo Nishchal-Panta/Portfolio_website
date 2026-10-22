@@ -1,0 +1,308 @@
+/* ==========================================================================
+   The album
+
+   An ordered conveyor. Three photographs at a time, advancing through the
+   album in the order the files are named: the left one leaves to the left,
+   the other two slide into its place, and the next enters from the right -
+   one strip of film rather than three boxes being refilled.
+
+   Nothing here is given a size except a height. A photograph with a definite
+   height and `width: auto` is exactly as wide as its own proportions say, so
+   the figure wraps the picture instead of being handed a ratio to obey, and
+   the box can never disagree with what is inside it. The height is a fraction
+   of the row's own width, which means it is the same at every step: the row
+   cannot jump between steps, and nothing outside the section can shift.
+
+   Without script this is a wrapping gallery of all thirteen - the same rule,
+   allowed to break into as many lines as it needs.
+   ========================================================================== */
+
+.album {
+  --album-gap: var(--s-3);
+  position: relative;
+}
+
+/* The stage is the container the row measures against - the row's height is a
+   fraction of this width, at any viewport, without a ladder of breakpoints.
+   `inline-size` is enough, and it cannot reach the lightbox: the lightbox is a
+   sibling of the stage rather than a child, so it stays fixed to the viewport
+   however the stage is contained. */
+.album__stage {
+  container-type: inline-size;
+  position: relative;
+}
+
+.album__row {
+  display: flex;
+  justify-content: center;
+  gap: var(--album-gap);
+  /* Vertical panning stays the browser's - a finger dragging up or down
+     scrolls the page exactly as it would anywhere else - but a horizontal
+     drag is ours. Without this the browser claims a horizontal drag too,
+     cancels the pointer stream two moves in, and the swipe never lands. */
+  touch-action: pan-y;
+  /* The widest trio in the album sums to 4.78 of these heights; dividing by
+     5.05 rather than 4.78 leaves the two gaps clear, so even that trio fits
+     and every narrower one is centred inside the same line. Below about 450px
+     of row width the sum would crowd the row, which is why the three-up row
+     only starts at 48rem and the phone keeps two lines. */
+  height: calc(100cqw / 5.05);
+}
+
+.album__figure {
+  /* No basis, no grow: the width is the photograph's, worked out from the
+     height and the ratio the image already carries. */
+  flex: 0 0 auto;
+  height: 100%;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-2);
+  background: var(--surface-sunk);
+}
+
+/* Out of the flow while a photograph is on its way off the row. Hiding it
+   here as well would be the one thing the slide exists to avoid. */
+.album__figure[hidden] {
+  display: none;
+}
+
+.album__link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.album__img {
+  display: block;
+  /* The figure is exactly this wide - it shrink-wraps the photograph - so
+     `cover` crops nothing and merely absorbs the sub-pixel rounding that
+     `contain` would turn into a hairline of letterbox. */
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+/* The photograph leaving is lifted out of the flow and pinned where it was so
+   the row can re-form under it. Its own background has to go: the image inside
+   it is fading out, and what would show through is an empty shell painted over
+   the photograph taking its place instead of the two cross-dissolving. */
+.album__figure.is-leaving {
+  background: transparent;
+}
+
+.album__cap {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* The break element sorts between slot 0 and slot 1 on a phone. Anywhere else
+   it is nothing. */
+.album__break {
+  display: none;
+}
+
+/* --- arrows ---------------------------------------------------------------- */
+
+/* Invisible at rest, never absent: opacity rather than `display: none`, so
+   both stay in the accessibility tree and tab order, and a screen reader names
+   them whether or not anyone is pointing at the album. The target is a 44px
+   circle of the page's own ink on the page's own surface - no glow, no glass,
+   no shadow - and it sits over the row's outer edge rather than over a
+   photograph's middle. */
+.album__arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--text);
+  background: var(--surface);
+  border: var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.album__arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Fourteen pixels outside the row, into the page gutter, so the circle only
+   overlaps the outermost photograph by about a dozen pixels at its widest -
+   the gutter is never narrower than 20px, so this cannot push the page wide. */
+.album__arrow--prev {
+  left: -14px;
+}
+
+.album__arrow--next {
+  right: -14px;
+}
+
+.album__arrow:hover {
+  border-color: var(--text);
+}
+
+.album__arrow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* The row is focusable so the arrow keys have somewhere to land that is not
+   an arrow button - tabbing to the row and pressing left or right is the same
+   gesture as pressing the arrows. The ring is the same quiet one. */
+.album__row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 8px;
+}
+
+/* Revealed by the pointer over the album - the same gesture that says the
+   reader is attending to it - and by focus inside it, which is the other way
+   in: tabbing to a photograph or to an arrow brings them up too. */
+.album:hover .album__arrow,
+.album:focus-within .album__arrow {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* On a touch screen there is no hovering to reveal them, and two arrows
+   parked over the photographs would be clutter beside a swipe. They stay in
+   the accessibility tree and appear on focus, which is how a keyboard, switch
+   or screen-reader user reaches them; a finger swipes instead. */
+@media (hover: none) {
+  .album:hover .album__arrow {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* --- lightbox -------------------------------------------------------------- */
+
+.album__btn {
+  font: inherit;
+  font-size: var(--step--1);
+  padding: 0.5rem 1rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  background: transparent;
+  border: var(--rule);
+  border-radius: var(--r-2);
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+.album__btn:hover {
+  border-color: var(--text);
+}
+
+.album__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.album__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-4);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+}
+
+.album__lightbox[hidden] {
+  display: none;
+}
+
+.album__lightbox-inner {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: center;
+  max-width: min(1100px, 100%);
+}
+
+.album__lightbox-img {
+  max-width: 100%;
+  max-height: 72vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-2);
+  border: var(--rule);
+}
+
+.album__lightbox-counter {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.album__lightbox-controls {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* --- narrow: one above, two below ------------------------------------------ */
+
+/* Under 48rem a three-up row would make each photograph too small to read, so
+   the first takes a line of its own and the two after it share the line below
+   - the same arrangement the album has always had on a phone, at one height
+   for all three. That height is set by the widest pair that can stand next to
+   each other (3.28 of these heights, at any wrap point in the album), which is
+   what guarantees the second line never overflows; the photograph on its own
+   above it is then narrower than its line and centred in it. One height means
+   a photograph moving from the second line up to the first is translated, not
+   resized: the step stays a slide. */
+@media (max-width: 48rem) {
+  .album__row {
+    height: auto;
+    flex-wrap: wrap;
+    /* The break element has no height of its own but does take a line, so the
+       two gaps either side of it are halved: one gap's worth of space between
+       the two lines of photographs, same as the gap between them. */
+    row-gap: calc(var(--album-gap) / 2);
+  }
+
+  .album__figure {
+    height: calc((100cqw - var(--album-gap)) / 3.35);
+  }
+
+  .album__break {
+    display: block;
+    flex: 0 0 100%;
+    height: 0;
+    order: 5;
+  }
+}
+
+/* --- reduced motion -------------------------------------------------------- */
+
+/* The step is the motion. Without it the row is static and a step is an
+   instant change of photograph, so the transitions are dropped rather than
+   shortened into something that still moves. */
+@media (prefers-reduced-motion: reduce) {
+  .album__figure,
+  .album__img,
+  .album__arrow,
+  .album__btn {
+    transition: none;
+  }
+}

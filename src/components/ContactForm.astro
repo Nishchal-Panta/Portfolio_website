@@ -1,0 +1,137 @@
+---
+import { CONTACT_ENDPOINT } from '../config.local';
+/**
+ * Contact form.
+ *
+ * - Honeypot field plus client-side required/length checks.
+ * - The endpoint comes from src/config.local.ts at build time: the CI
+ *   variable PUBLIC_CONTACT_ENDPOINT, else config.js at the project root.
+ *   It is emitted only as a data attribute, so no other value reaches the page.
+ * - Server-side validation, rate limiting and spam scoring belong to the
+ *   Lambda; this component only avoids sending obviously bad input.
+ */
+const endpoint = CONTACT_ENDPOINT;
+---
+
+<form
+  class="contact-form"
+  method="post"
+  data-contact
+  data-endpoint={endpoint}
+  action={endpoint || undefined}
+  novalidate
+>
+  <div class="field field--trap" aria-hidden="true">
+    <label for="company-website">Company website</label>
+    <input id="company-website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="field">
+    <label for="cf-name">Your name</label>
+    <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="120" />
+  </div>
+
+  <div class="field">
+    <label for="cf-email">Email</label>
+    <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="200" />
+  </div>
+
+  <div class="field">
+    <label for="cf-message">Message</label>
+    <textarea id="cf-message" name="message" rows="6" required maxlength="5000"></textarea>
+  </div>
+
+  <div class="field">
+    <button class="button" type="submit" data-submit>Send message</button>
+  </div>
+
+  <p class="form-status" data-status role="status" aria-live="polite"></p>
+
+  <noscript>
+    <p class="ledger__issuer">
+      The form needs JavaScript. Email me directly at
+      <a href="mailto:nishchalpanta426@gmail.com">nishchalpanta426@gmail.com</a> instead.
+    </p>
+  </noscript>
+</form>
+
+<style>
+  .contact-form {
+    max-width: 34rem;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-contact]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-status]');
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]');
+    const endpoint = form.dataset.endpoint ?? '';
+
+    const say = (state: 'ok' | 'error', text: string) => {
+      if (!status) return;
+      status.dataset.state = state;
+      status.textContent = text;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // honeypot: a real person never fills this in
+      const trap = form.querySelector<HTMLInputElement>('[name="company_website"]');
+      if (trap && trap.value) {
+        say('ok', 'Thanks, your message is on its way.');
+        form.reset();
+        return;
+      }
+
+      const data = new FormData(form);
+      const name = String(data.get('name') ?? '').trim();
+      const email = String(data.get('email') ?? '').trim();
+      const message = String(data.get('message') ?? '').trim();
+
+      if (!name || !email || !message) {
+        say('error', 'Please fill in your name, email and a message.');
+        return;
+      }
+      if (message.length > 5000) {
+        say('error', 'That message is over the 5,000 character limit.');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        say('error', 'That email address does not look right.');
+        return;
+      }
+
+      if (!endpoint) {
+        say(
+          'error',
+          'The contact endpoint is not configured yet. Email nishchalpanta426@gmail.com instead.',
+        );
+        return;
+      }
+
+      if (submit) submit.disabled = true;
+      say('ok', 'Sending...');
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message, website: trap?.value ?? '' }),
+        });
+        const body = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+        if (res.ok && body.ok) {
+          say('ok', 'Thanks. Your message is on its way.');
+          form.reset();
+        } else {
+          say('error', body.error ?? 'That did not go through. Please try again in a moment.');
+        }
+      } catch {
+        say('error', 'Could not reach the server. Please try again in a moment.');
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    });
+  });
+</script>

@@ -1,0 +1,136 @@
+---
+/**
+ * The debug overlay.
+ *
+ * Shown only with ?debug=1 in the query string, never otherwise. It exists
+ * because "it does not work on my machine" is otherwise unanswerable: this
+ * reports what the field actually decided, not what the code intended.
+ *
+ * It reads from a window hook that Ambient publishes, and falls back to
+ * measuring the canvas itself when the field is not running at all.
+ */
+import { BUILD } from '../consts';
+
+export interface FieldDebug {
+  theme: string;
+  mode: string;
+  mix: number;
+  backend: string;
+  constellations: number;
+  fps: number;
+  scroll: number;
+  pointer: string;
+  lastThemeChange: string;
+  themeChangeCount: number;
+  supportsViewTransitions: boolean;
+  timeline: string;
+  reducedMotion: boolean;
+  pointerType: string;
+}
+---
+
+<div class="debug" id="debug-overlay" hidden>
+  <p class="debug__build">build <b>{BUILD}</b></p>
+  <dl id="debug-list"></dl>
+  <p class="debug__hint">remove <code>?debug=1</code> to hide</p>
+</div>
+
+<style>
+  .debug {
+    position: fixed;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    z-index: 200;
+    max-width: 26rem;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: rgb(12 12 14 / 0.94);
+    color: #e8e6e1;
+    font: 11px/1.5 ui-monospace, Menlo, Consolas, monospace;
+    pointer-events: none;
+  }
+  .debug__build {
+    margin: 0 0 0.4rem;
+    color: #9ac;
+  }
+  .debug dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 0.5rem;
+    margin: 0;
+  }
+  .debug dt {
+    color: #9a9;
+  }
+  .debug dd {
+    margin: 0;
+    color: #fff;
+    /* The figure names are a variable-length list; wrap rather than push the
+       overlay past its own width. */
+    overflow-wrap: anywhere;
+  }
+  .debug__hint {
+    margin: 0.4rem 0 0;
+    color: #888;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .debug {
+      position: static;
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+  import { BUILD } from '../consts';
+
+  // An ES module has no top-level return, so this is gated rather than early-exited.
+  const requested = new URLSearchParams(location.search).get('debug') === '1';
+  const overlay = document.getElementById('debug-overlay');
+
+  if (overlay && requested) {
+    overlay.hidden = false;
+    const list = document.getElementById('debug-list') as HTMLDListElement;
+    const F = (window as unknown as { __field?: Record<string, unknown> }).__field ?? {};
+
+    const rows: [string, () => string][] = [
+      ['theme', () => String(document.documentElement.getAttribute('data-theme'))],
+      ['mode', () => (F.mode as string) ?? 'not running'],
+      ['mix', () => (F.mix != null ? Number(F.mix).toFixed(2) : '-')],
+      ['backend', () => (F.backend as string) ?? 'none'],
+      ['figures', () => (F.figures != null ? String(F.figures) : '-')],
+      ['on screen', () => (F.onScreen != null ? String(F.onScreen) : '-')],
+      ['names', () => (F.constellations as string) ?? '-'],
+      ['shape dev', () => (F.shapeDev as string) ?? '-'],
+      ['stars', () => (F.stars != null ? String(F.stars) : '-')],
+      ['max px/s', () => (F.maxSpeed as string) ?? '-'],
+      ['figure px/s', () => (F.shapeSpeed as string) ?? '-'],
+      ['star px/s', () => (F.starSpeed as string) ?? '-'],
+      ['fps', () => (F.fps != null ? String(Math.round(F.fps as number)) : '-')],
+      ['scroll', () => (F.scroll != null ? Number(F.scroll).toFixed(3) : '-')],
+      ['pointer', () => (F.pointer as string) ?? 'none'],
+      ['pointer xy', () => (F.pointerXY as string) ?? '-'],
+      ['influenced', () => (F.influenced != null ? String(F.influenced) : '-')],
+      ['text boxes', () => (F.textBoxes != null ? String(F.textBoxes) : '-')],
+      ['scroll vel', () => (F.scrollVel != null ? String(F.scrollVel) : '-')],
+      ['scroll dir', () => (F.scrollDir as string) ?? '-'],
+      ['born', () => (F.born != null ? String(F.born) : '-')],
+      ['retired', () => (F.retired != null ? String(F.retired) : '-')],
+      ['peak flow px/s', () => (F.peakFlow != null ? Number(F.peakFlow).toFixed(1) : '-')],
+      ['themechange', () => (F.lastThemeChange as string) ?? 'never'],
+      ['changes', () => (F.themeChangeCount != null ? String(F.themeChangeCount) : '-')],
+      ['view trans.', () => (typeof document.startViewTransition === 'function' ? 'yes' : 'NO')],
+      ['timeline', () => String(document.documentElement.getAttribute('data-timeline'))],
+      ['reduced mot.', () => (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduce' : 'no-preference')],
+      ['pointer type', () => (matchMedia('(pointer: fine)').matches ? 'fine' : 'coarse')],
+      ['build', () => BUILD],
+    ];
+
+    const draw = () => {
+      list.innerHTML = rows.map(([k, f]) => `<dt>${k}</dt><dd>${f()}</dd>`).join('');
+    };
+    draw();
+    setInterval(draw, 250);
+  }
+</script>

@@ -2,63 +2,140 @@ name: Deploy to AWS (S3 + CloudFront)
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
+# Two deployments never run at once, and a queued push supersedes the one behind it.
 concurrency:
-  group: "deploy"
-  cancel-in-progress: false
+  group: deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  id-token: write # required to exchange the GitHub OIDC token for AWS credentials
+
+env:
+  # Cache: hashed build assets never change, HTML is revalidated quickly.
+  IMMUTABLE_MAX_AGE: '31536000'
+  HTML_MAX_AGE: '0, must-revalidate'
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
-    name: Validate
+    name: Build
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Verify required files
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The contact endpoint comes from a repository variable, kept in sync
+      # from the gitignored config.js by `npm run sync:vars`.
+      env:
+        PUBLIC_CONTACT_ENDPOINT: ${{ vars.CONTACT_ENDPOINT }}
+      - name: Build
+        run: npm run build
+
+      - name: Assert the 404 document exists
+        run: test -f dist/404.html
+
+      - name: Assert no source image was left at full resolution
         run: |
           set -e
-          test -f index.html
-          test -f style.css
-          test -f script.js
-          echo "Required files present."
+          # Everything under dist/_astro should be a derivative the page asks for.
+          total=$(du -sk dist | cut -f1)
+          echo "dist size: ${total} KB"
+          if [ "$total" -gt 12000 ]; then
+            echo "::error::dist is ${total} KB, which is larger than the 12 MB budget"
+            exit 1
+          fi
 
-      - name: Quick listing
-        run: |
-          ls -la
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 3
 
   deploy:
-    needs: validate
+    needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    name: Deploy to S3 (+ CloudFront invalidate)
-    env:
-      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-
+    name: Sync to S3 and invalidate CloudFront
+    environment: production
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+
+      # OIDC: no long-lived access keys, and nothing secret in the repository.
+      # The role's trust policy must allow this repository's main branch.
+      - name: Assume the deployment role
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: gha-deploy-${{ github.run_id }}
 
-      - name: Sync site to S3
+      - name: Configure S3 website error document and content types
+        env:
+          BUCKET: ${{ vars.S3_BUCKET }}
         run: |
-          aws s3 sync . s3://${{ secrets.S3_BUCKET }} \
+          set -euo pipefail
+          # CloudFront asks S3 for the custom error document rather than serving
+          # its own default, so /404.html is used for missing paths.
+          aws s3api put-bucket-website \
+            --bucket "$BUCKET" \
+            --website-configuration '
+              {
+                "IndexDocument": {"Suffix": "index.html"},
+                "ErrorDocument": {"Key": "404.html"}
+              }'
+          # The 404 must come back with a real status code, not 200.
+          aws s3 cp dist/404.html "s3://$BUCKET/404.html" \
+            --cache-control "$HTML_MAX_AGE" \
+            --content-type "text/html; charset=utf-8"
+
+      - name: Sync the site
+        env:
+          BUCKET: ${{ vars.S3_BUCKET }}
+        run: |
+          set -euo pipefail
+          aws s3 sync dist/ "s3://$BUCKET/" \
             --delete \
-            --exclude ".git/*" \
-            --exclude ".github/*"
+            --exclude "404.html" \
+            --cache-control "public, max-age=0, must-revalidate" \
+            --exclude "fonts/*" --exclude "_astro/*" \
+            --exclude "og/*" --exclude "certs/*" --exclude "cv/*"
 
-      - name: CloudFront invalidation
-        if: env.CLOUDFRONT_DISTRIBUTION_ID != ''
+          # Hashed filenames: safe to cache for a year.
+          aws s3 sync dist/ "s3://$BUCKET/" \
+            --delete \
+            --exclude "*" \
+            --include "_astro/*" --include "fonts/*" \
+            --cache-control "public, max-age=$IMMUTABLE_MAX_AGE, immutable"
+
+          # Static, unhashed assets: cache briefly so a deploy is visible quickly.
+          aws s3 sync dist/ "s3://$BUCKET/" \
+            --delete \
+            --exclude "*" \
+            --include "og/*" --include "certs/*" --include "cv/*" \
+            --cache-control "public, max-age=86400"
+
+      - name: Invalidate CloudFront
+        env:
+          DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
         run: |
+          set -euo pipefail
           aws cloudfront create-invalidation \
-            --distribution-id "${{ env.CLOUDFRONT_DISTRIBUTION_ID }}" \
-            --paths "/*"
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/*" \
+            --query 'Invalidation.Id' --output text

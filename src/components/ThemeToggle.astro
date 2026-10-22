@@ -1,0 +1,172 @@
+---
+/**
+ * Theme toggle.
+ *
+ * The new theme is uncovered by a circle that grows from this button out to
+ * the farthest corner of the viewport, driven by the View Transitions API.
+ * Where that API is missing, the colour tokens ease over 250ms instead.
+ *
+ * Under prefers-reduced-motion: reduce the change is instantaneous.
+ */
+---
+
+<button
+  class="theme-toggle"
+  type="button"
+  data-theme-toggle
+  aria-pressed="false"
+  aria-label="Switch to dark theme"
+>
+  <span class="theme-toggle__glyph" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+      <circle cx="12" cy="12" r="4.2" data-glyph-sun></circle>
+      <g data-glyph-moon stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 14.5A8.2 8.2 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"></path>
+      </g>
+    </svg>
+  </span>
+  <span data-theme-label>Dark</span>
+</button>
+
+<style>
+  [data-glyph-sun] {
+    display: none;
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const label = document.querySelector<HTMLElement>('[data-theme-label]');
+  const sun = document.querySelector<SVGCircleElement>('[data-glyph-sun]');
+  const moon = document.querySelector<SVGGElement>('[data-glyph-moon]');
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const supportsVT = typeof document.startViewTransition === 'function';
+
+  /* The fallback transition is opt-in, so it never fires alongside the
+     View Transition and both do not run at once. */
+  const usesFallback = !supportsVT;
+  root.toggleAttribute('data-theme-fallback', usesFallback);
+
+  const current = (): 'light' | 'dark' =>
+    root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+
+  function sync(next: 'light' | 'dark') {
+    const toDark = next === 'dark';
+    if (btn) {
+      btn.setAttribute('aria-pressed', String(toDark));
+      btn.setAttribute('aria-label', `Switch to ${toDark ? 'light' : 'dark'} theme`);
+    }
+    if (label) label.textContent = toDark ? 'Light' : 'Dark';
+    if (sun) sun.style.display = toDark ? 'block' : 'none';
+    if (moon) moon.style.display = toDark ? 'none' : 'block';
+    const meta = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (meta) meta.setAttribute('content', toDark ? '#111214' : '#f6f4ef');
+  }
+
+  /**
+   * Radius from the button's centre to the farthest viewport corner.
+   * Recomputed on every use, so the origin always matches where the button
+   * actually is, including after a resize or with the sticky header.
+   */
+  function measure() {
+    const el = btn;
+    if (!el) {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      return { x: cx, y: cy, r: Math.hypot(cx, cy) };
+    }
+    const box = el.getBoundingClientRect();
+    const x = box.left + box.width / 2;
+    const y = box.top + box.height / 2;
+    // farthest corner, not the nearest
+    const r = Math.max(
+      Math.hypot(x, y),
+      Math.hypot(window.innerWidth - x, y),
+      Math.hypot(x, window.innerHeight - y),
+      Math.hypot(window.innerWidth - x, window.innerHeight - y)
+    );
+    return { x, y, r };
+  }
+
+  function commit(next: 'light' | 'dark') {
+    root.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* private mode: the choice simply will not persist */
+    }
+    sync(next);
+    // the ambient layer repaints from the new tokens
+    /* Dispatched on the document, not the window: an event dispatched directly
+       on window never reaches a listener registered on document, which is
+       exactly why the field used to miss every theme change. From the
+       document it bubbles to the window too, so both work. */
+    document.dispatchEvent(new CustomEvent('themechange', { detail: next }));
+  }
+
+  let running: ViewTransition | null = null;
+
+  function toggle() {
+    const next = current() === 'dark' ? 'light' : 'dark';
+
+    // Instant. No transition, no view transition.
+    if (reduced.matches) {
+      running?.skipTransition();
+      running = null;
+      commit(next);
+      return;
+    }
+
+    // Pressed again mid-reveal: finish the current one cleanly rather than
+    // stacking a second transition on top of it.
+    if (running) {
+      running.skipTransition();
+      running = null;
+      commit(next);
+      return;
+    }
+
+    if (!supportsVT) {
+      commit(next);
+      return;
+    }
+
+    const { x, y, r } = measure();
+    root.style.setProperty('--theme-x', `${x}px`);
+    root.style.setProperty('--theme-y', `${y}px`);
+    root.style.setProperty('--theme-r', `${r}px`);
+
+    const vt = document.startViewTransition(() => commit(next));
+    running = vt;
+    vt.finished
+      .catch(() => {
+        /* a skipped transition rejects; that is expected, not an error */
+      })
+      .finally(() => {
+        if (running === vt) running = null;
+      });
+  }
+
+  sync(current());
+
+  // Click and keyboard both go through the same handler, so the origin is the
+  // button's centre either way. Native buttons already fire click on Enter
+  // and Space, which keeps this to one code path.
+  btn?.addEventListener('click', toggle);
+
+  // Follow the system only while no explicit choice has been made.
+  const sys = window.matchMedia('(prefers-color-scheme: dark)');
+  sys.addEventListener('change', (e) => {
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem('theme');
+    } catch {
+      /* ignore */
+    }
+    if (saved) return;
+    const next = e.matches ? 'dark' : 'light';
+    commit(next);
+  });
+</script>

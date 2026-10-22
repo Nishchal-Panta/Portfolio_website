@@ -1,408 +1,212 @@
 # Design System
 
-## Color Palette
+> This document was stale until now: it described Poppins and blue gradients,
+> which the stylesheet stopped using some time ago. It has been rewritten to
+> match what `src/styles/tokens.css` and `src/styles/site.css` actually do.
+> **The CSS is the source of truth. If they ever disagree, the CSS wins.**
 
-### Primary Colors
+## Principles
 
-**Light Mode:**
-- Background: `#ffffff` (White)
-- Surface: `#f8f9fa` (Light Gray)
-- Text: `#1a1a2e` (Dark Navy)
-- Text Secondary: `#64748b` (Slate)
-- Border: `#e2e8f0` (Light Border)
+1. Paper, not screen. A warm off-white ground reads as a printed page rather
+   than a browser window.
+2. Two accents, one job each. `--accent` is for actions and links only.
+   `--verified` is reserved for credentials and means nothing else.
+3. Mono is for dates and roles. Labels and headings stay sentence case.
+4. Four rendered weights. No italics.
+5. Separate with spacing, alignment and hairlines before reaching for shadow.
+   There are three shadows in the whole site and they are all for interactive
+   overlays.
+6. Motion only where scroll position carries meaning.
 
-**Dark Mode:**
-- Background: `#0f172a` (Deep Navy)
-- Surface: `#1e293b` (Navy)
-- Text: `#f1f5f9` (Off White)
-- Text Secondary: `#cbd5e1` (Light Slate)
-- Border: `#334155` (Dark Border)
+## Colour
 
-### Accent Colors
+### Light (paper)
 
-- Primary Accent: `#3b82f6` (Blue)
-- Accent Dark: `#1e40af` (Dark Blue)
-- Success: `#10b981` (Green)
-- Warning: `#f59e0b` (Orange)
-- Error: `#ef4444` (Red)
+| Token | Value | Role |
+|---|---|---|
+| `--bg` | `#f6f4ef` | page ground |
+| `--surface` | `#fdfcfa` | raised panels, inputs |
+| `--surface-sunk` | `#f1eee7` | image wells, code blocks |
+| `--text` | `#1a1917` | body and headings |
+| `--text-secondary` | `#4f4b43` | descriptions |
+| `--text-muted` | `#6b665c` | meta, labels |
+| `--border` | `#e0dbcf` | hairlines |
+| `--border-strong` | `#c9c3b4` | emphasis hairline |
+| `--accent` | `#1a45c4` | links and actions only |
+| `--accent-soft` | `#eaeefc` | selected and hover fills |
+| `--verified` | `#8f4207` | **credentials only** |
 
-### Gradients
+### Dark (ink)
 
-- Primary: `linear-gradient(135deg, #3b82f6, #0284c7)`
-- Accent: `linear-gradient(135deg, #0f172a, #1e293b)`
+| Token | Value |
+|---|---|
+| `--bg` | `#111214` |
+| `--surface` | `#191a1d` |
+| `--surface-sunk` | `#101113` |
+| `--text` | `#f2f0ec` |
+| `--text-secondary` | `#c3bfb6` |
+| `--text-muted` | `#918c82` |
+| `--border` | `#2b2c30` |
+| `--accent` | `#93acff` |
+| `--verified` | `#e0a64b` |
+
+### Measured contrast
+
+Every pairing below was computed, not assumed.
+
+| Pairing | Ratio | AA |
+|---|---|---|
+| `--text` on `--bg` (light) | 15.98:1 | pass |
+| `--text-secondary` on `--bg` | 7.89:1 | pass |
+| `--text-muted` on `--bg` | 5.19:1 | pass |
+| `--accent` on `--bg` | 7.10:1 | pass |
+| `--verified` on `--bg` | **6.48:1** | pass |
+| `--text` on `--bg` (dark) | 16.47:1 | pass |
+| `--text-muted` on `--bg` (dark) | 5.60:1 | pass |
+| `--accent` on `--bg` (dark) | 8.56:1 | pass |
+| `--verified` on `--bg` (dark) | **8.68:1** | pass |
+
+`--verified` was darkened from an earlier `#B45309` precisely so it clears
+4.5:1 for small text on the paper ground.
 
 ## Typography
 
-### Font Families
-
-- **Primary**: `Poppins` (Google Fonts)
-  - Used for headings, UI text
-  - Weights: 300, 400, 500, 600, 700, 800
-
-- **Monospace**: `JetBrains Mono` (Google Fonts)
-  - Used for code snippets, technical content
-  - Weights: 400, 600
-
-### Font Sizes
-
-```css
-h1 {
-  font-size: 3.5rem;    /* 56px - Hero title */
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 2.5rem;    /* 40px - Section titles */
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 1.875rem;  /* 30px - Subsections */
-  font-weight: 700;
-}
-
-h4 {
-  font-size: 1.25rem;   /* 20px - Component titles */
-  font-weight: 700;
-}
+Four rendered weights. No italics anywhere.
+
+| Face | Weights | Role |
+|---|---|---|
+| **Newsreader** (variable, `opsz` pinned to 72, self-hosted) | 500 | display and narrative voice |
+| **Plus Jakarta Sans** (self-hosted) | 400, 500 | body and UI |
+| **JetBrains Mono** (self-hosted) | 400 | dates, roles, labels |
+
+The optical-size axis is pinned rather than kept live. Keeping it cost
+**32.5 KB on the latin subset** (51.9 KB against 19.4 KB), and since Newsreader
+is only ever used at display sizes, `opsz 72` is the correct static instance
+rather than a compromise.
 
-p {
-  font-size: 1rem;      /* 16px - Body text */
-  line-height: 1.8;
-  font-weight: 400;
-}
-
-small {
-  font-size: 0.875rem;  /* 14px - Small text */
-}
-```
-
-### Line Heights
-
-- Headings: 1.2
-- Body: 1.6 - 1.8
-- Tight: 1.4
-
-### Letter Spacing
-
-- Hero Title: -0.02em (tighter)
-- Headings: -0.01em (slight)
-- Normal: 0 (default)
-- Wide: 0.5px - 1px (UI elements)
-
-## Spacing System
-
-**Base Unit: 0.25rem (4px)**
-
-```css
---spacing-xs:   0.25rem   /* 4px */
---spacing-sm:   0.5rem    /* 8px */
---spacing-md:   1rem      /* 16px */
---spacing-lg:   1.5rem    /* 24px */
---spacing-xl:   2rem      /* 32px */
---spacing-2xl:  3rem      /* 48px */
---spacing-3xl:  4rem      /* 64px */
---spacing-4xl:  6rem      /* 96px */
-```
-
-### Common Applications
-
-- **Padding**: Small content - `var(--spacing-md)` to `var(--spacing-lg)`
-- **Margins**: Section spacing - `var(--spacing-2xl)` to `var(--spacing-3xl)`
-- **Gap (Grid/Flex)**: `var(--spacing-lg)` to `var(--spacing-2xl)`
-- **Button Padding**: Horizontal `var(--spacing-xl)`, Vertical `var(--spacing-md)`
-
-## Border Radius
-
-```css
---radius-sm:   0.375rem   /* 6px - Small elements */
---radius-md:   0.5rem     /* 8px - Buttons, inputs */
---radius-lg:   1rem       /* 16px - Cards, modals */
---radius-xl:   1.5rem     /* 24px - Large elements */
-```
-
-## Shadows
-
-```css
---shadow-sm:   0 1px 2px 0 rgba(0, 0, 0, 0.05);
---shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.1);
---shadow-lg:   0 10px 15px -3px rgba(0, 0, 0, 0.1);
---shadow-xl:   0 20px 25px -5px rgba(0, 0, 0, 0.1);
-```
-
-### Usage
-
-- Hover states: `var(--shadow-lg)`
-- Lifted cards: `var(--shadow-md)` → `var(--shadow-lg)` on hover
-- Heavy emphasis: `var(--shadow-xl)`
-
-## Transitions & Animations
-
-### Timing
-
-```css
---transition-fast:   150ms ease-in-out
---transition-base:   300ms ease-in-out
---transition-slow:   500ms ease-in-out
-```
-
-### Common Animations
-
-- **Fade**: opacity from 0 to 1
-- **Slide**: transform translateX/Y
-- **Scale**: transform scale()
-- **Bounce**: keyframe animation
-- **Pulse**: opacity pulse effect
-
-### Timing Functions
-
-- **ease-in-out**: Default for UI transitions
-- **ease-out**: Entrance animations
-- **ease-in**: Exit animations
-- **linear**: Continuous rotations
-
-## Component Styles
-
-### Buttons
-
-#### Primary Button
-```css
-Background: var(--color-accent) /* #3b82f6 */
-Color: white
-Padding: var(--spacing-md) var(--spacing-xl)
-Border Radius: var(--radius-lg)
-Font Weight: 600
-Box Shadow: 0 4px 15px rgba(59, 130, 246, 0.4)
-Hover: translateY(-2px), darkened background
-```
-
-#### Secondary Button
-```css
-Background: var(--color-surface)
-Color: var(--color-text)
-Border: 1px solid var(--color-border)
-Padding: var(--spacing-md) var(--spacing-xl)
-Border Radius: var(--radius-lg)
-Hover: var(--color-surface-alt) background
-```
-
-#### Outline Button
-```css
-Background: transparent
-Border: 2px solid var(--color-accent)
-Color: var(--color-accent)
-Hover: blue background, white text
-```
-
-### Cards
-
-#### Base Card
-```css
-Background: var(--color-surface)
-Border: 1px solid var(--color-border)
-Border Radius: var(--radius-lg)
-Padding: var(--spacing-xl)
-Transition: all 300ms ease-in-out
-Hover: translateY(-5px), enhanced shadow
-```
-
-#### Feature Card
-```css
-Text Align: center
-Hover: border-accent color
-Icon Color: var(--color-accent)
-Icon Size: 2.5rem
-```
-
-### Tags & Badges
-
-#### Skill Tag
-```css
-Background: linear-gradient(135deg, #3b82f6, #0284c7)
-Color: white
-Padding: var(--spacing-sm) var(--spacing-lg)
-Border Radius: var(--radius-lg)
-Font Size: 0.9rem
-Font Weight: 500
-Hover: scale(1.05)
-```
-
-#### Tech Badge
-```css
-Background: rgba(59, 130, 246, 0.1)
-Color: var(--color-accent)
-Border: 1px solid var(--color-accent)
-Padding: var(--spacing-xs) var(--spacing-md)
-Border Radius: var(--radius-md)
-Font Size: 0.85rem
-```
-
-### Forms
-
-#### Input / Textarea
-```css
-Padding: var(--spacing-md)
-Background: var(--color-bg)
-Border: 1px solid var(--color-border)
-Border Radius: var(--radius-md)
-Font Size: 1rem
-Font Family: var(--font-sans)
-Color: var(--color-text)
-Focus: border-accent, shadow with accent tint
-```
-
-## Responsive Breakpoints
-
-```css
-Mobile: < 480px
-Tablet: 480px - 768px
-Desktop: 768px - 1024px
-Large: > 1024px
-```
-
-### Common Breakpoints Used
-
-```css
-@media (max-width: 480px)    /* Mobile */
-@media (max-width: 768px)    /* Tablet & below */
-@media (max-width: 1024px)   /* Desktop & below */
-```
-
-### Layout Changes
-
-- **Mobile**: Single column, stacked sections
-- **Tablet**: Two columns, flexible grids
-- **Desktop**: Multi-column, side-by-side layouts
-
-## Dark Mode Implementation
-
-The design system uses CSS custom properties (variables) that change between light and dark themes.
-
-```html
-<!-- Default: Light mode -->
-<html>
-
-<!-- Dark mode -->
-<html data-theme="dark">
-```
-
-All colors automatically adapt without code changes:
-
-```css
-:root {
-    --color-bg: #ffffff;
-}
-
-[data-theme="dark"] {
-    --color-bg: #0f172a;
-}
-```
-
-## Accessibility Features
-
-### Color Contrast
-
-- **WCAG AA**: Minimum 4.5:1 ratio for normal text
-- **WCAG AAA**: Minimum 7:1 ratio (preferred)
-- All accent colors meet AA standards against both backgrounds
-
-### Focus States
-
-- Visible focus outline on all interactive elements
-- Focus color: `var(--color-accent)`
-- Outline width: 2px
-- Outline offset: 2px
-
-### Keyboard Navigation
-
-- Tab order follows visual order
-- All links and buttons accessible via keyboard
-- Escape key closes modals/menus
-- Enter key activates buttons/links
-
-## Animation Best Practices
-
-### Do's
-
-✓ Use transforms (scale, translate, rotate) for performance  
-✓ Keep animations under 400ms for UI feedback  
-✓ Use ease-out for entrances, ease-in for exits  
-✓ Provide `prefers-reduced-motion` support  
-
-### Don'ts
-
-✗ Animate color changes (use them strategically)  
-✗ Animations longer than 500ms for interactions  
-✗ Multiple simultaneous animations on same element  
-✗ Ignore motion preferences  
-
-## Brand Elements
-
-### Logo
-
-- **Format**: "NP" initials in circle gradient
-- **Size**: 40px minimum
-- **Colors**: Blue gradient (#3b82f6 → #0284c7)
-- **Background**: Optional gradient or solid
-
-### Typography Emphasis
-
-- **Primary**: Hero title with gradient
-- **Accent**: Section titles with underline
-- **Active**: Links with color transition
-
-### Imagery Style
-
-- Professional photography
-- Technical screenshots
-- Minimalist icons
-- High contrast graphics
-
-## Spacing Examples
-
-### Hero Section
-```
-Top: 96px (var(--spacing-4xl))
-Bottom: 64px (var(--spacing-3xl))
-Content Gap: 96px (var(--spacing-4xl))
-```
-
-### Card Sections
-```
-Padding: 32px (var(--spacing-xl))
-Gap: 24px (var(--spacing-lg))
-Border: 1px solid
-```
-
-### Text Sections
-```
-Paragraph Gap: 16px (var(--spacing-md))
-Section Gap: 48px (var(--spacing-2xl))
-Line Height: 1.8
-```
-
-## Color Usage Guidelines
-
-### Text
-
-- **Primary**: Use `--color-text` for main content
-- **Secondary**: Use `--color-text-secondary` for muted text
-- **Accents**: Use sparingly for emphasis
-
-### Backgrounds
-
-- **Main**: `--color-bg` for page background
-- **Surface**: `--color-surface` for cards/sections
-- **Alt Surface**: `--color-surface-alt` for hover/active states
-
-### Borders
-
-- **Standard**: `--color-border` for all borders
-- **Accent**: `--color-accent` for highlighted borders/focus states
-
-### UI Elements
-
-- **Buttons**: Primary accent `#3b82f6`
-- **Links**: Use `--color-accent` with underline
-- **Hover**: Slightly darker shade
-- **Active**: Full saturation
+### Scale
+
+| Token | Value | Used for |
+|---|---|---|
+| `--step--1` | `0.78rem → 0.82rem` | labels, meta, captions |
+| `--step-0` | `1rem → 1.075rem` | body |
+| `--step-1` | `1.15rem → 1.35rem` | ledes, sub-headings |
+| `--step-2` | `1.4rem → 1.8rem` | event titles |
+| `--step-3` | `1.75rem → 2.5rem` | section titles |
+| `--step-4` | `2.4rem → 4rem` | 404 |
+| `--step-5` | `3rem → 6.5rem` | the opening statement |
+
+Display type is set at `weight 500`, `line-height 1.02` and
+`letter-spacing -0.028em`. Body is `1.5` to `1.65` with the measure capped at
+`68ch`.
+
+## Space
+
+Base unit `0.25rem`. Named steps `--s-1` (4px) through `--s-10` (128px).
+Layout constants: `--measure 68ch`, `--measure-narrow 46ch`, `--page 1200px`,
+`--rail 190px`, `--gutter clamp(1.25rem, 4vw, 3rem)`.
+
+## Shape
+
+Three radii only: `--r-1 3px`, `--r-2 6px`, `--r-3 10px`. Pills exist only on
+the carousel arrows, which are circular controls.
+
+Three shadows in the site, all for interactive surfaces: `--shadow-subtle`,
+`--shadow-card`, `--shadow-dropdown`.
+
+## Motion
+
+Four durations and one easing. There are no others.
+
+| Token | Value | Used for |
+|---|---|---|
+| `--t-state` | `150ms` | hover, focus, colour, pointer tilt |
+| `--t-base` | `250ms` | disclosure, paragraph reveals, theme fallback |
+| `--t-scene` | `400ms` | a photograph settling, a scene change |
+| `--t-chapter` | `550ms` | a chapter arriving, the theme reveal |
+| `--ease` | `cubic-bezier(0.16, 1, 0.3, 1)` | everything |
+
+### One spec, two triggers
+
+The keyframes and the durations live in `src/styles/story.css` and nowhere
+else. What differs between engines is only **when an element has arrived**:
+
+| | Trigger | Cost |
+|---|---|---|
+| Chrome 115+, Edge 115+, Safari 26+ | native CSS `animation-timeline` | none, compositor only |
+| Everything else | `IntersectionObserver` in `src/scripts/scroll.ts` | one class toggle per element |
+
+So both paths run the identical `@keyframes` at the identical durations. There
+is no second copy of the motion to drift out of step.
+
+Which path is in use is decided by the inline bootstrap in
+`src/layouts/BaseLayout.astro`, before first paint, and written to
+`<html data-timeline="native|fallback">`. That ordering matters: if it were
+decided after paint, Firefox would show one frame of content in its final state
+before the observer started hiding it again.
+
+**Firefox has not shipped scroll-driven animations.** caniuse shows no support
+through v161; MDN lists the feature as Limited availability and "Baseline
+blocked since September 2025". It sits behind
+`layout.css.scroll-driven-animations.enabled`, defaulting to `false`. This is
+why the fallback exists rather than a static page.
+
+### What the fallback deliberately does not reproduce
+
+Parallax and the drawn thread. Both are depth cues rather than story, both want
+a live scroll position, and both would mean a scroll listener on the main
+thread. The reveals carry the narrative, so those are what cross the gap. The
+thread is still drawn in Firefox, just drawn in full rather than drawn in.
+
+### Ambient layer
+
+The depth field is raw WebGL (`src/scripts/field.ts`): one shader program, one
+buffer, no dependency. It is a sparse cloud of motes in the paper and ink
+tokens, normal alpha blending rather than additive so body copy keeps its
+measured contrast.
+
+- The camera reads `scrollY` from a passive listener and advances through a
+  depth band, so the parallax is real depth rather than a scale trick.
+- Because it is rAF-driven rather than timeline-driven, **it runs identically in
+  every engine**, including Firefox.
+- Ceiling of 1500 points, device pixel ratio capped at 2.
+- Paused when the tab is hidden or the canvas is out of view; removed entirely
+  on touch, on low-power devices, and under reduced motion.
+- If WebGL is refused, the canvas is removed rather than left as a dead element.
+
+### Resting state
+
+Every reveal is authored so that an engine which ignores the animation shows the
+**completed** page. No-JS and reduced motion both land on that same state.
+
+Chapter pinning is `position: sticky`, so it needs no scroll listener. The only
+scroll listeners in the codebase are the field's cached scroll position, the
+rail's `IntersectionObserver`, and the chapter scene stepping.
+
+### Reduced motion
+
+`prefers-reduced-motion: reduce` removes: the depth field and pointer ring
+(deleted from the DOM, not just hidden), all reveal animation, parallax, tilt,
+smooth scrolling, the theme View Transition, and chapter pinning. Theme changes
+become instantaneous. Nothing is reordered or removed from the page: the whole
+story is still there, simply still.
+
+## Layout
+
+A page grid with the rail as a real first column at `≥ 78rem`. This replaced a
+fixed overlay, which overlapped the headline at 1440 because there is not
+enough margin beside a 1200px container to hold a 190px rail.
+
+Horizontal reveals were removed entirely: a `translateX` start offset places
+not-yet-revealed elements outside the viewport and produces a horizontal
+scrollbar on narrow screens.
+
+## Components
+
+- **Ledger.** Certificates and badges only, as native `<details>` rows. Opens
+  with no JavaScript. Nothing else on the page shows these documents.
+- **Carousel.** Native `scroll-snap`, real `<button>` controls, `ArrowLeft` /
+  `ArrowRight` / `Home` / `End` / `PageUp` / `PageDown`, and an `aria-live`
+  status. A trailing spacer makes the last slide reachable by keyboard.
+- **Contained figures.** Shown at true size, never cropped, never stretched,
+  never rendered wider than the source file.

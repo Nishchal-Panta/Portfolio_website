@@ -1,0 +1,62 @@
+/* ==========================================================================
+   The album without script
+
+   Loaded only by the <noscript> link in the head, so nothing here costs a
+   byte when the album is running.
+
+   The markup ships thirteen photographs with only the first three shown: that
+   is what makes the first paint exactly the conveyor's geometry, so the page
+   never reflows when the script takes over. Without script the same markup is
+   switched back to a plain wrapping gallery - every photograph visible, in
+   album order, each one a real link to the full-size image.
+
+   The arrows are switched off here as well. They are visible controls for a
+   row that no longer moves, and leaving them painted would be a promise the
+   page cannot keep. They stay out of the way with `display: none` rather than
+   being left at zero opacity, so no screen reader is offered a button that
+   does nothing.
+   ========================================================================== */
+
+/* Higher specificity than the rules that switch these on, so this works
+   whichever order the two stylesheets land in: Astro's bundled sheet and this
+   one are both <link>s in the head, and only a stronger selector is guaranteed
+   to win regardless of which comes last. */
+.album .album__figure[hidden] {
+  display: block;
+}
+
+.album .album__arrow {
+  display: none;
+}
+
+/* One wrapping gallery rather than one fixed line: the same figures, the same
+   photographs at their own proportions, allowed as many lines as the row
+   needs. Fixed heights, natural widths - no crop, no stretch. */
+.album__row {
+  height: auto;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: var(--album-gap, 0.75rem);
+}
+
+/* The heights are the conveyor's own, worked out the same way - a fraction of
+   the stage, not of which photographs are showing - so a photograph is the
+   same size with or without script. That is not cosmetic: `sizes` is written
+   next to the markup and cannot be rewritten by a stylesheet, so the two
+   paths have to agree about how big a photograph gets for the promise to be
+   true in both. */
+.album .album__figure {
+  height: calc(100cqw / 5.05);
+}
+
+@media (max-width: 48rem) {
+  .album .album__figure {
+    height: calc((100cqw - 12px) / 3.35);
+  }
+
+  /* The break element only exists to end slot 0's line on a phone, and there
+     are no slots here. */
+  .album__break {
+    display: none;
+  }
+}

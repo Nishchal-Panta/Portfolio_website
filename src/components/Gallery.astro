@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface Props {
+  images: {
+    src: ImageMetadata;
+    alt: string;
+    caption?: string;
+    layout?: string;
+    /** Render at true size, never cropped, never stretched. */
+    contain?: boolean;
+    /** Point the image at a full-size copy the reader can open instead. */
+    enlarge?: string;
+  }[];
+  widths?: number[];
+  sizes?: string;
+  contain?: boolean;
+  eager?: boolean;
+}
+
+const {
+  images,
+  widths = [400, 640, 900],
+  sizes = '(min-width: 62rem) 30rem, 92vw',
+  contain = false,
+  eager = false,
+} = Astro.props;
+
+// A contained image is shown at its own size, so it gets exactly one
+// candidate at the source width. Multiple widths would let the browser pick a
+// smaller file whose decoded size no longer matches the width/height
+// attributes, leaving a few pixels of letterbox around an un-upscaled image.
+const useSingle = contain || images.some((i) => i.contain || i.enlarge);
+
+const bounded = images.map((img) => {
+  const list = useSingle ? [img.src.width] : widths.filter((w) => w <= img.src.width);
+  const biggestForThis = Math.max(...list);
+  const scale = Math.min(1, biggestForThis / img.src.width);
+  return {
+    ...img,
+    w: Math.round(img.src.width * scale),
+    h: Math.round(img.src.height * scale),
+    list,
+    isContain: contain || img.contain,
+    // The true source width. A contained image is never rendered wider than
+    // this, so a low-resolution source is shown at 1:1 instead of upscaled.
+    maxNatural: img.src.width,
+  };
+});
+---
+
+<div class:list={['gallery', contain && 'gallery--contain']}>
+  {
+    bounded.map((img, i) => {
+      const frame = (
+        <div
+          class="figure__frame"
+          style={img.isContain ? `--max-natural:${img.maxNatural}px` : undefined}
+        >
+          <Image
+            src={img.src}
+            alt={img.alt}
+            width={img.w}
+            height={img.h}
+            widths={img.list}
+            sizes={sizes}
+            loading={eager && i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={eager && i === 0 ? 'high' : 'auto'}
+            decoding="async"
+            quality={74}
+            data-tilt
+          />
+        </div>
+      );
+
+      return (
+        <figure class:list={['figure', 'print', img.isContain && 'figure--contain']}>
+          {img.enlarge ? (
+            <a
+              class="figure__enlarge"
+              href={img.enlarge}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open at full size"
+              /* The image's own alt would otherwise become the link name, which
+                 describes the photograph rather than what the link does. */
+              aria-label={`Open the full-size copy of: ${img.alt}`}
+            >
+              {frame}
+            </a>
+          ) : (
+            frame
+          )}
+          {img.caption && <figcaption>{img.caption}</figcaption>}
+        </figure>
+      );
+    })
+  }
+</div>
+
+<style>
+  .gallery {
+    display: grid;
+    gap: var(--s-4);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .gallery--contain {
+    grid-template-columns: 1fr;
+  }
+</style>

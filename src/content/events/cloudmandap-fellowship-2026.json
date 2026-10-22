@@ -1,0 +1,20 @@
+{
+  "title": "CloudMandap DAAI Fellowship",
+  "dateLabel": "Feb to May 2026",
+  "sortKey": "2026-02-05",
+  "role": "AWS Cloud Fellow",
+  "organizer": "CloudMandap Pvt Ltd with IIMS College",
+  "summary": "A three-month fellowship on AWS cloud architecture, taken alongside the degree. I worked through scalability, IAM, VPC design and cloud security patterns, and spent the time learning how infrastructure decisions are argued and defended rather than just configured. It ended with the Cloud Practitioner exam.",
+  "images": [
+    {
+      "src": "../../assets/events/fellowship-start-01.jpg",
+      "alt": "Nishchal standing inside a CloudMandap and DAAI fellowship photo frame at the start of the programme."
+    },
+    {
+      "src": "../../assets/events/fellowship-presentation.jpg",
+      "alt": "Nishchal in a checked blazer and garland, holding a fellowship certificate between two other men at the DAAI commencement.",
+      "caption": "The DAAI fellowship certificate handover."
+    }
+  ],
+  "credential": "aws-cloud-practitioner"
+}

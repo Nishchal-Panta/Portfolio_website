@@ -1,0 +1,19 @@
+{
+  "title": "Data-centric intelligence session",
+  "dateLabel": "2026",
+  "sortKey": "2026-07-01",
+  "role": "Attendee",
+  "organizer": "IIMS College",
+  "summary": "A guest session on data-centric intelligence, led by Prof. Dr. Sudan Jha of Kathmandu University, Senior Member of the IEEE. The argument worth carrying away from it was that the model is rarely the bottleneck; how the data around it was collected and shaped usually is.",
+  "credential": null,
+  "images": [
+    {
+      "src": "../../assets/events/tedx-speaker.jpg",
+      "alt": "IIMS Applied Data Science Club members with Prof. Dr. Sudan Jha."
+    },
+    {
+      "src": "../../assets/events/tedx-audience.jpg",
+      "alt": "Participating in a guest lecture by Prof. Dr. Sudan Jha."
+    }
+  ]
+}
