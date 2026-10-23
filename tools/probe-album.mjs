@@ -9,7 +9,14 @@
  *   - nothing of the old controls is left - no pause, no shuffle, no counter;
  *   - the sequence is the data's own, wraps at the end, and repeats nothing
  *     inside a loop, over two whole loops of the album;
- *   - it advances every 2.5-3.0s and each step takes 450-550ms;
+ *   - it runs only while the section is on screen: arriving starts it at once
+ *     rather than after an interval, leaving stops the timer, the step in
+ *     flight and every decode, and 800px out the first six photographs are
+ *     decoded so the opening steps never hitch;
+ *   - it advances every 1.3-1.6s and each step takes 300-400ms, so every
+ *     photograph is on screen about 3s or more across one loop;
+ *   - a step holds its frame: p95 frame time under 16.7ms and no task over
+ *     50ms;
  *   - the row's height never changes between steps, so nothing outside the
  *     section can shift;
  *   - every photograph keeps its own aspect ratio, at one shared height;
@@ -39,6 +46,37 @@ const ok = (cond, label, detail) => {
 };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** What the row says it is doing, read off the attributes the script keeps
+ *  for exactly this purpose - timer armed, step in flight, decodes done. */
+const albumState = (p) =>
+  p.evaluate(() => {
+    const a = document.querySelector('[data-album]');
+    const g = (k, d) => a.dataset[k] ?? d;
+    return {
+      onScreen: g('onScreen', '0'),
+      timer: g('timer', 'off'),
+      busy: g('busy', '0'),
+      held: g('held', '?'),
+      warmed: g('warmed', '0'),
+      decodes: Number(g('decodes', '0')),
+      swaps: Number(g('swaps', '0')),
+    };
+  });
+
+/** Move the album to a known place in the window: `+400` puts its top 400px
+ *  below the bottom edge - near enough to warm up, not visible at all. */
+const placeAlbum = (p, delta) =>
+  p.evaluate((d) => {
+    const top = document.querySelector('#album').getBoundingClientRect().top + window.scrollY;
+    // Positive: put the album's top that far BELOW the bottom edge - near
+    // enough for the 800px warm-up margin to reach it, far enough that the
+    // threshold which starts the row does not. Negative: the very top of the
+    // document, where an album several sections down is out of reach of both.
+    const y = d >= 0 ? top - window.innerHeight - d : 0;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+    return window.scrollY;
+  }, delta);
+
 const browser = await only.launch({ headless: false });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 const errors = [];
@@ -48,17 +86,139 @@ page.on('console', (m) => {
 page.on('pageerror', (e) => errors.push(String(e)));
 
 await page.goto(BASE, { waitUntil: 'networkidle' });
-await page.evaluate(() =>
-  document.querySelector('#album')?.scrollIntoView({ behavior: 'instant', block: 'center' })
-);
-await page.waitForTimeout(1200);
-// Scrolling brings the album under wherever the real cursor happens to be, and
-// a browser fires pointerenter for that. Sampling with the row hovered would
-// then measure a deliberately paused row, so park the pointer off it first.
-await page.mouse.move(4, 4);
-await page.waitForTimeout(400);
 
-console.log(`\nalbum  (${ENGINE_NAME}, ${BASE})`);
+console.log(`\nalbum  (${ENGINE_NAME}${process.env.THEME ? `, ${process.env.THEME}` : ''}, ${BASE})`);
+
+if (process.env.THEME) {
+  await page.evaluate((t) => document.documentElement.setAttribute('data-theme', t), process.env.THEME);
+  await page.waitForTimeout(300);
+}
+
+/* --- 0. it runs only while it can be seen --------------------------------- */
+
+console.log('\nstart and stop');
+
+// The album is a long way below the window here, so nothing at all should be
+// running: no timer, no step, no decode. This is the state a reader who never
+// scrolls down to it is left in.
+const away0 = await albumState(page);
+ok(
+  away0.onScreen === '0' && away0.timer === 'off' && away0.busy === '0',
+  `far below the window, nothing is running (onScreen ${away0.onScreen}, timer ${away0.timer}, busy ${away0.busy}, held "${away0.held}")`
+);
+const quiet = [];
+for (let i = 0; i < 8; i++) {
+  await sleep(400);
+  quiet.push(await albumState(page));
+}
+ok(
+  quiet.every((s) => s.decodes === away0.decodes && s.swaps === away0.swaps && s.timer === 'off' && s.busy === '0'),
+  `and it stays that way for ${((8 * 400) / 1000).toFixed(0)}s (decodes ${away0.decodes} -> ${quiet[7].decodes}, swaps ${away0.swaps} -> ${quiet[7].swaps})`,
+  quiet.map((s) => `d${s.decodes}/s${s.swaps}/${s.timer}`).join(' ')
+);
+
+/* Within 800px - still not on screen - the first six are decoded. Warm, not
+   started: the conveyor itself is still held. */
+await placeAlbum(page, 400);
+let warmed = await albumState(page);
+for (let i = 0; i < 40 && warmed.decodes < 6; i++) {
+  await sleep(100);
+  warmed = await albumState(page);
+}
+ok(warmed.warmed === '1', 'within 800px the warm-up fires');
+ok(
+  warmed.decodes === 6,
+  `and it decodes the first six photographs exactly (${warmed.decodes} decodes, not one more)`,
+  `onScreen ${warmed.onScreen}, timer ${warmed.timer}`
+);
+ok(
+  warmed.onScreen === '0' && warmed.timer === 'off' && warmed.busy === '0' && warmed.swaps === 0,
+  'but does not start the conveyor - warming is not running'
+);
+
+/* Arriving starts it at once rather than after a full interval. The row keeps
+   its own two stamps for this - when it counted itself on screen, and when
+   the step actually began - so the delay is measured in the page's clock
+   across one round trip, not across a dozen polls, and a miss can be
+   explained by the row's own state rather than guessed at. */
+const arrived = Date.now();
+await page.evaluate(() =>
+  document.querySelector('#album').scrollIntoView({ behavior: 'instant', block: 'center' })
+);
+let stamp = { enter: 0, begin: 0 };
+let seen;
+for (let i = 0; i < 150 && !stamp.begin; i++) {
+  await sleep(15);
+  stamp = await page.evaluate(() => {
+    const a = document.querySelector('[data-album]');
+    return { enter: Number(a.dataset.enter ?? 0), begin: Number(a.dataset.begin ?? 0) };
+  });
+}
+const observed = Date.now() - arrived;
+if (!stamp.begin) {
+  const why = await page.evaluate(() => ({ ...document.querySelector('[data-album]').dataset }));
+  ok(false, `the first step never started (limit 300ms after ${observed}ms of watching)`, JSON.stringify(why));
+} else {
+  ok(
+    stamp.begin - stamp.enter <= 300,
+    `the first step begins ${stamp.begin - stamp.enter}ms after the section came into view (limit 300ms, ${observed}ms of wall clock end to end)`
+  );
+}
+seen = await albumState(page);
+ok(seen.onScreen === '1', 'and the section counts itself on screen');
+
+await page.mouse.move(4, 4);
+await sleep(400);
+
+/* Leaving stops everything, and it stays stopped. */
+await placeAlbum(page, -100000);
+await sleep(900); // let the step in flight, if any, end first
+const left = await albumState(page);
+ok(
+  left.onScreen === '0' && left.timer === 'off' && left.busy === '0' && /offscreen/.test(left.held),
+  `leaving stops it (onScreen ${left.onScreen}, timer ${left.timer}, busy ${left.busy}, held "${left.held}")`
+);
+const away = [];
+for (let i = 0; i < 15; i++) {
+  await sleep(400);
+  away.push(await albumState(page));
+}
+ok(
+  away.every((s) => s.decodes === left.decodes && s.swaps === left.swaps && s.timer === 'off' && s.busy === '0'),
+  `no timer, no step and no decode for 6s off screen (decodes ${left.decodes} -> ${away[14].decodes}, swaps ${left.swaps} -> ${away[14].swaps})`,
+  away.map((s) => `d${s.decodes}/s${s.swaps}/${s.timer}/${s.busy}`).join(' ')
+);
+
+/* And coming back starts it again, just as promptly. */
+const before = await albumState(page);
+await page.evaluate(() =>
+  document.querySelector('#album').scrollIntoView({ behavior: 'instant', block: 'center' })
+);
+await page.mouse.move(4, 4);
+const back = Date.now();
+let resume = { enter: 0, begin: 0 };
+for (let i = 0; i < 150 && resume.begin <= (stamp.begin || 0); i++) {
+  await sleep(15);
+  resume = await page.evaluate(() => {
+    const a = document.querySelector('[data-album]');
+    return { enter: Number(a.dataset.enter ?? 0), begin: Number(a.dataset.begin ?? 0) };
+  });
+}
+seen = await albumState(page);
+if (resume.begin <= (stamp.begin || 0)) {
+  ok(false, `re-entry never started the row again`, JSON.stringify({ ...seen }));
+} else {
+  ok(
+    resume.begin - resume.enter <= 300,
+    `re-entry starts it again ${resume.begin - resume.enter}ms after the section is back (limit 300ms, ${Date.now() - back}ms of wall clock)`
+  );
+}
+ok(seen.onScreen === '1', 'and the section counts itself on screen');
+ok(seen.swaps > before.swaps, `and it stepped (${before.swaps} -> ${seen.swaps})`);
+
+await sleep(1200);
+await page.mouse.move(4, 4);
+await sleep(400);
 
 /* --- 1. what must be gone ------------------------------------------------- */
 
@@ -178,13 +338,14 @@ await page.evaluate(() => {
 });
 
 const ALBUM_SIZE = 13;
-// One loop is one step per photograph: 13 steps at ~2.75s. Two loops is the
-// check, because one loop cannot distinguish "ordered" from "ordered with a
-// jump at the wrap".
-const LOOP_MS = ALBUM_SIZE * 2 * 2800;
+// One loop is one step per photograph: 13 steps at ~1.45s, so a loop is about
+// 19s and every photograph has been on screen by the end of it. Two loops is
+// the check, because one loop cannot distinguish "ordered" from "ordered with
+// a jump at the wrap".
+const LOOP_MS = ALBUM_SIZE * 2 * 1450;
 console.log(`        waiting ${(LOOP_MS / 1000).toFixed(0)}s for two loops...`);
 await page.mouse.move(4, 4);
-await sleep(LOOP_MS + 2500);
+await sleep(LOOP_MS + 2000);
 
 const seq = await page.evaluate(() => window.__seq);
 const steps = seq.slice(1);
@@ -193,12 +354,33 @@ ok(steps.length >= ALBUM_SIZE * 2 - 1, `two whole loops' worth of steps (${steps
 // The first interval is the remainder of a timer that was armed at page load,
 // before this probe started watching, so it is not a measurement of the
 // interval at all.
-const intervals = steps.map((s, i) => s.t - seq[i].t).filter((d) => d > 800).slice(1);
-const inBand = intervals.filter((d) => d >= 2450 && d <= 3050);
+const intervals = steps.map((s, i) => s.t - seq[i].t).filter((d) => d > 500).slice(1);
+const band = [1250, 1650];
+const inBand = intervals.filter((d) => d >= band[0] && d <= band[1]);
+const sorted = [...intervals].sort((a, b) => a - b);
 ok(
   intervals.length >= ALBUM_SIZE && inBand.length === intervals.length,
-  `every interval is 2500-3000ms (n=${intervals.length}, min ${Math.min(...intervals).toFixed(0)}, med ${intervals.sort((a, b) => a - b)[Math.floor(intervals.length / 2)].toFixed(0)}, max ${Math.max(...intervals).toFixed(0)})`,
-  intervals.filter((d) => d < 2450 || d > 3050).map((d) => d.toFixed(0)).join(', ')
+  `every interval is 1300-1600ms (n=${intervals.length}, min ${Math.min(...intervals).toFixed(0)}, med ${sorted[sorted.length >> 1].toFixed(0)}, max ${Math.max(...intervals).toFixed(0)})`,
+  intervals.filter((d) => d < band[0] || d > band[1]).map((d) => d.toFixed(0)).join(', ')
+);
+
+/* How long each photograph is actually on screen in one loop. It is on the
+   row for three consecutive steps - slot 2, then 1, then 0 - so the total is
+   three intervals, about 4.5s. The design asks for roughly four seconds: long
+   enough to register, short enough that nothing is missed. The recording
+   covers two loops, so the per-loop figure is half of it. */
+const recorded = new Array(ALBUM_SIZE).fill(0);
+for (let i = 1; i < seq.length; i++) {
+  const d = seq[i].t - seq[i - 1].t;
+  for (const id of seq[i - 1].ids) recorded[id] += d;
+}
+const LOOPS = 2;
+const onScreen = recorded.map((v) => v / LOOPS);
+const shown = onScreen.filter((v) => v > 0);
+ok(
+  shown.length === ALBUM_SIZE && shown.every((v) => v >= 3000),
+  `each photograph is on screen at least 3s in one loop (min ${(Math.min(...shown) / 1000).toFixed(1)}s, med ${(shown.sort((a, b) => a - b)[shown.length >> 1] / 1000).toFixed(1)}s, max ${(Math.max(...shown) / 1000).toFixed(1)}s)`,
+  onScreen.map((v, i) => `#${i} ${(v / 1000).toFixed(1)}s`).join(' ')
 );
 
 /* The order itself: each step's trio is the previous trio shifted by one, and
@@ -243,23 +425,34 @@ const timing = await page.evaluate(async () => {
   const row = document.querySelector('[data-album-row]');
   const out = { elapsed: [], durations: [] };
   let first = 0;
+  let seenRest = false;
   await new Promise((done) => {
     const watch = () => {
       const moving = [...row.querySelectorAll('.album__figure')].filter((f) => {
         const t = getComputedStyle(f).transform;
         return t && t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)';
       });
-      if (moving.length && !first) {
-        first = performance.now();
-        // One frame on, so this reads the transition the step actually
-        // applied rather than the frame where the positions were inverted
-        // and no transition existed yet.
-        requestAnimationFrame(() => {
-          out.durations.push(getComputedStyle(moving[0]).transitionDuration);
-        });
-      } else if (!moving.length && first) {
-        out.elapsed.push(performance.now() - first);
-        first = 0;
+      if (moving.length) {
+        // Only a step that begins from a standstill is measured. This watcher
+        // is switched on at an arbitrary moment, and if that moment lands in
+        // the middle of a step it would time the tail of that step and call it
+        // a 49ms slide; waiting for one frame of stillness first means every
+        // measurement covers a whole one.
+        if (!first && seenRest) {
+          first = performance.now();
+          // One frame on, so this reads the transition the step actually
+          // applied rather than the frame where the positions were inverted
+          // and no transition existed yet.
+          requestAnimationFrame(() => {
+            out.durations.push(getComputedStyle(moving[0]).transitionDuration);
+          });
+        }
+      } else {
+        seenRest = true;
+        if (first) {
+          out.elapsed.push(performance.now() - first);
+          first = 0;
+        }
       }
       if (out.elapsed.length >= 2 && !first) done();
       else requestAnimationFrame(watch);
@@ -270,14 +463,63 @@ const timing = await page.evaluate(async () => {
 });
 ok(
   timing.elapsed.length > 0 &&
-    timing.elapsed.every((e) => e >= 450 && e <= 650),
-  `a step moves for 450-550ms, measured end to end (${timing.elapsed.map((e) => e.toFixed(0)).join(', ')}ms)`
+    timing.elapsed.every((e) => e >= 300 && e <= 520),
+  `a step moves for 300-400ms, measured end to end (${timing.elapsed.map((e) => e.toFixed(0)).join(', ')}ms)`
 );
 ok(
   timing.durations.length > 0 &&
-    timing.durations.every((d) => parseFloat(d) >= 0.45 && parseFloat(d) <= 0.55),
-  `and the transition it sets is 500ms (${timing.durations.join(', ')})`
+    timing.durations.every((d) => parseFloat(d) >= 0.3 && parseFloat(d) <= 0.4),
+  `and the transition it sets is 350ms (${timing.durations.join(', ')})`
 );
+
+/* --- 4b. what a step costs the frame -------------------------------------- */
+
+console.log('\nframes during a step');
+
+/* Long tasks are observed in the page itself, and frames are timed off
+   requestAnimationFrame, so this is the browser's own account of the step
+   rather than the probe's polling of it. Three steps are watched - enough to
+   catch a hitch without turning the suite into a benchmark. */
+const frames = await page.evaluate(async () => {
+  const long = [];
+  const po = new PerformanceObserver((list) => {
+    for (const e of list.getEntries()) if (e.duration > 50) long.push(Math.round(e.duration));
+  });
+  try {
+    po.observe({ entryTypes: ['longtask'] });
+  } catch {
+    /* Firefox has no longtask entry type; frames below still stand. */
+  }
+
+  const times = [];
+  let last = performance.now();
+  const tick = () => {
+    const now = performance.now();
+    times.push(now - last);
+    last = now;
+    if (times.length < 420) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  await new Promise((r) => setTimeout(r, 4200));
+  po.disconnect();
+  times.sort((a, b) => a - b);
+  return {
+    n: times.length,
+    p50: times[Math.floor(times.length * 0.5)],
+    p95: times[Math.floor(times.length * 0.95)],
+    max: times[times.length - 1],
+    long,
+    // The display runs near 145Hz, so a 145Hz frame is ~6.9ms. What matters
+    // is the budget the design set: no worse than one 60Hz frame.
+    hz: Math.round(1000 / (times.reduce((a, b) => a + b, 0) / times.length)),
+  };
+});
+ok(
+  frames.p95 <= 16.7,
+  `p95 frame time during steps is ${frames.p95.toFixed(1)}ms (limit 16.7ms, n=${frames.n} at ~${frames.hz}Hz, p50 ${frames.p50.toFixed(1)}ms, max ${frames.max.toFixed(1)}ms)`,
+  frames.long.join(', ')
+);
+ok(frames.long.length === 0, `no long task over 50ms while the row moves (${frames.long.length})`, frames.long.join(', '));
 
 /* --- 5. the row's height does not move ------------------------------------ */
 
@@ -619,6 +861,15 @@ await touchPage.evaluate(() =>
 );
 await touchPage.waitForTimeout(900);
 
+/* Focused, so the row is held for the whole of this section. Every step
+   below is then the gesture's own doing rather than the conveyor's, which
+   matters far more now that it steps every 1.4s: an autoplay step landing
+   inside an 800ms wait would otherwise look like a swipe that worked, or like
+   a vertical one that should not have. The arrows' own rest state is checked
+   after an explicit blur, further down. */
+await touchPage.evaluate(() => document.querySelector('[data-album-row]')?.focus());
+await touchPage.waitForTimeout(600);
+
 const swipeBefore = await touchPage.evaluate(() =>
   [...document.querySelectorAll('.album__figure')]
     .filter((f) => !f.hidden && !f.classList.contains('is-leaving'))
@@ -764,7 +1015,73 @@ const touchFocusOp = await touchPage.evaluate(() =>
   parseFloat(getComputedStyle(document.querySelector('[data-album-next]')).opacity)
 );
 ok(touchFocusOp > 0.9, `focusing an arrow reveals it on touch too (opacity ${touchFocusOp})`);
+
+/* The conveyor's own numbers, at the viewport a phone actually has. The
+   desktop section above measures these on a wide stage; a 390px one packs
+   three photographs into a row barely 120px tall, and it is worth knowing the
+   interval and the frame cost survive that too. */
+console.log('\nat 390px');
 await touchPage.evaluate(() => document.activeElement?.blur());
+await touchPage.mouse.move(4, 4);
+await touchPage.waitForTimeout(500);
+
+const mobile = await touchPage.evaluate(async () => {
+  const root = document.querySelector('[data-album]');
+  const long = [];
+  const po = new PerformanceObserver((list) => {
+    for (const e of list.getEntries()) if (e.duration > 50) long.push(Math.round(e.duration));
+  });
+  try {
+    po.observe({ entryTypes: ['longtask'] });
+  } catch {
+    /* no longtask in Firefox */
+  }
+  const times = [];
+  let last = performance.now();
+  const tick = () => {
+    const now = performance.now();
+    times.push(now - last);
+    last = now;
+    if (times.length < 600) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+
+  const seenAt = [];
+  const first = Number(root.dataset.swaps ?? 0);
+  const t0 = performance.now();
+  let prev = first;
+  while (performance.now() - t0 < 6200) {
+    await new Promise((r) => setTimeout(r, 25));
+    const s = Number(root.dataset.swaps ?? 0);
+    if (s !== prev) {
+      seenAt.push(performance.now());
+      prev = s;
+    }
+  }
+  po.disconnect();
+  times.sort((a, b) => a - b);
+  const intervals = seenAt.slice(1).map((t, i) => t - seenAt[i]);
+  return {
+    steps: seenAt.length,
+    min: intervals.length ? Math.min(...intervals) : 0,
+    max: intervals.length ? Math.max(...intervals) : 0,
+    p95: times[Math.floor(times.length * 0.95)],
+    n: times.length,
+    long,
+    rowH: document.querySelector('[data-album-row]').getBoundingClientRect().height,
+  };
+});
+ok(
+  mobile.steps >= 4 && mobile.min >= 1250 && mobile.max <= 1650,
+  `the row steps on a 390px screen every ${mobile.min.toFixed(0)}-${mobile.max.toFixed(0)}ms over ${mobile.steps} steps`,
+  `min ${mobile.min.toFixed(0)} max ${mobile.max.toFixed(0)}`
+);
+ok(
+  mobile.p95 <= 16.7,
+  `p95 frame time at 390px during steps is ${mobile.p95.toFixed(1)}ms (limit 16.7ms, n=${mobile.n})`,
+  mobile.long.join(', ')
+);
+ok(mobile.long.length === 0, `no long task over 50ms at 390px (${mobile.long.length})`, mobile.long.join(', '));
 await touchPage.close();
 
 /* --- 10. reduced motion ----------------------------------------------------- */

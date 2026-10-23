@@ -18,10 +18,10 @@ await p.waitForTimeout(1200);
 async function snap(tag) {
   return await p.evaluate(() => {
     const F = window.__field ?? {};
-    const sp = window.__fieldSpeeds ?? { node: [], star: [] };
+    const sp = window.__fieldSpeeds ?? { shape: [], star: [] };
     const pos = window.__fieldParticles ?? [];
     const disp = window.__fieldDisp ?? [];
-    const all = [...sp.star, ...sp.node];
+    const all = [...sp.star, ...sp.shape];
     const max = all.length ? Math.max(...all) : 0;
     const sorted = [...all].sort((a, b2) => a - b2);
     return {

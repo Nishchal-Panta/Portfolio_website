@@ -16,6 +16,7 @@
 
 <script>
   import { createField, MORPH_DEFAULT } from '../scripts/field';
+  import { onFrame, kick } from '../scripts/scheduler';
   import { startFallback, startTilt } from '../scripts/scroll';
   import { startSpecimen } from '../scripts/specimen';
   import { startDeeplink } from '../scripts/deeplink';
@@ -82,6 +83,9 @@
       targetMix = document.documentElement.getAttribute('data-theme') === 'light' ? 1 : 0;
       sinceMorph = 0;
       readPalette();
+      /* The ink the type is painted in is a token, so every cached colour is
+         now a colour the page no longer uses. */
+      scheduleRebuild();
       themeChangeCount++;
       lastThemeChange = new Date().toLocaleTimeString();
     }
@@ -100,6 +104,7 @@
         sinceMorph = 0;
       }
       readPalette();
+      scheduleRebuild();
     }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     // Eased with the site's own curve.
@@ -148,6 +153,9 @@
     let inView = true;
     let t0 = performance.now();
     let last = t0;
+    /* ?debug=1 turns on the overlay and everything that exists only to feed
+       it. Without it, the frame does none of that work. */
+    const debugOn = new URLSearchParams(window.location.search).has('debug');
 
       /* Live state for the ?debug=1 overlay: what the field actually decided,
          which is the only honest answer to "it does not work here". */
@@ -171,69 +179,35 @@
       const p = ease(sinceMorph / MORPH_DEFAULT);
       mix = mix + (targetMix - mix) * Math.min(1, p * 0.5 + dt * 4);
 
-      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      scrollFrac = Math.min(1, Math.max(0, scrollY / max));
+      /* The document can grow or shrink without a resize - a credential row
+         opening, a photograph finishing its decode - so the denominator of the
+         scroll fraction is refreshed a couple of times a second instead of
+         being read every frame. scrollHeight is a layout read; this was one of
+         the three layout reads this frame used to make. */
+      if (++sinceMeasure >= 120) {
+        sinceMeasure = 0;
+        docMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      }
+      scrollFrac = Math.min(1, Math.max(0, scrollY / docMax));
       fps = fps ? fps * 0.9 + (1 / Math.max(dt, 0.001)) * 0.1 : 1 / Math.max(dt, 0.001);
-      /* Measured text blocks: the actual bounding boxes of the headline, the
-         lede and the body copy. Measured rather than assumed, because using
-         the whole .page quieted almost everything instead of just the copy.
-         Read here, before anything needs it, so it is never in the temporal
-         dead zone. */
-      const boxes = measureTextBoxes();
-      const media = measureMedia();
+
+      /* The rectangles this frame draws against. Measured on rebuild, turned
+         into viewport coordinates here by subtraction: scrolling no longer
+         reads the document at all. */
+      fill();
 
       dbg.mode = targetMix > 0.5 ? 'constellation' : 'motes';
       dbg.scrollVel = Math.round(scrollVel);
       dbg.scrollDir = scrollDir > 0 ? 'down' : scrollDir < 0 ? 'up' : 'still';
-      dbg.textBoxes = boxes.length;
+      dbg.textBoxes = textBoxes.length;
       dbg.pointerXY = pointer ? Math.round(pointer.x) + ',' + Math.round(pointer.y) : '-';
       const st = field.stats();
-      /* Speeds are published for the speed assertion rather than sampled from
-         the canvas, which cannot distinguish a slow star from a fast one. */
-      const sp = field.speeds();
-      dbg.shapeSpeed = Math.max(0, ...sp.shape).toFixed(1);
-      dbg.starSpeed = Math.max(0, ...sp.star).toFixed(1);
       dbg.maxSpeed = st.maxSpeed.toFixed(1);
       dbg.influenced = st.influenced;
       dbg.onScreen = st.onScreen;
       dbg.born = st.born;
       dbg.retired = st.retired;
-      /* Which figures are out, by name, and the worst distance error inside
-         them: the two numbers that say the shapes are still rigid. */
-      const figs = field.shapes();
-      dbg.figures = figs.length;
-      dbg.constellations = figs.map((s) => s.name).join(' ');
-      dbg.shapeDev = (st.deviation * 100).toFixed(3) + '%';
-      /* Sampled layer positions and the measured text rectangles, published so
-         the parallax and contrast checks read real numbers. */
-      const layers = field.sampleLayers();
-      dbg.layers = layers;
-      dbg.boxes = boxes;
-      (window as unknown as { __textBoxes?: unknown }).__textBoxes = boxes;
-      const wnd = window as unknown as {
-        __fieldSpeeds?: unknown;
-        __fieldParticles?: unknown;
-        __fieldStarVel?: unknown;
-        __fieldStarPoints?: unknown;
-        __fieldStarHomes?: unknown;
-        __fieldDisp?: unknown;
-        __fieldCurl?: (x: number, y: number) => number;
-        __fieldFlow?: (x: number, y: number) => [number, number];
-        __fieldPointerXY?: unknown;
-        __shapes?: () => ReturnType<typeof field.shapes>;
-      };
-      wnd.__fieldSpeeds = sp;
-      wnd.__fieldParticles = field.positions();
-      wnd.__fieldStarVel = field.starVelocities();
-      wnd.__fieldStarPoints = field.starPoints();
-      wnd.__fieldStarHomes = field.starHomes();
-      wnd.__fieldDisp = field.disp();
-      wnd.__fieldPointerXY = dbg.pointerXY;
-      wnd.__fieldCurl = (x: number, y: number) => field.flowCurl(x, y);
-      wnd.__fieldFlow = (x: number, y: number) => field.flowSample(x, y);
-      wnd.__shapes = () => field.shapes();
       dbg.peakFlow = st.peakFlow;
-      dbg.influenced = st.influenced;
       dbg.mix = mix;
       dbg.fps = Math.round(fps);
       dbg.scroll = scrollFrac;
@@ -241,19 +215,39 @@
       dbg.lastThemeChange = lastThemeChange;
       dbg.themeChangeCount = themeChangeCount;
 
+      /* Everything from here down allocates: an array of every star's speed,
+         an array of figure records, a joined string of their names, a sampled
+         layer table. All of it exists for the ?debug=1 overlay and the probes,
+         none of it for the reader, so none of it runs unless someone asked for
+         the overlay by URL. */
+      if (debugOn) {
+        const sp = field.speeds();
+        dbg.shapeSpeed = Math.max(0, ...sp.shape).toFixed(1);
+        dbg.starSpeed = Math.max(0, ...sp.star).toFixed(1);
+        const figs = field.shapes();
+        dbg.figures = figs.length;
+        dbg.constellations = figs.map((s) => s.name).join(' ');
+        dbg.shapeDev = (st.deviation * 100).toFixed(3) + '%';
+        dbg.layers = field.sampleLayers();
+        dbg.boxes = textBoxes;
+      }
+
       field.draw({
         scroll: scrollY,
         scrollVel,
         pointerVel: { x: pvx, y: pvy },
         chapter: activeChapter(),
-        textBoxes: boxes,
-        avoid: boxes.concat(media),
+        textBoxes,
+        /* Text first, then photographs, in the order the placement pass has
+           always seen them. The array is filled in place: draw() reads it and
+           lets go again within the same call, so nothing here outlives the
+           frame that wrote it. */
+        avoid: avoidBoxes,
         pointer,
         pointerDown,
         time: (now - t0) / 1000,
         mix,
       });
-      requestAnimationFrame(frame);
     }
 
 
@@ -272,107 +266,450 @@
       if (Math.abs(pvy) < 0.2) pvy = 0;
     }
 
-    /**
-     * The bounding boxes the field must keep quiet behind, measured from the
-     * live layout and recomputed on resize and when the content changes.
-     */
-    function measureTextBoxes() {
-      const out: {
-        left: number;
-        top: number;
-        right: number;
-        bottom: number;
-        kind: 'large' | 'body';
-        colour: string;
-      }[] = [];
-      const push = (el: Element | null, kind: 'large' | 'body') => {
-        if (!el) return;
-        const r = el.getBoundingClientRect();
-        if (r.width < 40 || r.height < 8) return;
-        if (r.bottom < -200 || r.top > innerHeight + 200) return;
-        // The computed colour goes with the box: the legibility check measures
-        // real contrast, so it needs the real ink, not a guess at it.
-        const ink = getComputedStyle(el).color;
-        const probe = document.createElement('span');
-        probe.style.color = ink;
-        document.body.appendChild(probe);
-        const rgb = getComputedStyle(probe).color;
-        probe.remove();
-        out.push({ left: r.left, top: r.top, right: r.right, bottom: r.bottom, kind, colour: rgb });
-      };
-      push(document.querySelector('.opening h1'), 'large');
-      push(document.querySelector('.movement-title'), 'large');
-      push(document.querySelector('.chapter__title'), 'large');
-      push(document.querySelector('.opening__line'), 'body');
-      push(document.querySelector('.movement-lede'), 'body');
-      for (const el of document.querySelectorAll('.story-body > *')) push(el, 'body');
-      for (const el of document.querySelectorAll('.chapter__body > p')) push(el, 'body');
-      for (const el of document.querySelectorAll('.event__summary')) push(el, 'body');
-      /* The rail is a column of type of its own, and figures were being placed
-         across it. One box for the whole nav rather than one per link: it is
-         the same quieting rule, measured the same way, for the cost of one
-         element instead of nine. */
-      push(document.querySelector('.rail'), 'body');
-      return out;
+    /* ------------------------------------------------------- the box cache
+       The field needs two kinds of rectangle every frame: the type it has to
+       stay quiet behind, and the photographs it must not place a figure
+       across. Both were measured from the live layout on every single frame -
+       about nineteen thousand getBoundingClientRect calls a second on a page
+       that was not moving - and every text block also paid for a probe span
+       created, styled, computed and removed, which is what turned one frame
+       into seven forced layouts.
+
+       Both are measured once now: on resize, when the browser tells us the
+       body moved, when the theme changes the ink, when the album swaps a
+       photograph. Each frame turns what was cached into viewport coordinates
+       with arithmetic.
+
+       Three kinds of rectangle, because three things move in three ways:
+
+         layout    the element and everything above it are in flow. The box is
+                   taken from the offset chain, not from getBoundingClientRect:
+                   offsetTop is a LAYOUT metric, so it cannot see the reveal
+                   animation. A box captured mid-reveal would go on quieting
+                   the empty place the animation had the copy in, for as long
+                   as the cache lived, while the copy sat forty pixels away.
+         fixed     pinned to the window, so its viewport rectangle does not
+                   depend on the scroll position at all. Valid until the next
+                   rebuild.
+         stuck     a sticky ancestor moves the element with no layout change,
+                   and the offset chain - where the element would be if nothing
+                   were stuck - is therefore not what is painted. Those read
+                   live, but only while the nearest ancestor that is NOT stuck
+                   overlaps the window, so a page of pinned photographs still
+                   costs a handful of reads rather than fifty.
+
+       Two containers on this page are transformed by scroll rather than by
+       layout: .movement-head and .figure__frame, both carrying the ±1.8%
+       parallax drift. A box inside one keeps its container and reads that
+       container's rectangle once per frame, so the drift is followed exactly
+       instead of being frozen at whatever it was at rebuild. Everything else
+       has no transform at rest and is exact.
+
+       What a photograph gives up: the hover tilt, ±3.2°, is a transform on the
+       image itself. Its box is the untilted rectangle, a few pixels inside the
+       tilted one, and only ever used to keep a constellation off a face.
+    */
+
+    const DRIFT = '.movement-head, .figure__frame';
+
+    interface Box {
+      el: Element;
+      /** 0 = layout coordinates, 1 = fixed viewport, 2 = sticky, read live. */
+      mode: 0 | 1 | 2;
+      /** Photographs are read live after the layout filter; type is not. */
+      live: boolean;
+      kind: 'large' | 'body';
+      colour: string;
+      minW: number;
+      minH: number;
+      gutter: number;
+      dl: number;
+      dt: number;
+      dr: number;
+      db: number;
+      /** mode 2 only: the nearest non-sticky ancestor, in document coords. */
+      bl: number;
+      bt: number;
+      br: number;
+      bb: number;
+      /** mode 0 inside a drifting container: offset from that container. */
+      driftEl: Element | null;
+      ddl: number;
+      ddt: number;
+      ddr: number;
+      ddb: number;
+      /** Rewritten every frame, in viewport coordinates. */
+      left: number;
+      top: number;
+      right: number;
+      bottom: number;
     }
+
+    /**
+     * Where an element sits in the document according to layout, not paint.
+     *
+     * Blind to the reveal animation, to the parallax drift and to the hover
+     * tilt - which is precisely what a cached rectangle has to be blind to,
+     * because all three change while the box's layout does not.
+     */
+    function layoutRect(el: Element): { l: number; t: number; r: number; b: number } {
+      let x = 0;
+      let y = 0;
+      let n = el as HTMLElement;
+      for (;;) {
+        x += n.offsetLeft;
+        y += n.offsetTop;
+        const p = n.offsetParent as HTMLElement | null;
+        if (!p) break;
+        /* offsetLeft is measured from the offsetParent's padding box, so its
+           border has to be carried across when stepping out of it. */
+        x += p.clientLeft;
+        y += p.clientTop;
+        n = p;
+      }
+      return { l: x, t: y, r: x + (el as HTMLElement).offsetWidth, b: y + (el as HTMLElement).offsetHeight };
+    }
+
+    /**
+     * The colour the type is actually painted in.
+     *
+     * getComputedStyle already serialises <color> to rgb() in every engine
+     * that ships the field, so the probe span below - which used to run for
+     * every text block on every frame, and was the reason one frame could cost
+     * seven forced layouts - now only runs for a value that is not rgb() yet.
+     * It is kept because it is what guarantees the legibility check reads the
+     * real ink rather than a guess at it.
+     */
+    function inkOf(el: Element): string {
+      const ink = getComputedStyle(el).color;
+      if (/^rgba?\(/.test(ink)) return ink;
+      const probe = document.createElement('span');
+      probe.style.color = ink;
+      document.body.appendChild(probe);
+      const rgb = getComputedStyle(probe).color;
+      probe.remove();
+      return rgb;
+    }
+
+    let textCache: Box[] = [];
+    let mediaCache: Box[] = [];
+    /** This frame's type, viewport coordinates, in the order it was measured. */
+    const textBoxes: Box[] = [];
+    /** Type then photographs, for the placement pass. Filled in place. */
+    const avoidBoxes: Box[] = [];
+    let docMax = 1;
+    let sinceMeasure = 0;
+    let movements: number[] = [];
+    let railLinks: { el: HTMLElement; num: number }[] = [];
+
+    /* One record per drifting container, reused across frames so a frame that
+       reads three frames reads allocates nothing. */
+    const drift = new Map<Element, { l: number; t: number; r: number; b: number }>();
+    function driftRect(host: Element) {
+      let d = drift.get(host);
+      if (!d) {
+        const q = host.getBoundingClientRect();
+        d = { l: q.left, t: q.top, r: q.right, b: q.bottom };
+        drift.set(host, d);
+      }
+      return d;
+    }
+
+    function makeBox(
+      el: Element,
+      kind: 'large' | 'body',
+      role: 'text' | 'media',
+      minW: number,
+      minH: number,
+      gutter: number,
+      colour: string
+    ): Box {
+      const b: Box = {
+        el,
+        mode: 0,
+        live: role === 'media',
+        kind,
+        colour,
+        minW,
+        minH,
+        gutter,
+        dl: 0,
+        dt: 0,
+        dr: 0,
+        db: 0,
+        bl: 0,
+        bt: 0,
+        br: 0,
+        bb: 0,
+        driftEl: null,
+        ddl: 0,
+        ddt: 0,
+        ddr: 0,
+        ddb: 0,
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+      };
+
+      /* Fixed beats sticky beats layout: the walk decides which coordinate
+         system the numbers below even mean. */
+      let bound: Element | null = null;
+      for (let a: Element | null = el; a && a !== document.body; a = a.parentElement) {
+        const pos = getComputedStyle(a).position;
+        if (pos === 'fixed') {
+          b.mode = 1;
+          bound = null;
+          break;
+        }
+        if (pos === 'sticky') b.mode = 2;
+        else if (b.mode === 2 && !bound && a !== el) bound = a;
+      }
+
+      if (b.mode === 1) {
+        const q = el.getBoundingClientRect();
+        b.dl = q.left;
+        b.dt = q.top;
+        b.dr = q.right;
+        b.db = q.bottom;
+        return b;
+      }
+
+      if (b.mode === 0) {
+        const q = layoutRect(el);
+        b.dl = q.l;
+        b.dt = q.t;
+        b.dr = q.r;
+        b.db = q.b;
+        const host = role === 'text' ? el.closest(DRIFT) : null;
+        if (host) {
+          const c = layoutRect(host);
+          b.driftEl = host;
+          b.ddl = q.l - c.l;
+          b.ddt = q.t - c.t;
+          b.ddr = q.r - c.r;
+          b.ddb = q.b - c.b;
+        }
+        return b;
+      }
+
+      const c = layoutRect(bound ?? document.documentElement);
+      b.bl = c.l;
+      b.bt = c.t;
+      b.br = c.r;
+      b.bb = c.b;
+      return b;
+    }
+
+    /* The type the field quiets behind, exactly as it was selected before:
+       five single elements, three whole collections, one rail. */
+    const TEXT: [selector: string, kind: 'large' | 'body', all: boolean][] = [
+      ['.opening h1', 'large', false],
+      ['.movement-title', 'large', false],
+      ['.chapter__title', 'large', false],
+      ['.opening__line', 'body', false],
+      ['.movement-lede', 'body', false],
+      ['.story-body > *', 'body', true],
+      ['.chapter__body > p', 'body', true],
+      ['.event__summary', 'body', true],
+      ['.rail', 'body', false],
+    ];
 
     /* Photographs and diagrams. Kept out of the alpha calculation - only type
        gets the field dimmed behind it - but passed to placement, because a
        constellation drawn across someone's face reads as a bug. The element
-       list is static; only the rectangles are re-read. */
+       list is static; only the rectangles were ever re-read. */
     const MEDIA = Array.from(document.querySelectorAll('img, video, canvas'));
 
-    function measureMedia() {
-      const out: {
-        left: number;
-        top: number;
-        right: number;
-        bottom: number;
-        kind: 'large' | 'body';
-        colour: string;
-      }[] = [];
-      for (const el of MEDIA) {
-        const r = el.getBoundingClientRect();
-        if (r.width < 80 || r.height < 60) continue;
-        if (r.bottom < -240 || r.top > innerHeight + 240) continue;
-        out.push({
-          left: r.left,
-          top: r.top,
-          right: r.right,
-          bottom: r.bottom,
-          kind: 'body',
-          colour: 'rgb(0, 0, 0)',
-        });
+    function rebuild() {
+      const text: Box[] = [];
+      for (const [sel, kind, all] of TEXT) {
+        const found = document.querySelectorAll(sel);
+        if (!all) {
+          const first = found[0];
+          if (first) text.push(makeBox(first, kind, 'text', 40, 8, 200, inkOf(first)));
+          continue;
+        }
+        for (const el of found) text.push(makeBox(el, kind, 'text', 40, 8, 200, inkOf(el)));
       }
-      return out;
+      const media: Box[] = [];
+      for (const el of MEDIA)
+        media.push(makeBox(el, 'body', 'media', 80, 60, 240, 'rgb(0, 0, 0)'));
+
+      textCache = text;
+      mediaCache = media;
+
+      /* The rail's own link and the section centres, read once here rather
+         than with a query and a rectangle per frame. The aria-current state
+         still changes on scroll, so that part stays live - it is an attribute
+         read, not a layout read. */
+      railLinks = Array.from(document.querySelectorAll<HTMLElement>('.rail__link')).map(
+        (el) => {
+          const m = (el.textContent || '').match(/^(\d+)/);
+          return { el, num: m ? Number(m[1]) : -1 };
+        }
+      );
+      movements = Array.from(document.querySelectorAll<HTMLElement>('.movement[id]')).map(
+        (el) => {
+          const q = layoutRect(el);
+          return q.t + (q.b - q.t) / 2;
+        }
+      );
+
+      docMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    let rebuildQueued = false;
+    /** Rebuild after this frame's work, coalescing whatever queued it. */
+    function scheduleRebuild() {
+      if (rebuildQueued) return;
+      rebuildQueued = true;
+      requestAnimationFrame(() => {
+        rebuildQueued = false;
+        rebuild();
+      });
+    }
+
+    /** Publish the cached rectangles as this frame's viewport rectangles. */
+    function fill() {
+      const sy = scrollY;
+      const vh = window.innerHeight;
+      drift.clear();
+      avoidBoxes.length = 0;
+      let n = 0;
+      for (let i = 0; i < textCache.length; i++) {
+        const b = textCache[i];
+        if (viewportBox(b, sy, vh)) {
+          textBoxes[n++] = b;
+          avoidBoxes.push(b);
+        }
+      }
+      textBoxes.length = n;
+      for (let i = 0; i < mediaCache.length; i++) {
+        const b = mediaCache[i];
+        if (viewportBox(b, sy, vh)) avoidBoxes.push(b);
+      }
+    }
+
+    function viewportBox(b: Box, sy: number, vh: number): boolean {
+      let l: number;
+      let t: number;
+      let r: number;
+      let bo: number;
+
+      if (b.mode === 1) {
+        l = b.dl;
+        t = b.dt;
+        r = b.dr;
+        bo = b.db;
+      } else if (b.mode === 2) {
+        /* Stuck. The chain says where it would be if nothing were stuck, which
+           is not where it is. Bound it by an ancestor that is not stuck -
+           cheap, and it never wrongly excludes a pinned photograph - then read
+           the truth. */
+        if (b.bt - sy > vh + b.gutter || b.bb - sy < -b.gutter) return false;
+        const q = b.el.getBoundingClientRect();
+        l = q.left;
+        t = q.top;
+        r = q.right;
+        bo = q.bottom;
+      } else {
+        /* Only the vertical axis moves with the scroll: document coordinates
+           for x are viewport coordinates for x. Subtracting the scroll offset
+           from the horizontal edges too would slide every box off to the left
+           by the length of the journey down the page. */
+        t = b.dt - sy;
+        bo = b.db - sy;
+        if (t > vh + b.gutter || bo < -b.gutter) return false;
+        l = b.dl;
+        r = b.dr;
+        if (b.live) {
+          const q = b.el.getBoundingClientRect();
+          l = q.left;
+          t = q.top;
+          r = q.right;
+          bo = q.bottom;
+        } else if (b.driftEl) {
+          const d = driftRect(b.driftEl);
+          l = d.l + b.ddl;
+          t = d.t + b.ddt;
+          r = d.r + b.ddr;
+          bo = d.b + b.ddb;
+        }
+      }
+
+      if (r - l < b.minW || bo - t < b.minH) return false;
+      if (bo < -b.gutter || t > vh + b.gutter) return false;
+      b.left = l;
+      b.top = t;
+      b.right = r;
+      b.bottom = bo;
+      return true;
     }
 
     /** The chapter the rail is currently on, so density can shift per beat. */
     function activeChapter(): number {
-      const cur = document.querySelector<HTMLElement>('.rail__link[aria-current="true"], .rail__link[data-current="true"]');
-      if (cur) {
-        const m = (cur.textContent || '').match(/^(\d+)/);
-        if (m) return Number(m[1]);
+      for (const link of railLinks) {
+        if (
+          link.el.getAttribute('aria-current') !== 'true' &&
+          link.el.getAttribute('data-current') !== 'true'
+        )
+          continue;
+        /* The first link that claims to be current is the only one the old
+           querySelector would have returned, whether or not it could name a
+           chapter - and if it could not, the geometry below decided. */
+        if (link.num >= 0) return link.num;
+        break;
       }
       let best = 0;
       let bestD = Infinity;
       const mid = innerHeight / 2;
-      document.querySelectorAll<HTMLElement>('.movement[id]').forEach((s, i) => {
-        const r = s.getBoundingClientRect();
-        const d = Math.abs(r.top + r.height / 2 - mid);
-        if (d < bestD) { bestD = d; best = i; }
-      });
+      for (let i = 0; i < movements.length; i++) {
+        const d = Math.abs(movements[i] - scrollY - mid);
+        if (d < bestD) {
+          bestD = d;
+          best = i;
+        }
+      }
       return best;
     }
+
+    /* Probes read the field through window. These are getters rather than
+       assignments now: materialising an array of every star, every velocity
+       and every displacement on every frame, for tools that were not looking,
+       was most of what this pass existed to remove. */
+    const wnd = window as unknown as Record<string, unknown>;
+    Object.defineProperties(wnd, {
+      __textBoxes: { get: () => textBoxes, configurable: true },
+      __fieldSpeeds: { get: () => field.speeds(), configurable: true },
+      __fieldParticles: { get: () => field.positions(), configurable: true },
+      __fieldStarVel: { get: () => field.starVelocities(), configurable: true },
+      __fieldStarPoints: { get: () => field.starPoints(), configurable: true },
+      __fieldStarHomes: { get: () => field.starHomes(), configurable: true },
+      __fieldDisp: { get: () => field.disp(), configurable: true },
+      __fieldPointerXY: { get: () => dbg.pointerXY, configurable: true },
+      __fieldCurl: {
+        value: (x: number, y: number) => field.flowCurl(x, y),
+        configurable: true,
+      },
+      __fieldFlow: {
+        value: (x: number, y: number) => field.flowSample(x, y),
+        configurable: true,
+      },
+      __shapes: { value: () => field.shapes(), configurable: true },
+    });
 
     function play() {
       if (running) return;
       running = true;
       last = performance.now();
-      requestAnimationFrame(frame);
+      kick();
     }
     function pause() {
       running = false;
+    }
+    function onFocus() {
+      if (inView && !document.hidden) play();
     }
 
     document.addEventListener('visibilitychange', () => {
@@ -380,10 +717,39 @@
       else if (inView) play();
     });
 
-    /* Recompute the text boxes when the layout can have moved under them. */
-    const ro = new ResizeObserver(() => measureTextBoxes());
+    /* An unfocused window keeps running requestAnimationFrame, so a page left
+       alone behind another one would keep painting the sky at full rate for
+       nobody. Blur stops the loop outright; focus brings it back only if the
+       canvas is still on screen and the tab is still the one being looked at.
+       This is the same rule the pointer ring already follows. */
+    window.addEventListener('blur', pause);
+    window.addEventListener('focus', onFocus);
+
+    /* Rebuild only when the layout can actually have moved under the boxes.
+       Every one of these happens off-frame and is cheaper than re-reading a
+       hundred rectangles sixty times a second. */
+    const ro = new ResizeObserver(() => scheduleRebuild());
     ro.observe(document.body);
-    window.addEventListener('load', () => measureTextBoxes(), { once: true });
+    window.addEventListener('load', () => scheduleRebuild(), { once: true });
+    document.fonts?.ready.then(() => scheduleRebuild()).catch(() => {});
+    /* The lightbox locks and unlocks the page by touching the body, and that
+       takes the scrollbar away without resizing the window. Attributes only,
+       and not the subtree: nothing down there changes our rectangles. */
+    const bodyObserver = new MutationObserver(() => scheduleRebuild());
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+    /* The album changes which photograph is where with `hidden` and with
+       `style.order`. Neither moves the body, so the ResizeObserver never sees
+       it - and a stale photograph box would let a figure be placed across a
+       face the moment the conveyor stepped. Observed nodes keep their observer
+       alive, so it needs no reference of its own. */
+    const albumEl = document.querySelector('[data-album]');
+    if (albumEl) {
+      new MutationObserver(() => scheduleRebuild()).observe(albumEl, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['hidden', 'style'],
+      });
+    }
 
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -395,69 +761,115 @@
     );
     io.observe(canvas);
 
+    /* Measured before the first frame rather than on it, so the very first
+       draw already has real rectangles and a real chapter. */
+    rebuild();
+    const stopTask = onFrame({ wants: () => running, run: frame });
     play();
 
     return () => {
       pause();
+      stopTask();
       io.disconnect();
       ro.disconnect();
+      bodyObserver.disconnect();
       document.removeEventListener('themechange', onThemeChange);
       window.removeEventListener('resize', onResize);
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('blur', pause);
+      window.removeEventListener('focus', onFocus);
+      for (const key of [
+        '__textBoxes',
+        '__fieldSpeeds',
+        '__fieldParticles',
+        '__fieldStarVel',
+        '__fieldStarPoints',
+        '__fieldStarHomes',
+        '__fieldDisp',
+        '__fieldPointerXY',
+        '__fieldCurl',
+        '__fieldFlow',
+        '__shapes',
+      ])
+        delete wnd[key];
       canvas.remove();
     };
   }
 
   // -------------------------------------------------------------- the pen ring
-  function initPen() {
+  function initPen(): () => void {
     const pen = document.getElementById('pen');
-    if (!pen) return;
+    if (!pen) return () => {};
 
     let x = -999;
     let y = -999;
     let cx = -999;
     let cy = -999;
     let alive = false;
+    /* Whether the ring has ever been placed. A settled ring must NOT reset its
+       position on the next move - that would teleport it instead of easing it
+       - but one waking up after a pointerleave or a blur must, exactly as it
+       always has. */
+    let placed = false;
 
     const INTERACTIVE =
       'a, button, summary, [tabindex]:not([tabindex="-1"]), input, textarea, select, label';
 
     function loop() {
-      if (!alive) return;
       cx += (x - cx) * 0.16;
       cy += (y - cy) * 0.16;
+      /* The ring eases toward the pointer and then stops. It used to keep
+         requesting frames long after the pointer had stopped moving, writing
+         the same transform over and over: a second loop running to do
+         nothing. A twentieth of a pixel is under the one-decimal step the
+         transform is written at, so stopping here is indistinguishable from
+         carrying on - and the pointer's next move eases from where it settled
+         rather than jumping. */
+      if (Math.abs(x - cx) < 0.05 && Math.abs(y - cy) < 0.05) {
+        cx = x;
+        cy = y;
+        alive = false;
+      }
       pen.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0)`;
-      requestAnimationFrame(loop);
     }
 
     function stop() {
       alive = false;
+      placed = false;
       pen.setAttribute('data-ready', 'false');
     }
 
-    window.addEventListener(
-      'pointermove',
-      (e: PointerEvent) => {
-        if (e.pointerType !== 'mouse') return;
-        x = e.clientX;
-        y = e.clientY;
-        pen.setAttribute('data-ready', 'true');
-        const over = !!(e.target as Element | null)?.closest?.(INTERACTIVE);
-        pen.setAttribute('data-over', String(over));
-        if (!alive) {
-          alive = true;
+    const offTask = onFrame({ wants: () => alive, run: loop });
+
+    const onPenMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      x = e.clientX;
+      y = e.clientY;
+      pen.setAttribute('data-ready', 'true');
+      const over = !!(e.target as Element | null)?.closest?.(INTERACTIVE);
+      pen.setAttribute('data-over', String(over));
+      if (!alive) {
+        if (!placed) {
           cx = x;
           cy = y;
-          loop();
+          placed = true;
         }
-      },
-      { passive: true }
-    );
+        alive = true;
+        kick();
+      }
+    };
+    window.addEventListener('pointermove', onPenMove, { passive: true });
     document.addEventListener('pointerleave', stop, { passive: true });
     window.addEventListener('blur', stop);
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stop();
     });
+
+    return () => {
+      stop();
+      offTask();
+      window.removeEventListener('pointermove', onPenMove);
+    };
   }
 
   // ------------------------------------------------------------------- decide
@@ -465,10 +877,11 @@
   const wantsPen = !reduced.matches && finePointer.matches && !lowPower;
 
   let teardown = () => {};
+  let teardownPen = () => {};
   if (wantsField) teardown = initField();
   else document.getElementById('motes')?.remove();
 
-  if (wantsPen) initPen();
+  if (wantsPen) teardownPen = initPen();
   else document.getElementById('pen')?.remove();
 
   if (!reduced.matches && !lowPower) startTilt();
@@ -487,6 +900,7 @@
   reduced.addEventListener('change', (e) => {
     if (!e.matches) return;
     teardown();
+    teardownPen();
     document.getElementById('motes')?.remove();
     document.getElementById('pen')?.remove();
   });

@@ -1,14 +1,14 @@
 /**
  * The step, captured at the browser's frame rate.
  *
- * The brief asks for twelve frames 50ms apart through a single step.
- * Screenshotting the element cannot do that: one element.screenshot() takes
- * longer than the whole 500ms step, so the very first frame already shows the
- * end state and the sheet proves nothing about the slide.
+ * The brief asks for twelve frames spread across a single step. Screenshotting
+ * the element cannot do that: one element.screenshot() takes longer than the
+ * whole 350ms step, so the very first frame already shows the end state and
+ * the sheet proves nothing about the slide.
  *
  * CDP screencast sidesteps it - the browser composites and streams frames on
- * its own clock, and this just collects them. Twelve frames at ~50ms are
- * selected afterwards by nearest-timestamp.
+ * its own clock, and this just collects them. Twelve frames are selected
+ * afterwards by nearest-timestamp, roughly 30ms apart.
  *
  * What it is for: seeing whether the outgoing photograph leaves to the left
  * while the other two slide into place and the next one enters from the
@@ -78,10 +78,10 @@ if (frames.length < 4) {
 }
 
 // Twelve frames evenly spread across the capture, which begins just before
-// the click and runs past the end of the 500ms step - 50ms apart, which is
-// the interval the brief asks for.
-const START = 100; // ms after the click - just before the first frame moves
-const SPAN = 550; // 12 frames at 50ms
+// the click and runs past the end of the 350ms step - about 30ms apart, so
+// twelve of them cover the whole slide rather than overrunning it.
+const START = 40; // ms after the click - just before the first frame moves
+const SPAN = 330; // 12 frames across the 350ms slide
 const chosen = [];
 for (let i = 0; i < 12; i++) {
   const want = t0 - frames[0].ts + START + (SPAN * i) / 11;

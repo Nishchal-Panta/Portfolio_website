@@ -52,6 +52,10 @@ if (start < 0 || end < 0) {
 }
 const album = html.slice(start, end + '</section>'.length);
 
+/* The number of photographs, counted out of the markup rather than assumed:
+   everything below that is about the loop is against this. */
+const ALBUM_SIZE_LIT = [...album.matchAll(/<figure class="album__figure"[^>]*>/g)].length;
+
 console.log('album');
 
 /* --- 1. what must be gone ------------------------------------------------ */
@@ -167,7 +171,57 @@ if (fs.existsSync(noJs)) {
   ok(/\.album__arrow\s*\{[^}]*display:\s*none/.test(noJsCss), 'the no-JS sheet switches the arrows off');
 }
 
-/* --- 6. what each photograph costs --------------------------------------- */
+/* --- 6. the timings the design asks for ----------------------------------- */
+
+/* These are read out of the module that ships rather than measured, because
+   measuring a 1.4s interval a dozen times belongs in the browser suite. What
+   belongs here is the thing a browser suite cannot catch: the constants
+   drifting back out of band while nobody is watching the probe. */
+const albumTs = (() => {
+  const p = path.join(ROOT, 'src', 'scripts', 'album.ts');
+  return fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '';
+})();
+const constant = (name) => Number(albumTs.match(new RegExp(`const ${name} = ([\\d.]+)`))?.[1]);
+
+const STEP = constant('STEP_MS');
+const TICK_MIN = constant('TICK_MIN');
+const TICK_JITTER = constant('TICK_JITTER');
+const FIRST_TICK = constant('FIRST_TICK_MS');
+const VISIBLE_RATIO = constant('VISIBLE_RATIO');
+const WARM_MARGIN = constant('WARM_MARGIN_PX');
+const WARM_AHEAD = constant('WARM_AHEAD');
+
+ok(albumTs.length > 0, 'the conveyor module is readable');
+ok(
+  STEP >= 300 && STEP <= 400,
+  `the slide is ${STEP}ms, inside 300-400ms`
+);
+ok(
+  TICK_MIN >= 1300 && TICK_MIN <= 1600 && TICK_MIN + TICK_JITTER <= 1600,
+  `the interval is ${TICK_MIN}-${TICK_MIN + TICK_JITTER}ms, inside 1300-1600ms`
+);
+ok(
+  FIRST_TICK > 0 && FIRST_TICK <= 300,
+  `the first step begins ${FIRST_TICK}ms after arriving, inside 300ms`
+);
+ok(VISIBLE_RATIO >= 0.2 && VISIBLE_RATIO <= 0.3, `a quarter of the section starts it (${VISIBLE_RATIO})`);
+ok(WARM_MARGIN === 800 && WARM_AHEAD === 6, `warm-up is 6 photographs, 800px out (${WARM_AHEAD} at ${WARM_MARGIN}px)`);
+
+/* The finished loop: thirteen photographs, one step each, at the interval the
+   constants ask for - which is what puts every photograph on screen inside
+   about twenty seconds. */
+const LOOP_S = (ALBUM_SIZE_LIT * (TICK_MIN + TICK_JITTER / 2)) / 1000;
+ok(
+  LOOP_S >= 17 && LOOP_S <= 21,
+  `one loop of 13 photographs takes ${LOOP_S.toFixed(1)}s (about 20s) - every photograph is on screen within it`
+);
+const ON_SCREEN_S = (3 * (TICK_MIN + TICK_JITTER / 2)) / 1000;
+ok(
+  ON_SCREEN_S >= 3,
+  `each photograph is on screen about ${ON_SCREEN_S.toFixed(1)}s across its three steps (at least 3s)`
+);
+
+/* --- 7. what each photograph costs --------------------------------------- */
 
 /* The `sizes` promise decides which derivative the browser fetches, so the
    budget is checked against the candidate it would actually pick: the smallest
