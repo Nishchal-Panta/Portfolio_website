@@ -48,6 +48,16 @@ export interface Frame {
   pointerVel: { x: number; y: number };
   pointerDown: boolean;
   time: number;
+  /**
+   * The real duration of the frame that produced this one, in seconds.
+   *
+   * `scrollVel` and `pointerVel` above are per-frame displacements, and turning
+   * a displacement into a rate needs the length of the frame it happened over.
+   * Without this the conversion can only assume 60Hz, which is what
+   * `scrollVel * 60` did. Supplied by the caller so the field never has to
+   * infer it from its own simulation clock.
+   */
+  dt?: number;
   /** 0 = sky, 1 = constellation. Eased by the caller. */
   mix: number;
   textBoxes: TextBox[];
@@ -449,6 +459,27 @@ class Flow {
 
 const POINTER_RADIUS = 210;
 const SCROLL_TAU = 0.15;
+
+/**
+ * How a per-frame displacement becomes a rate: `?scrollmode=rate`.
+ *
+ * The default, `frame`, is the original behaviour - multiply by a constant 60,
+ * which is only correct when the frame really is 1/60s. `rate` divides by the
+ * frame's measured duration instead. At 60Hz the two are the same arithmetic
+ * (`x / (1/60) === x * 60`), so `frame` changes nothing on a 60Hz panel and the
+ * modes can only differ on a display that is not 60Hz.
+ *
+ * Read once at module load, not per frame, so an absent parameter leaves the
+ * `frame` path exactly as it was and costs one query-string parse. It stays on
+ * `frame` deliberately: which one looks right on a high-refresh display is a
+ * judgement to be made by eye, not here.
+ */
+const RATE_MODE =
+  typeof window !== 'undefined' &&
+  new URLSearchParams(window.location.search).get('scrollmode') === 'rate';
+
+/** The refresh rate the old constant 60 assumed, named so both modes share it. */
+const ASSUMED_HZ = 60;
 const STAR_CAP = 110;
 const NODE_CAP = 90;
 /** The active cap eases with the morph, so a theme change mid-flight is smooth. */
@@ -1542,7 +1573,10 @@ export function createField(
       /* Scroll velocity, low-passed over about 150ms, soft clamped, then
          applied as *screen* velocity. A fast flick eases in and out rather than
          throwing the sky past the window. */
-      const raw = f.scrollVel * 60;
+      /* Displacement -> rate. `frame` is the original `* 60`; `rate` uses the
+         frame's real duration. Identical at 60Hz, divergent anywhere else. */
+      const frameSeconds = f.dt && f.dt > 0 ? f.dt : 1 / ASSUMED_HZ;
+      const raw = RATE_MODE ? f.scrollVel / frameSeconds : f.scrollVel * ASSUMED_HZ;
       scrollFilt += (raw - scrollFilt) * (1 - Math.exp((-steps * dt) / SCROLL_TAU));
       const screenVel = softClamp(scrollFilt, 900);
 
@@ -1550,8 +1584,8 @@ export function createField(
          happens once - doing it per catch-up step would stir harder exactly
          when the browser is already struggling. */
       if (flow) {
-        const pvx = f.pointerVel.x * 60;
-        const pvy = f.pointerVel.y * 60;
+        const pvx = RATE_MODE ? f.pointerVel.x / frameSeconds : f.pointerVel.x * ASSUMED_HZ;
+        const pvy = RATE_MODE ? f.pointerVel.y / frameSeconds : f.pointerVel.y * ASSUMED_HZ;
         const sp = Math.hypot(pvx, pvy);
         if (f.pointer && sp > 1) {
           flow.inject(f.pointer.x, f.pointer.y, softClamp(pvx, 320), softClamp(pvy, 320), POINTER_RADIUS);

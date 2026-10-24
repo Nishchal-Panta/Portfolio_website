@@ -651,8 +651,6 @@ const onFocus = await page.evaluate(() => ({
 ok(parseFloat(onFocus.opacity) > 0.95, `keyboard focus brings them up (opacity ${onFocus.opacity})`);
 ok(onFocus.focusWithin, 'via :focus-within on the album');
 
-// And they step. The trio after one forward step is the previous trio shifted
-// by one, with the photograph after the trio's last entering at the right.
 const trioOf = () =>
   page.evaluate(() =>
     [...document.querySelectorAll('.album__figure')]
@@ -660,7 +658,10 @@ const trioOf = () =>
       .sort((a, b) => Number(a.dataset.slot) - Number(b.dataset.slot))
       .map((f) => Number(f.dataset.i))
   );
-const oneForward = (t) => [t[1], t[2], (t[2] + 1) % ALBUM_SIZE];
+// And they step. The row after one forward step is the previous row shifted by
+// one, with the photograph after its last entering at the right - the same
+// rule whether the row is three photographs wide or, on a phone, one.
+const oneForward = (t) => [...t.slice(1), (t[t.length - 1] + 1) % ALBUM_SIZE];
 
 const beforeArrow = await trioOf();
 await page.locator('[data-album-next]').click();
@@ -1025,6 +1026,34 @@ await touchPage.evaluate(() => document.activeElement?.blur());
 await touchPage.mouse.move(4, 4);
 await touchPage.waitForTimeout(500);
 
+/* One photograph, not three: the row is one wide at this width, and its height
+   is the row's own width over the widest original in the album (1.78, the
+   1000x562 frame). Nothing may be wider than the row it stands in. */
+const phoneGeo = await touchPage.evaluate(() => {
+  const row = document.querySelector('[data-album-row]');
+  const figs = [...row.querySelectorAll('.album__figure')].filter(
+    (f) => !f.hidden && !f.classList.contains('is-leaving')
+  );
+  const rr = row.getBoundingClientRect();
+  return {
+    shown: figs.length,
+    rowW: rr.width,
+    rowH: rr.height,
+    widest: Math.max(...figs.map((f) => f.getBoundingClientRect().width)),
+    heights: new Set(figs.map((f) => Math.round(f.getBoundingClientRect().height))).size,
+  };
+});
+ok(phoneGeo.shown === 1, `one photograph on the row at a time (${phoneGeo.shown})`);
+ok(
+  phoneGeo.widest <= phoneGeo.rowW + 1,
+  `and it fits inside the row (${phoneGeo.widest.toFixed(0)}px of ${phoneGeo.rowW.toFixed(0)}px)`
+);
+ok(phoneGeo.heights === 1, `the row is one height (${phoneGeo.heights})`);
+ok(
+  Math.abs(phoneGeo.rowH - phoneGeo.rowW / 1.78) < 1.5,
+  `the height is the row's width over 1.78 (${phoneGeo.rowH.toFixed(0)}px)`
+);
+
 const mobile = await touchPage.evaluate(async () => {
   const root = document.querySelector('[data-album]');
   const long = [];
@@ -1082,6 +1111,46 @@ ok(
   mobile.long.join(', ')
 );
 ok(mobile.long.length === 0, `no long task over 50ms at 390px (${mobile.long.length})`, mobile.long.join(', '));
+
+/* Dragged across the breakpoint with the row on screen - the one thing the
+   stylesheet cannot do for the script. Three photographs left standing in a
+   one-photograph row would overflow it, and one left in a three-photograph row
+   would look broken, so the window is widened and narrowed here the way a
+   reader dragging it would. */
+const readRow = () =>
+  touchPage.evaluate(() => {
+    const row = document.querySelector('[data-album-row]');
+    const figs = [...row.querySelectorAll('.album__figure')].filter(
+      (f) => !f.hidden && !f.classList.contains('is-leaving')
+    );
+    const r = row.getBoundingClientRect();
+    return {
+      shown: figs.length,
+      w: r.width,
+      h: r.height,
+      widest: Math.max(...figs.map((f) => f.getBoundingClientRect().width)),
+    };
+  });
+await touchPage.setViewportSize({ width: 1100, height: 844 });
+await touchPage.waitForTimeout(400);
+const wide = await readRow();
+ok(wide.shown === 3, `widened past 48rem the row carries three again (${wide.shown})`);
+ok(
+  wide.widest <= wide.w + 1,
+  `and all three fit it (${wide.widest.toFixed(0)}px of ${wide.w.toFixed(0)}px)`
+);
+ok(
+  Math.abs(wide.h - wide.w / 5.05) < 1.5,
+  `at the wide stage's own height (${wide.h.toFixed(0)}px, want ${(wide.w / 5.05).toFixed(0)})`
+);
+await touchPage.setViewportSize({ width: 390, height: 844 });
+await touchPage.waitForTimeout(400);
+const narrow = await readRow();
+ok(narrow.shown === 1, `and narrowed back to one photograph (${narrow.shown})`);
+ok(
+  narrow.widest <= narrow.w + 1,
+  `fitted to that row (${narrow.widest.toFixed(0)}px of ${narrow.w.toFixed(0)}px)`
+);
 await touchPage.close();
 
 /* --- 10. reduced motion ----------------------------------------------------- */

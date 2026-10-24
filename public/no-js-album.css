@@ -5,10 +5,12 @@
    byte when the album is running.
 
    The markup ships thirteen photographs with only the first three shown: that
-   is what makes the first paint exactly the conveyor's geometry, so the page
-   never reflows when the script takes over. Without script the same markup is
-   switched back to a plain wrapping gallery - every photograph visible, in
-   album order, each one a real link to the full-size image.
+   is what makes the first paint exactly the conveyor's geometry on a stage
+   wide enough for three, and on a phone - where the row is one photograph wide
+   - album.css holds two more of them back until the script arrives. Either
+   way the page never reflows when the script takes over. Without script the
+   same markup is switched back to a plain wrapping gallery - every photograph
+   visible, in album order, each one a real link to the full-size image.
 
    The arrows are switched off here as well. They are visible controls for a
    row that no longer moves, and leaving them painted would be a promise the
@@ -31,8 +33,15 @@
 
 /* One wrapping gallery rather than one fixed line: the same figures, the same
    photographs at their own proportions, allowed as many lines as the row
-   needs. Fixed heights, natural widths - no crop, no stretch. */
-.album__row {
+   needs. Fixed heights, natural widths - no crop, no stretch.
+
+   `.album` on the front is what makes this hold: the row's height is a plain
+   `.album__row` rule in both sheets, so at a specificity of one the winner
+   would be whichever <link> landed later - and the one that landed later was
+   the conveyor's, with a fixed height. A wrapped gallery inside a one-line
+   box does not clip, it paints over whatever the section is standing on, so
+   this has to win at every width, not just at the one it was written for. */
+.album .album__row {
   height: auto;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -49,14 +58,20 @@
   height: calc(100cqw / 5.05);
 }
 
+/* With script, album.css holds every photograph after the first back on a
+   phone: that row is one photograph wide, so one is what its first paint shows.
+   There is no conveyor here, so all thirteen come back. The selector is longer
+   than the job needs on purpose - it has to outrank that rule whichever order
+   the two stylesheets land in, and they are both <link>s in the head. */
+.album[data-album]:not([data-js]) .album__row .album__figure {
+  display: block;
+}
+
 @media (max-width: 48rem) {
   .album .album__figure {
-    height: calc((100cqw - 12px) / 3.35);
-  }
-
-  /* The break element only exists to end slot 0's line on a phone, and there
-     are no slots here. */
-  .album__break {
-    display: none;
+    /* The phone's row is one photograph wide, so its height is the row's own
+       width over the widest original in the album - the conveyor's rule, so a
+       photograph is the same size with or without script. */
+    height: calc(100cqw / 1.78);
   }
 }

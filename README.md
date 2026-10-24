@@ -130,15 +130,19 @@ it will serve its own default page instead.
 
 ## Contact form
 
-The form posts to an API Gateway URL that is currently **empty on purpose**.
-Set it in `src/components/ContactForm.astro`:
+The form posts to an API Gateway URL that is resolved at build time by
+`src/config.local.ts`, in this order:
 
-```js
-const endpoint = 'https://<api-id>.execute-api.<region>.amazonaws.com/contact';
-```
+1. `PUBLIC_CONTACT_ENDPOINT`, set in CI from the GitHub repository variable
+   `CONTACT_ENDPOINT` - so a hosted build works with no local file present.
+2. `invokeURL` in `config.js` at the project root (gitignored, never committed)
+   - so a local build works without touching GitHub settings.
 
-No credential is ever placed in the front end. The endpoint is a public URL;
-the function is protected by the spam controls below.
+`npm run sync:vars` is the bridge: it copies `config.js` into those repository
+variables, so CI has what it needs while the file stays local. Only the
+endpoint reaches the page, and only as a `data-endpoint` attribute; no
+credential is ever placed in the front end. The function is protected by the
+spam controls below.
 
 `lambda_function.js` validates server-side regardless of what the client did:
 

@@ -1,12 +1,13 @@
 /**
  * The album's conveyor.
  *
- * Three photographs are on the row at a time, in the order the files are
- * named. Every step the leftmost leaves to the left, the other two slide into
- * its place and the next one in the order enters from the right - round the
- * end of the album and back to the first. There is no shuffle bag and no
- * random order anywhere: the sequence is the data's own, so nothing repeats
- * inside a loop and the loop is exactly as long as the album.
+ * The row carries three photographs at a time on a stage wide enough for
+ * three, and one on a phone, in the order the files are named. Every step the
+ * leftmost leaves to the left, the others slide into its place and the next
+ * one in the order enters from the right - round the end of the album and back
+ * to the first. There is no shuffle bag and no random order anywhere: the
+ * sequence is the data's own, so nothing repeats inside a loop and the loop is
+ * exactly as long as the album.
  *
  * It runs only while the section is on screen. A quarter of the section
  * visible starts it, arriving starts it at once rather than after an interval,
@@ -15,13 +16,14 @@
  * photographs are decoded so the opening steps never hitch, and nothing is
  * prepared earlier than that.
  *
- * A step is a FLIP. Measure where the three are, apply the new order, measure
- * where they have landed, then play the difference as a transform. Only
- * transform and opacity are ever animated, and the row's height is a fraction
- * of its own width rather than a function of which photographs are in it, so
- * a step cannot move the layout at all: no layout is invalidated, which is
- * what keeps the background field's frame rate up while the row is moving.
- * `will-change` is on for the length of a step and taken off again.
+ * A step is a FLIP. Measure where the row's photographs are, apply the new
+ * order, measure where they have landed, then play the difference as a
+ * transform. Only transform and opacity are ever animated, and the row's
+ * height is a fraction of its own width rather than a function of which
+ * photographs are in it, so a step cannot move the layout at all: no layout is
+ * invalidated, which is what keeps the background field's frame rate up while
+ * the row is moving. `will-change` is on for the length of a step and taken
+ * off again.
  */
 
 const STEP_MS = 350; // inside the 300-400ms the design asks for
@@ -75,16 +77,25 @@ function wire(root: HTMLElement): void {
   );
   if (photos.length < 3) return;
 
-  /* The script is live from here. The opening three are already the only
-     visible ones in the markup, so this first pass adds their slots and
-     orders and changes nothing a reader can see. */
+  /* The script is live from here. The opening photographs are already the only
+     visible ones - three in the markup, one of them on a phone, which is what
+     the stylesheet has been saying since the first paint - so this first pass
+     adds their slots and orders and changes nothing a reader can see. */
   root.setAttribute('data-js', '');
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const n = photos.length;
 
+  /* How many photographs the row carries at a time: three on a stage wide
+     enough for three, one on a phone - where at the three-up height the widest
+     of them would be about a third of the row, which is too small to read.
+     The breakpoint is the stylesheet's own (48rem, where the row's height
+     changes divisor), so the two cannot disagree about what the row holds. */
+  const oneUp = window.matchMedia('(max-width: 48rem)');
+  let slots = oneUp.matches ? 1 : 3;
+
   /* The whole of the state: which photograph is in slot 0. Everything else -
-     which three are on the row, and in what order - follows from it. */
+     which photographs are on the row, and in what order - follows from it. */
   let start = 0;
   let busy = false;
   let timer = 0;
@@ -121,7 +132,7 @@ function wire(root: HTMLElement): void {
     start = (((nextStart % n) + n) % n);
     photos.forEach((p, i) => {
       const slot = (((i - start) % n) + n) % n;
-      if (slot < 3) {
+      if (slot < slots) {
         p.figure.hidden = false;
         p.figure.dataset.slot = String(slot);
         p.figure.style.order = String(slot * 10);
@@ -139,7 +150,7 @@ function wire(root: HTMLElement): void {
    *  has scrolled past is work nobody asked for. */
   const preload = (): void => {
     if (!onScreen) return;
-    for (let ahead = 3; ahead < 3 + PRELOAD; ahead++) {
+    for (let ahead = slots; ahead < slots + PRELOAD; ahead++) {
       const img = photos[indexAt(ahead)].img;
       if (img.loading === 'lazy') img.loading = 'eager';
       decode(img);
@@ -183,7 +194,7 @@ function wire(root: HTMLElement): void {
 
   /** Wait for a photograph to be ready to draw, but never for long: a row that
    *  has stopped is worse than one that steps onto a photograph still
-   *  arriving, and the three ahead are normally already decoded. */
+   *  arriving, and the photographs ahead are normally already decoded. */
   const settle = async (img: HTMLImageElement): Promise<void> => {
     if (img.complete && img.naturalWidth > 0) return;
     if (img.loading === 'lazy') img.loading = 'eager';
@@ -210,8 +221,8 @@ function wire(root: HTMLElement): void {
        exactly what re-entry should feel like. */
     if (!announce && !onScreen) return;
 
-    const leaving = photos[indexAt(dir > 0 ? 0 : 2)];
-    const incoming = photos[(((dir > 0 ? start + 3 : start - 1) % n) + n) % n];
+    const leaving = photos[indexAt(dir > 0 ? 0 : slots - 1)];
+    const incoming = photos[(((dir > 0 ? start + slots : start - 1) % n) + n) % n];
     const mine = epoch;
     await settle(incoming.img);
     // The reader may have hovered, focused something, hidden the tab or
@@ -233,11 +244,11 @@ function wire(root: HTMLElement): void {
     let exit = '';
 
     if (!instant) {
-      /* Read once, before anything moves: where the three are, and where the
-         row is. Nothing is read again until the step is over. */
+      /* Read once, before anything moves: where the row's photographs are, and
+         where the row is. Nothing is read again until the step is over. */
       const stageBox = stage.getBoundingClientRect();
       const before = new Map<number, DOMRect>();
-      for (let slot = 0; slot < 3; slot++) {
+      for (let slot = 0; slot < slots; slot++) {
         const p = photos[indexAt(slot)];
         before.set(p.index, p.figure.getBoundingClientRect());
       }
@@ -254,13 +265,19 @@ function wire(root: HTMLElement): void {
       leaving.figure.style.margin = '0';
       leaving.figure.style.zIndex = '2';
       animating.push(leaving.figure);
-      exit = dir > 0 ? `${-(leaveBox.width + GAP)}px` : `${leaveBox.width + GAP}px`;
+      /* How far it slides: its own width plus the gap, which on a three-up
+         row is the distance from the row's edge to off the end of it. A
+         one-up row is centred, so there the distance is measured off the
+         stage instead - the photograph has to clear the stage, and its own
+         width is not that distance when it starts in the middle. */
+      const travel = slots === 1 ? leaveBox.right - stageBox.left + GAP : leaveBox.width + GAP;
+      exit = dir > 0 ? `${-travel}px` : `${travel}px`;
 
       // The new order, and where it lands.
       layout(start + dir, [leaving.index]);
 
       const after = new Map<number, DOMRect>();
-      for (let slot = 0; slot < 3; slot++) {
+      for (let slot = 0; slot < slots; slot++) {
         const p = photos[indexAt(slot)];
         after.set(p.index, p.figure.getBoundingClientRect());
         if (p.index !== leaving.index) animating.push(p.figure);
@@ -268,7 +285,7 @@ function wire(root: HTMLElement): void {
 
       // Invert: every photograph that moves is put back where it was, and the
       // one arriving starts outside the row on the side it comes from.
-      for (let slot = 0; slot < 3; slot++) {
+      for (let slot = 0; slot < slots; slot++) {
         const p = photos[indexAt(slot)];
         if (p.index === leaving.index) continue;
         const now = after.get(p.index) as DOMRect;
@@ -301,7 +318,7 @@ function wire(root: HTMLElement): void {
       }
       leaving.figure.style.transform = `translate3d(${exit}, 0, 0)`;
       leaving.figure.style.opacity = '0';
-      for (let slot = 0; slot < 3; slot++) {
+      for (let slot = 0; slot < slots; slot++) {
         const p = photos[indexAt(slot)];
         if (p.index === leaving.index) continue;
         p.figure.style.transform = 'translate3d(0, 0, 0)';
@@ -593,6 +610,19 @@ function wire(root: HTMLElement): void {
   row.addEventListener('pointercancel', () => (swiping = false), { passive: true });
 
   reduced.addEventListener?.('change', sync);
+
+  /* A reader who drags the window across 48rem gets the row that breakpoint
+     describes - three photographs or one, whichever the stage now has room
+     for. The row is re-laid out where it is, at the same start, so nothing
+     the timer was doing is lost. */
+  const onSplit = (): void => {
+    const next = oneUp.matches ? 1 : 3;
+    if (next === slots) return;
+    slots = next;
+    layout(start);
+    preload();
+  };
+  oneUp.addEventListener?.('change', onSplit);
 
   /* --- go ------------------------------------------------------------------- */
 

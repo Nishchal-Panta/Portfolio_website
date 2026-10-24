@@ -411,10 +411,19 @@ const scrollCarry = async (label, pxPerSec) => {
     speed: Number(window.__field?.maxSpeed ?? 0),
   }));
   const samples = [];
-  const until = Date.now() + 1500;
-  let y = 0;
+  const t0 = Date.now();
+  const until = t0 + 1500;
+  let lastY = 0;
+  /* Driven from real elapsed time, not an assumed 16.7ms per iteration. This
+     loop's period is set by the evaluate round-trip plus waitForTimeout, not by
+     the display, so a fixed increment made the scroll speed a function of
+     round-trip latency while reporting pxPerSec. Position is now a pure
+     function of wall clock, so the rate is exactly pxPerSec whatever the loop
+     costs - the achieved speed is recorded below so the claim is measured
+     rather than assumed. */
   while (Date.now() < until) {
-    y += (pxPerSec * 16.7) / 1000;
+    const y = (pxPerSec * (Date.now() - t0)) / 1000;
+    lastY = y;
     await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: 'instant' }), y);
     await page.waitForTimeout(16);
     samples.push(
@@ -425,6 +434,10 @@ const scrollCarry = async (label, pxPerSec) => {
       }))
     );
   }
+  /* The loop reports pxPerSec; this is what it actually achieved, so the fix
+     can be shown rather than asserted. */
+  const elapsedMs = Date.now() - t0;
+  const achieved = lastY / (elapsedMs / 1000);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   await page.waitForTimeout(1400);
   const after = await page.evaluate(() => ({
@@ -436,6 +449,10 @@ const scrollCarry = async (label, pxPerSec) => {
     { peak: 0, infl: 0, speed: 0 }
   );
   console.log(`\nscroll carry @${label}`);
+  console.log(
+    `  scroll rate  asked ${pxPerSec}px/s, achieved ${achieved.toFixed(0)}px/s over ${elapsedMs}ms` +
+      ` (${((achieved / pxPerSec - 1) * 100).toFixed(1)}% off)`
+  );
   console.log(
     `  at rest   peak flow ${atRest.peak.toFixed(1)}px/s  influenced ${atRest.infl}  fastest ${atRest.speed.toFixed(1)}px/s`
   );

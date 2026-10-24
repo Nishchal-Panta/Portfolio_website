@@ -3,11 +3,12 @@ import { getImage, Picture } from 'astro:assets';
 import { album } from '../data/album';
 
 /**
- * The album: an ordered conveyor of three photographs at a time.
+ * The album: an ordered conveyor - three photographs at a time on a wide
+ * stage, one at a time on a phone.
  *
- * Every photograph in the folder is in the DOM, not just the three on screen.
- * That is what makes the no-JS path free: hide all but three and it is a
- * conveyor, show all thirteen and it is a gallery.
+ * Every photograph in the folder is in the DOM, not just the ones on screen.
+ * That is what makes the no-JS path free: hide all but the row's own width and
+ * it is a conveyor, show all thirteen and it is a gallery.
  *
  * No figure is given a size of its own. A photograph with a definite height
  * and `width: auto` is exactly as wide as its own proportions say, so the box
@@ -29,8 +30,9 @@ const WIDTHS = [160, 240, 400, 640, 960];
    than promised once for the whole row.
 
    The row's height is a fraction of its container, not of which photographs
-   are in it - `100cqw / 5.05` on one line, `(100cqw - gap) / 3.35` in the
-   phone's 1 + 2 - so a photograph's box is that height times its own ratio.
+   are in it - `100cqw / 5.05` on the wide stages, `100cqw / 1.78` on a phone,
+   where the row carries one photograph at a time - so a photograph's box is
+   that height times its own ratio.
    One shared `sizes` has to promise the widest photograph in the album, which
    is what had a portrait decoded at 2.6x its box; one per photograph tells the
    browser each box's own number.
@@ -43,8 +45,13 @@ const WIDTHS = [160, 240, 400, 640, 960];
    `tools/probe-album.mjs` measures the real box of all thirteen photographs
    at several widths and fails if the promise is short or idle. */
 const ROW_DIVISOR = 5.05; // .album__row's height on one line, in cqw
-const PAIR_DIVISOR = 3.35; // .album__row's height in the phone's 1 + 2
-const GAP_PX = 12; // --album-gap
+/* The phone's row is one photograph wide, so its height is the row's width
+   over the widest original in the album: 1000x562, which is 1.78. That one
+   fills the row and every narrower photograph is centred in the same height.
+   album.css's `calc(100cqw / 1.78)` and public/no-js-album.css carry the same
+   number - `sizes` cannot be rewritten by a stylesheet, so the three have to
+   agree, and a photograph wider than 1.78 would overflow the row. */
+const SINGLE_DIVISOR = 1.78;
 
 /** One band of the promise: at `cap` container pixels the row stops growing,
  *  and that happens at `atViewport` pixels of viewport. */
@@ -61,8 +68,8 @@ const sizesFor = (photo: { src: { width: number; height: number } }): string => 
     band('min-width: 78rem', (1008 / ROW_DIVISOR) * ar, 1438),
     // 48rem to 78rem: one line of three, container capping at 1104.
     band('min-width: 48rem', (1104 / ROW_DIVISOR) * ar, 1200),
-    // Below that: one above, two below, sharing one height.
-    band(null, ((706 - GAP_PX) / PAIR_DIVISOR) * ar, 768),
+    // Below 48rem: one photograph at a time, at the row's own width.
+    band(null, (706 / SINGLE_DIVISOR) * ar, 768),
   ].join(', ');
 };
 
@@ -80,11 +87,6 @@ const lightbox = await Promise.all(
     <div class="movement-head">
       <p class="movement-index">07</p>
       <h2 class="movement-title" id="album-title">Album</h2>
-      <p class="movement-lede">
-        Photographs rather than claims. Three at a time, in the order they were taken, each
-        shown at its own proportions - a portrait stays a portrait, and the row is measured
-        around it rather than cropped to a box.
-      </p>
     </div>
 
     <div class="album" data-album>
@@ -97,8 +99,13 @@ const lightbox = await Promise.all(
           data-album-row
           role="group"
           tabindex="0"
-          aria-label={`${album.length} photographs, shown three at a time. Left and right arrow keys step through them.`}
+          aria-label={`${album.length} photographs. Left and right arrow keys step through them.`}
         >
+          {/* The opening three ship visible: that is a wide stage's whole row,
+              so the first paint is already the conveyor's geometry and taking
+              the script away shifts nothing. A phone's row is one photograph
+              wide, and album.css holds the two after the first back until the
+              conveyor asks for them. */}
           {
             album.map((photo, i) => (
               <figure class="album__figure" data-i={i} hidden={i >= 3}>
@@ -125,12 +132,6 @@ const lightbox = await Promise.all(
               </figure>
             ))
           }
-          {/* On a phone the first photograph takes a line of its own and the
-              two after it share the line below. This is what makes that
-              happen: it is full width and zero tall, so it always ends the
-              line it lands on. With script it sorts between slot 0 and slot 1;
-              without script it is switched off and the gallery wraps. */}
-          <div class="album__break" aria-hidden="true"></div>
         </div>
 
         {/* Both are in the DOM and focusable at rest - only their paint is

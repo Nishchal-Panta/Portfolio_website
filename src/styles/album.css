@@ -1,10 +1,12 @@
 /* ==========================================================================
    The album
 
-   An ordered conveyor. Three photographs at a time, advancing through the
-   album in the order the files are named: the left one leaves to the left,
-   the other two slide into its place, and the next enters from the right -
-   one strip of film rather than three boxes being refilled.
+   An ordered conveyor, advancing through the album in the order the files are
+   named: the left one leaves to the left, the others slide into its place, and
+   the next enters from the right - one strip of film rather than three boxes
+   being refilled. Three photographs at a time on a stage wide enough for
+   three; one at a time on a phone, where three would each be a third of the
+   row and too small to read.
 
    Nothing here is given a size except a height. A photograph with a definite
    height and `width: auto` is exactly as wide as its own proportions say, so
@@ -45,7 +47,7 @@
      5.05 rather than 4.78 leaves the two gaps clear, so even that trio fits
      and every narrower one is centred inside the same line. Below about 450px
      of row width the sum would crowd the row, which is why the three-up row
-     only starts at 48rem and the phone keeps two lines. */
+     only starts at 48rem and the phone carries one photograph at a time. */
   height: calc(100cqw / 5.05);
 }
 
@@ -96,12 +98,6 @@
   font-size: var(--step--1);
   color: var(--text-muted);
   line-height: 1.45;
-}
-
-/* The break element sorts between slot 0 and slot 1 on a phone. Anywhere else
-   it is nothing. */
-.album__break {
-  display: none;
 }
 
 /* --- arrows ---------------------------------------------------------------- */
@@ -260,36 +256,29 @@
   justify-content: center;
 }
 
-/* --- narrow: one above, two below ------------------------------------------ */
+/* --- narrow: one photograph at a time -------------------------------------- */
 
-/* Under 48rem a three-up row would make each photograph too small to read, so
-   the first takes a line of its own and the two after it share the line below
-   - the same arrangement the album has always had on a phone, at one height
-   for all three. That height is set by the widest pair that can stand next to
-   each other (3.28 of these heights, at any wrap point in the album), which is
-   what guarantees the second line never overflows; the photograph on its own
-   above it is then narrower than its line and centred in it. One height means
-   a photograph moving from the second line up to the first is translated, not
-   resized: the step stays a slide. */
+/* Under 48rem there is room for one photograph at a time. The rule is the wide
+   stage's own: one fixed height, and each photograph's width left to its own
+   proportions, so nothing is cropped and the row cannot jump between steps. The
+   divisor is the widest original in the album - a 1000x562 frame, 1.78 - which
+   is what makes that one fill the row exactly while every narrower photograph
+   is centred in the same height. 1.78 is SINGLE_DIVISOR in Album.astro's
+   `sizes` promise and in public/no-js-album.css; all three have to move
+   together, and a photograph wider than it would overflow the row. */
 @media (max-width: 48rem) {
   .album__row {
-    height: auto;
-    flex-wrap: wrap;
-    /* The break element has no height of its own but does take a line, so the
-       two gaps either side of it are halved: one gap's worth of space between
-       the two lines of photographs, same as the gap between them. */
-    row-gap: calc(var(--album-gap) / 2);
+    height: calc(100cqw / 1.78);
   }
 
-  .album__figure {
-    height: calc((100cqw - var(--album-gap)) / 3.35);
-  }
-
-  .album__break {
-    display: block;
-    flex: 0 0 100%;
-    height: 0;
-    order: 5;
+  /* The markup ships the opening three visible, which is exactly what a wide
+     stage paints. Here the row is one photograph wide, so the two after the
+     first are held back until the conveyor asks for them - which is what keeps
+     the first paint on a phone the conveyor's geometry as well. Without script
+     `no-js-album.css` puts all thirteen back, and this rule never meant
+     anything without the script that takes it off. */
+  .album:not([data-js]) .album__figure:nth-of-type(n + 2) {
+    display: none;
   }
 }
 

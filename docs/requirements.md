@@ -253,12 +253,10 @@ Build a premium, recruiter-focused static portfolio website for Nishchal Panta t
 
 #### 6.1 Documentation Files
 - ✓ `README.md` - Main project documentation
-- ✓ `docs/context.md` - Project overview
 - ✓ `docs/requirements.md` - This file
 - ✓ `docs/design-system.md` - Design guidelines
 - ✓ `docs/content-strategy.md` - Content approach
 - ✓ `docs/project-analysis.md` - GitHub/social analysis
-- ✓ `docs/deployment-guide.md` - Setup instructions
 
 #### 6.2 README Contents
 - ✓ Project description

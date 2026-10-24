@@ -100,6 +100,27 @@ await page.addInitScript(() => {
   };
   requestAnimationFrame(frame);
 
+  /* The real refresh interval, measured at startup rather than inferred from
+     whatever frames the whole run happened to produce. Deriving it from the
+     observed frame times folded jank into the estimate: one long task drags
+     the median up, the refresh rate reads low, and "frames dropped" is then
+     judged against a display that does not exist. A tight rAF chain sees one
+     delta per display frame and nothing else. */
+  (() => {
+    const dt = [];
+    let prev = 0;
+    const sample = (now) => {
+      if (prev) dt.push(now - prev);
+      prev = now;
+      if (dt.length < 60) requestAnimationFrame(sample);
+      else {
+        dt.sort((a, b) => a - b);
+        P.refreshMs = dt[Math.floor(dt.length / 2)];
+      }
+    };
+    requestAnimationFrame(sample);
+  })();
+
   const snapshot = () => {
     P.instrumenting = true;
     try {
@@ -191,7 +212,11 @@ const stepFrames = raw.frames.filter((f) => inStep(f.t)).map((f) => f.dt);
 const allFrames = raw.frames.map((f) => f.dt);
 const stepMs = swaps.length * WINDOW;
 const produced = raw.frames.filter((f) => inStep(f.t)).length;
-const expected = Math.round(stepMs / (1000 / 60));
+/* `expected` used to be computed here against an assumed 60Hz
+   (stepMs / (1000/60)). It was never read - `expectedAtRefresh` below is the
+   number actually printed - so it was a live60Hz assumption with no caller.
+   Removed rather than corrected, because correcting it would have left two
+   refresh estimates disagreeing. */
 
 console.log(`  frame time (all)      p50 ${pct(allFrames, 50).toFixed(1)} / p95 ${pct(allFrames, 95).toFixed(1)} / max ${Math.max(...allFrames, 0).toFixed(1)} ms`);
 console.log(`  frame time (in step)  p50 ${pct(stepFrames, 50).toFixed(1)} / p95 ${pct(stepFrames, 95).toFixed(1)} / max ${Math.max(...stepFrames, 0).toFixed(1)} ms`);
@@ -206,9 +231,15 @@ for (const [cls, n] of [...byClass].sort((a, b) => b[1] - a[1]).slice(0, 6)) {
   console.log(`      ${String(n).padStart(6)}x  ${cls.slice(0, 60)}`);
 }
 
-/* The display may be 120Hz, so "dropped" has to be judged against the rate the
-   page is actually running at, not against an assumed 60. */
-const refreshMs = pct(allFrames, 50) || 16.7;
+/* "Dropped" has to be judged against the rate the page actually runs at, and
+   that rate is now MEASURED at startup (`P.refreshMs`, median of 60 rAF deltas)
+   rather than inferred from the run's own frame times. The old
+   `pct(allFrames, 50) || 16.7` counted jank as refresh: a long task during the
+   run inflated the median interval, made the display look slower than it is,
+   and so widened the allowance for dropped frames by roughly the amount the
+   jank had already cost. The observed median is kept only as a fallback for a
+   page that never reported. */
+const refreshMs = raw.refreshMs || pct(allFrames, 50) || 16.7;
 const refreshHz = 1000 / refreshMs;
 const expectedAtRefresh = Math.round(stepMs / refreshMs);
 console.log(

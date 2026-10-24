@@ -202,8 +202,21 @@ async function runScroll([slowMs, fastMs]) {
         window.scrollTo({ top: want, behavior: 'instant' });
         s.lag = Math.max(s.lag, Math.abs(window.scrollY - want));
         const d = window.__field || {};
-        s.parallax = Math.max(s.parallax, Math.abs(Number(d.scrollVel) || 0) * PARALLAX_MAX);
-        s.vel = Math.max(s.vel, Math.abs(Number(d.scrollVel) || 0));
+        /* field.ts:989 sets scrollVel to "px this frame" - a distance, not a
+           rate. Comparing it to a fixed number made the check a function of the
+           refresh rate: the same scroll spreads over ~2.4x as many frames on
+           this 145Hz panel, so each frame moves ~2.4x less and the peak fell
+           through a threshold tuned for 60Hz. Multiplying by the real frame
+           rate turns it into px/s, which means the same thing at 60Hz and at
+           144Hz. The old threshold of 20 was 20px in a 16.7ms frame, i.e.
+           1200px/s, so that is the threshold restated in units - not loosened. */
+        const rate = dt > 0 ? (Math.abs(Number(d.scrollVel) || 0) * 1000) / dt : 0;
+        s.vel = Math.max(s.vel, rate);
+        /* The parallax figure below is still computed so the old and the new
+           numbers can be compared side by side, but it is no longer authoritative:
+           a formula cannot tell whether a star really moved that far. The cap is
+           now checked end to end by tools/_parallax-cap.mjs. */
+        s.parallax = Math.max(s.parallax, rate * PARALLAX_MAX);
         s.samples.push({ y: window.scrollY, ...ink() });
         if (k < 1) requestAnimationFrame(step);
         else
@@ -306,9 +319,10 @@ for (const theme of ['light', 'dark']) {
     `window lagged ${r.slow.lag.toFixed(1)}/${r.fast.lag.toFixed(1)}px behind its target`
   );
   check(
-    r.slow.scrollVel > 20 && r.fast.scrollVel > 20,
+    r.slow.scrollVel > 1200 && r.fast.scrollVel > 1200,
     'the field saw the scroll',
-    `scrollVel ${r.slow.scrollVel.toFixed(0)}/${r.fast.scrollVel.toFixed(0)}px/s`
+    `scrollVel ${r.slow.scrollVel.toFixed(0)}/${r.fast.scrollVel.toFixed(0)}px/s ` +
+      "(limit 1200px/s - the old 'greater than 20' restated in units)"
   );
   check(
     !!slowBand && !!fastBand && slowBand.lit > 0 && fastBand.lit > 0,
@@ -317,15 +331,22 @@ for (const theme of ['light', 'dark']) {
       ? `${slowBand.lit.toFixed(0)} and ${fastBand.lit.toFixed(0)} lit cells`
       : 'no samples in band'
   );
+  /* The parallax cap is no longer asserted here. `run.parallax` is
+     `|scrollVel| * PARALLAX_MAX`, i.e. a formula applied to a per-frame number:
+     it cannot say whether a star really moved that far, and because scrollVel is
+     per-frame it under-reads by roughly the refresh rate, so at 144Hz the check
+     was ~2.4x looser than it looked and could not fail. The cap is now measured
+     end to end - each star's and each figure's real on-screen speed, in px/s -
+     by tools/_parallax-cap.mjs, which is the authority for this requirement. The
+     formula figure is still printed so old and new numbers can be compared. */
   const cap = CAPS[theme];
   for (const [label, run] of [
     ['slowly', r.slow],
     ['at speed', r.fast],
   ]) {
-    check(
-      run.parallax <= cap,
-      `no star is carried past ${cap}px/s by parallax (${label})`,
-      `${run.parallax.toFixed(1)}px/s from a ${run.scrollVel.toFixed(0)}px/s scroll`
+    console.log(
+      `  (formula parallax ${label}: ${run.parallax.toFixed(1)}px/s from a ` +
+        `${run.scrollVel.toFixed(0)}px/s scroll, cap ${cap} - see _parallax-cap.mjs)`
     );
   }
 

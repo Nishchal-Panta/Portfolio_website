@@ -156,6 +156,16 @@
     /* ?debug=1 turns on the overlay and everything that exists only to feed
        it. Without it, the frame does none of that work. */
     const debugOn = new URLSearchParams(window.location.search).has('debug');
+    /* ?scrollmode=rate swaps the field's per-frame -> per-second conversion.
+       ?clock=<hz> replaces each frame's timestamp with a virtual one advancing
+       by a fixed step, so a 60Hz and a 144Hz run can be compared without
+       depending on the display or on browser frame pacing: the field's `tick`
+       is a fixed-step accumulator driven by `f.time`, so feeding it fixed
+       timestamps is exactly "a 60Hz panel" however fast the real one is. */
+    const params = new URLSearchParams(window.location.search);
+    const rateMode = params.get('scrollmode') === 'rate';
+    const virtualHz = Number(params.get('clock')) || 0;
+    let vNow = 0;
 
       /* Live state for the ?debug=1 overlay: what the field actually decided,
          which is the only honest answer to "it does not work here". */
@@ -171,6 +181,15 @@
          overlay at whatever it read on the first frame. */
     function frame(now: number) {
       if (!running) return;
+      /* Virtual clock: the page is told the previous fixed step has elapsed,
+         whether or not the real display agreed. Everything below - dt, the
+         easing, f.time and therefore the field's tick accumulator - reads this
+         timestamp, so one switch sets the whole page's notion of time. */
+      if (virtualHz > 0) {
+        if (vNow === 0) vNow = now;
+        else vNow += 1000 / virtualHz;
+        now = vNow;
+      }
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       sinceMorph += dt;
@@ -246,6 +265,9 @@
         pointer,
         pointerDown,
         time: (now - t0) / 1000,
+        /* The real length of this frame, so the field can turn a per-frame
+           displacement into a rate without assuming 60Hz. */
+        dt,
         mix,
       });
     }
@@ -255,7 +277,16 @@
     function integrate(dt: number) {
       const delta = scrollY - lastScrollY;
       lastScrollY = scrollY;
-      const instant = Math.max(-120, Math.min(120, delta));
+      /* The ceiling was 120px *per frame*, so what it actually allowed was
+         7200px/s at 60Hz and 17280px/s at 144Hz - a cap that moved with the
+         display. `rate` states it once in px/s and multiplies back by dt, which
+         is the same expression whenever dt is 1/60s:
+             clamp(delta/(1/60), +-7200) * (1/60)  ===  clamp(delta, +-120)
+         on both the in-range and the saturated branch, so `frame` and `rate`
+         agree exactly at 60Hz and only part company above it. */
+      const instant = rateMode
+        ? Math.max(-7200, Math.min(7200, delta / dt)) * dt
+        : Math.max(-120, Math.min(120, delta));
       scrollVel = scrollVel * Math.pow(0.001, dt) + instant * (1 - Math.pow(0.001, dt));
       if (Math.abs(scrollVel) < 0.4) scrollVel = 0;
       scrollDir = Math.sign(scrollVel);
