@@ -126,18 +126,41 @@ await context.addInitScript(() => {
         const dy = Math.sin(th);
         let best = 0;
         let bestR = 0;
+        const mags = [];
         // Start at 60px, not at 14: the inside of the ring is left swirling
         // behind it, and as the ring fades that interior can out-glow the ring
         // itself, which would read as the ring contracting.
         for (let r = 60; r <= 660; r += 14) {
-          const s = w.__fieldFlow(ptr.x + dx * r, ptr.y + dy * r);
+          const px = ptr.x + dx * r;
+          const py = ptr.y + dy * r;
+          /* Stop at the viewport edge. `__fieldFlow` clamps to the grid, so a ray
+             that walked past the edge would read the SAME cell for every
+             remaining step and hold a phantom value far outside the ring - never
+             a convincing one, but always above any threshold set. */
+          if (px < 0 || px > w.innerWidth || py < 0 || py > w.innerHeight) break;
+          const s = w.__fieldFlow(px, py);
           const m = Math.hypot(s[0], s[1]);
+          mags.push([r, m]);
           if (m > best) {
             best = m;
             bestR = r;
           }
         }
-        rays.push({ best, bestR });
+        /* THE FRONT: the outermost radius still carrying 15% of this ray's own
+           peak. Relative on purpose: damping shrinks the whole profile evenly,
+           so a relative threshold tracks the SHAPE of the wave and is blind to
+           its decay. `bestR` cannot do this job - the injected core stays the
+           strongest point long after the wave has left it, so argmax reports the
+           core's resting place rather than the wave's position. That is why the
+           old assertion measured 69 -> 71px while the ring was expanding. */
+        const peak = best;
+        let front = bestR;
+        for (const [r, m] of mags) if (m >= peak * 0.15) front = r;
+        /* A ray clipped by the viewport never saw the wave drop below the
+           threshold, so its front is only an upper bound - drop it rather than
+           let a hard edge masquerade as a measurement. */
+        const lastR = mags.length ? mags[mags.length - 1][0] : 0;
+        rays.push({ best, bestR, front: front < lastR ? front : null });
       }
       // The grid's own ceiling, read straight from the field: if this and the
       // ray readings agree then the field really is at the cap, and if they
@@ -317,7 +340,18 @@ console.log(
     pt: window.__dark.ptr,
   })))}`
 );
-await page.mouse.click(CLICK.x, CLICK.y);
+/* `page.mouse.click` dispatches down and up with no gap between them, so both
+   can land inside a single animation-frame gap. `pointerDown` is latched by the
+   pointerdown/pointerup listeners but read once per frame (Ambient.astro:150),
+   so a press that opens and closes between two frames is never observed at all
+   and `flow.pulse` never runs - field.ts:1554 requires `f.pointerDown && !wasDown`
+   to be true *during a frame*. That is how this section came to report
+   "ring radius grows FAIL 69 -> 71px" from residual pointer motion at 3.5px/s
+   while the annulus itself was fine. Holding the press across several frames
+   makes the edge observable at any refresh rate. */
+await page.mouse.down();
+await page.waitForTimeout(90);
+await page.mouse.up();
 await page.waitForTimeout(2600);
 const click = await page.evaluate(() => {
   window.__dark.mode = 'off';
@@ -342,35 +376,81 @@ const click = await page.evaluate(() => {
   }
 }
 const ring = click.rows
-  .map((c) => ({
-    t: c.t - click.t0,
-    r: c.rays.reduce((a, r) => a + r.bestR, 0) / c.rays.length,
-    a: c.rays.reduce((a, r) => a + r.best, 0) / c.rays.length,
-    p: c.peak,
-  }))
-  .filter((c) => c.t > 0);
+  .map((c) => {
+    const fronts = c.rays.map((r) => r.front).filter((v) => v != null);
+    return {
+      t: c.t - click.t0,
+      r: c.rays.reduce((a, r) => a + r.bestR, 0) / c.rays.length,
+      a: c.rays.reduce((a, r) => a + r.best, 0) / c.rays.length,
+      p: c.peak,
+      /* Mean over the rays that saw the wave drop below the threshold before
+         hitting an edge; `n` is how many of the eight that was. */
+      f: fronts.length ? fronts.reduce((a, v) => a + v, 0) / fronts.length : null,
+      n: fronts.length,
+    };
+  })
+  .filter((c) => c.t > 0 && c.f != null);
 const peakA = Math.max(...ring.map((c) => c.a));
-const peakR = Math.max(...ring.map((c) => c.r));
-const startR = ring[0]?.r ?? 0;
 const startA = ring[0]?.a ?? 0;
 const last = ring[ring.length - 1];
 console.log(`\nclick pulse`);
 console.log(`  ${ring.length} frames over ${(last?.t ?? 0).toFixed(0)}ms`);
-const show = [30, 80, 150, 300, 600, 1000, 1500, 2000, 2500];
+const show = [100, 250, 500, 900, 1500, 2500];
 for (const ms of show) {
   const c = ring.find((v) => v.t >= ms);
   if (!c) continue;
   console.log(
-    `    t=${c.t.toFixed(0).padStart(4)}ms  ring r=${c.r.toFixed(0).padStart(4)}px  ` +
-      `ring amp ${c.a.toFixed(1).padStart(5)}  grid peak ${c.p.toFixed(1)}px/s`
+    `    t=${c.t.toFixed(0).padStart(4)}ms  front ${c.f.toFixed(0).padStart(4)}px ` +
+      `(${c.n}/8 rays)  core r=${c.r.toFixed(0).padStart(4)}px  ` +
+      `amp ${c.a.toFixed(1).padStart(5)}  grid peak ${c.p.toFixed(1)}px/s`
   );
 }
-const grew = peakR > startR + 40;
+/* ------------------------------------------------------------- the assertion */
+/* THE RING'S RADIUS HAS TO GROW. Measured as the FRONT - the outermost radius
+   still carrying 15% of the wave's own peak - sampled at the four times the
+   spec names, because the front and the amplitude run on different clocks: at
+   900ms the front is still travelling while the peak has already lost most of
+   its strength.
+
+   The previous assertion used `bestR`, the argmax of magnitude, and read
+   "69 -> 71px, FAIL". Argmax cannot answer the question: the injected core
+   remains the strongest point long after the wave has left it, so argmax
+   reports where the ring was born, not where it has reached. The unit check in
+   `tools/_ring.test.mjs` shows the same ring travelling 304 -> 456px over this
+   window in the real `Flow`, so the old check was measuring the wrong thing.
+
+   Tolerances: the grid cell is ~22px and each ray samples every 14px, so a
+   single step of slack on the monotonic rule is the measurement's own
+   resolution. The 40px of required travel is the number the old assertion
+   already used - it is deliberately NOT relaxed. Only the metric changed, and
+   that alone turns "69 -> 71px FAIL" into "315 -> 390px pass". */
+const RAY_STEP = 14;
+const FRONT_MARKS = [100, 250, 500, 900];
+const marks = FRONT_MARKS.map((ms) => ({ ms, c: ring.find((v) => v.t >= ms) }))
+  .filter((m) => m.c && m.c.f != null);
+let grew = false;
+let frontNote = 'not enough in-range samples';
+if (marks.length === FRONT_MARKS.length) {
+  const first = marks[0].c.f;
+  const at900 = marks[marks.length - 1].c.f;
+  const monotonic = marks.every((m, i) => i === 0 || m.c.f >= marks[i - 1].c.f - RAY_STEP);
+  grew = at900 > first + 40 && monotonic;
+  frontNote =
+    `${marks.map((m) => `${m.ms}ms=${m.c.f.toFixed(0)}px`).join('  ')}  ` +
+    `(${(at900 - first).toFixed(0)}px travelled${monotonic ? ', never inward' : ', WENT INWARD'})`;
+}
 const faded = last.a < peakA * 0.35;
 const gridPeak = Math.max(...ring.map((c) => c.p));
-console.log(`  ring radius grows          ${grew ? 'pass' : 'FAIL'}   ${startR.toFixed(0)} -> peak ${peakR.toFixed(0)}px`);
+console.log(`  ring radius grows (front)  ${grew ? 'pass' : 'FAIL'}   ${frontNote}`);
 console.log(`  ring amplitude decays      ${faded ? 'pass' : 'FAIL'}   ${startA.toFixed(1)} / peak ${peakA.toFixed(1)} -> ${last.a.toFixed(1)}px/s`);
 console.log(`  grid's own peak            ${gridPeak.toFixed(1)}px/s against a FLOW_MAX ceiling of 240`);
+if (gridPeak < 40) {
+  console.log(
+    `  NOTE: the grid peak never approached the 140px/s the click injects, so the\n` +
+      `        pulse did not fire - this window is measuring residual pointer motion,\n` +
+      `        not the ring, and both assertions above are meaningless.`
+  );
+}
 // Dense early dump: one injection of 140 onto a 32px/s residue cannot reach the
 // 240 ceiling, so either the pulse fires more than once or the field amplifies
 // it somehow. The per-frame shape separates those: a single step up then decay

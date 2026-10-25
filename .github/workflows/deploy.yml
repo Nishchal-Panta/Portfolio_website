@@ -37,9 +37,9 @@ jobs:
 
       # The contact endpoint comes from a repository variable, kept in sync
       # from the gitignored config.js by `npm run sync:vars`.
-      env:
-        PUBLIC_CONTACT_ENDPOINT: ${{ vars.CONTACT_ENDPOINT }}
       - name: Build
+        env:
+          PUBLIC_CONTACT_ENDPOINT: ${{ vars.CONTACT_ENDPOINT }}
         run: npm run build
 
       - name: Assert the 404 document exists

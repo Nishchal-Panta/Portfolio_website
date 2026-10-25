@@ -25,7 +25,7 @@
  * is identical at 60, 120 and 144Hz.
  */
 
-import { FIGURES, magTier } from '../data/constellations';
+import { FIGURES, magTier } from '../data/constellations.ts';
 
 /** A measured text block: the field keeps quiet behind it. */
 export interface TextBox {
@@ -139,12 +139,19 @@ function ceilingAt(x: number, y: number, boxes: TextBox[]) {
 /* -------------------------------------------------------------- shared grid */
 
 class Grid {
+  /* Declared and assigned here rather than as constructor parameter
+     properties, so this file can be imported by Node's type-stripping loader
+     and the flow grid unit test can run against the real implementation. The
+     assignment order is unchanged: w, h and cols are set before `size()` is
+     called, exactly as parameter properties would have been. */
+  private w: number;
+  private h: number;
+  private cols: number;
   private cells: number[][] = [];
-  constructor(
-    private w: number,
-    private h: number,
-    private cols: number
-  ) {
+  constructor(w: number, h: number, cols: number) {
+    this.w = w;
+    this.h = h;
+    this.cols = cols;
     this.cells = Array.from({ length: this.size() }, () => [] as number[]);
   }
   private rows() {
@@ -277,7 +284,14 @@ function poissonDisk(w: number, h: number, count: number, seed: number): [number
  * swirls, diffuse it slightly so the wake stays coherent, then apply viscous
  * damping so it dies away over about 0.9 seconds.
  */
-class Flow {
+/**
+ * The flow grid: advection, diffusion, damping.
+ *
+ * Exported rather than kept private so the click ring can be unit-tested in
+ * Node against the real implementation - see `tools/_ring.test.mjs`. It is plain
+ * array maths with no canvas, no DOM and no frame loop, so it runs headless.
+ */
+export class Flow {
   cols = 64;
   rows = 40;
   u = new Float32Array(0);
@@ -460,26 +474,13 @@ class Flow {
 const POINTER_RADIUS = 210;
 const SCROLL_TAU = 0.15;
 
-/**
- * How a per-frame displacement becomes a rate: `?scrollmode=rate`.
- *
- * The default, `frame`, is the original behaviour - multiply by a constant 60,
- * which is only correct when the frame really is 1/60s. `rate` divides by the
- * frame's measured duration instead. At 60Hz the two are the same arithmetic
- * (`x / (1/60) === x * 60`), so `frame` changes nothing on a 60Hz panel and the
- * modes can only differ on a display that is not 60Hz.
- *
- * Read once at module load, not per frame, so an absent parameter leaves the
- * `frame` path exactly as it was and costs one query-string parse. It stays on
- * `frame` deliberately: which one looks right on a high-refresh display is a
- * judgement to be made by eye, not here.
- */
-const RATE_MODE =
-  typeof window !== 'undefined' &&
-  new URLSearchParams(window.location.search).get('scrollmode') === 'rate';
-
-/** The refresh rate the old constant 60 assumed, named so both modes share it. */
-const ASSUMED_HZ = 60;
+/* The scroll response, in px/s, lives in `scroll-response.ts` so it can be
+   unit-tested in Node with no browser, no display and no frame pacing involved
+   - see `tools/_scroll-response.test.mjs`. That module owns three things: the
+   one conversion from a per-frame distance to a rate, the 7200px/s ceiling,
+   and the single number that sets how hard the sky pushes back. This file only
+   ever consumes a rate from it. */
+import { fieldRate, rateFromPerFrame } from './scroll-response.ts';
 const STAR_CAP = 110;
 const NODE_CAP = 90;
 /** The active cap eases with the morph, so a theme change mid-flight is smooth. */
@@ -1572,20 +1573,25 @@ export function createField(
 
       /* Scroll velocity, low-passed over about 150ms, soft clamped, then
          applied as *screen* velocity. A fast flick eases in and out rather than
-         throwing the sky past the window. */
-      /* Displacement -> rate. `frame` is the original `* 60`; `rate` uses the
-         frame's real duration. Identical at 60Hz, divergent anywhere else. */
-      const frameSeconds = f.dt && f.dt > 0 ? f.dt : 1 / ASSUMED_HZ;
-      const raw = RATE_MODE ? f.scrollVel / frameSeconds : f.scrollVel * ASSUMED_HZ;
+         throwing the sky past the window.
+
+         `f.scrollVel` arrives as a per-frame *distance* - that is the unit the
+         browser hands us - and `fieldRate` converts it to a rate using the real
+         length of this frame. The conversion, the 7200px/s ceiling and the one
+         strength constant live in `scroll-response.ts`; there is no per-frame
+         assumption left in this file. */
+      const frameSeconds = f.dt && f.dt > 0 ? f.dt : 1 / 60;
+      const raw = fieldRate(f.scrollVel, frameSeconds);
       scrollFilt += (raw - scrollFilt) * (1 - Math.exp((-steps * dt) / SCROLL_TAU));
       const screenVel = softClamp(scrollFilt, 900);
 
       /* Injection is the pointer's contribution for this whole frame, so it
          happens once - doing it per catch-up step would stir harder exactly
-         when the browser is already struggling. */
+         when the browser is already struggling. Same conversion as above, in
+         px/s, but no scroll strength applied: this is the cursor, not the page. */
       if (flow) {
-        const pvx = RATE_MODE ? f.pointerVel.x / frameSeconds : f.pointerVel.x * ASSUMED_HZ;
-        const pvy = RATE_MODE ? f.pointerVel.y / frameSeconds : f.pointerVel.y * ASSUMED_HZ;
+        const pvx = rateFromPerFrame(f.pointerVel.x, frameSeconds);
+        const pvy = rateFromPerFrame(f.pointerVel.y, frameSeconds);
         const sp = Math.hypot(pvx, pvy);
         if (f.pointer && sp > 1) {
           flow.inject(f.pointer.x, f.pointer.y, softClamp(pvx, 320), softClamp(pvy, 320), POINTER_RADIUS);

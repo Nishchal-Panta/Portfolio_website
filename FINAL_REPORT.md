@@ -1,10 +1,31 @@
 # FINAL_REPORT (draft)
 
-Status: **in progress.** Only the gate-investigation session of 2026-10-23 is
-written up here. Later stages (Three.js Increment 1, fallow, deploy and SES
-review, artifact cleanup, push approval) are not yet done and are not claimed.
+Status: **in progress.** Sections 3.1–3.8 cover the gate-investigation session of
+2026-10-23 and the scroll/ring/hover session of 2026-10-24/25. Later stages
+(contact endpoint, Three.js Increment 1, fallow, deploy and SES review, artifact
+cleanup, push approval) are not yet done and are not claimed.
 
-Nothing here is committed or pushed. No AWS resource was touched.
+**I committed nothing and pushed nothing, and touched no AWS resource.** Two
+commits (`b4b289e`, `ae77623`) landed during this work from outside this
+session — see *Standing constraints* for exactly which of my changes are and are
+not inside them.
+
+### Gate table, as of 2026-10-25
+
+| gate tool | exit | status |
+| --- | --- | --- |
+| `npm run build` (includes `astro check` + `verify:album`) | 0 | **green** — 0 errors, 0 hints |
+| `tools/_scroll-response.test.mjs` | 0 | **green** — refresh identity + clamp + non-vacuity self-check |
+| `tools/_ring.test.mjs` | 0 | **green** — 13 checks; proven to exit 1 on an altered copy |
+| `tools/dark-probe.mjs` | 0 | **green** — ring front check passes (315→390px) |
+| `tools/scroll-regression.mjs` | 0 | **green** — 0 FAIL lines, 135–144 fps both themes |
+| `tools/perf-album.mjs` | 0 | **green** |
+| `tools/_framecheck.mjs` (new) | 0 | **green** — 128.7 fps Chrome / 139.1 fps Firefox, dark, fast scroll |
+| `tools/_hovercheck.mjs` (new) | 0 | **green** — 8/8 in headed Chrome and Firefox |
+| `tools/probe-album.mjs` | 1 | 2 pre-existing non-hover failures (see 3.7) |
+| `tools/_parallax-cap.mjs` | — | **parked by name** — open, time-boxed, not a visible bug (see 3.6) |
+
+Everything is uncommitted. HEAD is `a295e7f made UI changes`.
 
 ---
 
@@ -65,9 +86,9 @@ display, so a fixed 16.7 ms increment made the real scroll speed a function of
 round-trip latency while reporting `pxPerSec`. Position is now
 `(pxPerSec * (Date.now() - t0)) / 1000`, a pure function of wall clock. The
 achieved rate is printed against the requested one, so the fix is measured
-rather than asserted. **Proof run executed (3.8): dark-probe exits 0, all
-assertions pass** except the pre-existing `ring radius grows 69 -> 69`, whose
-assertion is being replaced (3.5, ruling 4).
+rather than asserted. **Proof run: dark-probe exits 0 with every assertion
+passing**, including the ring front check, whose old `69 -> 69` assertion this
+session replaced (3.5).
 
 **`perf-album.mjs` — refresh measured at startup.** Added a dedicated sampler:
 a tight `requestAnimationFrame` chain recording the median of 60 deltas, which
@@ -77,9 +98,10 @@ fallback. That old form counted jank as refresh — a long task inflated the
 median interval, made the display look slower than it is, and so widened the
 allowance for dropped frames by roughly what the jank had already cost. The
 dead 60 Hz `expected` constant was **removed** rather than corrected, because
-correcting it would have left two disagreeing refresh estimates. **Proof run
-executed (3.8): perf-album exits 0**, measuring a real 61 Hz refresh and
-574 frames produced against 640 expected over the 10.5 s of stepping.
+correcting it would have left two disagreeing refresh estimates. **Proof run:
+perf-album exits 0**, now reading **145 Hz** with `2132 produced vs 2333 at
+145Hz` (3.8) — the 61 Hz quoted in the first draft of this report was machine
+load, not the display.
 
 **`scroll-regression.mjs` — scrollVel compared as a rate.** `field.ts:989` sets
 `scrollVel` to "px this frame". The check now computes
@@ -88,34 +110,84 @@ threshold of 20 px in a 16.7 ms frame restated in units — identical at 60 Hz,
 not loosened. The formula-based parallax assertion was **removed**, since a
 formula applied to a per-frame number cannot say whether a star really moved,
 and the figure is still printed for continuity. The cap is meant to be judged by
-`tools/_parallax-cap.mjs`. **Proof run executed (3.8): the scrollVel rate check
-passes in both themes** (2963/6748 px/s light, 2767/9176 px/s dark, against the
-1200 px/s limit). A *different* assertion in the same tool fails — dark-theme
-frame rate under fast scroll (29.9 fps); see 3.8.
+`tools/_parallax-cap.mjs`. **Proof run: scroll-regression exits 0 with zero FAIL
+lines** — the scrollVel rate check passes in both themes (2963/6748 px/s light,
+2767/9176 px/s dark, against the 1200 px/s limit), and so does the dark-theme
+frame-rate assertion that previously failed at 29.9 fps (3.8).
 
-### 3.4 The 145 Hz flag — NOT ESTABLISHED
+### 3.4 The refresh dependence of scroll response — RESOLVED
 
-The mechanism is confirmed in code:
+**The mechanism.** The original code measured scroll as a *distance per frame*
+and converted it to a rate by multiplying by an assumed 60 Hz:
 
-- `field.ts:989` `this.scrollVel = dy; // px this frame` — a distance, not a rate;
-- `field.ts:1545` `const raw = f.scrollVel * 60;` — assumes exactly 60 Hz;
-- `field.ts:1553-1554` same for `pointerVel`;
-- `Ambient.astro:255-260` eases `scrollVel` from a per-frame `delta` clamped to
-  ±120 px **per frame**, so the clamp itself is refresh-dependent (7200 px/s at
-  60 Hz, 17280 px/s at 144 Hz).
+- `field.ts` — `this.scrollVel = dy; // px this frame`, then
+  `const raw = f.scrollVel * 60;` for both `scrollVel` and `pointerVel`;
+- `Ambient.astro` — eased `scrollVel` from a per-frame `delta` clamped to
+  ±120 px **per frame**, so the clamp itself was refresh-dependent
+  (7200 px/s at 60 Hz, 17280 px/s at 144 Hz).
 
-So on a 145 Hz panel the field's scroll response *should* be weaker than on a
-60 Hz one, by roughly the ratio of frame rates. **The measurement that was
-supposed to size this did not run at the rates it claimed, so no ratio can be
-reported.** See 3.6.
+On a 145 Hz panel that made the field's scroll response weaker than on a 60 Hz
+one by roughly the ratio of frame rates, and made the clamp silently 2.4×
+looser.
 
-### 3.5 Click ring — the ring does expand; the old check measured the wrong thing
+**The fix, applied.** `rate` is now the only behaviour — there is no flag, no
+`frame` branch and no `?clock` parameter anywhere in production. All the scroll
+arithmetic was lifted into a pure module, `src/scripts/scroll-response.ts`, and
+both callers import from it:
+
+| export | value / role |
+| --- | --- |
+| `SCROLL_RESPONSE_GAIN` | **1.0** — the single knob for judging scroll feel |
+| `SCROLL_CLAMP_PX_PER_SEC` | 7200 (the old ±120 px/frame at 60 Hz) |
+| `SCROLL_STILL_PX_PER_SEC` | 24 — the deadzone, now decided from the input rate |
+| `SCROLL_EASE_DECAY_PER_SEC` | 0.001 |
+| `rateFromPerFrame` / `perFrameFromRate` | the conversion, at exactly one place |
+| `clampDeltaToPerFrame`, `ease`, `clampRate`, `ambientStep`, `fieldRate` | the pipeline |
+
+`scrollVel`/`pvx` remain **px/frame** inside `Ambient.astro` and convert once in
+`field.ts` — a literal reading of `scrollVel * 1000 / dt`, which is identical to
+`scrollVel / dt_s`.
+
+**Proof: `tools/_scroll-response.test.mjs`, exit 0.**
+
+- **Claim A** — old and new pipelines agree to a worst relative difference of
+  **2.18e-16** over 16 live distances × 60 frames, and their ceiling saturation
+  is identical (7192.80 px/s).
+- **Claim B** — the same input produces the same output at 6.9 ms and 16.67 ms
+  (relative difference ~1e-16), and after 1.0 s the settled value is identical at
+  both frame rates.
+- **Claim C** — clamp and easing bounds hold.
+- **Claim D** — a self-check asserts the test can *detect* a wrong conversion,
+  so the pass above is not vacuous (`0 == 0`).
+
+**A real bug was found and fixed while doing this.** The deadzone was applied to
+the *eased* value, so the minimum scroll speed a reader could produce scaled
+with `dt²` rather than `dt`: the original `0.4` px/frame threshold trapped
+everything below **≈221 px/s at 60 Hz** and **≈1231 px/s at 144 Hz**. On your
+145 Hz display, steady scrolls slower than about 1231 px/s were being ignored
+outright. `ambientStep` now decides "still" from the **input rate** and eases the
+state to zero before snapping, which removes the rate dependence. The region
+where the old code was stuck but the new code responds is `dy = −3, −0.5, 0.5, 3`.
+
+To judge the feel, change `SCROLL_RESPONSE_GAIN` in
+`src/scripts/scroll-response.ts` and nothing else.
+
+**Left alone deliberately, for the report rather than a silent change:** star
+on-screen speed is the flow velocity (hard-capped 110/90 px/s at `field.ts:658`)
+**plus** a parallax term `screenVel × parallaxFor(z)` where
+`screenVel = softClamp(scrollFilt, 900)` and the largest parallax is 0.14. That
+gives up to **126 px/s**, ~15% above the nominal 110. `field.speeds()` returns
+only `hypot(vx, vy)` and does not include this term, which is why an earlier A/B
+harness read ~0. Recommendation if you want it: clamp `scrollFilt` to ≤785 px/s
+so the sum cannot exceed 110.
+
+### 3.5 Click ring — two replacement checks, both written and both proven to fail
 
 The ring is an **annulus injected into the fluid grid**, not a growing radius
 object. `field.ts:327-349`:
 
 ```
-const ring = radius * 0.45;      // annulus centre, 223px at the 1400x1100 test viewport
+const ring = radius * 0.45;      // annulus centre, 182px at the 1440x900 probe viewport
 const sig  = radius * 0.16;      // its thickness
 ...
 const e = d - ring;
@@ -123,26 +195,95 @@ const g = Math.exp(-(e * e) / sig2);
 this.u[k] += (cx / d) * amp * g; // outward velocity, annulus-shaped
 ```
 
-It then travels outward because the field advects itself — `field.ts:372-373`
-`bx = i*cw + cw*0.5 - this.u[k]*dt` — and weakens because of damping,
-`field.ts:403` `const damp = Math.exp(-dt / 0.7)`, i.e. about 0.9 s to die,
-against a hard ceiling `FLOW_MAX`.
+It then travels outward because the field advects itself — `bx = i*cw + cw*0.5
+- this.u[k]*dt` — and weakens because of damping,
+`const damp = Math.exp(-dt / 0.7)`, i.e. about 0.9 s to die, against a hard
+ceiling `FLOW_MAX`.
 
 **This corrects an earlier claim of mine.** I previously reported that `pulse()`
 "just pushes `{x, y, r, a}`" and therefore never expands. That was read from
-corrupted tool output. There is **no `rings` array** in `field.ts`; the two
-occurrences of the string are inside comments about springs. The real code
-above shows the ring expands by advection and decays by damping — which is what
-the spec asks for.
+corrupted tool output. There is **no `rings` array** in `field.ts`.
 
-The old `dark-probe` assertion was measuring `bestR`, defined as
-`Math.abs(c.gx - cx)` — the horizontal offset from each row's intensity centroid
-to that row's brightest cell. That is not a ring radius, and the reported
-"69 -> 71" therefore says nothing about the click ripple. **The replacement
-checks (unit check on the annulus, observable check on the radial displacement
-front at 100/250/500/900 ms) are specified but not yet written.**
+#### Check 1 — `tools/_ring.test.mjs`, unit check on the real `Flow`
 
-### 3.6 The end-to-end parallax measurement — NOT ESTABLISHED, two defects
+It imports `Flow` directly from `src/scripts/field.ts` and runs it in Node at
+the dark-probe viewport (1440×900). **Exit 0, 13 checks:**
+
+| check | measured |
+| --- | --- |
+| peak sits at `radius × 0.45`, not the centre | **176px vs expected 182px**, 138.8 px/s |
+| centre is not the strongest point | 0.5 px/s at centre vs 138.8 px/s at peak |
+| points outward on all four axes | u = +138.0 / −138.9, v = +138.2 / −139.3 |
+| nothing injected beyond the stated radius | 0.00 px/s at 465px |
+| front travels outward, 0→900 ms | **304 → 328 → 360 → 400 → 456px** |
+| ring **core** is carried, not just spread | **176px → 216px** |
+| front never moves inward (15% and 30% thresholds) | monotonic at both |
+| amplitude decays as it travels | 138.8 → 17.9 px/s (12.9%) |
+| stays under `FLOW_MAX` 240 px/s | peak 138.9 |
+
+#### Check 2 — `dark-probe.mjs`, observable front in the real browser
+
+The old assertion measured `bestR` — the argmax of magnitude — and reported
+`69 -> 71px, FAIL`. **Argmax cannot answer the question:** the injected core
+stays the strongest point long after the wave has left it, so argmax reports
+where the ring was *born*, not where it has *reached*. The replacement measures
+the **front**: the outermost radius still carrying 15% of the wave's own peak,
+sampled at 100/250/500/900 ms. The threshold stays at the **same 40px** the old
+assertion used — it was not relaxed. Only the metric changed.
+
+Measured on the real page: **315 → 334 → 362 → 390px** (76px travelled, never
+inward), amplitude 138.9 → 1.2 px/s.
+
+Two input defects in the probe had to be fixed before it could measure anything —
+both test-side, neither changes visible behaviour:
+
+1. **The click never registered.** `page.mouse.click()` does down+up with no gap,
+   and both can fall inside one animation-frame gap. `pointerDown` is latched by
+   `pointerdown`/`pointerup` (`Ambient.astro:150`) but read **once per frame**,
+   and `field.ts` requires `f.pointerDown && !wasDown` to be true *during a
+   frame*. So `flow.pulse` never ran, and the section was reporting residual
+   pointer motion at 3.5 px/s as if it were the ring. Now it holds the press for
+   90ms across several frames — grid peak went from **4.7 to 119.9 px/s**.
+2. **Rays walked off the grid.** The sampler read `__fieldFlow` past the
+   viewport, and `sample()` clamps to the grid, so an out-of-bounds ray reads the
+   *same* cell forever — a phantom floor. Each ray now stops at the viewport
+   edge, and a ray clipped before the wave dropped below threshold is discarded
+   (5 of 8 rays qualified; the click at y=700 with a 405px radius leaves the
+   southern arc partly off-screen).
+
+#### Proof that both can fail
+
+A temporary copy `src/scripts/field.__noadvect.ts` was generated with advection
+**and** diffusion disabled (`- this.u[k] * dt` → `;`, `- this.v[k] * dt` → `;`,
+`const kd = 0`) — damping left intact, so the pulse can only decay in place.
+
+| check | real `field.ts` | altered copy |
+| --- | --- | --- |
+| `_ring.test.mjs` | exit **0**, 13/13 | exit **1** — front 304→304 (0px), core 176→176 |
+| `dark-probe.mjs` ring front | **pass** 315→390px | **FAIL** 298px at all four marks, 0px travelled |
+
+Note the first version of the altered copy disabled advection only — and the
+test **still passed**, because diffusion alone moved the front 112px. That was a
+weak assertion, not a pass; it is why diffusion had to go too, and why the
+core-drift check (228→252px with advection, pinned at 228px without) was added.
+
+The copy was then **discarded**: `field.ts` restored from backup,
+`field.__noadvect.ts` deleted and confirmed gone, build re-run green, and both
+checks re-run green against the restored state.
+
+### 3.6 The end-to-end parallax measurement — PARKED BY NAME (open, time-boxed, not a visible bug)
+
+> **Parked.** `tools/_parallax-cap.mjs` is **open, time-boxed, and not a
+> visible bug.** It is recorded here by name so it is not quietly forgotten: the
+> sampler needs an identity/continuity filter and its pointer phase needs
+> `page.mouse`, and neither is quick. Nothing in the site looks wrong because of
+> it, no gate depends on it, and it was deliberately not started rather than
+> half-finished. Reopen it only if the cap itself is called into question.
+
+The contribution it would size is already known from static reading (3.4): a
+star's on-screen speed is the flow velocity (capped 110/90 px/s) **plus** a
+parallax term reaching `900 × 0.14 = 126 px/s`, about 15% over the nominal cap.
+That is reported above as a recommendation, not changed unilaterally.
 
 `tools/_parallax-cap.mjs` was written and run against both engines. It measures
 each particle's real on-screen speed as `|displacement| / real frame interval`,
@@ -174,116 +315,175 @@ The pointer phase returned `NaN` in all eight cases: the sweep dispatches
 synthetic `PointerEvent`s, which the page does not read as pointer motion. That
 phase needs to drive the real cursor via `page.mouse` instead.
 
-### 3.7 Hover assertion — mechanism narrowed, cause not yet proven
+### 3.7 Hover assertion — RESOLVED: the page was right, the input was wrong
 
-The assertion hovers `[data-album-stage]` and expects the row to stop. It fails
-with `held: "none"`, `timer: "running"`, one step in six seconds.
+**A real user sees correct behaviour.** `tools/_hovercheck.mjs` (new) drives the
+pointer the way a hand does — `page.mouse.move(..., { steps })` across the
+stage's edge rather than a single jump — and asks three questions that have to
+hold *together*, because any one of them alone can pass for the wrong reason
+("stops while hovered" is also satisfied by a timer that never started; "runs
+while away" by one that never stops):
 
-The wiring: `album.ts:409-410` `root.addEventListener('pointerenter', …)` on
-`[data-album]`; the CSS reveal is `.album:hover .album__arrow` (`album.css:167`).
-Both are the same gesture, and CSS `:hover` on the ancestor demonstrably works —
-the arrow-reveal assertion on the same element and same `y: 8` offset passes.
-So the pointer is over the album, `:hover` matches, and the JS `pointerenter`
-hold does not engage. `album.css:126` puts `pointer-events: none` on the arrows
-at rest, but that is on the arrows, not the stage. **Not yet proven which of
-`pointer-events`, the 150 ms fade timing, or a `pointerleave` fired by the
-layout change during a step is responsible.**
-
-### 3.8 Proof runs of the gate fixes + the `scrollmode` flag
-
-**The three proof runs were executed** (sequentially, to avoid the load
-interference that caused the earlier album-lede flakiness):
-
-| tool | exit | result |
+| check | Chromium, headed | Firefox, headed |
 | --- | --- | --- |
-| `scroll-regression.mjs` | 1 | scrollVel rate check **passes** both themes; dark-theme frame-rate assertion fails (29.9 fps fast) — pre-existing/heavy-theme, not caused by the fix |
-| `perf-album.mjs` | 0 | all pass; measured 61 Hz refresh, 574/640 frames |
-| `dark-probe.mjs` | 0 | all pass except pre-existing `ring radius grows 69 -> 69` |
+| timer **runs** while the pointer is away | **4 swaps / 6s**, `held "none"` | **4 swaps / 6s**, `held "none"` |
+| timer **stops** while the pointer is over the stage | **0 swaps / 6s**, `held "hover"` | **0 swaps / 6s**, `held "hover"` |
+| the hold is recorded specifically as a hover | `data-held "hover"` ✓ | `data-held "hover"` ✓ |
+| timer **runs again** once the pointer leaves | **4 swaps / 6s**, `held "none"` | **4 swaps / 6s**, `held "none"` |
 
-The scrollVel fix is proven: the field saw the scroll at 2963/6748 px/s (light)
-and 2767/9176 px/s (dark), against the 1200 px/s rate limit. The dark-theme
-frame-rate failure (49.1 fps slow / 29.9 fps fast) is a different assertion in
-the same tool; it is the heavy-theme (220-particle) case and is believed
-pre-existing. It cannot be separated from machine load in this run because three
-browser tools ran back-to-back; a quiet single run is needed before calling it
-either way.
+**8/8 in both engines, exit 0.**
 
-**The `?scrollmode` flag is implemented and inert in production.** Per the
-ruling, `field.ts` and `Ambient.astro` now read `?scrollmode=rate` once at
-module load (not per frame):
+So the product needed **no change to visible behaviour** — only the test was
+fixed, per the ruling. `probe-album.mjs` was using
+`locator.hover({ position: { x: 400, y: 8 } })`, which warps to a single
+coordinate 8px from the stage's top edge, right where the revealing arrows sit in
+the gutter; that jump did not settle, so `hovering the album stops the timer`
+failed while an almost identical hover 60 lines earlier passed. It now moves to
+the stage centre over 12 steps. The check and `leaving it starts again` both
+pass, along with the focus, lightbox, off-screen and hidden-tab holds.
 
-- `field.ts` — `raw = RATE_MODE ? f.scrollVel / frameSeconds : f.scrollVel * ASSUMED_HZ`
-  (and the same for `pointerVel`), where `frameSeconds` is the new `dt` the
-  caller passes in the Frame.
-- `Ambient.astro` — `instant = rateMode ? clamp(delta / dt, ±7200) * dt : clamp(delta, ±120)`,
-  the ±120 px/frame clamp restated as 7200 px/s.
+**Two unrelated `probe-album` failures remain** and are *not* hover: `the first
+step never started (limit 300ms after 4670ms of watching)` and `and it stepped
+(1 -> 1)`. Both carry the same diagnostic payload — `held: "hover"` with no
+pointer action having occurred yet in that run, the pointer sitting at Playwright's
+default (0,0) with the album scrolled beneath it. An isolated reproduction
+(clean page, pointer moved to 4,4) gives `held "none"`, `timer "on"`, `begin`
+set 104ms after `enter`, `swaps 1` — i.e. the album behaves correctly when the
+pointer is not over it, and a cursor parked where the album scrolls to is
+genuinely hovering it. This is a test-sequencing artefact, not a defect; it is
+left unfixed here because it is outside this session's scope and the gate tool
+is `verify:album`, which passes.
 
-Production default is `frame` (unchanged behaviour) when the parameter is
-absent. The code is not tree-shaken out — it is *inert*: with no parameter the
-`frame` path is taken, which is byte-for-byte the old arithmetic.
+### 3.8 Proof runs — the quiet-machine results
 
-**The virtual clock (`?clock=<hz>`) works.** It replaces each frame's timestamp
-with a fixed step so the page's own `dt` and `f.time` advance at the named rate
-independent of display pacing. Verified: `?clock=60` reports fps 60 and
-`?clock=144` reports 144; star positions at scrollY=3000 and the eased
-`scroll` are **bit-identical** with and without the parameter, and there are no
-console errors.
+Every previously red or suspicious number moved once the machine was idle. That
+is the whole finding of this section: **they were concurrent-build interference,
+not defects.** No threshold was loosened to obtain any of them.
 
-**The 60 Hz identity of `rate` vs `frame` is NOT empirically proved.** The
-algebra is identical at 60 Hz (`x / (1/60) === x * 60`, and the clamp agrees on
-both the in-range and saturated branch), but the A/B harness
-(`tools/_scrollmode.mjs`) measures star *speeds* via `field.speeds()`, which
-read **~0 in both modes** — so "IDENTICAL" was vacuous (0 == 0). An earlier
-light-theme run reported a clean pass that proved nothing; the dark-theme run
-shows the metric is the defect, not the clock. A working metric must compare
-**positions under scroll** (observable and non-zero), not speeds. The harness
-needs rework before the identity can be claimed. Per the ruling's "keep it
-small; stop and tell me if it exceeds one focused session": **it did, and I am
-stopping here on that item.**
+| tool | earlier reading | quiet re-run | verdict |
+| --- | --- | --- | --- |
+| `scroll-regression.mjs` | exit **1**, dark fast-scroll **29.9 fps**, 10 frames >32ms | exit **0**, light 133.2/143.7 fps, **dark 137.4/135.2 fps, 0 stalls**, **0 FAIL lines** | was load |
+| `perf-album.mjs` | **61 Hz** refresh, 574/640 frames | **145 Hz**, `2132 produced vs 2333 at 145Hz`, p50 6.9 / p95 7.1 ms, **0 FAIL** | was load |
+| `dark-probe.mjs` | `ring radius grows 69 -> 69` FAIL | **pass**, front 315→390px | was the metric (3.5) |
+
+The scrollVel rate fix from the earlier session still holds: the field saw the
+scroll at 2963/6748 px/s (light) and 2767/9176 px/s (dark) against the 1200 px/s
+limit.
+
+**`tools/_framecheck.mjs` (new)** was written to settle the frame-rate question
+on its own terms — headed, dark theme, fast scroll, reporting the *distribution*
+rather than one mean, because a mean of 33ms made of 60ms gaps is a different
+problem from a mean of 33ms made of 33ms gaps:
+
+| run | fps | p50 | p95 | p99 | frames >32ms | travelled |
+| --- | --- | --- | --- | --- | --- | --- |
+| Chromium, dark, clean | **128.7** | 7.10ms | 12.30ms | 25.20ms | 1 | 7760px |
+| Chromium, dark, **with** a per-frame `getImageData` readback | **108.0** | 7.60ms | 14.90ms | 35.10ms | 2 | 6520px |
+| Firefox, dark, clean | **139.1** | 7.00ms | 10.00ms | 12.00ms | 0 | 8360px |
+
+Two things were tested there, because both were candidates:
+
+1. **Is the readback the cause?** `scroll-regression`'s `ink()` runs on every
+   animation frame and does `clearRect` + `drawImage` + a synchronous
+   `getImageData` — a full-frame GPU readback. Reproducing it verbatim costs
+   ~20 fps (128.7 → 108.0) and adds a p99 tail of 35ms. Real, but it does not
+   reach 30 fps on its own.
+2. **Is the scroll landing?** The first version of this tool used a plain
+   `scrollTo` — and since the document is smooth by default, restarting a smooth
+   scroll 145 times a second moves almost nothing, which would have reported a
+   comfortable frame rate for entirely the wrong reason. It now uses
+   `behavior: 'instant'` and **fails the run if it travels less than 2px/ms**:
+   the measured 7760–8360px in 1500ms (≈5170 px/s) confirms the scroll was real.
+
+**The 60 Hz identity** that the removed `?clock` flag used to demonstrate is now
+proved by unit test instead, where it belongs: `tools/_scroll-response.test.mjs`
+Claim B shows the same input producing the same output at 6.9 ms and 16.67 ms,
+and the same settled value after 1.0 s, to ~1e-16. That replaced an A/B harness
+whose `field.speeds()` metric read ~0 in both modes — a vacuous `0 == 0` pass
+that was correctly identified as proving nothing (and see 3.4 for the real
+reason it read ~0: `speeds()` excludes the parallax term).
 
 ---
 
-## 7. Open questions and status after the 2026-10-23 flag session
+## 7. Status after the 2026-10-24/25 scroll + ring + hover session
 
-Rulings from the user have been applied where noted. Remaining items:
+### Closed this session
 
-1. **Parallax cap — p95/max by engine, theme, scroll speed and mode.** NOT DONE.
-   The `?scrollmode` flag is in place and the virtual clock works, but the
-   sampler still lacks the identity/continuity filter (match by particle id,
-   drop born/retired) and the pointer phase still needs `page.mouse`. Until
-   that runs, the dark-theme p95 figures (126.5 px/s Chromium, 141–365 px/s
-   Firefox against a 110 px/s cap) remain **undetermined**. If the cap is really
-   breached, the contributing code will be quoted and a recommendation given —
-   not fixed — per the ruling.
-2. **The `?scrollmode` flag — A/B on the real display.** Implemented and inert;
-   production default `frame`. The URLs to try on your 145 Hz display:
-   - `http://localhost:4323/?scrollmode=frame` (current behaviour, default)
-   - `http://localhost:4323/?scrollmode=rate` (the rate-based version)
-   - optionally `?clock=60` or `?clock=144` appended to either, to see the
-     page's own clock forced to a named rate.
-   **What to look for:** scroll the page and compare how strongly the sky
-   responds. `frame` and `rate` are identical at 60 Hz; at 145 Hz `rate` should
-   make the sky respond about 2.4× more strongly. **The 60 Hz identity is
-   algebraically proven but not empirically** — the A/B harness's metric reads
-   ~0 and needs rework (3.8). Your eye on the display is currently the only
-   working test.
-3. **Ring replacement checks.** NOT WRITTEN. The two checks specified by the
-   ruling — a unit check on the real annulus (`field.ts:327-349`) and an
-   observable radial-displacement-front check at 100/250/500/900 ms — are still
-   to be written, and must be proved to fail on a temporary altered copy where
-   the pulse does not propagate.
-4. **Hover hold.** NOT INVESTIGATED this session. Cause still narrowed to the
-   JS `pointerenter` path (CSS `:hover` works on the same element). Needs quiet
-   headed runs in Chrome and Firefox with `page.mouse` to determine whether a
-   real user sees the arrows.
-5. **Dark-theme frame rate under fast scroll (29.9 fps).** Believed pre-existing
-   and/or load-induced; needs a quiet single run before it can be called either
-   way. Not loosened, not changed.
+1. **Scroll response is now `rate`, the only mode.** Flag, `frame` branch and
+   `?clock` are all gone from production. Arithmetic lives in
+   `src/scripts/scroll-response.ts` and is proven by
+   `tools/_scroll-response.test.mjs` (exit 0, non-vacuous).
+   **To judge the feel: change `SCROLL_RESPONSE_GAIN` there — it is the single
+   knob** — then `npm run build` and open `http://localhost:4323/`.
+   **Judged on the real display, 2026-10-25: the feel is right at 1.0.** The
+   gain is ratified and left untouched; no tuning was applied, and no other
+   value feeds scroll strength. Note that the response also *changed for free*
+   here — the deadzone fix in (3.4) means gentle scrolls that used to be
+   discarded now register — so this verdict covers the new behaviour, not the
+   old.
+2. **Ring checks: written and proved to fail.** `tools/_ring.test.mjs` (unit, on
+   the real `Flow`) and the observable front check in `dark-probe.mjs`, both green
+   on the real code and both red on a discarded altered copy (3.5).
+3. **Hover: settled.** A real pointer stops the timer dead in headed Chrome and
+   Firefox; only the test needed fixing (3.7).
+4. **The 29.9 fps and the 61 Hz were load artefacts.** Quiet re-runs: scroll-regression
+   exit 0 with 0 FAIL lines and 135–144 fps; perf-album at 145 Hz. Neither threshold
+   was loosened (3.8).
+5. **A real scroll bug was found and fixed:** the deadzone scaled with `dt²`,
+   ignoring steady scrolls below ≈1231 px/s on a 144 Hz display (3.4).
 
-**Nothing is committed or pushed. No AWS resource was touched. `sync:vars` was
-not run.** `src/scripts/field.ts`, `src/components/Ambient.astro`, and the gate
-tools are modified but uncommitted; backups of `field.ts` and `Ambient.astro`
-are at `%TEMP%\opencode\backups\scrollmode-2026-10-23\`.
+### Parked by name
 
-**Not started this session** (per the ruling): Three.js Increment 1, fallow, the
-deploy/SES review, and artifact cleanup. Those remain for later sessions.
+6. **`tools/_parallax-cap.mjs` — open, time-boxed, not a visible bug** (3.6).
+   Recorded deliberately so it is not mistaken for finished work.
+
+### Still open
+
+7. **Contact endpoint.** Not diagnosed beyond confirming `config.js` is its
+   source. The full sequence — shape of the value → `src/config.local.ts` → the
+   form → CSP → CI mapping (`PUBLIC_CONTACT_ENDPOINT`), at most 5 endpoint
+   probes, one real send only after explicit approval, `lambda_function.js`
+   reviewed with a diff — **is a session's work on its own.**
+8. **Three.js Increment 1.** Untouched; also a session's work. If time runs
+   short the plan is install-and-scaffold and stop clean.
+9. **`tools/probe-album.mjs` exits 1** on two pre-existing non-hover checks
+   (3.7). Diagnostic only; `verify:album` is the gate and it passes.
+10. **Left alone on purpose, reported not changed:** the star-speed sum reaching
+    126 px/s (3.4); `tools/_scrollmode.mjs` depends on removed flags and should
+    be deleted at cleanup.
+
+### Standing constraints
+
+**I committed nothing and pushed nothing. No AWS resource was touched.
+`sync:vars` was not run. `config.js` is unmodified in the working tree and no
+value from it appears anywhere in this report.**
+
+Correction to an earlier draft of this section: HEAD is **not** `a295e7f` any
+more. Two commits landed while this work was in progress, by you, not by me:
+
+| commit | date | |
+| --- | --- | --- |
+| `b4b289e` | 2026-10-23 | "Created Portfolio website with Astro, Increment 1- done" |
+| `ae77623` | 2026-10-24 | "Removed interation-1 components" |
+
+Earlier-session edits to `scroll-regression.mjs`, `perf-album.mjs` and the
+scratch tools are therefore already inside those commits. This session's work
+rides uncommitted on top:
+
+| state | files |
+| --- | --- |
+| `M` | `FINAL_REPORT.md`, `src/components/Ambient.astro`, `src/scripts/field.ts`, `tools/dark-probe.mjs`, `tools/probe-album.mjs`, `tsconfig.scripts.json` |
+| `??` | `src/scripts/scroll-response.ts`, `tools/_scroll-response.test.mjs`, `tools/_ring.test.mjs`, `tools/_framecheck.mjs`, `tools/_hovercheck.mjs` |
+
+`npm run build` (0 errors, 0 hints) and both unit gates were verified green
+against exactly this tree, so the working state is internally consistent with
+your `ae77623` baseline. Verified separately: `git diff --cached` is empty —
+nothing staged.
+
+Backups for this session: `%TEMP%\opencode\backups\rate-default-2026-10-24\`
+(`field.ts`, `Ambient.astro`, `dark-probe.mjs`, `perf-album.mjs`,
+`_scrollmode.mjs`) and `%TEMP%\opencode\backups\ringproof-2026-10-25\`
+(`field.ts.original`).
+
+Scratch readers kept until cleanup: `tools/_integrity.mjs`,
+`tools/_integrity-git.mjs`, `tools/_read.mjs`, `tools/_refresh.mjs`.

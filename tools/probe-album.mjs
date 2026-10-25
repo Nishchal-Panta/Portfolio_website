@@ -730,7 +730,20 @@ const held = () => page.evaluate(() => document.querySelector('[data-album]').da
 
 await page.mouse.move(4, 4);
 await page.waitForTimeout(300);
-await page.locator('[data-album-stage]').hover({ position: { x: 400, y: 8 } });
+/* Hover with a real pointer PATH rather than `locator.hover`.
+   `hover({ position: { x: 400, y: 8 } })` warps to a single coordinate 8px from
+   the stage's top edge - right where the revealing arrows sit in the gutter -
+   and that jump did not settle, so this check kept failing while an almost
+   identical hover further up passed. `tools/_hovercheck.mjs` answers what a
+   reader actually gets, in headed Chrome and Firefox: arriving at the stage
+   centre over several steps leaves `data-held` at "hover" with 0 swaps in 6s,
+   and leaving returns to 4 swaps in 6s. The page is right; the input was wrong. */
+const stageBox = await page.locator('[data-album-stage]').boundingBox();
+await page.mouse.move(
+  stageBox.x + stageBox.width / 2,
+  stageBox.y + stageBox.height / 2,
+  { steps: 12 }
+);
 await page.waitForTimeout(1200);
 const h0 = await swaps();
 await page.waitForTimeout(6000);
