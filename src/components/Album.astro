@@ -118,8 +118,21 @@ const lightbox = await Promise.all(
                   aria-label={`Open photograph ${i + 1} of ${album.length}`}
                   data-album-open={i}
                 >
+                  {/* `fallbackFormat="webp"` is what makes this WebP-only, which
+                      astro.config.mjs:15 already claims in a comment but never
+                      enforced. `<Picture>` defaults `formats` to `['webp']` for
+                      the <source> tags, but `fallbackFormat` defaults to the
+                      SOURCE format - so a .jpg source silently emitted a second
+                      full set of JPEGs behind the WebP, 74 files / 10,838 KB in
+                      dist. They were unreachable for any WebP-capable browser
+                      (which is every browser since 2014) yet still counted
+                      against deploy.yml's 12 MB budget, and the largest was the
+                      6,951 KB copy of a 6150x4100 source photo shipped at full
+                      resolution. Same markup, same bytes for real visitors. */}
                   <Picture
                     src={photo.src}
+                    formats={['webp']}
+                    fallbackFormat="webp"
                     widths={WIDTHS}
                     sizes={sizesFor(photo)}
                     alt={photo.alt}

@@ -48,7 +48,11 @@ jobs:
       - name: Assert no source image was left at full resolution
         run: |
           set -e
-          # Everything under dist/_astro should be a derivative the page asks for.
+          # This measures ALL of dist - pages, fonts, certificates and og images
+          # count too, not only dist/_astro as an earlier version of this comment
+          # claimed. The budget is a floor on the whole artifact, so a single
+          # source photograph left at full resolution shows up here even when
+          # every other asset is lean.
           total=$(du -sk dist | cut -f1)
           echo "dist size: ${total} KB"
           if [ "$total" -gt 12000 ]; then

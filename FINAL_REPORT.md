@@ -437,6 +437,55 @@ reason it read ~0: `speeds()` excludes the parallax term).
 6. **`tools/_parallax-cap.mjs` — open, time-boxed, not a visible bug** (3.6).
    Recorded deliberately so it is not mistaken for finished work.
 
+### Deploy pipeline — two CI blockers found and fixed (2026-10-25)
+
+The push did not fail at AWS. It failed **twice in the Build job**, before
+anything was uploaded:
+
+**Blocker 1 — YAML, reported as an error at line 27.** The real break was lines
+40–43: `env:` was written as a *sibling* of the `- name:` entries under
+`steps:`, i.e. a mapping key dropped into a sequence. GitHub points at line 27
+because that is where the sequence starts. It was committed in `4e077e0`
+(10-22), so **every push since 10-22 failed to deploy** — which is exactly why
+the live site still served the 7 Oct build. Fixed by moving `env:` inside the
+Build step; proven 4 parse errors → 0 and 7 well-formed steps.
+
+**Blocker 2 — the 12 MB assertion at `deploy.yml:48-57`.** CI measured
+`dist` = 20,904 KB against a 12,000 KB budget. Two real defects behind it:
+
+- `astro.config.mjs:15` claims *"WebP only"* but only sets `responsiveStyles`;
+  the claim was never enforced. `<Picture>` defaults `formats` to `['webp']` for
+  the `<source>` tags but `fallbackFormat` to the **source** format, so a `.jpg`
+  source silently emitted a second full set of JPEGs — **74 files, 10,838 KB**,
+  every one with a WebP sibling, none reachable by any WebP-capable browser.
+- The real cause of the size: Astro's fallback `<img src>` is the **untouched
+  original**, and the original was **6150×4100, 29 MB**. Reformatting to WebP
+  did not help much (6,951 KB → 6,503 KB at the same 6150×4100) because the bug
+  is resolution, not format. No Astro prop caps that fallback, so the source had
+  to be corrected: `src/assets/album/1790495165040.jpg` → **1600×1067, 432 KB**.
+
+The 29 MB original is **not lost** — it remains tracked in
+`assets/Carousel_photos/` and `assets/photo_intake/`, and is backed up at
+`%TEMP%\opencode\backups\deploy-fix-2026-10-25\`. The site never rendered this
+above 1600px anyway: the inline `srcset` tops out at 960w and the lightbox serves
+a 1600px WebP.
+
+Also corrected the comment you flagged: it claimed the check measured
+`dist/_astro` while `du -sk` measures **all of `dist`**. The comment now matches
+the command; the 12,000 KB budget was **not** loosened.
+
+| | before | after |
+| --- | --- | --- |
+| `dist` apparent | 20,318 KB | **10,653 KB** |
+| `du -sk` (what CI runs) | 20,904 KB (measured) | **11,072 KB** (projected) |
+| verdict | over by 8,904 | **under by 928** |
+| JPEGs in `dist/_astro` | 74 | **0** |
+
+Verified after rebuilding: build exits 0 with 0 errors, **183 distinct local
+references in `index.html`, none missing**, the one remaining `.jpg` is a
+`public/` evidence asset that exists, and both unit gates still pass.
+**Not committed, not pushed, no AWS touched.**
+
 ### Still open
 
 7. **Contact endpoint.** Not diagnosed beyond confirming `config.js` is its
