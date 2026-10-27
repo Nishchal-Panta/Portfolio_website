@@ -85,12 +85,17 @@ stays under 12 MB, then syncs to S3 and invalidates CloudFront.
 **It authenticates with GitHub OIDC.** There are no long-lived access keys and
 nothing secret in the repository.
 
-Before the first deploy, set these as **repository or environment variables**:
+Before the first deploy, set these as **repository Variables** — the
+`Variables` tab under *Settings → Secrets and variables → Actions*, **not** the
+`Secrets` tab. The workflow reads `${{ vars.* }}` only: a value saved as a
+secret is invisible to it, and Secrets never display their values again after
+saving, so they can look empty forever while being populated.
 
 | Variable | Meaning |
 |---|---|
+| `vars.CONTACT_ENDPOINT` | API Gateway invoke URL for the contact form. Read by the **Build** job, which declares no `environment`, so it has to be a repository variable. If it is empty the build still succeeds and the deployed form silently posts nowhere. |
 | `vars.AWS_DEPLOY_ROLE_ARN` (or `secrets.AWS_DEPLOY_ROLE_ARN`) | IAM role trusting this repo's `main` branch |
-| `vars.AWS_REGION` | e.g. `ap-south-1` |
+| `vars.AWS_REGION` | The bucket's region — read it from S3 → *Bucket region*. Do not guess: a wrong default here deploys against the wrong region without failing. |
 | `vars.S3_BUCKET` | the site's bucket |
 | `vars.CLOUDFRONT_DISTRIBUTION_ID` | distribution to invalidate |
 
