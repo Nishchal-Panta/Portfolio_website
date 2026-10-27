@@ -25,6 +25,23 @@ jobs:
     runs-on: ubuntu-latest
     name: Build
     steps:
+      # TEMPORARY DIAGNOSTIC - booleans only, values are never written to the log.
+      # Delete both of these steps once the Variables resolve.
+      - name: Report variable resolution (build scope)
+        env:
+          R_CONTACT: ${{ vars.CONTACT_ENDPOINT != '' }}
+          R_REGION: ${{ vars.AWS_REGION != '' }}
+          R_BUCKET: ${{ vars.S3_BUCKET != '' }}
+          R_ROLE: ${{ vars.AWS_DEPLOY_ROLE_ARN != '' }}
+          R_DIST: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        run: |
+          echo "SCOPE: repository only - this job declares no environment"
+          echo "CONTACT_ENDPOINT            non-empty: $R_CONTACT"
+          echo "AWS_REGION                  non-empty: $R_REGION"
+          echo "S3_BUCKET                   non-empty: $R_BUCKET"
+          echo "AWS_DEPLOY_ROLE_ARN         non-empty: $R_ROLE"
+          echo "CLOUDFRONT_DISTRIBUTION_ID  non-empty: $R_DIST"
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -73,6 +90,27 @@ jobs:
     name: Sync to S3 and invalidate CloudFront
     environment: production
     steps:
+      # TEMPORARY DIAGNOSTIC - booleans only, values are never written to the log.
+      # This job resolves vars from the `production` environment first, then falls
+      # back to the repository, so compare against the build job's output: a value
+      # that is true here but false there lives on the environment, not the repo.
+      - name: Report variable resolution (deploy scope)
+        env:
+          R_CONTACT: ${{ vars.CONTACT_ENDPOINT != '' }}
+          R_REGION: ${{ vars.AWS_REGION != '' }}
+          R_BUCKET: ${{ vars.S3_BUCKET != '' }}
+          R_ROLE: ${{ vars.AWS_DEPLOY_ROLE_ARN != '' }}
+          R_DIST: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+          R_ROLE_SECRET: ${{ secrets.AWS_DEPLOY_ROLE_ARN != '' }}
+        run: |
+          echo "SCOPE: environment 'production' first, then repository fallback"
+          echo "AWS_REGION                  non-empty: $R_REGION"
+          echo "AWS_DEPLOY_ROLE_ARN         non-empty: $R_ROLE"
+          echo "S3_BUCKET                   non-empty: $R_BUCKET"
+          echo "CLOUDFRONT_DISTRIBUTION_ID  non-empty: $R_DIST"
+          echo "CONTACT_ENDPOINT            non-empty: $R_CONTACT"
+          echo "secrets.AWS_DEPLOY_ROLE_ARN present:   $R_ROLE_SECRET"
+
       - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v4
