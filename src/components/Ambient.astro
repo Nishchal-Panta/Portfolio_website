@@ -880,7 +880,14 @@
   }
 
   // ------------------------------------------------------------------- decide
-  const wantsField = !reduced.matches && !lowPower;
+  // The field is not a low-power casualty: `initField` already drops the flow
+  // grid for touch and low-core devices (`flowOK` at L49) and counts fewer
+  // stars on a small screen, which is the "skip the flow field and keep scroll
+  // parallax only" the comment above describes. Gating on `lowPower` here made
+  // that dead code and removed the canvas those devices need for the parallax
+  // it promised. Reduced motion still removes it, and `.motes` is also
+  // `display:none` under that preference in story.css.
+  const wantsField = !reduced.matches;
   const wantsPen = !reduced.matches && finePointer.matches && !lowPower;
 
   let teardown = () => {};

@@ -437,10 +437,13 @@ reason it read ~0: `speeds()` excludes the parallax term).
 6. **`tools/_parallax-cap.mjs` — open, time-boxed, not a visible bug** (3.6).
    Recorded deliberately so it is not mistaken for finished work.
 
-### Deploy pipeline — two CI blockers found and fixed (2026-10-25)
+### Deploy pipeline — five blockers found and fixed (2026-10-25 → 2026-10-27)
 
-The push did not fail at AWS. It failed **twice in the Build job**, before
-anything was uploaded:
+The site was down and the pipeline red from 10-22 onward. **Five** separate
+defects stood between it and green. The last run before all of it was
+**#18 `a295e7f`, 2026-10-07**; runs #19 through #33 failed.
+
+Only the first two failed in the Build job, before anything was uploaded:
 
 **Blocker 1 — YAML, reported as an error at line 27.** The real break was lines
 40–43: `env:` was written as a *sibling* of the `- name:` entries under
@@ -474,6 +477,55 @@ Also corrected the comment you flagged: it claimed the check measured
 `dist/_astro` while `du -sk` measures **all of `dist`**. The comment now matches
 the command; the 12,000 KB budget was **not** loosened.
 
+**Blocker 3 — every repository Variable was empty (runs #30–#31).**
+The workflow reads `${{ vars.* }}` only, but all five values had been saved on
+the **Secrets** tab, which it never reads and which never displays a value
+again after saving — so they looked empty forever while being populated. The
+annotation was `Input required and not supplied: aws-region`. Two things had
+been masking it: a `|| 'ap-south-1'` fallback at `deploy.yml:89` that quietly
+pointed every deploy at the wrong region, and a `|| secrets.AWS_DEPLOY_ROLE_ARN`
+fallback that could only ever supply a correct ARN or fail as before. The region
+fallback was removed (it was actively wrong, not merely permissive); the role
+fallback was kept. All five were re-created on the **Variables** tab and
+verified by a temporary boolean-only step that printed `true`/`false` and never
+a value: **all five resolve**, including `CONTACT_ENDPOINT` — the one that
+fails *silently*, by building a form that posts nowhere while CI stays green.
+
+**Blocker 4 — OIDC had never passed, not even once (runs #32–#33).** Two
+independent defects:
+
+- The identity provider `token.actions.githubusercontent.com` **did not exist**
+  in the account. IAM will save a trust policy naming a provider that isn't
+  there — it never validates the reference — and STS then reports *"The web
+  identity token provided could not be validated."*
+- Even once created, the policy demanded
+  `sub = repo:ORG/REPO:ref:refs/heads/main` while the job declares
+  `environment: production` (`deploy.yml:74`), which makes GitHub issue
+  `sub = repo:ORG/REPO:environment:production` instead. GitHub's OIDC docs state
+  this directly: *"The subject claim includes the environment name when the job
+  references an environment."*
+
+`git log -S "environment: production"` settles whether this was a regression:
+both `environment: production` and `id-token: write` were introduced together in
+`4e077e0` (10-22) and were **absent at `a295e7f`**, the last green run. OIDC had
+never worked; nothing had broken. The repository predates GitHub's 15 July 2026
+immutable-subject-claims change (`created_at: 2026-05-10`), so the classic `sub`
+format applies and no `@<id>` suffixes are involved.
+
+**Blocker 5 — the role could send email and nothing else (exit code 254).**
+With identity solved, authorization failed. The only policy on the role was
+`ses:SendEmail`/`ses:SendRawEmail` — no `s3:*`, no `cloudfront:*`. AWS CLI
+return code **254** means *"a request was made to the specified service but the
+service returned an error"*, and the first call in the job,
+`s3:PutBucketWebsite`, was rejected — confirmed independently by probing the
+live site, which still reported `NoSuchKey Key: index.astro` because the website
+configuration had never applied. An S3 + CloudFront policy was attached, scoped
+to the specific bucket and distribution rather than `*`.
+
+Trade-off recorded deliberately: the Lambda/mail role now doubles as the
+deploy role. Splitting them into a dedicated deploy role is **later cleanup**,
+not done while the site was down.
+
 | | before | after |
 | --- | --- | --- |
 | `dist` apparent | 20,318 KB | **10,653 KB** |
@@ -484,7 +536,29 @@ the command; the 12,000 KB budget was **not** loosened.
 Verified after rebuilding: build exits 0 with 0 errors, **183 distinct local
 references in `index.html`, none missing**, the one remaining `.jpg` is a
 `public/` evidence asset that exists, and both unit gates still pass.
-**Not committed, not pushed, no AWS touched.**
+
+**Final state — measured, not assumed.** Run **#33 `da7d542` completed
+successfully (30s)**, and the live site was probed directly afterwards rather
+than trusting the checkmark:
+
+| probe | result |
+| --- | --- |
+| `/` | 200, 121,011 chars, **13 `<picture>`**, WebP |
+| `/index.html` | 200, **identical ETag to `/`** → the same file |
+| `/404.html` | 200 — *file now exists* (was missing) |
+| `/page-that-does-not-exist-xyz` | **404 with the custom HTML page** → real status, no `NoSuchKey` |
+| `index.astro` error | gone |
+| `last-modified` | `Tue, 27 Oct 2026 11:12:42 GMT` |
+
+A first probe caught `/index.html` at the stale 73,260-byte Oct-7 build; an
+immediately following re-fetch returned `x-cache: Miss from cloudfront` with the
+current content and a matching ETag. The CloudFront invalidation had been
+mid-flight — a transient, not a defect.
+
+**Attribution.** All five fixes were **committed and pushed by you, not by me**
+— I made no commits and no pushes. The AWS changes (creating the OIDC provider,
+editing the trust policy, attaching the S3/CloudFront policy) were likewise
+**yours, done in the console**; I listed no AWS CLI command and ran none.
 
 ### Still open
 
@@ -507,27 +581,25 @@ references in `index.html`, none missing**, the one remaining `.jpg` is a
 `sync:vars` was not run. `config.js` is unmodified in the working tree and no
 value from it appears anywhere in this report.**
 
-Correction to an earlier draft of this section: HEAD is **not** `a295e7f` any
-more. Two commits landed while this work was in progress, by you, not by me:
+Superseding an earlier draft of this section, which recorded HEAD as `a295e7f`
+and listed six files riding uncommitted on top. **None of that holds now** —
+those edits were committed in `b4b289e` (10-23), `ae77623` (10-24) and the
+10-25/10-27 deploy work. Verified directly rather than assumed:
 
-| commit | date | |
-| --- | --- | --- |
-| `b4b289e` | 2026-10-23 | "Created Portfolio website with Astro, Increment 1- done" |
-| `ae77623` | 2026-10-24 | "Removed interation-1 components" |
-
-Earlier-session edits to `scroll-regression.mjs`, `perf-album.mjs` and the
-scratch tools are therefore already inside those commits. This session's work
-rides uncommitted on top:
-
-| state | files |
+| | |
 | --- | --- |
-| `M` | `FINAL_REPORT.md`, `src/components/Ambient.astro`, `src/scripts/field.ts`, `tools/dark-probe.mjs`, `tools/probe-album.mjs`, `tsconfig.scripts.json` |
-| `??` | `src/scripts/scroll-response.ts`, `tools/_scroll-response.test.mjs`, `tools/_ring.test.mjs`, `tools/_framecheck.mjs`, `tools/_hovercheck.mjs` |
+| `HEAD` | `da7d542` "fixing broken deploy" |
+| vs `origin/main` | behind 0, ahead 0 |
+| staged | empty — nothing staged |
+| working tree | **only `FINAL_REPORT.md`** (this edit) |
 
-`npm run build` (0 errors, 0 hints) and both unit gates were verified green
-against exactly this tree, so the working state is internally consistent with
-your `ae77623` baseline. Verified separately: `git diff --cached` is empty —
-nothing staged.
+Re-checked file by file: `src/components/Ambient.astro`, `src/scripts/field.ts`,
+`tools/dark-probe.mjs`, `tools/probe-album.mjs`, `tsconfig.scripts.json` are all
+**unmodified**, and `src/scripts/scroll-response.ts`,
+`tools/_scroll-response.test.mjs`, `tools/_ring.test.mjs`,
+`tools/_framecheck.mjs`, `tools/_hovercheck.mjs` are all **tracked** — none
+untracked, none missing. The earlier table would have been misleading to anyone
+planning the next change against it.
 
 Backups for this session: `%TEMP%\opencode\backups\rate-default-2026-10-24\`
 (`field.ts`, `Ambient.astro`, `dark-probe.mjs`, `perf-album.mjs`,
