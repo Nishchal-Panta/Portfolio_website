@@ -71,7 +71,6 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     name: Sync to S3 and invalidate CloudFront
-    environment: production
     steps:
       - uses: actions/checkout@v4
 

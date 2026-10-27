@@ -85,7 +85,7 @@ stays under 12 MB, then syncs to S3 and invalidates CloudFront.
 **It authenticates with GitHub OIDC.** There are no long-lived access keys and
 nothing secret in the repository.
 
-Before the first deploy, set these as **repository or environment variables**:
+Before the first deploy, set these as **repository variables**:
 
 | Variable | Meaning |
 |---|---|
