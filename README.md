@@ -89,7 +89,7 @@ Before the first deploy, set these as **repository or environment variables**:
 
 | Variable | Meaning |
 |---|---|
-| `vars.AWS_DEPLOY_ROLE_ARN` | IAM role trusting this repo's `main` branch |
+| `vars.AWS_DEPLOY_ROLE_ARN` (or `secrets.AWS_DEPLOY_ROLE_ARN`) | IAM role trusting this repo's `main` branch |
 | `vars.AWS_REGION` | e.g. `ap-south-1` |
 | `vars.S3_BUCKET` | the site's bucket |
 | `vars.CLOUDFRONT_DISTRIBUTION_ID` | distribution to invalidate |
